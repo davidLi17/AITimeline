@@ -556,7 +556,7 @@ class TimelineManager {
             starChatBtn.style.position = 'fixed';
             starChatBtn.style.top = fixedPosition.top;
             starChatBtn.style.right = fixedPosition.right;
-            starChatBtn.style.zIndex = '2147483646';
+            starChatBtn.style.zIndex = '50';
         }
         
         // 10. 保存引用

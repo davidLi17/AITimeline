@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Salin formula LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "Berjaya disalin"
   }
 }

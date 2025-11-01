@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Copiază formula LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "Copiat cu succes"
   }
 }

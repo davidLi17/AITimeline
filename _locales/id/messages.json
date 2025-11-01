@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Salin rumus LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "Berhasil disalin"
   }
 }

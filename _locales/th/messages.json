@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "คัดลอกสูตร LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "คัดลอกสำเร็จ"
   }
 }

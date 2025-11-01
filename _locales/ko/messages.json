@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome 웹 스토어"
+  },
+  "copyLatexFormula": {
+    "message": "LaTeX 수식 복사"
+  },
+  "latexFormulaCopied": {
+    "message": "복사 완료"
   }
 }

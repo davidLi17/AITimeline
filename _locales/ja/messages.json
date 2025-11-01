@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome ウェブストア"
+  },
+  "copyLatexFormula": {
+    "message": "LaTeX 数式をコピー"
+  },
+  "latexFormulaCopied": {
+    "message": "コピーしました"
   }
 }

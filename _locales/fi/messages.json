@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Kopioi LaTeX-kaava"
+  },
+  "latexFormulaCopied": {
+    "message": "Kopioitu onnistuneesti"
   }
 }

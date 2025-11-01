@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "LaTeX සූත්‍රය පිටපත් කරන්න"
+  },
+  "latexFormulaCopied": {
+    "message": "සාර්ථකව පිටපත් කරන ලදී"
   }
 }

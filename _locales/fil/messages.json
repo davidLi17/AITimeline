@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Kopyahin ang LaTeX formula"
+  },
+  "latexFormulaCopied": {
+    "message": "Matagumpay na nakopya"
   }
 }

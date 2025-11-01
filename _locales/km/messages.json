@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "ចម្លងរូបមន្ត LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "បានចម្លងដោយជោគជ័យ"
   }
 }

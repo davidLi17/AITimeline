@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Պատճենել LaTeX բանաձևը"
+  },
+  "latexFormulaCopied": {
+    "message": "Հաջողությամբ պատճենվեց"
   }
 }

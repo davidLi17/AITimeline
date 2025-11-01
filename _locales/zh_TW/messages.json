@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome 應用商店"
+  },
+  "copyLatexFormula": {
+    "message": "複製 LaTeX 公式"
+  },
+  "latexFormulaCopied": {
+    "message": "複製成功"
   }
 }

@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "متجر كروم الإلكتروني"
+  },
+  "copyLatexFormula": {
+    "message": "نسخ معادلة LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "تم النسخ بنجاح"
   }
 }

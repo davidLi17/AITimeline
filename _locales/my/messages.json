@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "LaTeX ဖော်မြူလာကို ကူးယူမည်"
+  },
+  "latexFormulaCopied": {
+    "message": "အောင်မြင်စွာ ကူးယူပြီးပါပြီ"
   }
 }

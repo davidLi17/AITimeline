@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Копирај LaTeX формулу"
+  },
+  "latexFormulaCopied": {
+    "message": "Успешно копирано"
   }
 }

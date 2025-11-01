@@ -101,5 +101,23 @@ class ChatGPTAdapter extends SiteAdapter {
         // ChatGPT 使用页面标题作为默认主题
         return document.title || '';
     }
+    
+    /**
+     * 初始化公式交互功能
+     * @returns {FormulaManager|null} - 返回 FormulaManager 实例，如果不支持则返回 null
+     */
+    initFormulaInteraction() {
+        // 检查是否存在 FormulaManager 类
+        if (typeof FormulaManager === 'undefined') {
+            console.warn('FormulaManager is not loaded');
+            return null;
+        }
+        
+        // 创建并初始化 FormulaManager
+        const formulaManager = new FormulaManager();
+        formulaManager.init();
+        
+        return formulaManager;
+    }
 }
 

@@ -44,6 +44,7 @@
         "js/adapters/kimi.js",
         "js/adapters/yuanbao.js",
         "js/adapters/registry.js",
+        "js/formula-manager.js",
         "js/timeline-manager.js",
         "js/main.js"
       ],

@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Kopijuoti LaTeX formulę"
+  },
+  "latexFormulaCopied": {
+    "message": "Sėkmingai nukopijuota"
   }
 }

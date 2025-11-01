@@ -12,6 +12,7 @@
 
 // --- Entry Point and SPA Navigation Handler ---
 let timelineManagerInstance = null;
+let formulaManagerInstance = null; // ✅ FormulaManager 实例
 let currentUrl = location.href;
 let initVersion = 0; // Version number for initialization, increments on URL change
 let pageObserver = null;
@@ -147,7 +148,30 @@ function initializeTimeline() {
     try {
         timelineManagerInstance = new TimelineManager(currentAdapter);
         timelineManagerInstance.init().catch(err => {});
+        
+        // ✅ 初始化公式交互功能（仅 ChatGPT）
+        initializeFormulaInteraction();
     } catch (err) {
+    }
+}
+
+/**
+ * 初始化公式交互功能
+ */
+function initializeFormulaInteraction() {
+    // 清理旧实例
+    if (formulaManagerInstance) {
+        try { formulaManagerInstance.destroy(); } catch {}
+        formulaManagerInstance = null;
+    }
+    
+    // 仅在 ChatGPT 平台启用
+    if (currentAdapter && typeof currentAdapter.initFormulaInteraction === 'function') {
+        try {
+            formulaManagerInstance = currentAdapter.initFormulaInteraction();
+        } catch (err) {
+            console.warn('Failed to initialize formula interaction:', err);
+        }
     }
 }
 
@@ -162,6 +186,13 @@ function handleUrlChange() {
         try { timelineManagerInstance.destroy(); } catch {}
         timelineManagerInstance = null;
     }
+    
+    // ✅ 清理公式管理器
+    if (formulaManagerInstance) {
+        try { formulaManagerInstance.destroy(); } catch {}
+        formulaManagerInstance = null;
+    }
+    
     TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-bar'));
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-left-slider'));
     TimelineUtils.removeElementSafe(document.getElementById('chat-timeline-tooltip'));
@@ -170,6 +201,17 @@ function handleUrlChange() {
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-fixed'));
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-theme-dialog-overlay'));
+    
+    // ✅ 清理公式相关 UI（使用更精确的选择器）
+    TimelineUtils.removeElementSafe(document.querySelector('.timeline-tooltip-base.formula-tooltip'));
+    TimelineUtils.removeElementSafe(document.querySelector('.timeline-copy-feedback'));
+    
+    // ✅ 清理所有公式的交互标记和样式
+    document.querySelectorAll('.katex[data-formula-interactive]').forEach(formula => {
+        formula.removeAttribute('data-formula-interactive');
+        formula.classList.remove('formula-interactive', 'formula-hover');
+    });
+    
     cleanupGlobalObservers();
 
     // 如果当前是对话 URL，重新初始化

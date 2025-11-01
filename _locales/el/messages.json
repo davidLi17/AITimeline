@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Αντιγραφή τύπου LaTeX"
+  },
+  "latexFormulaCopied": {
+    "message": "Αντιγράφηκε επιτυχώς"
   }
 }

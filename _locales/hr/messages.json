@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "Kopiraj LaTeX formulu"
+  },
+  "latexFormulaCopied": {
+    "message": "Uspješno kopirano"
   }
 }

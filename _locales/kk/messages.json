@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "LaTeX формуласын көшіру"
+  },
+  "latexFormulaCopied": {
+    "message": "Сәтті көшірілді"
   }
 }

@@ -82,5 +82,11 @@
   },
   "chromeWebStore": {
     "message": "Chrome Web Store"
+  },
+  "copyLatexFormula": {
+    "message": "LaTeX सूत्र कॉपी करें"
+  },
+  "latexFormulaCopied": {
+    "message": "सफलतापूर्वक कॉपी किया गया"
   }
 }
