@@ -3,7 +3,7 @@
     "message": "AI Chat Timeline - AI 대화에 인터랙티브 타임라인 추가, ChatGPT, DeepSeek 등 지원"
   },
   "extDescription": {
-    "message": "Double your AI chat efficiency! With an interactive timeline, 🚀 easily jump to any conversation, 📌 long-press to mark important chats, ⭐️ bookmark chats and quickly copy LaTeX formulas."
+    "message": "AI 채팅용 인터랙티브 타임라인. 대화로 이동, 중요한 채팅 북마크, LaTeX 수식 손쉽게 복사."
   },
   "viewStarred": {
     "message": "즐겨찾기 보기"

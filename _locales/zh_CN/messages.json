@@ -3,7 +3,7 @@
     "message": "AI Chat Timeline - 给 AI 对话添加交互式时间轴，支持 ChatGPT、Gemini、DeepSeek、Claude 等"
   },
   "extDescription": {
-    "message": "让你使用 AI 聊天的效率翻倍！通过交互式时间轴，🚀轻松跳转至任意对话，📌长按标记重要对话，⭐️收藏聊天、快捷复制 LaTeX 公式。"
+    "message": "让你使用 AI 聊天的效率翻倍！通过交互式时间轴，🚀轻松跳转至任意对话，📌长按标记重要对话，⭐️收藏聊天，❤️复制 LaTeX 公式。"
   },
   "viewStarred": {
     "message": "查看收藏"

@@ -3,7 +3,7 @@
     "message": "AI Chat Timeline - Интерактивная хронология для ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Double your AI chat efficiency! With an interactive timeline, 🚀 easily jump to any conversation, 📌 long-press to mark important chats, ⭐️ bookmark chats and quickly copy LaTeX formulas."
+    "message": "Интерактивная шкала для AI-чатов. Переходите к разговорам, закладки и копируйте формулы LaTeX."
   },
   "viewStarred": {
     "message": "Просмотр избранного"

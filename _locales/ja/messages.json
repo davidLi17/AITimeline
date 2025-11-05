@@ -3,7 +3,7 @@
     "message": "AI Chat Timeline - AI対話にインタラクティブなタイムラインを追加、ChatGPT、DeepSeek等対応"
   },
   "extDescription": {
-    "message": "Double your AI chat efficiency! With an interactive timeline, 🚀 easily jump to any conversation, 📌 long-press to mark important chats, ⭐️ bookmark chats and quickly copy LaTeX formulas."
+    "message": "AI チャット用インタラクティブタイムライン。会話にジャンプ、重要なチャットをブックマーク、LaTeX 式を簡単にコピー。"
   },
   "viewStarred": {
     "message": "お気に入りを表示"
