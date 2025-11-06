@@ -15,6 +15,7 @@ class SiteAdapterRegistry {
             new TongyiAdapter(),
             new KimiAdapter(),
             new YuanbaoAdapter(),
+            new GrokAdapter(),
             // Add more adapters here in the future
         ];
     }

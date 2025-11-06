@@ -128,7 +128,8 @@ class TimelineManager {
             'tongyi.com': { name: '通义千问', color: '#F59E0B', logo: chrome.runtime.getURL('images/logo/tongyi.webp') },
             'kimi.com': { name: 'Kimi', color: '#8B5CF6', logo: chrome.runtime.getURL('images/logo/kimi.webp') },
             'kimi.moonshot.cn': { name: 'Kimi', color: '#8B5CF6', logo: chrome.runtime.getURL('images/logo/kimi.webp') },
-            'yuanbao.tencent.com': { name: '元宝', color: '#10B981', logo: chrome.runtime.getURL('images/logo/yuanbao.webp') }
+            'yuanbao.tencent.com': { name: '元宝', color: '#10B981', logo: chrome.runtime.getURL('images/logo/yuanbao.webp') },
+            'grok.com': { name: 'Grok', color: '#000000', logo: chrome.runtime.getURL('images/logo/grok.webp') }
         };
     }
 
@@ -220,7 +221,16 @@ class TimelineManager {
         const position = this.adapter.getTimelinePosition();
         if (position) {
             if (position.top) timelineBar.style.top = position.top;
-            if (position.right) timelineBar.style.right = position.right;
+            
+            // ✅ 支持左右两侧定位
+            if (position.right) {
+                timelineBar.style.right = position.right;
+                timelineBar.style.left = 'auto'; // 清除可能存在的 left 样式
+            } else if (position.left) {
+                timelineBar.style.left = position.left;
+                timelineBar.style.right = 'auto'; // 清除可能存在的 right 样式
+            }
+            
             if (position.bottom) {
                 // ✅ 修复：确保高度至少为 200px，避免窗口太小导致时间轴高度为 0
                 // 使用 max() 函数确保即使 calc 结果为负数，也会有最小高度
@@ -346,15 +356,23 @@ class TimelineManager {
                 starredBtn.style.bottom = `${bottomValue - 10 - 26}px`;
             }
             
-            // 2. 计算 right 位置，使两者中心对齐
-            // timeline-bar: width=28px, right=position.right
+            // 2. 计算水平位置，使两者中心对齐
+            // timeline-bar: width=28px
             // 收藏按钮: width=26px
-            // 中心对齐: timelineBarRight + 28/2 = starredBtnRight + 26/2
-            // 所以: starredBtnRight = timelineBarRight + 14 - 13 = timelineBarRight + 1
+            // 中心对齐偏移: 28/2 - 26/2 = 1
+            
             if (position.right) {
+                // 时间轴在右侧（大多数平台）
                 const timelineBarRight = parseInt(position.right, 10) || 20;
-                const starredBtnRight = timelineBarRight + 1; // 28/2 - 26/2 = 1
+                const starredBtnRight = timelineBarRight + 1;
                 starredBtn.style.right = `${starredBtnRight}px`;
+                starredBtn.style.left = 'auto'; // 清除可能存在的 left 样式
+            } else if (position.left) {
+                // 时间轴在左侧（如 Grok）
+                const timelineBarLeft = parseInt(position.left, 10) || 20;
+                const starredBtnLeft = timelineBarLeft + 1;
+                starredBtn.style.left = `${starredBtnLeft}px`;
+                starredBtn.style.right = 'auto'; // 清除可能存在的 right 样式
             }
         }
         

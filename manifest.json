@@ -29,7 +29,8 @@
         "https://www.tongyi.com/*",
         "https://kimi.moonshot.cn/*",
         "https://www.kimi.com/*",
-        "https://yuanbao.tencent.com/*"
+        "https://yuanbao.tencent.com/*",
+        "https://grok.com/*"
       ],
       "js": [
         "js/common.js",
@@ -45,6 +46,7 @@
         "js/adapters/tongyi.js",
         "js/adapters/kimi.js",
         "js/adapters/yuanbao.js",
+        "js/adapters/grok.js",
         "js/adapters/registry.js",
         "js/formula-manager.js",
         "js/timeline-manager.js",
@@ -69,7 +71,8 @@
         "https://www.tongyi.com/*",
         "https://kimi.moonshot.cn/*",
         "https://www.kimi.com/*",
-        "https://yuanbao.tencent.com/*"
+        "https://yuanbao.tencent.com/*",
+        "https://grok.com/*"
       ]
     }
   ],

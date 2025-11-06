@@ -6,7 +6,6 @@
  *   - chatgpt.com/g/xxx/c/xxx (GPT 对话)
  *   - chatgpt.com/share/e/xxx (分享页面)
  *   - chat.openai.com (旧域名)
- * Features: Uses native data-message-id when available, falls back to index
  */
 
 class ChatGPTAdapter extends SiteAdapter {
@@ -23,9 +22,8 @@ class ChatGPTAdapter extends SiteAdapter {
     }
 
     generateTurnId(element, index) {
-        // Try to use native message-id if available, fallback to index
-        const nativeId = element.getAttribute('data-message-id');
-        return nativeId || `chatgpt-${index}`;
+        // 使用 index 作为唯一标识，与其他 AI 平台保持一致
+        return `chatgpt-${index}`;
     }
 
     extractText(element) {
