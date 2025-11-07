@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interaktyvi laiko juosta ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline - Interaktyvi laiko juosta ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Interaktyvi linija AI pokalbių. Pereikite prie pokalbių, pažymėkite ir kopijuokite LaTeX."
+    "message": "Paversti AI pokalbius interaktyviomis laiko juostomis. 🚀 Greitas peržiūra ir navigacija, 📌 pažymėti pagrindinius dialogus, ⭐️ mėgstami svarbūs pokalbiai, ❤️ kopijuoti LaTeX formules, padvigubinti efektyvumą!"
   },
   "viewStarred": {
     "message": "Peržiūrėti mėgstamiausius"

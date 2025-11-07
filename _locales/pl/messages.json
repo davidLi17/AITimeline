@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interaktywna oś czasu dla ChatGPT, Gemini, DeepSeek itp."
+    "message": "AI Timeline - Interaktywna oś czasu dla ChatGPT, Gemini, DeepSeek itp."
   },
   "extDescription": {
-    "message": "Interaktywna oś czasu dla czatów AI. Przeskocz do rozmów, dodaj ważne czaty do zakładek i łatwo kopiuj formuły LaTeX."
+    "message": "Przekształć swoje rozmowy z AI w interaktywne osie czasu. 🚀 Szybki podgląd i nawigacja, 📌 oznaczanie kluczowych dialogów, ⭐️ ulubione ważne czaty, ❤️ kopiowanie formuł LaTeX, podwój swoją efektywność!"
   },
   "viewStarred": {
     "message": "Zobacz ulubione"

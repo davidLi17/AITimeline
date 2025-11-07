@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - ChatGPT, Gemini için etkileşimli zaman çizelgesi"
+    "message": "AI Timeline - ChatGPT, Gemini için etkileşimli zaman çizelgesi"
   },
   "extDescription": {
-    "message": "AI için etkileşimli zaman çizelgesi. Konuşmalara atlayın, işaretleyin ve LaTeX kopyalayın."
+    "message": "AI konuşmalarınızı etkileşimli zaman çizelgelerine dönüştürün. 🚀 Hızlı önizleme ve gezinme, 📌 anahtar diyalogları işaretle, ⭐️ önemli sohbetleri favorile, ❤️ LaTeX formüllerini kopyala, verimliliğinizi ikiye katlayın!"
   },
   "viewStarred": {
     "message": "Favorileri görüntüle"

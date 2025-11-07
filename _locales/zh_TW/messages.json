@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - 為 AI 對話添加互動式時間軸，支援 ChatGPT、Gemini、DeepSeek 等平台"
+    "message": "AI Timeline - 為 AI 對話添加互動式時間軸，支援 ChatGPT、Gemini、DeepSeek 等平台"
   },
   "extDescription": {
-    "message": "讓你使用 AI 聊天的效率翻倍！通過交互式時間軸，🚀輕鬆跳轉至任意對話，📌長按標記重要對話，⭐️收藏聊天，❤️複製 LaTeX 公式。"
+    "message": "把你跟 AI 的對話整理成可互動時間軸，🚀快速預覽並跳轉、📌標記重點對話、⭐️收藏重要聊天、❤️複製 LaTeX 公式，讓效率翻倍！"
   },
   "viewStarred": {
     "message": "檢視收藏"

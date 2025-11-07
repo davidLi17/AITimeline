@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interactive timeline para sa ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline - Interactive timeline para sa ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Interactive timeline para sa AI chats. Tumalon sa pag-uusap, i-bookmark at kopyahin ang LaTeX formulas."
+    "message": "I-transform ang iyong AI conversations sa interactive timelines. 🚀 Mabilis na preview at jump, 📌 markahan ang mga pangunahing dialogue, ⭐️ paborito ang mahahalagang chat, ❤️ kopyahin ang LaTeX formulas, doblehin ang iyong efficiency!"
   },
   "viewStarred": {
     "message": "Tingnan ang mga paborito"

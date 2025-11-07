@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interactive timeline for ChatGPT, Gemini, DeepSeek, etc."
+    "message": "AI Timeline - Interactive timeline for ChatGPT, Gemini, DeepSeek, etc."
   },
   "extDescription": {
-    "message": "Interactive timeline for AI chats. Jump to conversations, bookmark important chats, and copy LaTeX formulas with ease."
+    "message": "Transform your AI conversations into interactive timelines. 🚀 Quick preview and jump, 📌 mark key dialogues, ⭐️ favourite important chats, ❤️ copy LaTeX formulas, double your efficiency!"
   },
   "viewStarred": {
     "message": "View favourites"

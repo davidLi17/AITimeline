@@ -29,7 +29,8 @@ class GrokAdapter extends SiteAdapter {
     extractText(element) {
         // 从 p.break-words 元素中提取文本内容
         const textElement = element.querySelector('p.break-words');
-        return textElement?.textContent?.trim() || '';
+        const text = (textElement?.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {
@@ -76,14 +77,14 @@ class GrokAdapter extends SiteAdapter {
     }
     
     getStarChatButtonTarget() {
-        // Grok 暂不支持收藏整个对话功能
-        // 可以根据实际 UI 结构添加
-        return null;
+        // 返回"更多"按钮，收藏按钮将插入到它前面
+        return document.querySelector('button[aria-label="更多"]');
     }
     
     getDefaultChatTheme() {
-        // Grok 使用页面标题作为默认主题
-        return document.title || '';
+        // Grok 使用页面标题作为默认主题，去掉后缀 " - Grok"
+        const title = document.title || '';
+        return title.replace(/\s*-\s*Grok\s*$/i, '').trim();
     }
     
     /**

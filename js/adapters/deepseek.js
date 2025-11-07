@@ -43,7 +43,8 @@ class DeepSeekAdapter extends SiteAdapter {
     extractText(element) {
         // 从第一个子 div 提取文本
         const firstDiv = element.querySelector('div');
-        return firstDiv?.textContent?.trim() || '';
+        const text = (firstDiv?.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {

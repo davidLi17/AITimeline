@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - AI対話にインタラクティブなタイムラインを追加、ChatGPT、DeepSeek等対応"
+    "message": "AI Timeline - AI対話にインタラクティブなタイムラインを追加、ChatGPT、DeepSeek等対応"
   },
   "extDescription": {
-    "message": "AI チャット用インタラクティブタイムライン。会話にジャンプ、重要なチャットをブックマーク、LaTeX 式を簡単にコピー。"
+    "message": "AIとの会話をインタラクティブなタイムラインに整理。🚀素早くプレビュー・ジャンプ、📌重要な対話をマーク、⭐️大切なチャットをお気に入り、❤️LaTeX数式をコピー、効率が倍増！"
   },
   "viewStarred": {
     "message": "お気に入りを表示"

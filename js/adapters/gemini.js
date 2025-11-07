@@ -35,7 +35,8 @@ class GeminiAdapter extends SiteAdapter {
                 .map(node => node.textContent)
                 .join('');
         });
-        return texts.join(' ').replace(/\s+/g, ' ').trim();
+        const text = texts.join(' ').replace(/\s+/g, ' ').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {

@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interaktive Zeitleiste für ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline - Interaktive Zeitleiste für ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Interaktive Zeitleiste für AI-Chats. Zu Konversationen springen, wichtige Chats markieren und LaTeX-Formeln einfach kopieren."
+    "message": "Verwandeln Sie Ihre KI-Gespräche in interaktive Zeitleisten. 🚀 Schnelle Vorschau und Navigation, 📌 wichtige Dialoge markieren, ⭐️ wichtige Chats favorisieren, ❤️ LaTeX-Formeln kopieren, verdoppeln Sie Ihre Effizienz!"
   },
   "viewStarred": {
     "message": "Favoriten anzeigen"

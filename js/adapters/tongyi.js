@@ -26,7 +26,8 @@ class TongyiAdapter extends SiteAdapter {
     extractText(element) {
         // 文本在 bubble-- 开头的 class 中
         const bubble = element.querySelector('[class*="bubble"]');
-        return bubble?.textContent?.trim() || element.textContent?.trim() || '';
+        const text = (bubble?.textContent || element.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {

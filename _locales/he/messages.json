@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - ציר זמן אינטראקטיבי עבור ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline - ציר זמן אינטראקטיבי עבור ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "ציר זמן אינטראקטיבי לצ'אטים של AI. קפצו לשיחות, סמנו צ'אטים חשובים והעתיקו נוסחאות LaTeX בקלות."
+    "message": "הפכו את שיחות ה-AI שלכם לצירי זמן אינטראקטיביים. 🚀 תצוגה מקדימה מהירה וניווט, 📌 סימון דיאלוגים מרכזיים, ⭐️ מועדפים של צ'אטים חשובים, ❤️ העתקת נוסחאות LaTeX, הכפילו את היעילות שלכם!"
   },
   "viewStarred": {
     "message": "הצג מועדפים"

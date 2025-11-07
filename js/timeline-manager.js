@@ -3473,11 +3473,17 @@ class TimelineManager {
     async updateStarredBtnVisibility() {
         if (!this.ui.starredBtn) return;
         
+        // 始终显示收藏按钮，即使没有收藏记录
+        this.ui.starredBtn.style.display = 'flex';
+        
+        // 根据是否有收藏数据来设置不同的颜色状态
         const hasData = await this.hasStarredData();
         if (hasData) {
-            this.ui.starredBtn.style.display = 'flex';
+            // 有收藏记录：移除灰色类，使用橙色
+            this.ui.starredBtn.classList.remove('no-starred-data');
         } else {
-            this.ui.starredBtn.style.display = 'none';
+            // 没有收藏记录：添加灰色类
+            this.ui.starredBtn.classList.add('no-starred-data');
         }
     }
     

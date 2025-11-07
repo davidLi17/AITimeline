@@ -25,7 +25,8 @@ class KimiAdapter extends SiteAdapter {
 
     extractText(element) {
         // 文本直接在元素中
-        return element.textContent?.trim() || '';
+        const text = (element.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {

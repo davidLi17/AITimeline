@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Garis waktu interaktif untuk ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline - Garis waktu interaktif untuk ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Timeline interaktif untuk obrolan AI. Lompat ke percakapan, tandai obrolan penting, dan salin formula LaTeX dengan mudah."
+    "message": "Ubah percakapan AI Anda menjadi garis waktu interaktif. 🚀 Pratinjau cepat dan navigasi, 📌 tandai dialog kunci, ⭐️ favoritkan obrolan penting, ❤️ salin rumus LaTeX, gandakan efisiensi Anda!"
   },
   "viewStarred": {
     "message": "Lihat favorit"

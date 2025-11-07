@@ -29,7 +29,8 @@ class ChatGPTAdapter extends SiteAdapter {
     extractText(element) {
         // 从 whitespace-pre-wrap 类的元素中提取文本内容
         const textElement = element.querySelector('.whitespace-pre-wrap');
-        return (textElement?.textContent || '').replace(/\s+/g, ' ').trim();
+        const text = (textElement?.textContent || '').replace(/\s+/g, ' ').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {

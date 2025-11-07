@@ -25,7 +25,8 @@ class DoubaoAdapter extends SiteAdapter {
     extractText(element) {
         // Extract from message_text_content element
         const textEl = element.querySelector('[data-testid="message_text_content"]');
-        return textEl?.textContent?.trim() || '';
+        const text = (textEl?.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {

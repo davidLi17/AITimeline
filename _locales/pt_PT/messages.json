@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Linha do tempo interativa para ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline - Linha do tempo interativa para ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Linha do tempo interativa para chats de IA. Salte para conversas, marque chats importantes e copie fórmulas LaTeX com facilidade."
+    "message": "Transforme as suas conversas de IA em linhas do tempo interativas. 🚀 Pré-visualização rápida e navegação, 📌 marcar diálogos-chave, ⭐️ favoritos de chats importantes, ❤️ copiar fórmulas LaTeX, duplique a sua eficiência!"
   },
   "viewStarred": {
     "message": "Ver favoritos"

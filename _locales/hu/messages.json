@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interaktív idővonal ChatGPT, Gemini, DeepSeek stb.-hez"
+    "message": "AI Timeline - Interaktív idővonal ChatGPT, Gemini, DeepSeek stb.-hez"
   },
   "extDescription": {
-    "message": "Interaktív idővonal AI chatekhez. Ugorj beszélgetésekre, jelölj meg fontos chateket és könnyen másold ki a LaTeX képleteket."
+    "message": "Alakítsa át AI-beszélgetéseit interaktív idővonallá. 🚀 Gyors előnézet és navigáció, 📌 jelölje meg a kulcsfontosságú párbeszédeket, ⭐️ kedvencek fontos chatok, ❤️ másolja a LaTeX képleteket, duplázza meg hatékonyságát!"
   },
   "viewStarred": {
     "message": "Kedvencek megtekintése"

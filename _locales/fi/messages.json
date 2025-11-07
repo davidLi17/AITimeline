@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - Interaktiivinen aikajana ChatGPT, Gemini, DeepSeek jne."
+    "message": "AI Timeline - Interaktiivinen aikajana ChatGPT, Gemini, DeepSeek jne."
   },
   "extDescription": {
-    "message": "Interaktiivinen aikajana AI-keskusteluille. Hyppää keskusteluihin, kirjanmerkit ja kopioi LaTeX."
+    "message": "Muunna AI-keskustelusi interaktiivisiksi aikajanoisiksi. 🚀 Nopea esikatselu ja navigointi, 📌 merkitse avaindialogia, ⭐️ suosikki tärkeät keskustelut, ❤️ kopioi LaTeX-kaavoja, kaksinkertaista tehokkuutesi!"
   },
   "viewStarred": {
     "message": "Näytä suosikit"

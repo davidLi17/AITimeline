@@ -45,7 +45,8 @@ class SiteAdapter {
      * @returns {string}
      */
     extractText(element) {
-        return element.textContent || '';
+        const text = (element.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     /**

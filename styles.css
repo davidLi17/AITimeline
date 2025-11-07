@@ -518,6 +518,19 @@ html.dark .timeline-left-slider::before { background: rgba(255,255,255,0.10); }
     background-color: rgba(0, 0, 0, 0.12);
 }
 
+/* ✅ 没有收藏记录时的灰色状态 */
+.timeline-starred-btn.no-starred-data svg path {
+    fill: #9CA3AF; /* 明亮模式：灰色 */
+    stroke: #9CA3AF;
+}
+
+@media (prefers-color-scheme: dark) {
+    .timeline-starred-btn.no-starred-data svg path {
+        fill: #6B7280; /* 暗黑模式：更深的灰色 */
+        stroke: #6B7280;
+    }
+}
+
 
 /* ✅ 主题输入对话框遮罩 */
 .timeline-theme-dialog-overlay {

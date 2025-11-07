@@ -26,7 +26,8 @@ class YiyanAdapter extends SiteAdapter {
     extractText(element) {
         // 文本在 span 子元素中
         const span = element.querySelector('span');
-        return span?.textContent?.trim() || element.textContent?.trim() || '';
+        const text = (span?.textContent || element.textContent || '').trim();
+        return text || '[图片或文件]';
     }
 
     isConversationRoute(pathname) {
