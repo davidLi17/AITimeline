@@ -88,25 +88,6 @@ class GrokAdapter extends SiteAdapter {
     }
     
     /**
-     * 初始化公式交互功能
-     * Grok 使用 KaTeX 格式（与 DeepSeek、ChatGPT 相同）
-     * @returns {FormulaManager|null} - 返回 FormulaManager 实例，如果不支持则返回 null
-     */
-    initFormulaInteraction() {
-        // 检查是否存在 FormulaManager 类
-        if (typeof FormulaManager === 'undefined') {
-            console.warn('FormulaManager is not loaded');
-            return null;
-        }
-        
-        // 创建并初始化 FormulaManager
-        const formulaManager = new FormulaManager();
-        formulaManager.init();
-        
-        return formulaManager;
-    }
-    
-    /**
      * 检测 Grok 的深色模式
      * Grok 通过 html 元素的 class 控制主题 (dark/light)
      * @returns {boolean}

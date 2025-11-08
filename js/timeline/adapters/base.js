@@ -136,5 +136,6 @@ class SiteAdapter {
         
         return false;
     }
+    
 }
 

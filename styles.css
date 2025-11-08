@@ -1199,25 +1199,37 @@ html.dark .timeline-starred-item-copy:hover svg {
    ✅ 公式交互样式（FormulaManager）
    ============================================ */
 
-/* 公式基础交互样式（统一识别 .katex 元素）*/
-.katex.formula-interactive {
+/* 公式基础交互样式（统一识别 .katex、.mwe-math-element 和 MathJax 元素）*/
+.katex.formula-interactive,
+.mwe-math-element.formula-interactive,
+.MathJax_SVG.formula-interactive,
+.MathJax.formula-interactive {
     position: relative;
     transition: background-color 0.2s ease, transform 0.15s ease;
     border-radius: 6px;
 }
 
 /* 公式 hover 效果 */
-.katex.formula-interactive.formula-hover {
+.katex.formula-interactive.formula-hover,
+.mwe-math-element.formula-interactive.formula-hover,
+.MathJax_SVG.formula-interactive.formula-hover,
+.MathJax.formula-interactive.formula-hover {
     background-color: rgba(0, 0, 0, 0.06) !important;
     cursor: pointer;
 }
 
-html.dark .katex.formula-interactive.formula-hover {
+html.dark .katex.formula-interactive.formula-hover,
+html.dark .mwe-math-element.formula-interactive.formula-hover,
+html.dark .MathJax_SVG.formula-interactive.formula-hover,
+html.dark .MathJax.formula-interactive.formula-hover {
     background-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* 公式点击效果 */
-.katex.formula-interactive:active {
+.katex.formula-interactive:active,
+.mwe-math-element.formula-interactive:active,
+.MathJax_SVG.formula-interactive:active,
+.MathJax.formula-interactive:active {
     transform: scale(0.998);
 }
 

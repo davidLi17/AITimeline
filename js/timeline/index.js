@@ -12,7 +12,6 @@
 
 // --- Entry Point and SPA Navigation Handler ---
 let timelineManagerInstance = null;
-let formulaManagerInstance = null; // ✅ FormulaManager 实例
 let currentUrl = location.href;
 let initVersion = 0; // Version number for initialization, increments on URL change
 let pageObserver = null;
@@ -148,30 +147,7 @@ function initializeTimeline() {
     try {
         timelineManagerInstance = new TimelineManager(currentAdapter);
         timelineManagerInstance.init().catch(err => {});
-        
-        // ✅ 初始化公式交互功能（仅 ChatGPT）
-        initializeFormulaInteraction();
     } catch (err) {
-    }
-}
-
-/**
- * 初始化公式交互功能
- */
-function initializeFormulaInteraction() {
-    // 清理旧实例
-    if (formulaManagerInstance) {
-        try { formulaManagerInstance.destroy(); } catch {}
-        formulaManagerInstance = null;
-    }
-    
-    // 仅在 ChatGPT 平台启用
-    if (currentAdapter && typeof currentAdapter.initFormulaInteraction === 'function') {
-        try {
-            formulaManagerInstance = currentAdapter.initFormulaInteraction();
-        } catch (err) {
-            console.warn('Failed to initialize formula interaction:', err);
-        }
     }
 }
 
@@ -185,12 +161,6 @@ function handleUrlChange() {
     if (timelineManagerInstance) {
         try { timelineManagerInstance.destroy(); } catch {}
         timelineManagerInstance = null;
-    }
-    
-    // ✅ 清理公式管理器
-    if (formulaManagerInstance) {
-        try { formulaManagerInstance.destroy(); } catch {}
-        formulaManagerInstance = null;
     }
     
     TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-bar'));

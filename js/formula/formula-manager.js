@@ -97,12 +97,28 @@ class FormulaManager {
      */
     attachFormulaListeners(formulaElement) {
         // 避免重复添加
-        if (formulaElement.hasAttribute('data-formula-interactive')) return;
+        if (formulaElement.hasAttribute('data-latex-source')) return;
         
         // 检查元素是否在 DOM 中且可见
         if (!formulaElement.isConnected) return;
         
-        formulaElement.setAttribute('data-formula-interactive', 'true');
+        // 前置提取逻辑：使用独立的 LatexExtractor
+        let latexCode = LatexExtractor.extract(formulaElement);
+        if (!latexCode) {
+            // 无法提取公式，不添加交互功能
+            return;
+        }
+        
+        // 特殊处理：如果是维基百科的 mwe-math-element，清理格式
+        if (formulaElement.classList.contains('mwe-math-element') || formulaElement.closest('.mwe-math-element')) {
+            // 如果开头是 {\displaystyle，则删除它，同时删除结尾的 }
+            if (latexCode.startsWith('{\\displaystyle')) {
+                latexCode = latexCode.replace(/^\{\\displaystyle\s*/, '').replace(/\}\s*$/, '').trim();
+            }
+        }
+        
+        // 存储 LaTeX 源码到元素属性（同时作为已处理标记）
+        formulaElement.setAttribute('data-latex-source', latexCode);
         
         formulaElement.addEventListener('mouseenter', this.handleMouseEnter);
         formulaElement.addEventListener('mouseleave', this.handleMouseLeave);
@@ -168,10 +184,12 @@ class FormulaManager {
     async handleClick(e) {
         const formulaElement = e.currentTarget;
         
-        // 获取 LaTeX 源码
-        const latexCode = this.extractLatexCode(formulaElement);
+        // 直接从属性读取 LaTeX 源码（已在 attachFormulaListeners 中提取并存储）
+        const latexCode = formulaElement.getAttribute('data-latex-source');
         
         if (!latexCode) {
+            // 防御性检查（理论上不应该发生）
+            console.warn('Formula element missing data-latex-source attribute', formulaElement);
             this.showCopyFeedback('⚠ 无法获取公式', formulaElement, true);
             return;
         }
@@ -198,62 +216,6 @@ class FormulaManager {
         }
     }
 
-    /**
-     * 从公式元素中提取 LaTeX 源码
-     */
-    extractLatexCode(formulaElement) {
-        // 方法1: 豆包格式 - data-custom-copy-text 属性（当前元素）
-        if (formulaElement.hasAttribute('data-custom-copy-text')) {
-            return formulaElement.getAttribute('data-custom-copy-text').trim();
-        }
-
-        // 方法2: 豆包格式 - 向上查找 .math-inline 父元素
-        let mathInlineParent = formulaElement.closest('.math-inline');
-        if (mathInlineParent && mathInlineParent.hasAttribute('data-custom-copy-text')) {
-            return mathInlineParent.getAttribute('data-custom-copy-text').trim();
-        }
-
-        // 方法3: 豆包格式 - data-custom-copy-text 属性（子元素）
-        const doubaoChild = formulaElement.querySelector('[data-custom-copy-text]');
-        if (doubaoChild) {
-            return doubaoChild.getAttribute('data-custom-copy-text').trim();
-        }
-
-        // 方法4: 当前元素的 data-math 属性
-        if (formulaElement.hasAttribute('data-math')) {
-            return formulaElement.getAttribute('data-math').trim();
-        }
-
-        // 方法5: Gemini 格式 - 从祖先元素的 data-math 属性获取
-        let parent = formulaElement.parentElement;
-        while (parent) {
-            if (parent.hasAttribute('data-math')) {
-                return parent.getAttribute('data-math').trim();
-            }
-            parent = parent.parentElement;
-            if (!parent || parent === document.body) break;
-        }
-
-        // 方法6: ChatGPT 格式 - 从 annotation 标签获取
-        const annotation = formulaElement.querySelector('annotation[encoding="application/x-tex"]');
-        if (annotation) {
-            return annotation.textContent.trim();
-        }
-
-        // 方法7: 从 .katex-mathml 中的 annotation 获取
-        const mathml = formulaElement.querySelector('.katex-mathml annotation');
-        if (mathml) {
-            return mathml.textContent.trim();
-        }
-
-        // 方法8: 通用 data-latex 属性
-        if (formulaElement.hasAttribute('data-latex')) {
-            return formulaElement.getAttribute('data-latex').trim();
-        }
-
-        // 无法获取公式
-        return null;
-    }
 
     /**
      * 显示 tooltip
@@ -460,13 +422,29 @@ class FormulaManager {
     scanAndAttachFormulas() {
         if (!this.isEnabled) return;
         
-        // 扫描 KaTeX 公式（ChatGPT, Gemini, DeepSeek）
-        const katexFormulas = document.querySelectorAll('.katex:not([data-formula-interactive])');
+        // 扫描 KaTeX 公式（ChatGPT, Gemini, DeepSeek, Grok）
+        const katexFormulas = document.querySelectorAll('.katex:not([data-latex-source])');
         katexFormulas.forEach(formula => this.attachFormulaListeners(formula));
         
         // 扫描豆包的 .math-inline 公式
-        const doubaoFormulas = document.querySelectorAll('.math-inline:not([data-formula-interactive])');
+        const doubaoFormulas = document.querySelectorAll('.math-inline:not([data-latex-source])');
         doubaoFormulas.forEach(formula => this.attachFormulaListeners(formula));
+        
+        // 扫描维基百科的 .mwe-math-element 公式
+        const wikiFormulas = document.querySelectorAll('.mwe-math-element:not([data-latex-source])');
+        wikiFormulas.forEach(formula => this.attachFormulaListeners(formula));
+        
+        // 扫描 MathJax 公式 - 查找 script[type="math/tex"] 的兄弟元素
+        const mathJaxScripts = document.querySelectorAll('script[type^="math/tex"]');
+        mathJaxScripts.forEach(script => {
+            if (!script.parentElement) return;
+            
+            // 查找兄弟元素中的 .MathJax_SVG 或 .MathJax
+            const mathJaxElement = script.parentElement.querySelector('.MathJax_SVG:not([data-latex-source]), .MathJax:not([data-latex-source])');
+            if (mathJaxElement) {
+                this.attachFormulaListeners(mathJaxElement);
+            }
+        });
     }
 
     /**
@@ -506,12 +484,12 @@ class FormulaManager {
         }
 
         // 移除所有公式的事件监听
-        const formulas = document.querySelectorAll('.katex[data-formula-interactive]');
+        const formulas = document.querySelectorAll('.katex[data-latex-source], .math-inline[data-latex-source], .mwe-math-element[data-latex-source], .MathJax_SVG[data-latex-source], .MathJax[data-latex-source]');
         formulas.forEach(formula => {
             formula.removeEventListener('mouseenter', this.handleMouseEnter);
             formula.removeEventListener('mouseleave', this.handleMouseLeave);
             formula.removeEventListener('click', this.handleClick);
-            formula.removeAttribute('data-formula-interactive');
+            formula.removeAttribute('data-latex-source');
             formula.classList.remove('formula-interactive', 'formula-hover');
         });
 

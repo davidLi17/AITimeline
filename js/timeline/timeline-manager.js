@@ -118,19 +118,8 @@ class TimelineManager {
         this.pinnedIndexes = new Set();
         
         // ✅ URL 到网站信息的映射字典（包含名称和颜色）
-        this.siteNameMap = {
-            'chatgpt.com': { name: 'ChatGPT', color: '#0D0D0D', logo: chrome.runtime.getURL('images/logo/chatgpt.webp') },
-            'chat.openai.com': { name: 'ChatGPT', color: '#0D0D0D', logo: chrome.runtime.getURL('images/logo/chatgpt.webp') },
-            'gemini.google.com': { name: 'Gemini', color: '#4285F4', logo: chrome.runtime.getURL('images/logo/gemini.webp') },
-            'doubao.com': { name: '豆包', color: '#7C3AED', logo: chrome.runtime.getURL('images/logo/doubao.webp') },
-            'chat.deepseek.com': { name: 'DeepSeek', color: '#3B82F6', logo: chrome.runtime.getURL('images/logo/deepseek.webp') },
-            'yiyan.baidu.com': { name: '文心一言', color: '#EF4444', logo: chrome.runtime.getURL('images/logo/wenxin.webp') },
-            'tongyi.com': { name: '通义千问', color: '#F59E0B', logo: chrome.runtime.getURL('images/logo/tongyi.webp') },
-            'kimi.com': { name: 'Kimi', color: '#8B5CF6', logo: chrome.runtime.getURL('images/logo/kimi.webp') },
-            'kimi.moonshot.cn': { name: 'Kimi', color: '#8B5CF6', logo: chrome.runtime.getURL('images/logo/kimi.webp') },
-            'yuanbao.tencent.com': { name: '元宝', color: '#10B981', logo: chrome.runtime.getURL('images/logo/yuanbao.webp') },
-            'grok.com': { name: 'Grok', color: '#000000', logo: chrome.runtime.getURL('images/logo/grok.webp') }
-        };
+        // 使用 constants.js 中的函数生成 siteNameMap
+        this.siteNameMap = getSiteNameMap();
     }
 
     perfStart(name) {
@@ -1171,7 +1160,7 @@ class TimelineManager {
                 else { this.visibleUserTurns.delete(target); }
             });
             this.scheduleScrollSync();
-        }, { root: this.scrollContainer, threshold: 0.1, rootMargin: "-40% 0px -59% 0px" });
+        }, { root: this.scrollContainer, threshold: 0, rootMargin: "0px" });
         this.updateIntersectionObserverTargets();
 
         // Re-observe mutations on the new conversation container
@@ -2638,6 +2627,7 @@ class TimelineManager {
          */
         const referencePoint = containerRect.top + clientHeight * 0.45;
         const viewportTop = containerRect.top;
+        const viewportBottom = containerRect.bottom;
         
         // 默认激活第一个节点（用于情况2.2）
         let activeId = this.markers[0].id;
@@ -2648,10 +2638,17 @@ class TimelineManager {
             const m = this.markers[i];
             const elRect = m.element.getBoundingClientRect();
             const elTop = elRect.top;
+            const elBottom = elRect.bottom;
             
-            // 【情况1】找到第一个在视口内且在0-45%区域的节点
-            // 条件：elTop >= viewportTop (在视口内或之下) && elTop <= referencePoint (在45%之上)
-            if (elTop >= viewportTop && elTop <= referencePoint) {
+            // 【情况1】找到第一个部分可见且在0-45%区域的节点
+            // 判断元素是否部分可见：上边缘或下边缘在视口内，或完全覆盖视口
+            const isTopInViewport = elTop >= viewportTop && elTop <= viewportBottom;
+            const isBottomInViewport = elBottom >= viewportTop && elBottom <= viewportBottom;
+            const coversViewport = elTop < viewportTop && elBottom > viewportBottom;
+            const isPartiallyVisible = isTopInViewport || isBottomInViewport || coversViewport;
+            
+            // 条件：元素部分可见 && 元素顶部在45%参考线之上
+            if (isPartiallyVisible && elTop <= referencePoint) {
                 activeId = m.id;
                 foundInRange = true;
                 break;  // 找到第一个满足条件的，立即停止
