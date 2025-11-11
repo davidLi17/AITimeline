@@ -19,18 +19,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://chatgpt.com/*",
-        "https://chat.openai.com/*",
-        "https://gemini.google.com/*",
-        "https://www.doubao.com/*",
-        "https://chat.deepseek.com/*",
-        "https://yiyan.baidu.com/*",
-        "https://tongyi.aliyun.com/*",
-        "https://www.tongyi.com/*",
-        "https://kimi.moonshot.cn/*",
-        "https://www.kimi.com/*",
-        "https://yuanbao.tencent.com/*",
-        "https://grok.com/*"
+        "<all_urls>"
       ],
       "js": [
         "js/global/tooltip-manager.js",
@@ -70,18 +59,7 @@
     {
       "resources": ["images/logo/*.webp"],
       "matches": [
-        "https://chatgpt.com/*",
-        "https://chat.openai.com/*",
-        "https://gemini.google.com/*",
-        "https://www.doubao.com/*",
-        "https://chat.deepseek.com/*",
-        "https://yiyan.baidu.com/*",
-        "https://tongyi.aliyun.com/*",
-        "https://www.tongyi.com/*",
-        "https://kimi.moonshot.cn/*",
-        "https://www.kimi.com/*",
-        "https://yuanbao.tencent.com/*",
-        "https://grok.com/*"
+        "<all_urls>"
       ]
     }
   ],
