@@ -87,16 +87,16 @@ class DeepSeekAdapter extends SiteAdapter {
     }
     
     getStarChatButtonTarget() {
-        // 不使用原生插入，返回 null
-        return null;
-    }
-    
-    getStarChatButtonPosition() {
-        // DeepSeek 使用固定定位，返回自定义位置
-        return {
-            top: '12px',
-            right: '60px'
-        };
+        // DeepSeek: 通过 SVG path 查找图标，然后找父容器
+        // 这个图标通常在顶部工具栏中（分享按钮）
+        // 只匹配 path 的前几个字符（更稳定，不依赖完整 SVG 路径）
+        // 注意：页面可能有多个匹配的 path，querySelector 会自动返回第一个（通常就是顶部工具栏的）
+        const path = document.querySelector('path[d^="M15.7484 11.1004"]');
+        if (!path) return null;
+        
+        // 往上找到 .ds-icon-button 按钮容器
+        const iconButton = path.closest('.ds-icon-button');
+        return iconButton; // 收藏按钮将插入到这个按钮的左边
     }
     
     getDefaultChatTheme() {

@@ -373,20 +373,19 @@ class TimelineManager {
     }
     
     /**
-     * ✅ 注入收藏聊天按钮（支持原生插入和固定定位两种模式）
+     * ✅ 注入收藏聊天按钮（原生插入模式）
      */
     async injectStarChatButton() {
-        // 1. 获取Adapter提供的目标元素或位置配置
+        // 1. 获取Adapter提供的目标元素
         const targetElement = this.adapter.getStarChatButtonTarget?.();
-        const fixedPosition = this.adapter.getStarChatButtonPosition?.();
         
-        // 如果两者都没有，不显示按钮
-        if (!targetElement && !fixedPosition) {
+        // 如果没有目标元素，不显示按钮
+        if (!targetElement) {
             return;
         }
         
-        // 2. 检查是否已存在按钮（两种class都检查）
-        let starChatBtn = document.querySelector('.timeline-star-chat-btn-native, .timeline-star-chat-btn-fixed');
+        // 2. 检查是否已存在按钮
+        let starChatBtn = document.querySelector('.timeline-star-chat-btn-native');
         if (starChatBtn) {
             // 已存在，移除旧的
             starChatBtn.remove();
@@ -394,8 +393,7 @@ class TimelineManager {
         
         // 3. 创建按钮
         starChatBtn = document.createElement('button');
-        // 根据模式设置不同的 class
-        starChatBtn.className = targetElement ? 'timeline-star-chat-btn-native' : 'timeline-star-chat-btn-fixed';
+        starChatBtn.className = 'timeline-star-chat-btn-native';
         
         // 4. 检查收藏状态并设置图标
         const isStarred = await this.isChatStarred();
@@ -406,6 +404,7 @@ class TimelineManager {
         `;
         
         // 5. 设置基础样式（适配原生UI）
+        const isDeepSeek = this.adapter.constructor.name === 'DeepSeekAdapter';
         starChatBtn.style.cssText = `
             width: 36px;
             height: 36px;
@@ -418,7 +417,7 @@ class TimelineManager {
             align-items: center;
             justify-content: center;
             transition: background-color 0.2s;
-            position: relative;
+            ${isDeepSeek ? 'position: absolute; top: 14px; right: 56px; z-index: 1000;' : 'position: relative;'}
         `;
         
         // 6. Hover效果和tooltip - 使用全局 Tooltip 管理器
@@ -456,18 +455,8 @@ class TimelineManager {
             }
         });
         
-        // 9. 插入按钮或设置固定定位
-        if (targetElement) {
-            // 模式1: 插入到原生UI
-            targetElement.parentNode.insertBefore(starChatBtn, targetElement);
-        } else if (fixedPosition) {
-            // 模式2: 固定定位
-            document.body.appendChild(starChatBtn);
-            starChatBtn.style.position = 'fixed';
-            starChatBtn.style.top = fixedPosition.top;
-            starChatBtn.style.right = fixedPosition.right;
-            starChatBtn.style.zIndex = '50';
-        }
+        // 9. 插入按钮到原生UI
+        targetElement.parentNode.insertBefore(starChatBtn, targetElement);
         
         // 10. 保存引用
         this.ui.starChatBtn = starChatBtn;

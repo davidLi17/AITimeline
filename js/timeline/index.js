@@ -147,9 +147,6 @@ function initializeTimeline() {
     // 3. 清理原生收藏按钮（正常文档流中的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
     
-    // 4. 清理固定定位收藏按钮（滚动时固定在屏幕上的收藏按钮）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-fixed'));
-    
     try {
         timelineManagerInstance = new TimelineManager(currentAdapter);
         timelineManagerInstance.init().catch(err => {});
@@ -182,9 +179,6 @@ function handleUrlChange() {
     
     // 3. 清理原生收藏按钮（正常文档流中的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
-    
-    // 4. 清理固定定位收藏按钮（滚动时固定在屏幕上的收藏按钮）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-fixed'));
     
     cleanupGlobalObservers();
 

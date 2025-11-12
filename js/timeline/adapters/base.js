@@ -105,14 +105,6 @@ class SiteAdapter {
     }
     
     /**
-     * Get fixed position for star chat button (fallback when no native target)
-     * @returns {Object|null} - {top, right} in pixels, or null to skip fixed positioning
-     */
-    getStarChatButtonPosition() {
-        return null; // 默认不使用固定定位
-    }
-    
-    /**
      * Detect if the site is in dark mode
      * @returns {boolean} - true if dark mode is detected
      */

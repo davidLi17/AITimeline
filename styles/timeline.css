@@ -194,7 +194,7 @@ html.dark .timeline-dot.starred.active::before {
 /* 图钉图标（独立渲染到 .chat-timeline-bar，使用和节点相同的定位方式） */
 .timeline-pin-marker {
     position: absolute !important;
-    left: calc(100% + 3px) !important; /* 时间轴容器右侧3px */
+    left: -18px !important; /* 时间轴容器左侧18px，避开右侧滚动条 */
     /* 使用和节点相同的 --n 变量定位 */
     top: calc(16px + (100% - 32px) * var(--n, 0)) !important;
     transform: translateY(-50%) !important;
