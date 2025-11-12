@@ -10,6 +10,7 @@
  * - 完全可配置（颜色、位置、时长、图标）
  * - 自动清理（定时消失）
  * - 相对定位或固定定位
+ * - ✨ 组件自治：URL 变化时自动清理所有 Toast（无需外部管理）
  */
 
 class GlobalToastManager {
@@ -98,6 +99,15 @@ class GlobalToastManager {
                 }
             }
         };
+        
+        // 状态管理
+        this.state = {
+            currentUrl: location.href  // 记录当前 URL
+        };
+        
+        // ✅ 监听 URL 变化，自动清理所有 toast（组件自治）
+        this._boundHandleUrlChange = this._handleUrlChange.bind(this);
+        this._attachUrlListeners();
         
         this._log('Toast manager initialized');
     }
@@ -211,6 +221,7 @@ class GlobalToastManager {
     destroy() {
         this._log('Destroying toast manager');
         this.forceHideAll();
+        this._detachUrlListeners();  // 清理事件监听器
     }
     
     // ==================== 内部方法 ====================
@@ -411,6 +422,54 @@ class GlobalToastManager {
     _log(...args) {
         if (this.config.debug) {
             console.log('[ToastManager]', ...args);
+        }
+    }
+    
+    // ==================== URL 变化监听（组件自治）====================
+    
+    /**
+     * 附加 URL 变化监听器
+     * 当 URL 变化时自动清理所有 toast，无需外部调用
+     */
+    _attachUrlListeners() {
+        try {
+            window.addEventListener('popstate', this._boundHandleUrlChange);
+            window.addEventListener('hashchange', this._boundHandleUrlChange);
+            this._log('URL listeners attached');
+        } catch (error) {
+            console.error('[ToastManager] Failed to attach URL listeners:', error);
+        }
+    }
+    
+    /**
+     * 移除 URL 变化监听器
+     */
+    _detachUrlListeners() {
+        try {
+            window.removeEventListener('popstate', this._boundHandleUrlChange);
+            window.removeEventListener('hashchange', this._boundHandleUrlChange);
+            this._log('URL listeners detached');
+        } catch (error) {
+            console.error('[ToastManager] Failed to detach URL listeners:', error);
+        }
+    }
+    
+    /**
+     * 处理 URL 变化
+     * ✅ 组件自治：URL 变化时自动清理所有 toast
+     */
+    _handleUrlChange() {
+        const newUrl = location.href;
+        
+        // URL 变化了，自动清理所有 toast
+        if (newUrl !== this.state.currentUrl) {
+            this._log('URL changed, auto-hiding all toasts:', this.state.currentUrl, '->', newUrl);
+            this.state.currentUrl = newUrl;
+            
+            // 如果有 toast 正在显示，自动清理
+            if (this.queue.length > 0) {
+                this.forceHideAll();
+            }
         }
     }
 }

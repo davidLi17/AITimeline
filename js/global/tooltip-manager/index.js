@@ -13,6 +13,7 @@
  * - 保险定时器（强制消失）
  * - 全局安全网（滚动/点击/ESC 强制隐藏）
  * - DOM 复用（性能优化）
+ * - ✨ 组件自治：URL 变化时自动清理所有 Tooltip（无需外部管理）
  */
 
 class GlobalTooltipManager {
@@ -23,7 +24,8 @@ class GlobalTooltipManager {
             currentType: null,
             currentTarget: null,
             isVisible: false,
-            isPinned: false  // 鼠标是否在 tooltip 上
+            isPinned: false,  // 鼠标是否在 tooltip 上
+            currentUrl: location.href  // 记录当前 URL
         };
         
         // DOM 实例池（按类型复用）
@@ -117,9 +119,11 @@ class GlobalTooltipManager {
         this._onWindowBlur = this._onWindowBlur.bind(this);
         this._onTooltipEnter = this._onTooltipEnter.bind(this);
         this._onTooltipLeave = this._onTooltipLeave.bind(this);
+        this._boundHandleUrlChange = this._handleUrlChange.bind(this);
         
         // 初始化
         this._setupGlobalListeners();
+        this._attachUrlListeners();  // ✅ 监听 URL 变化（组件自治）
     }
     
     /**
@@ -246,6 +250,7 @@ class GlobalTooltipManager {
         
         // 移除全局事件监听
         this._removeGlobalListeners();
+        this._detachUrlListeners();  // 清理 URL 监听器
         
         // 停止观察
         if (this.targetObserver) {
@@ -267,7 +272,8 @@ class GlobalTooltipManager {
             currentType: null,
             currentTarget: null,
             isVisible: false,
-            isPinned: false
+            isPinned: false,
+            currentUrl: location.href
         };
     }
     
@@ -797,6 +803,54 @@ class GlobalTooltipManager {
     _log(...args) {
         if (this.config.debug) {
             console.log('[TooltipManager]', ...args);
+        }
+    }
+    
+    // ==================== URL 变化监听（组件自治）====================
+    
+    /**
+     * 附加 URL 变化监听器
+     * 当 URL 变化时自动清理所有 tooltip，无需外部调用
+     */
+    _attachUrlListeners() {
+        try {
+            window.addEventListener('popstate', this._boundHandleUrlChange);
+            window.addEventListener('hashchange', this._boundHandleUrlChange);
+            this._log('URL listeners attached');
+        } catch (error) {
+            console.error('[TooltipManager] Failed to attach URL listeners:', error);
+        }
+    }
+    
+    /**
+     * 移除 URL 变化监听器
+     */
+    _detachUrlListeners() {
+        try {
+            window.removeEventListener('popstate', this._boundHandleUrlChange);
+            window.removeEventListener('hashchange', this._boundHandleUrlChange);
+            this._log('URL listeners detached');
+        } catch (error) {
+            console.error('[TooltipManager] Failed to detach URL listeners:', error);
+        }
+    }
+    
+    /**
+     * 处理 URL 变化
+     * ✅ 组件自治：URL 变化时自动清理所有 tooltip
+     */
+    _handleUrlChange() {
+        const newUrl = location.href;
+        
+        // URL 变化了，自动清理所有 tooltip
+        if (newUrl !== this.state.currentUrl) {
+            this._log('URL changed, auto-hiding all tooltips:', this.state.currentUrl, '->', newUrl);
+            this.state.currentUrl = newUrl;
+            
+            // 如果有 tooltip 正在显示，自动清理
+            if (this.state.isVisible) {
+                this.forceHideAll();
+            }
         }
     }
 }

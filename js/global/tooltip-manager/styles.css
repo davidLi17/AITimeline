@@ -3,7 +3,7 @@
  * 
  * 通用 Tooltip 组件样式
  * 
- * 对应 JS: js/global/tooltip-manager.js
+ * 对应 JS: ./index.js
  * 
  * 包含内容：
  * - 基础 tooltip 样式
@@ -11,7 +11,7 @@
  * - 箭头样式（上下左右）
  * - 显示/隐藏动画
  * 
- * @requires ../variables.css
+ * @requires ../../../styles/variables.css
  */
 
 /* ============================================

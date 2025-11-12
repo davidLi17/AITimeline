@@ -8,6 +8,7 @@
  * - 点击复制 LaTeX 源码（纯文本，不包装 Markdown）
  * - 复制成功反馈
  * - 动态监听新增公式
+ * - ✨ 组件自治：URL 变化时自动清理公式交互标记（无需外部管理）
  */
 
 class FormulaManager {
@@ -26,10 +27,17 @@ class FormulaManager {
         this._mutationCount = 0;
         this._lastScanTime = 0;
         
+        // ✅ URL 变化监听（组件自治）
+        this._currentUrl = location.href;
+        
         // 绑定事件处理器
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this._boundHandleUrlChange = this._handleUrlChange.bind(this);
+        
+        // ✅ 监听 URL 变化（组件自治）
+        this._attachUrlListeners();
     }
 
     /**
@@ -483,15 +491,8 @@ class FormulaManager {
             this.feedbackTimer = null;
         }
 
-        // 移除所有公式的事件监听
-        const formulas = document.querySelectorAll('.katex[data-latex-source], .math-inline[data-latex-source], .mwe-math-element[data-latex-source], .MathJax_SVG[data-latex-source], .MathJax[data-latex-source]');
-        formulas.forEach(formula => {
-            formula.removeEventListener('mouseenter', this.handleMouseEnter);
-            formula.removeEventListener('mouseleave', this.handleMouseLeave);
-            formula.removeEventListener('click', this.handleClick);
-            formula.removeAttribute('data-latex-source');
-            formula.classList.remove('formula-interactive', 'formula-hover');
-        });
+        // 清理公式交互标记
+        this._cleanupFormulaMarkers();
 
         // 移除 UI 元素
         if (this.tooltip) {
@@ -504,10 +505,77 @@ class FormulaManager {
             this.copyFeedback = null;
         }
 
+        // 清理 URL 监听器
+        this._detachUrlListeners();
+
         // 重置状态变量
         this.currentHoverElement = null;
         this._mutationCount = 0;
         this._lastScanTime = 0;
+    }
+    
+    // ==================== URL 变化监听（组件自治）====================
+    
+    /**
+     * 附加 URL 变化监听器
+     * 当 URL 变化时自动清理公式交互标记，无需外部调用
+     */
+    _attachUrlListeners() {
+        try {
+            window.addEventListener('popstate', this._boundHandleUrlChange);
+            window.addEventListener('hashchange', this._boundHandleUrlChange);
+        } catch (error) {
+            console.error('[FormulaManager] Failed to attach URL listeners:', error);
+        }
+    }
+    
+    /**
+     * 移除 URL 变化监听器
+     */
+    _detachUrlListeners() {
+        try {
+            window.removeEventListener('popstate', this._boundHandleUrlChange);
+            window.removeEventListener('hashchange', this._boundHandleUrlChange);
+        } catch (error) {
+            console.error('[FormulaManager] Failed to detach URL listeners:', error);
+        }
+    }
+    
+    /**
+     * 处理 URL 变化
+     * ✅ 组件自治：URL 变化时自动清理公式交互标记
+     */
+    _handleUrlChange() {
+        const newUrl = location.href;
+        
+        // URL 变化了，自动清理公式交互标记
+        if (newUrl !== this._currentUrl) {
+            this._currentUrl = newUrl;
+            
+            // 清理所有公式的交互标记
+            this._cleanupFormulaMarkers();
+        }
+    }
+    
+    /**
+     * 清理所有公式的交互标记和样式类
+     */
+    _cleanupFormulaMarkers() {
+        const formulas = document.querySelectorAll('.katex[data-latex-source], .math-inline[data-latex-source], .mwe-math-element[data-latex-source], .MathJax_SVG[data-latex-source], .MathJax[data-latex-source]');
+        formulas.forEach(formula => {
+            formula.removeEventListener('mouseenter', this.handleMouseEnter);
+            formula.removeEventListener('mouseleave', this.handleMouseLeave);
+            formula.removeEventListener('click', this.handleClick);
+            formula.removeAttribute('data-latex-source');
+            formula.classList.remove('formula-interactive', 'formula-hover');
+        });
+        
+        // 或者更简洁的方式：只清理标记，不移除事件监听器（因为元素可能被移除）
+        const allFormulas = document.querySelectorAll('[data-formula-interactive]');
+        allFormulas.forEach(formula => {
+            formula.removeAttribute('data-formula-interactive');
+            formula.classList.remove('formula-interactive', 'formula-hover');
+        });
     }
 }
 

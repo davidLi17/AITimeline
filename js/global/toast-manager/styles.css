@@ -3,14 +3,14 @@
  * 
  * 通用 Toast 提示组件样式
  * 
- * 对应 JS: js/global/toast-manager.js
+ * 对应 JS: ./index.js
  * 
  * 包含内容：
  * - 复制成功提示
  * - 错误提示
  * - 显示/隐藏动画
  * 
- * @requires ../variables.css
+ * @requires ../../../styles/variables.css
  */
 
 /* ============================================

@@ -22,8 +22,9 @@
         "<all_urls>"
       ],
       "js": [
-        "js/global/tooltip-manager.js",
-        "js/global/toast-manager.js",
+        "js/global/tooltip-manager/index.js",
+        "js/global/toast-manager/index.js",
+        "js/global/input-modal/index.js",
         "js/formula/latex-extractor.js",
         "js/formula/formula-manager.js",
         "js/formula/index.js",
@@ -46,8 +47,9 @@
       ],
       "css": [
         "styles/variables.css",
-        "styles/global/tooltip-manager.css",
-        "styles/global/toast-manager.css",
+        "js/global/tooltip-manager/styles.css",
+        "js/global/toast-manager/styles.css",
+        "js/global/input-modal/styles.css",
         "styles/timeline.css",
         "styles/formula.css"
       ],

@@ -134,14 +134,21 @@ function initializeTimeline() {
         timelineManagerInstance = null;
     }
     
-    // Remove any leftover UI before creating a new instance
-    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper')); // ✅ 清理包装容器（包含时间轴和收藏按钮）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-left-slider'));
-    TimelineUtils.removeElementSafe(document.getElementById('chat-timeline-tooltip'));
+    // ============================================
+    // 清理所有可能残留的 UI 元素（重新初始化前确保页面干净）
+    // ============================================
+    
+    // 1. 清理时间轴主容器（包含整个时间轴 UI 和收藏按钮的包装器）
+    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper'));
+    
+    // 2. 清理收藏面板（右侧弹出的收藏列表面板）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-starred-panel'));
+    
+    // 3. 清理原生收藏按钮（正常文档流中的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
+    
+    // 4. 清理固定定位收藏按钮（滚动时固定在屏幕上的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-fixed'));
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-theme-dialog-overlay'));
     
     try {
         timelineManagerInstance = new TimelineManager(currentAdapter);
@@ -157,29 +164,27 @@ function handleUrlChange() {
     currentUrl = location.href;
     initVersion++;
 
-    // URL 变化了，先清理旧时间轴
+    // URL 变化了，先清理旧时间轴实例
     if (timelineManagerInstance) {
         try { timelineManagerInstance.destroy(); } catch {}
         timelineManagerInstance = null;
     }
     
-    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper')); // ✅ 清理包装容器（包含时间轴和收藏按钮）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-left-slider'));
-    TimelineUtils.removeElementSafe(document.getElementById('chat-timeline-tooltip'));
+    // ============================================
+    // 清理时间轴相关的所有 UI 元素
+    // ============================================
+    
+    // 1. 清理时间轴主容器（包含整个时间轴 UI 和收藏按钮的包装器）
+    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper'));
+    
+    // 2. 清理收藏面板（右侧弹出的收藏列表面板）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-starred-panel'));
+    
+    // 3. 清理原生收藏按钮（正常文档流中的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
+    
+    // 4. 清理固定定位收藏按钮（滚动时固定在屏幕上的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-fixed'));
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-theme-dialog-overlay'));
-    
-    // ✅ 清理公式相关 UI（使用更精确的选择器）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-tooltip-base.formula-tooltip'));
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-copy-feedback'));
-    
-    // ✅ 清理所有公式的交互标记和样式
-    document.querySelectorAll('.katex[data-formula-interactive]').forEach(formula => {
-        formula.removeAttribute('data-formula-interactive');
-        formula.classList.remove('formula-interactive', 'formula-hover');
-    });
     
     cleanupGlobalObservers();
 

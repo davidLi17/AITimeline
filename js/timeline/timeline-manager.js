@@ -24,7 +24,7 @@ class TimelineManager {
         this.conversationContainer = null;
         this.markers = [];
         this.activeTurnId = null;
-        this.ui = { timelineBar: null, tooltip: null, track: null, trackContent: null, slider: null, sliderHandle: null };
+        this.ui = { timelineBar: null, tooltip: null, track: null, trackContent: null };
         
         // ✅ 用于跟踪节点变化，避免不必要的重新计算
         this.lastNodeCount = 0;
@@ -43,19 +43,11 @@ class TimelineManager {
         this.onTimelineBarOut = null;
         this.onTimelineBarFocusIn = null;
         this.onTimelineBarFocusOut = null;
-        this.onTooltipEnter = null; // ✅ 需求2：tooltip 悬停事件
-        this.onTooltipLeave = null; // ✅ 需求2：tooltip 离开事件
+        // ✅ 移除：tooltip hover 事件由 GlobalTooltipManager 管理
         this.onWindowResize = null;
         this.onTimelineWheel = null;
-        this.onSliderDown = null;
-        this.onSliderMove = null;
-        this.onSliderUp = null;
         this.onStorage = null;
         this.onVisualViewportResize = null;
-        this.onBarEnter = null;
-        this.onBarLeave = null;
-        this.onSliderEnter = null;
-        this.onSliderLeave = null;
         // ✅ 长按相关事件处理器
         this.startLongPress = null;
         this.checkLongPressMove = null;
@@ -63,9 +55,8 @@ class TimelineManager {
         // Timers and RAF IDs
         this.scrollRafId = null;
         this.activeChangeTimer = null;
-        this.tooltipHideTimer = null;
+        // ✅ 移除：tooltipHideTimer 由 GlobalTooltipManager 管理
         this.showRafId = null;
-        this.sliderFadeTimer = null;
         this.resizeIdleTimer = null;
         this.resizeIdleRICId = null;
         this.zeroTurnsTimer = null;
@@ -96,9 +87,7 @@ class TimelineManager {
         this.usePixelTop = false;
         this._cssVarTopSupported = null;
 
-        // Left-side slider
-        this.sliderDragging = false;
-        this.sliderAlwaysVisible = false;
+        // Markers and rendering
         this.markersVersion = 0;
 
         // Performance debugging
@@ -251,27 +240,7 @@ class TimelineManager {
         }
         this.ui.track = track;
         this.ui.trackContent = trackContent;
-        // Ensure external left-side slider exists (outside the bar)
-        let slider = document.querySelector('.timeline-left-slider');
-        if (!slider) {
-            slider = document.createElement('div');
-            slider.className = 'timeline-left-slider';
-            const handle = document.createElement('div');
-            handle.className = 'timeline-left-handle';
-            slider.appendChild(handle);
-            document.body.appendChild(slider);
-        }
-        this.ui.slider = slider;
-        this.ui.sliderHandle = slider.querySelector('.timeline-left-handle');
-        // Visibility will be controlled by updateSlider() based on scrollable state
-        if (!this.ui.tooltip) {
-            const tip = document.createElement('div');
-            tip.className = 'timeline-tooltip';
-            tip.setAttribute('role', 'tooltip');
-            tip.id = 'chat-timeline-tooltip';
-            document.body.appendChild(tip);
-            this.ui.tooltip = tip;
-        }
+        
         // ✅ 重新设计：测量元素应该模拟内容区的样式
         if (!this.measureEl) {
             const m = document.createElement('div');
@@ -282,12 +251,11 @@ class TimelineManager {
             m.style.visibility = 'hidden';
             m.style.pointerEvents = 'none';
             
-            // ✅ 关键：模拟内容区的样式，而不是 tooltip 外层
-            const cs = getComputedStyle(this.ui.tooltip);
+            // ✅ 关键：模拟 tooltip 内容区的样式（使用固定值）
             Object.assign(m.style, {
-                fontFamily: cs.fontFamily,
-                fontSize: cs.fontSize,
-                lineHeight: cs.lineHeight || '18px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+                fontSize: '13px',
+                lineHeight: '18px',
                 // ✅ 内容区的 padding（重要！）
                 padding: '10px 12px',
                 whiteSpace: 'pre-wrap',
@@ -506,107 +474,21 @@ class TimelineManager {
     }
     
     /**
-     * ✅ 显示编辑对话框
+     * ✅ 显示编辑对话框（使用全局 Input Modal）
      */
     async showEditDialog(currentText) {
-        return new Promise((resolve) => {
-            // 创建遮罩层
-            const overlay = document.createElement('div');
-            overlay.className = 'timeline-theme-dialog-overlay';
-            
-            // 创建对话框
-            const dialog = document.createElement('div');
-            dialog.className = 'timeline-theme-dialog';
-            
-            dialog.innerHTML = `
-                <div class="timeline-theme-dialog-header">
-                    <h3>${chrome.i18n.getMessage('editStarredContent')}</h3>
-                </div>
-                <div class="timeline-theme-dialog-body">
-                    <input type="text" id="timeline-edit-input" class="timeline-theme-input" placeholder="${chrome.i18n.getMessage('themePlaceholder')}" value="${this.escapeHTML(currentText)}" maxlength="100" />
-                </div>
-                <div class="timeline-theme-dialog-footer">
-                    <button class="timeline-theme-dialog-cancel">${chrome.i18n.getMessage('cancel')}</button>
-                    <button class="timeline-theme-dialog-confirm">${chrome.i18n.getMessage('confirm')}</button>
-                </div>
-            `;
-            
-            overlay.appendChild(dialog);
-            document.body.appendChild(overlay);
-            
-            // 获取元素
-            const input = dialog.querySelector('#timeline-edit-input');
-            const confirmBtn = dialog.querySelector('.timeline-theme-dialog-confirm');
-            const cancelBtn = dialog.querySelector('.timeline-theme-dialog-cancel');
-            
-            // 显示对话框
-            requestAnimationFrame(() => {
-                overlay.classList.add('visible');
-                input.focus();
-                // 将光标定位到末尾
-                setTimeout(() => {
-                    if (input.value) {
-                        const length = input.value.length;
-                        input.setSelectionRange(length, length);
-                    }
-                }, 0);
-            });
-            
-            // 清理函数
-            const cleanup = () => {
-                overlay.classList.remove('visible');
-                setTimeout(() => {
-                    if (overlay.parentNode) {
-                        overlay.parentNode.removeChild(overlay);
-                    }
-                }, 200);
-            };
-            
-            // 确定按钮
-            confirmBtn.addEventListener('click', () => {
-                const text = input.value.trim();
-                if (!text) {
-                    // 输入为空，显示错误 toast
-                    this.showErrorToast(chrome.i18n.getMessage('contentRequired'), input);
-                    return;
-                }
-                cleanup();
-                resolve(text);
-            });
-            
-            // 取消按钮
-            cancelBtn.addEventListener('click', () => {
-                cleanup();
-                resolve(null);
-            });
-            
-            // ESC 键取消，Enter 键确认
-            const handleKeyDown = (e) => {
-                if (e.key === 'Escape') {
-                    cleanup();
-                    resolve(null);
-                    document.removeEventListener('keydown', handleKeyDown);
-                } else if (e.key === 'Enter' && document.activeElement === input) {
-                    const text = input.value.trim();
-                    if (!text) {
-                        // 输入为空，显示错误 toast
-                        this.showErrorToast(chrome.i18n.getMessage('contentRequired'), input);
-                        return;
-                    }
-                    cleanup();
-                    resolve(text);
-                    document.removeEventListener('keydown', handleKeyDown);
-                }
-            };
-            document.addEventListener('keydown', handleKeyDown);
-            
-            // 点击遮罩层取消
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) {
-                    cleanup();
-                    resolve(null);
-                }
-            });
+        if (!window.globalInputModal) {
+            console.error('[TimelineManager] globalInputModal not available');
+            return null;
+        }
+        
+        return await window.globalInputModal.show({
+            title: chrome.i18n.getMessage('editStarredContent'),
+            defaultValue: currentText,
+            placeholder: chrome.i18n.getMessage('themePlaceholder'),
+            required: true,
+            requiredMessage: chrome.i18n.getMessage('contentRequired'),
+            maxLength: 100
         });
     }
     
@@ -668,129 +550,42 @@ class TimelineManager {
     }
     
     /**
-     * ✅ 显示主题输入对话框
+     * ✅ 显示主题输入对话框（使用全局 Input Modal）
      */
     async showThemeInputDialog() {
-        return new Promise((resolve) => {
-            // 创建遮罩层
-            const overlay = document.createElement('div');
-            overlay.className = 'timeline-theme-dialog-overlay';
-            
-            // 创建对话框
-            const dialog = document.createElement('div');
-            dialog.className = 'timeline-theme-dialog';
+        if (!window.globalInputModal) {
+            console.error('[TimelineManager] globalInputModal not available');
+            return null;
+        }
+        
             // 获取默认主题（通过 Adapter 提供）
             const defaultTheme = this.adapter.getDefaultChatTheme?.() || '';
             
-            dialog.innerHTML = `
-                <div class="timeline-theme-dialog-header">
-                    <h3>${chrome.i18n.getMessage('inputChatTheme')}</h3>
-                </div>
-                <div class="timeline-theme-dialog-body">
-                    <input type="text" id="timeline-theme-input" class="timeline-theme-input" placeholder="${chrome.i18n.getMessage('themePlaceholder')}" value="${this.escapeHTML(defaultTheme)}" maxlength="100" />
-                </div>
-                <div class="timeline-theme-dialog-footer">
-                    <button class="timeline-theme-dialog-cancel">${chrome.i18n.getMessage('cancel')}</button>
-                    <button class="timeline-theme-dialog-confirm">${chrome.i18n.getMessage('confirm')}</button>
-                </div>
-            `;
-            
-            overlay.appendChild(dialog);
-            document.body.appendChild(overlay);
-            
-            // 获取元素
-            const input = dialog.querySelector('#timeline-theme-input');
-            const confirmBtn = dialog.querySelector('.timeline-theme-dialog-confirm');
-            const cancelBtn = dialog.querySelector('.timeline-theme-dialog-cancel');
-            
-            // 显示对话框
-            requestAnimationFrame(() => {
-                overlay.classList.add('visible');
-                input.focus();
-                // 如果有默认值，将光标定位到末尾
-                setTimeout(() => {
-                    if (input.value) {
-                        const length = input.value.length;
-                        input.setSelectionRange(length, length);
-                    }
-                }, 0);
-            });
-            
-            // 清理函数
-            const cleanup = () => {
-                overlay.classList.remove('visible');
-                setTimeout(() => {
-                    if (overlay.parentNode) {
-                        overlay.parentNode.removeChild(overlay);
-                    }
-                }, 200);
-            };
-            
-            // 确定按钮
-            confirmBtn.addEventListener('click', () => {
-                const theme = input.value.trim();
-                if (!theme) {
-                    // 输入为空，显示错误 toast
-                    this.showErrorToast(chrome.i18n.getMessage('themeRequired'), input);
-                    return;
-                }
-                cleanup();
-                resolve(theme);
-            });
-            
-            // 取消按钮
-            cancelBtn.addEventListener('click', () => {
-                cleanup();
-                resolve(null);
-            });
-            
-            // ESC 键取消，Enter 键确认
-            const handleKeyDown = (e) => {
-                if (e.key === 'Escape') {
-                    cleanup();
-                    resolve(null);
-                    document.removeEventListener('keydown', handleKeyDown);
-                } else if (e.key === 'Enter' && document.activeElement === input) {
-                    const theme = input.value.trim();
-                    if (!theme) {
-                        // 输入为空，显示错误 toast
-                        this.showErrorToast(chrome.i18n.getMessage('themeRequired'), input);
-                        return;
-                    }
-                    cleanup();
-                    resolve(theme);
-                    document.removeEventListener('keydown', handleKeyDown);
-                }
-            };
-            document.addEventListener('keydown', handleKeyDown);
-            
-            // 点击遮罩层取消
-            overlay.addEventListener('click', (e) => {
-                if (e.target === overlay) {
-                    cleanup();
-                    resolve(null);
-                }
-            });
+        return await window.globalInputModal.show({
+            title: chrome.i18n.getMessage('inputChatTheme'),
+            defaultValue: defaultTheme,
+            placeholder: chrome.i18n.getMessage('themePlaceholder'),
+            required: true,
+            requiredMessage: chrome.i18n.getMessage('themeRequired'),
+            maxLength: 100
         });
     }
     
     /**
-     * ✅ 优化：缓存 Tooltip CSS 变量
-     * 避免每次显示 Tooltip 时都调用 getComputedStyle（成本高）
+     * ✅ 缓存 Tooltip 的 CSS 变量配置
+     * 使用固定值，与 CSS 中的 .timeline-tooltip 样式保持一致
      */
     cacheTooltipConfig() {
-        const tip = this.ui.tooltip;
-        if (!tip) return;
-        
         try {
+            // ✅ 使用固定值（与 CSS 变量的默认值一致）
             this.tooltipConfigCache = {
-                arrowOut: this.getCSSVarNumber(tip, '--timeline-tooltip-arrow-outside', 6),
-                baseGap: this.getCSSVarNumber(tip, '--timeline-tooltip-gap-visual', 12),
-                boxGap: this.getCSSVarNumber(tip, '--timeline-tooltip-gap-box', 8),
-                lineH: this.getCSSVarNumber(tip, '--timeline-tooltip-lh', 18),
-                padY: this.getCSSVarNumber(tip, '--timeline-tooltip-pad-y', 10),
-                borderW: this.getCSSVarNumber(tip, '--timeline-tooltip-border-w', 1),
-                maxW: this.getCSSVarNumber(tip, '--timeline-tooltip-max', 288),
+                arrowOut: 6,   // --timeline-tooltip-arrow-outside
+                baseGap: 12,   // --timeline-tooltip-gap-visual
+                boxGap: 8,     // --timeline-tooltip-gap-box
+                lineH: 18,     // --timeline-tooltip-lh
+                padY: 10,      // --timeline-tooltip-pad-y
+                borderW: 1,    // --timeline-tooltip-border-w
+                maxW: 288,     // --timeline-tooltip-max
             };
         } catch (e) {
             // 使用默认值
@@ -1327,42 +1122,7 @@ class TimelineManager {
         this.ui.timelineBar.addEventListener('focusin', this.onTimelineBarFocusIn);
         this.ui.timelineBar.addEventListener('focusout', this.onTimelineBarFocusOut);
         
-        // ✅ 需求2：添加 tooltip 自身的悬停事件
-        this.onTooltipEnter = () => {
-            // 鼠标进入 tooltip，取消隐藏定时器
-            this.tooltipHideTimer = TimelineUtils.clearTimerSafe(this.tooltipHideTimer);
-        };
-        
-        this.onTooltipLeave = (e) => {
-            // 鼠标离开 tooltip
-            const toTimeline = e.relatedTarget?.closest?.('.chat-timeline-wrapper');
-            const toDot = e.relatedTarget?.closest?.('.timeline-dot');
-            
-            // 如果不是移回圆点或时间轴，隐藏 tooltip
-            if (!toTimeline && !toDot) {
-                this.hideTooltip();
-            }
-        };
-        
-        if (this.ui.tooltip) {
-            this.ui.tooltip.addEventListener('mouseenter', this.onTooltipEnter);
-            this.ui.tooltip.addEventListener('mouseleave', this.onTooltipLeave);
-        }
-
-        // Slider visibility on hover (time axis or slider itself) with stable refs
-        // Define and persist handlers so we can remove them in destroy()
-        this.onBarEnter = () => this.showSlider();
-        this.onBarLeave = () => this.hideSliderDeferred();
-        this.onSliderEnter = () => this.showSlider();
-        this.onSliderLeave = () => this.hideSliderDeferred();
-        try {
-            this.ui.timelineBar.addEventListener('pointerenter', this.onBarEnter);
-            this.ui.timelineBar.addEventListener('pointerleave', this.onBarLeave);
-            if (this.ui.slider) {
-                this.ui.slider.addEventListener('pointerenter', this.onSliderEnter);
-                this.ui.slider.addEventListener('pointerleave', this.onSliderLeave);
-            }
-        } catch {}
+        // ✅ 移除：tooltip hover 事件由 GlobalTooltipManager 内部管理
 
         /**
          * 窗口大小变化处理
@@ -1377,14 +1137,7 @@ class TimelineManager {
          * 使用 debouncedRecalculateAndRender 避免频繁计算
          */
         this.onWindowResize = () => {
-            if (this.ui.tooltip?.classList.contains('visible')) {
-                const activeDot = this.ui.timelineBar.querySelector('.timeline-dot:hover, .timeline-dot:focus');
-                if (activeDot) {
-                    // ✅ 修改：window resize 时隐藏 tooltip，让用户重新 hover 时再显示
-                    // 这样可以避免维护两套 tooltip 构建逻辑
-                    this.hideTooltip();
-                }
-            }
+            // ✅ GlobalTooltipManager 会处理 tooltip 在 resize 时的行为
             // ✅ 强制重新计算节点位置
             // 重置状态，使优化逻辑认为"节点已变化"，从而触发位置重新计算
             this.lastNodeCount = 0;
@@ -1420,25 +1173,8 @@ class TimelineManager {
             this.scrollContainer.scrollTop += delta;
             // Keep markers in sync on next frame
             this.scheduleScrollSync();
-            this.showSlider();
         };
         this.ui.timelineBar.addEventListener('wheel', this.onTimelineWheel, { passive: false });
-
-        // Slider drag handlers
-        this.onSliderDown = (ev) => {
-            if (!this.ui.sliderHandle) return;
-            try { this.ui.sliderHandle.setPointerCapture(ev.pointerId); } catch {}
-            this.sliderDragging = true;
-            this.showSlider();
-            this.sliderStartClientY = ev.clientY;
-            const rect = this.ui.sliderHandle.getBoundingClientRect();
-            this.sliderStartTop = rect.top;
-            this.onSliderMove = (e) => this.handleSliderDrag(e);
-            this.onSliderUp = (e) => this.endSliderDrag(e);
-            window.addEventListener('pointermove', this.onSliderMove);
-            window.addEventListener('pointerup', this.onSliderUp, { once: true });
-        };
-        try { this.ui.sliderHandle?.addEventListener('pointerdown', this.onSliderDown); } catch {}
 
         // Cross-tab/cross-site star sync via chrome.storage change event
         this.onStorage = (changes, areaName) => {
@@ -1473,11 +1209,12 @@ class TimelineManager {
                             if (marker) marker.starred = false;
                         }
                         
-                        // 更新圆点样式并刷新 tooltip
+                        // 更新圆点样式
                         if (marker.dotElement) {
                             try { 
                                 marker.dotElement.classList.toggle('starred', this.starred.has(marker.id));
-                                this.refreshTooltipForDot(marker.dotElement);
+                                // ✅ 更新 tooltip 中的星标状态（如果正在显示）
+                                this._updateTooltipStarIfVisible(marker.dotElement, marker.id);
                             } catch {}
                         }
                     }
@@ -1819,7 +1556,7 @@ class TimelineManager {
             element: contentElement
         }, {
             placement: 'auto',
-            maxWidth: this.getCSSVarNumber(this.ui.tooltip, '--timeline-tooltip-max', 288)
+            maxWidth: 288  // ✅ 使用固定值（与 CSS 中的默认值一致）
         });
     }
     
@@ -1892,101 +1629,18 @@ class TimelineManager {
     }
     
     /**
-     * ✅ 优化：立即显示 Tooltip（内部方法 - 仅用于降级逻辑，保留以备不时之需）
+     * ✅ 已废弃：完全使用 GlobalTooltipManager
+     * 保留此方法签名以避免可能的调用错误
      */
     _showTooltipImmediate(dot) {
-        if (!this.ui.tooltip || !dot) return;
-        
-        this.tooltipHideTimer = TimelineUtils.clearTimerSafe(this.tooltipHideTimer);
-        
-        // T0: compute + write geometry while hidden
-        const tip = this.ui.tooltip;
-        tip.classList.remove('visible');
-        
-        // 获取消息信息
-        const id = dot.dataset.targetTurnId;
-        const isStarred = id && this.starred.has(id);
-        
-        // 获取消息文本（不含星标前缀）
-        const messageText = (dot.getAttribute('aria-label') || '').trim();
-        
-        // 计算位置和宽度
-        const p = this.computePlacementInfo(dot);
-        
-        // 截断文本
-        const layout = this.truncateToFiveLines(messageText, p.width, true);
-        
-        // ✅ 修改：新的 tooltip 结构（内容 + 星标，水平排列，垂直居中）
-        tip.innerHTML = '';
-        
-        // 创建内容区
-        const content = document.createElement('div');
-        content.className = 'timeline-tooltip-content';
-        content.textContent = layout.text;
-        
-        // 添加点击复制功能
-        content.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.copyToClipboard(messageText, content);
-        });
-        
-        // 创建星标图标（放在内容右侧，垂直居中）
-        const starSpan = document.createElement('span');
-        starSpan.className = 'timeline-tooltip-star';
-        starSpan.dataset.targetTurnId = id; // 保存消息 ID
-        
-        // ✅ 根据当前收藏状态设置初始CSS类
-        if (!isStarred) {
-            starSpan.classList.add('not-starred');
+        console.warn('[TimelineManager] _showTooltipImmediate is deprecated, use GlobalTooltipManager instead');
+        // 降级：使用全局管理器
+        if (typeof window.globalTooltipManager !== 'undefined' && dot) {
+            const id = dot.dataset.targetTurnId;
+            const messageText = (dot.getAttribute('aria-label') || '').trim();
+            const contentElement = this._buildNodeTooltipElement(dot, messageText);
+            window.globalTooltipManager.show(id, 'node', dot, { element: contentElement });
         }
-        
-        // ✅ 添加点击切换收藏事件（不需要悬停tooltip，点击时显示toast）
-        starSpan.addEventListener('click', (e) => {
-            e.stopPropagation(); // 阻止事件冒泡
-            const turnId = starSpan.dataset.targetTurnId;
-            this.toggleStar(turnId); // 切换收藏状态
-            
-            // 立即更新样式类
-            const nowStarred = this.starred.has(turnId);
-            
-            if (nowStarred) {
-                starSpan.classList.remove('not-starred');
-                // ✅ 显示收藏成功toast
-                window.globalToastManager.success(chrome.i18n.getMessage('starSuccess'), starSpan);
-            } else {
-                starSpan.classList.add('not-starred');
-                // ✅ 显示取消收藏toast
-                window.globalToastManager.info(chrome.i18n.getMessage('unstarSuccess'), starSpan);
-            }
-        });
-        
-        // 组装：content 和 star 平级，使用 flex 布局
-        tip.appendChild(content);
-        tip.appendChild(starSpan);
-        
-        // ✅ 先设置宽度和基本样式，让tooltip可以正确渲染
-        tip.style.maxWidth = `${Math.floor(p.width)}px`;
-        tip.style.width = 'auto';
-        tip.style.minWidth = '80px';
-        tip.style.height = 'auto';
-        tip.style.opacity = '0'; // 暂时隐藏，避免闪烁
-        tip.style.visibility = 'visible'; // 但要让浏览器渲染它
-        
-        // ✅ 强制浏览器渲染，然后读取实际高度
-        tip.offsetHeight; // 触发reflow
-        const actualHeight = tip.getBoundingClientRect().height;
-        
-        // ✅ 使用实际高度来定位（确保箭头对齐节点中心）
-        this.placeTooltipAt(dot, p.placement, p.width, actualHeight);
-        tip.setAttribute('aria-hidden', 'false');
-        
-        // T1: next frame add visible for non-geometric animation only
-        this.showRafId = TimelineUtils.clearRafSafe(this.showRafId);
-        this.showRafId = requestAnimationFrame(() => {
-            this.showRafId = null;
-            tip.style.opacity = ''; // 恢复opacity，让CSS控制
-            tip.classList.add('visible');
-        });
     }
     
     /**
@@ -2009,99 +1663,59 @@ class TimelineManager {
         window.globalTooltipManager.hide(immediate);
     }
     
-    placeTooltipAt(dot, placement, width, height) {
-        if (!this.ui.tooltip) return;
-        const tip = this.ui.tooltip;
-        const dotRect = dot.getBoundingClientRect();
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        
-        // ✅ 优化：使用缓存的 CSS 变量（如果有）
-        const config = this.tooltipConfigCache || {};
-        const arrowOut = config.arrowOut ?? this.getCSSVarNumber(tip, '--timeline-tooltip-arrow-outside', 6);
-        const baseGap = config.baseGap ?? this.getCSSVarNumber(tip, '--timeline-tooltip-gap-visual', 12);
-        const boxGap = config.boxGap ?? this.getCSSVarNumber(tip, '--timeline-tooltip-gap-box', 8);
-        const gap = baseGap + Math.max(0, arrowOut) + Math.max(0, boxGap);
-        const viewportPad = 8;
-
-        let left;
-        if (placement === 'left') {
-            left = Math.round(dotRect.left - gap - width);
-            if (left < viewportPad) {
-                // Clamp within viewport: switch to right if impossible
-                const altLeft = Math.round(dotRect.right + gap);
-                if (altLeft + width <= vw - viewportPad) {
-                    placement = 'right';
-                    left = altLeft;
-                } else {
-                    // shrink width to fit
-                    const fitWidth = Math.max(120, vw - viewportPad - altLeft);
-                    left = altLeft;
-                    width = fitWidth;
-                }
-            }
-        } else {
-            left = Math.round(dotRect.right + gap);
-            if (left + width > vw - viewportPad) {
-                const altLeft = Math.round(dotRect.left - gap - width);
-                if (altLeft >= viewportPad) {
-                    placement = 'left';
-                    left = altLeft;
-                } else {
-                    const fitWidth = Math.max(120, vw - viewportPad - left);
-                    width = fitWidth;
-                }
-            }
-        }
-
-        // ✅ 修复：使用实际高度来垂直居中
-        // height参数是tooltip的实际渲染高度（包括padding、border等）
-        let top = Math.round(dotRect.top + dotRect.height / 2 - height / 2);
-        top = Math.max(viewportPad, Math.min(vh - height - viewportPad, top));
-        
-        // 设置tooltip的top位置
-        tip.style.top = `${top}px`;
-        
-        // ✅ 需求2：短文本时保持右侧对齐
-        // 左侧显示：使用 right 属性，保持右边缘对齐（靠近圆点）
-        // 右侧显示：使用 left 属性，保持左边缘对齐（靠近圆点）
-        if (placement === 'left') {
-            // 清除left，使用right
-            tip.style.left = '';
-            tip.style.right = `${vw - dotRect.left + gap}px`;
-        } else {
-            // 清除right，使用left
-            tip.style.right = '';
-            tip.style.left = `${left}px`;
-        }
-        
-        tip.setAttribute('data-placement', placement);
-    }
-
     /**
-     * ✅ 优化：只更新星标图标，避免重新构建整个 tooltip（防止抖动）
+     * ✅ 已废弃：完全使用 GlobalTooltipManager
+     */
+    placeTooltipAt(dot, placement, width, height) {
+        console.warn('[TimelineManager] placeTooltipAt is deprecated, use GlobalTooltipManager instead');
+    }
+    
+    /**
+     * ✅ 已废弃：完全使用 GlobalTooltipManager
      */
     refreshTooltipForDot(dot) {
-        if (!this.ui?.tooltip || !dot) return;
-        const tip = this.ui.tooltip;
+        console.warn('[TimelineManager] refreshTooltipForDot is deprecated, use GlobalTooltipManager instead');
+    }
+    
+    /**
+     * ✅ 更新 tooltip 中的星标状态（如果 tooltip 正在显示该节点）
+     * 用于：当通过收藏面板或 storage 同步改变收藏状态时，更新已显示的 tooltip
+     */
+    _updateTooltipStarIfVisible(dotElement, turnId) {
+        if (!dotElement || !turnId) return;
         
-        // Only update when tooltip is currently visible
-        const isVisible = tip.classList.contains('visible');
-        if (!isVisible) return;
-
-        // ✅ 优化：只更新星标图标的 CSS 类，不重新构建整个 tooltip
-        const id = dot.dataset.targetTurnId;
-        const isStarred = id && this.starred.has(id);
-        
-        // 查找现有的星标元素
-        const starSpan = tip.querySelector('.timeline-tooltip-star');
-        if (!starSpan) return;
-        
-        // ✅ 只更新 CSS 类，不需要tooltip（点击时会显示toast）
-        if (isStarred) {
-            starSpan.classList.remove('not-starred');
-        } else {
-            starSpan.classList.add('not-starred');
+        try {
+            // 检查 GlobalTooltipManager 是否正在显示此节点的 tooltip
+            const tooltipManager = window.globalTooltipManager;
+            if (!tooltipManager || !tooltipManager.state || !tooltipManager.state.isVisible) {
+                return;
+            }
+            
+            // 检查当前 tooltip 是否属于这个节点
+            const currentId = tooltipManager.state.currentId;
+            if (!currentId || !currentId.includes(turnId)) {
+                return;
+            }
+            
+            // 查找 tooltip 中的星标图标
+            const tooltipInstances = tooltipManager.instances;
+            for (const [type, instance] of tooltipInstances) {
+                if (instance && instance.tooltip) {
+                    const starSpan = instance.tooltip.querySelector('.timeline-tooltip-star');
+                    if (starSpan && starSpan.dataset.targetTurnId === turnId) {
+                        // 更新星标状态
+                        const isStarred = this.starred.has(turnId);
+                        if (isStarred) {
+                            starSpan.classList.remove('not-starred');
+                        } else {
+                            starSpan.classList.add('not-starred');
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (e) {
+            // 静默失败，不影响主流程
         }
     }
 
@@ -2184,15 +1798,6 @@ class TimelineManager {
             this._cssVarTopSupported = this.detectCssVarTopSupport(pad, usableC);
             this.usePixelTop = !this._cssVarTopSupported;
         }
-        this.updateSlider();
-        // First-time nudge: if content is scrollable, briefly reveal slider
-        const barH = this.ui.timelineBar?.clientHeight || 0;
-        if (this.contentHeight > barH + 1) {
-            this.sliderAlwaysVisible = true;
-            this.showSlider();
-        } else {
-            this.sliderAlwaysVisible = false;
-        }
     }
 
     detectCssVarTopSupport(pad, usableC) {
@@ -2218,7 +1823,6 @@ class TimelineManager {
     }
 
     syncTimelineTrackToMain() {
-        if (this.sliderDragging) return; // do not override when user drags slider
         if (!this.ui.track || !this.scrollContainer || !this.contentHeight) return;
         const scrollTop = this.scrollContainer.scrollTop;
         const ref = scrollTop + this.scrollContainer.clientHeight * 0.45;
@@ -2305,9 +1909,6 @@ class TimelineManager {
         requestAnimationFrame(() => {
             this.renderPinMarkers();
         });
-        
-        // keep slider in sync with timeline scroll
-        this.updateSlider();
     }
 
     lowerBound(arr, x) {
@@ -2328,99 +1929,17 @@ class TimelineManager {
         return lo - 1;
     }
 
-    // --- Left slider helpers ---
-    updateSlider() {
-        if (!this.ui.slider || !this.ui.sliderHandle) return;
-        if (!this.contentHeight || !this.ui.timelineBar || !this.ui.track) return;
-        const barRect = this.ui.timelineBar.getBoundingClientRect();
-        const barH = barRect.height || 0;
-        const pad = this.getTrackPadding();
-        const innerH = Math.max(0, barH - 2 * pad);
-        if (this.contentHeight <= barH + 1 || innerH <= 0) {
-            this.sliderAlwaysVisible = false;
-            try {
-                this.ui.slider.classList.remove('visible');
-                this.ui.slider.style.opacity = '';
-            } catch {}
-            return;
-        }
-        this.sliderAlwaysVisible = true;
-        // External slider geometry (short rail centered on inner area)
-        const railLen = Math.max(120, Math.min(240, Math.floor(barH * 0.45)));
-        const railTop = Math.round(barRect.top + pad + (innerH - railLen) / 2);
-        const railLeftGap = 8; // px gap from bar's left edge
-        const sliderWidth = 12; // matches CSS
-        const left = Math.round(barRect.left - railLeftGap - sliderWidth);
-        this.ui.slider.style.left = `${left}px`;
-        this.ui.slider.style.top = `${railTop}px`;
-        this.ui.slider.style.height = `${railLen}px`;
-
-        const handleH = 22; // fixed concise handle
-        const maxTop = Math.max(0, railLen - handleH);
-        const range = Math.max(1, this.contentHeight - barH);
-        const st = this.ui.track.scrollTop || 0;
-        const r = Math.max(0, Math.min(1, st / range));
-        const top = Math.round(r * maxTop);
-        this.ui.sliderHandle.style.height = `${handleH}px`;
-        this.ui.sliderHandle.style.top = `${top}px`;
-        try {
-            this.ui.slider.classList.add('visible');
-            this.ui.slider.style.opacity = '';
-        } catch {}
-    }
-
-    showSlider() {
-        if (!this.ui.slider) return;
-        this.ui.slider.classList.add('visible');
-        this.sliderFadeTimer = TimelineUtils.clearTimerSafe(this.sliderFadeTimer);
-        this.updateSlider();
-    }
-
-    hideSliderDeferred() {
-        if (this.sliderDragging || this.sliderAlwaysVisible) return;
-        this.sliderFadeTimer = TimelineUtils.clearTimerSafe(this.sliderFadeTimer);
-        this.sliderFadeTimer = setTimeout(() => {
-            this.sliderFadeTimer = null;
-            TimelineUtils.removeClassSafe(this.ui.slider, 'visible');
-        }, TIMELINE_CONFIG.SLIDER_FADE_DELAY);
-    }
-
-    handleSliderDrag(e) {
-        if (!this.sliderDragging || !this.ui.timelineBar || !this.ui.track) return;
-        const barRect = this.ui.timelineBar.getBoundingClientRect();
-        const barH = barRect.height || 0;
-        const railLen = parseFloat(this.ui.slider.style.height || '0') || Math.max(120, Math.min(240, Math.floor(barH * 0.45)));
-        const handleH = this.ui.sliderHandle.getBoundingClientRect().height || 22;
-        const maxTop = Math.max(0, railLen - handleH);
-        const delta = e.clientY - this.sliderStartClientY;
-        let top = Math.max(0, Math.min(maxTop, (this.sliderStartTop + delta) - (parseFloat(this.ui.slider.style.top) || 0)));
-        const r = (maxTop > 0) ? (top / maxTop) : 0;
-        const range = Math.max(1, this.contentHeight - barH);
-        this.ui.track.scrollTop = Math.round(r * range);
-        this.updateVirtualRangeAndRender();
-        this.showSlider();
-        this.updateSlider();
-    }
-
-    endSliderDrag(e) {
-        this.sliderDragging = false;
-        try { window.removeEventListener('pointermove', this.onSliderMove); } catch {}
-        this.onSliderMove = null;
-        this.onSliderUp = null;
-        this.hideSliderDeferred();
-    }
-
     computePlacementInfo(dot) {
-        const tip = this.ui.tooltip || document.body;
+        // ✅ 使用 document.body 作为参考（tooltip 已经不由 Timeline 创建）
         const dotRect = dot.getBoundingClientRect();
         const vw = window.innerWidth;
         
-        // ✅ 优化：使用缓存的 CSS 变量（如果有）
+        // ✅ 使用缓存的配置值
         const config = this.tooltipConfigCache || {};
-        const arrowOut = config.arrowOut ?? this.getCSSVarNumber(tip, '--timeline-tooltip-arrow-outside', 6);
-        const baseGap = config.baseGap ?? this.getCSSVarNumber(tip, '--timeline-tooltip-gap-visual', 12);
-        const boxGap = config.boxGap ?? this.getCSSVarNumber(tip, '--timeline-tooltip-gap-box', 8);
-        const maxW = config.maxW ?? this.getCSSVarNumber(tip, '--timeline-tooltip-max', 288);
+        const arrowOut = config.arrowOut ?? 6;
+        const baseGap = config.baseGap ?? 12;
+        const boxGap = config.boxGap ?? 8;
+        const maxW = config.maxW ?? 288;
         
         const gap = baseGap + Math.max(0, arrowOut) + Math.max(0, boxGap);
         const viewportPad = 8;
@@ -2454,7 +1973,7 @@ class TimelineManager {
      */
     truncateToFiveLines(text, targetWidth, wantLayout = false) {
         try {
-            if (!this.measureEl || !this.ui.tooltip) {
+            if (!this.measureEl) {
                 return wantLayout ? { text, height: 0 } : text;
             }
             
@@ -2464,12 +1983,10 @@ class TimelineManager {
                 return this.truncateCache.get(cacheKey);
             }
             
-            const tip = this.ui.tooltip;
-            
-            // ✅ 优化：使用缓存的 CSS 变量
+            // ✅ 使用缓存的配置值
             const config = this.tooltipConfigCache || {};
-            const lineH = config.lineH ?? this.getCSSVarNumber(tip, '--timeline-tooltip-lh', 18);
-            const padY = config.padY ?? this.getCSSVarNumber(tip, '--timeline-tooltip-pad-y', 10);
+            const lineH = config.lineH ?? 18;
+            const padY = config.padY ?? 10;
             
             // ✅ 重新设计：maxH 应该是内容区的最大高度（5行 + padding）
             // measureEl 已经模拟了内容区的样式（有 padding），所以不需要加 border
@@ -2556,7 +2073,6 @@ class TimelineManager {
             this.syncTimelineTrackToMain();
             this.updateVirtualRangeAndRender();
             this.computeActiveByScroll();
-            this.updateSlider();
         });
     }
 
@@ -2778,53 +2294,33 @@ class TimelineManager {
         TimelineUtils.removeEventListenerSafe(this.ui.timelineBar, 'mouseout', this.onTimelineBarOut);
         TimelineUtils.removeEventListenerSafe(this.ui.timelineBar, 'focusin', this.onTimelineBarFocusIn);
         TimelineUtils.removeEventListenerSafe(this.ui.timelineBar, 'focusout', this.onTimelineBarFocusOut);
-        // ✅ 需求2：清理 tooltip 事件监听器
-        TimelineUtils.removeEventListenerSafe(this.ui.tooltip, 'mouseenter', this.onTooltipEnter);
-        TimelineUtils.removeEventListenerSafe(this.ui.tooltip, 'mouseleave', this.onTooltipLeave);
+        // ✅ 注意：不再需要清理 tooltip 事件监听器（因为 tooltip 不由 Timeline 创建）
         TimelineUtils.removeEventListenerSafe(this.ui.timelineBar, 'wheel', this.onTimelineWheel);
-        TimelineUtils.removeEventListenerSafe(this.ui.timelineBar, 'pointerenter', this.onBarEnter);
-        TimelineUtils.removeEventListenerSafe(this.ui.timelineBar, 'pointerleave', this.onBarLeave);
-        TimelineUtils.removeEventListenerSafe(this.ui.slider, 'pointerenter', this.onSliderEnter);
-        TimelineUtils.removeEventListenerSafe(this.ui.slider, 'pointerleave', this.onSliderLeave);
-        TimelineUtils.removeEventListenerSafe(this.ui.sliderHandle, 'pointerdown', this.onSliderDown);
-        TimelineUtils.removeEventListenerSafe(window, 'pointermove', this.onSliderMove);
         TimelineUtils.removeEventListenerSafe(window, 'resize', this.onWindowResize);
         TimelineUtils.removeEventListenerSafe(window.visualViewport, 'resize', this.onVisualViewportResize);
         
         // Clear timers and RAF
         this.scrollRafId = TimelineUtils.clearRafSafe(this.scrollRafId);
         this.activeChangeTimer = TimelineUtils.clearTimerSafe(this.activeChangeTimer);
-        this.tooltipHideTimer = TimelineUtils.clearTimerSafe(this.tooltipHideTimer);
+        // ✅ 移除：tooltipHideTimer 由 GlobalTooltipManager 管理
         this.tooltipUpdateDebounceTimer = TimelineUtils.clearTimerSafe(this.tooltipUpdateDebounceTimer);
         this.resizeIdleTimer = TimelineUtils.clearTimerSafe(this.resizeIdleTimer);
         this.resizeIdleRICId = TimelineUtils.clearIdleCallbackSafe(this.resizeIdleRICId);
-        this.sliderFadeTimer = TimelineUtils.clearTimerSafe(this.sliderFadeTimer);
         // ✅ 移除：longPressTimer 已删除
         this.zeroTurnsTimer = TimelineUtils.clearTimerSafe(this.zeroTurnsTimer);
         this.showRafId = TimelineUtils.clearRafSafe(this.showRafId);
         
         // Remove DOM elements
         TimelineUtils.removeElementSafe(this.ui.timelineBar);
-        TimelineUtils.removeElementSafe(this.ui.tooltip);
+        // ✅ 注意：不再清理 tooltip（由 GlobalTooltipManager 管理）
         TimelineUtils.removeElementSafe(this.measureEl);
-        
-        // Ensure external left slider is fully removed
-        if (this.ui.slider) {
-            try { this.ui.slider.style.pointerEvents = 'none'; } catch {}
-            TimelineUtils.removeElementSafe(this.ui.slider);
-        }
-        const straySlider = document.querySelector('.timeline-left-slider');
-        if (straySlider) {
-            try { straySlider.style.pointerEvents = 'none'; } catch {}
-            TimelineUtils.removeElementSafe(straySlider);
-        }
         
         // ✅ 修复：清理收藏按钮和面板
         TimelineUtils.removeElementSafe(this.ui.starredBtn);
         TimelineUtils.removeElementSafe(this.ui.starredPanel);
         
         // Clear references
-        this.ui = { timelineBar: null, tooltip: null, track: null, trackContent: null, slider: null, sliderHandle: null };
+        this.ui = { timelineBar: null, track: null, trackContent: null };
         this.markers = [];
         this.activeTurnId = null;
         this.scrollContainer = null;
@@ -2834,15 +2330,12 @@ class TimelineManager {
         this.onTimelineBarOut = null;
         this.onTimelineBarFocusIn = null;
         this.onTimelineBarFocusOut = null;
-        this.onTooltipEnter = null; // ✅ 需求2：清理 tooltip 事件引用
-        this.onTooltipLeave = null; // ✅ 需求2：清理 tooltip 事件引用
+        // ✅ 移除：tooltip hover 事件由 GlobalTooltipManager 管理
         this.onScroll = null;
         this.onWindowResize = null;
-        this.onBarEnter = this.onBarLeave = this.onSliderEnter = this.onSliderLeave = null;
         this.onVisualViewportResize = null;
         // ✅ 清理长按相关的引用
         this.startLongPress = this.checkLongPressMove = this.cancelLongPress = null;
-        this.onSliderDown = this.onSliderMove = this.onSliderUp = null;
         this.pendingActiveId = null;
     }
 
@@ -3019,8 +2512,8 @@ class TimelineManager {
         if (m.dotElement) {
             try {
                 m.dotElement.classList.toggle('starred', this.starred.has(id));
-                // If tooltip is visible and anchored to this dot, update immediately
-                this.refreshTooltipForDot(m.dotElement);
+                // ✅ 更新 tooltip 中的星标状态（如果正在显示）
+                this._updateTooltipStarIfVisible(m.dotElement, id);
             } catch {}
         }
         
@@ -3292,7 +2785,8 @@ class TimelineManager {
                                     marker.starred = false;
                                     if (marker.dotElement) {
                                         marker.dotElement.classList.remove('starred');
-                                        this.refreshTooltipForDot(marker.dotElement);
+                                        // ✅ 更新 tooltip 中的星标状态（如果正在显示）
+                                        this._updateTooltipStarIfVisible(marker.dotElement, marker.id);
                                     }
                                 }
                             }

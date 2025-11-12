@@ -19,9 +19,6 @@ const TIMELINE_CONFIG = {
     LONG_PRESS_TOLERANCE: 6, // px - movement tolerance during long press
     CLICK_SUPPRESS_DURATION: 350, // ms - suppress clicks after long press
     
-    // Slider behavior
-    SLIDER_FADE_DELAY: 1000, // ms - delay before fading slider
-    
     // Resize and layout
     RESIZE_IDLE_DELAY: 140, // ms - settle time before min-gap correction
     RESIZE_IDLE_TIMEOUT: 200, // ms - timeout for requestIdleCallback
