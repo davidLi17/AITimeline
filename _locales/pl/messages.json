@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - Interaktywna oś czasu dla ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - Interaktywna oś czasu dla rozmów AI, łatwe kopiowanie LaTeX"
   },
   "extDescription": {
-    "message": "Przekształć swoje rozmowy z AI w interaktywne osie czasu. 🚀 Szybki podgląd i nawigacja, 📌 oznaczanie kluczowych dialogów, ⭐️ ulubione ważne czaty, ❤️ kopiowanie formuł LaTeX, podwój swoją efektywność!"
+    "message": "Przekształć swoje rozmowy AI w interaktywne osie czasu. 🚀Szybki podgląd i nawigacja, 📌Oznacz węzły rozmowy, ⭐️Oznacz strony czatu, ❤️Kopiuj formuły LaTeX, podwój swoją wydajność!"
   },
   "viewStarred": {
     "message": "Zobacz ulubione"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Skopiowano"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Dodaj rozmowę do ulubionych"
+    "message": "Oznacz stronę czatu"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Zawartość nie może być pusta"
   },
   "dataStorageNote": {
-    "message": "Wszystkie dane są przechowywane wyłącznie lokalnie w Twojej przeglądarce. Nigdy nie będziemy przesyłać żadnych danych czatu na serwery bez Twojej zgody"
+    "message": "Wszystkie dane przechowywane lokalnie"
   },
   "projectOpenSource": {
-    "message": "Ten projekt jest open source, zapraszamy do"
+    "message": "Open source, witamy"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Podoba ci się? Podziel się ze znajomymi!"
+    "message": "Udostępnij znajomym"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "Kopiuj wzór LaTeX"
   },
   "latexFormulaCopied": {
     "message": "Skopiowano pomyślnie"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

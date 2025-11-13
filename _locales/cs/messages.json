@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - Interaktivní časová osa pro ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - Interaktivní časová osa pro konverzace s AI, snadné kopírování LaTeX"
   },
   "extDescription": {
-    "message": "Přeměňte své AI konverzace na interaktivní časové osy. 🚀 Rychlý náhled a navigace, 📌 označte klíčové dialogy, ⭐️ oblíbené důležité chaty, ❤️ kopírujte LaTeX vzorce, zdvojnásobte svou efektivitu!"
+    "message": "Přeměňte své konverzace s AI na interaktivní časové osy. 🚀Rychlý náhled a navigace, 📌Označte uzly konverzace, ⭐️Označte stránky chatu, ❤️Kopírujte vzorce LaTeX, zdvojnásobte svou efektivitu!"
   },
   "viewStarred": {
     "message": "Zobrazit oblíbené"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Zkopírováno"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Přidat konverzaci do oblíbených"
+    "message": "Označit stránku chatu"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Obsah nemůže být prázdný"
   },
   "dataStorageNote": {
-    "message": "Všechna data jsou uložena pouze lokálně ve vašem prohlížeči. Nikdy nebudeme nahrávat žádná data chatu na servery bez vašeho svolení"
+    "message": "Všechna data uložena lokálně"
   },
   "projectOpenSource": {
-    "message": "Tento projekt je open source, vítejte"
+    "message": "Open source, vítejte"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Líbí se vám to? Sdílejte s přáteli!"
+    "message": "Sdílet s přáteli"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "Kopírovat LaTeX vzorec"
   },
   "latexFormulaCopied": {
     "message": "Úspěšně zkopírováno"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

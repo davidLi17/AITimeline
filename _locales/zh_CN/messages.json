@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - 为 AI 对话添加可交互时间轴，ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - 为 AI 对话添加可交互时间轴，轻松复制LaTeX公式"
   },
   "extDescription": {
-    "message": "把你跟 AI 的对话整理成可交互时间轴，🚀快速预览并跳转、📌标记重点对话、⭐️收藏重要对话、❤️复制 LaTeX 公式，让效率翻倍！"
+    "message": "把你跟 AI 的对话整理成可交互时间轴，🚀快速预览并跳转、📌标记对话节点、⭐️收藏聊天页面、❤️复制 LaTeX 公式，让效率翻倍！"
   },
   "viewStarred": {
     "message": "查看收藏"
@@ -20,8 +20,11 @@
   "unstarSuccess": {
     "message": "已取消收藏"
   },
+  "unstarFailed": {
+    "message": "取消收藏失败"
+  },
   "starChat": {
-    "message": "收藏对话"
+    "message": "收藏聊天页面"
   },
   "unstarChat": {
     "message": "取消收藏"
@@ -31,6 +34,12 @@
   },
   "copied": {
     "message": "已复制"
+  },
+  "copyContent": {
+    "message": "复制内容"
+  },
+  "copyFailed": {
+    "message": "复制失败"
   },
   "inputChatTheme": {
     "message": "请输入收藏标题："
@@ -63,24 +72,105 @@
     "message": "内容不能为空"
   },
   "dataStorageNote": {
-    "message": "所有数据存储在您的浏览器本地，不上传服务器"
+    "message": "所有数据存储在您的浏览器本地"
   },
   "projectOpenSource": {
-    "message": "本项目已开源，欢迎"
+    "message": "已开源，欢迎"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "觉得不错的话，欢迎推荐给朋友"
+    "message": "分享给朋友"
   },
   "chromeWebStore": {
-    "message": "Chrome 应用商店"
+    "message": "Chrome 商店"
   },
   "copyLatexFormula": {
     "message": "复制 LaTeX 公式"
   },
   "latexFormulaCopied": {
     "message": "复制成功"
+  },
+  "createFolder": {
+    "message": "新建文件夹"
+  },
+  "createSubfolder": {
+    "message": "新建子文件夹"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "defaultFolder": {
+    "message": "默认文件夹"
+  },
+  "createNewFolder": {
+    "message": "创建新文件夹"
+  },
+  "createSubfolderIn": {
+    "message": "在「{folderName}」下创建子文件夹"
+  },
+  "folderNamePlaceholder": {
+    "message": "请输入文件夹名称"
+  },
+  "folderNameRequired": {
+    "message": "文件夹名称不能为空"
+  },
+  "editFolderName": {
+    "message": "编辑文件夹名称"
+  },
+  "newNamePlaceholder": {
+    "message": "请输入新名称"
+  },
+  "folderNameExists": {
+    "message": "文件夹名称已存在"
+  },
+  "folderCreated": {
+    "message": "文件夹创建成功"
+  },
+  "folderUpdated": {
+    "message": "文件夹已更新"
+  },
+  "editFailed": {
+    "message": "编辑失败"
+  },
+  "folderNotFound": {
+    "message": "文件夹不存在"
+  },
+  "folderDeleted": {
+    "message": "文件夹已删除"
+  },
+  "deleteFailed": {
+    "message": "删除失败"
+  },
+  "updated": {
+    "message": "已更新"
+  },
+  "createFolderFirst": {
+    "message": "请先创建文件夹"
+  },
+  "selectTargetFolder": {
+    "message": "请选择目标文件夹（输入序号）：\n0. 未分类\n"
+  },
+  "invalidSelection": {
+    "message": "无效的选择"
+  },
+  "moved": {
+    "message": "已移动"
+  },
+  "move": {
+    "message": "转移"
+  },
+  "copyLink": {
+    "message": "复制链接"
+  },
+  "moveFailed": {
+    "message": "移动失败"
+  },
+  "confirmDeleteFolder": {
+    "message": "删除文件夹「{folderName}」？\n\n该文件夹及其子文件夹中有 {count} 个收藏项，删除后这些收藏项将移至未分类。"
+  },
+  "uncategorized": {
+    "message": "未分类"
   }
 }

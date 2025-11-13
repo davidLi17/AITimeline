@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - Timeline interaktif untuk ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - Timeline interaktif untuk percakapan AI, menyalin LaTeX dengan mudah"
   },
   "extDescription": {
-    "message": "Ubah percakapan AI Anda menjadi garis waktu interaktif. 🚀 Pratinjau cepat dan navigasi, 📌 tandai dialog kunci, ⭐️ favoritkan obrolan penting, ❤️ salin rumus LaTeX, gandakan efisiensi Anda!"
+    "message": "Ubah percakapan AI Anda menjadi timeline interaktif. 🚀Pratinjau cepat dan navigasi, 📌Tandai node percakapan, ⭐️Tandai halaman obrolan, ❤️Salin rumus LaTeX, gandakan efisiensi Anda!"
   },
   "viewStarred": {
     "message": "Lihat favorit"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Disalin"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Tambahkan percakapan ke favorit"
+    "message": "Tandai halaman obrolan"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Konten tidak boleh kosong"
   },
   "dataStorageNote": {
-    "message": "Semua data hanya disimpan secara lokal di browser Anda. Kami tidak akan pernah mengunggah data obrolan apa pun ke server tanpa izin Anda"
+    "message": "Semua data disimpan secara lokal"
   },
   "projectOpenSource": {
-    "message": "Proyek ini bersifat open source, selamat datang di"
+    "message": "Open source, selamat datang"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Suka? Bagikan dengan teman!"
+    "message": "Bagikan dengan teman"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "Salin rumus LaTeX"
   },
   "latexFormulaCopied": {
     "message": "Berhasil disalin"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

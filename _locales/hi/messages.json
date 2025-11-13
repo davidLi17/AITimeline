@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - ChatGPT, Gemini, DeepSeek, grok के लिए इंटरैक्टिव टाइमलाइन"
+    "message": "AI Timeline - AI वार्तालापों के लिए इंटरैक्टिव टाइमलाइन, आसान LaTeX कॉपी करना"
   },
   "extDescription": {
-    "message": "अपनी AI बातचीत को इंटरैक्टिव टाइमलाइन में बदलें। 🚀 त्वरित पूर्वावलोकन और नेविगेशन, 📌 मुख्य संवादों को चिह्नित करें, ⭐️ महत्वपूर्ण चैट को पसंदीदा में जोड़ें, ❤️ LaTeX सूत्र कॉपी करें, अपनी दक्षता दोगुनी करें!"
+    "message": "अपने AI वार्तालापों को इंटरैक्टिव टाइमलाइन में बदलें। 🚀त्वरित पूर्वावलोकन और नेविगेशन, 📌वार्तालाप नोड्स को चिह्नित करें, ⭐️चैट पृष्ठों को चिह्नित करें, ❤️LaTeX सूत्रों की प्रतिलिपि बनाएँ, अपनी दक्षता दोगुनी करें!"
   },
   "viewStarred": {
     "message": "पसंदीदा देखें"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "कॉपी किया गया"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "बातचीत को पसंदीदा में जोड़ें"
+    "message": "चैट पृष्ठ को चिह्नित करें"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "सामग्री खाली नहीं हो सकती"
   },
   "dataStorageNote": {
-    "message": "सभी डेटा केवल आपके ब्राउज़र में स्थानीय रूप से संग्रहीत है। हम आपकी अनुमति के बिना कभी भी किसी चैट डेटा को सर्वर पर अपलोड नहीं करेंगे"
+    "message": "सभी डेटा स्थानीय रूप से संग्रहीत"
   },
   "projectOpenSource": {
-    "message": "यह परियोजना ओपन सोर्स है, स्वागत है"
+    "message": "ओपन सोर्स, स्वागत है"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "पसंद आया? दोस्तों के साथ शेयर करें!"
+    "message": "दोस्तों के साथ साझा करें"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "LaTeX सूत्र कॉपी करें"
   },
   "latexFormulaCopied": {
     "message": "सफलतापूर्वक कॉपी किया गया"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

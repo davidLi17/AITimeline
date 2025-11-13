@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - 為 AI 對話添加互動式時間軸，支援 ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - 為 AI 對話添加可交互時間軸，輕鬆複製LaTeX公式"
   },
   "extDescription": {
-    "message": "把你跟 AI 的對話整理成可互動時間軸，🚀快速預覽並跳轉、📌標記重點對話、⭐️收藏重要聊天、❤️複製 LaTeX 公式，讓效率翻倍！"
+    "message": "把你跟 AI 的對話整理成可交互時間軸，🚀快速預覽並跳轉、📌標記對話節點、⭐️收藏聊天頁面、❤️複製 LaTeX 公式，讓效率翻倍！"
   },
   "viewStarred": {
     "message": "檢視收藏"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "已取消收藏"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "已收藏"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "已複製"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "收藏對話"
+    "message": "收藏聊天頁面"
   },
   "unstarChat": {
     "message": "取消收藏"
@@ -63,24 +72,105 @@
     "message": "內容不能為空"
   },
   "dataStorageNote": {
-    "message": "所有資料儲存在您的瀏覽器本機，不上傳伺服器"
+    "message": "所有數據存儲在您的瀏覽器本地"
   },
   "projectOpenSource": {
-    "message": "本項目已開源，歡迎"
+    "message": "已開源，歡迎"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "覺得不錯的話，歡迎推薦給朋友"
+    "message": "分享給朋友"
   },
   "chromeWebStore": {
-    "message": "Chrome 應用商店"
+    "message": "Chrome 商店"
   },
   "copyLatexFormula": {
     "message": "複製 LaTeX 公式"
   },
   "latexFormulaCopied": {
     "message": "複製成功"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

@@ -28,6 +28,11 @@
         "js/formula/latex-extractor.js",
         "js/formula/formula-manager.js",
         "js/formula/index.js",
+        "js/panelModal/base-tab.js",
+        "js/panelModal/index.js",
+        "js/panelModal/tabs/starred/folder-manager.js",
+        "js/panelModal/tabs/starred/index.js",
+        "js/panelModal/tab-registry.js",
         "js/timeline/adapters/base.js",
         "js/timeline/adapters/chatgpt.js",
         "js/timeline/adapters/gemini.js",
@@ -50,8 +55,10 @@
         "js/global/tooltip-manager/styles.css",
         "js/global/toast-manager/styles.css",
         "js/global/input-modal/styles.css",
-        "styles/timeline.css",
-        "styles/formula.css"
+        "js/panelModal/styles.css",
+        "js/panelModal/tabs/starred/styles.css",
+        "js/timeline/timeline.css",
+        "js/formula/formula.css"
       ],
       "run_at": "document_idle"
     }

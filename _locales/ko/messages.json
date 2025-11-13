@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - AI 대화에 인터랙티브 타임라인 추가, ChatGPT, Gemini, DeepSeek, grok 지원"
+    "message": "AI Timeline - AI 대화용 인터랙티브 타임라인, 간편한 LaTeX 복사"
   },
   "extDescription": {
-    "message": "AI와의 대화를 인터랙티브 타임라인으로 정리. 🚀빠른 미리보기 및 이동, 📌주요 대화 표시, ⭐️중요한 채팅 즐겨찾기, ❤️LaTeX 수식 복사, 효율성 두 배!"
+    "message": "AI 대화를 인터랙티브 타임라인으로 변환합니다. 🚀빠른 미리보기 및 이동, 📌대화 노드 표시, ⭐️채팅 페이지 스타, ❤️LaTeX 수식 복사, 효율성 두 배 향상!"
   },
   "viewStarred": {
     "message": "즐겨찾기 보기"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "복사됨"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "대화 즐겨찾기"
+    "message": "채팅 페이지 스타"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "내용을 입력해야 합니다"
   },
   "dataStorageNote": {
-    "message": "모든 데이터는 브라우저 로컬에만 저장됩니다. 귀하의 허락 없이 채팅 데이터를 서버에 업로드하지 않습니다"
+    "message": "모든 데이터가 브라우저에 로컬 저장됨"
   },
   "projectOpenSource": {
-    "message": "이 프로젝트는 오픈 소스입니다."
+    "message": "오픈 소스, 환영합니다"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "마음에 드시면 친구에게 공유해주세요!"
+    "message": "친구와 공유"
   },
   "chromeWebStore": {
-    "message": "Chrome 웹 스토어"
+    "message": "Chrome 스토어"
   },
   "copyLatexFormula": {
     "message": "LaTeX 수식 복사"
   },
   "latexFormulaCopied": {
     "message": "복사 완료"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

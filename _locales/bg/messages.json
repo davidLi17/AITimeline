@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - Интерактивна времева линия за ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - Интерактивна времева линия за AI разговори, лесно копиране на LaTeX"
   },
   "extDescription": {
-    "message": "Трансформирайте вашите AI разговори в интерактивни времеви линии. 🚀 Бърз преглед и навигация, 📌 маркирайте ключови диалози, ⭐️ любими важни чатове, ❤️ копирайте LaTeX формули, удвоете ефективността си!"
+    "message": "Трансформирайте вашите AI разговори в интерактивни времеви линии. 🚀Бърз преглед и навигация, 📌Маркирайте възли на разговора, ⭐️Маркирайте страници на чат, ❤️Копирайте формули LaTeX, удвоете ефективността си!"
   },
   "viewStarred": {
     "message": "Преглед на любими"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Копирано"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Добави разговор в любими"
+    "message": "Маркирай страница на чат"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Съдържанието не може да бъде празно"
   },
   "dataStorageNote": {
-    "message": "Всички данни се съхраняват само локално във вашия браузър. Никога няма да качваме данни от чат на сървъри без вашето разрешение"
+    "message": "Всички данни са съхранени локално"
   },
   "projectOpenSource": {
-    "message": "Този проект е с отворен код, добре дошли в"
+    "message": "Отворен код, добре дошли"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Харесва ли ви? Споделете с приятели!"
+    "message": "Споделяне с приятели"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "Копирай LaTeX формула"
   },
   "latexFormulaCopied": {
     "message": "Успешно копирано"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - ChatGPT, Gemini, DeepSeek-এর জন্য ইন্টারঅ্যাক্টিভ টাইমলাইন"
+    "message": "AI Timeline - AI কথোপকথনের জন্য ইন্টারঅ্যাক্টিভ টাইমলাইন, সহজ LaTeX কপি"
   },
   "extDescription": {
-    "message": "আপনার AI কথোপকথনকে ইন্টারেক্টিভ টাইমলাইনে রূপান্তর করুন। 🚀 দ্রুত প্রিভিউ এবং জাম্প, 📌 মূল ডায়ালগ চিহ্নিত করুন, ⭐️ গুরুত্বপূর্ণ চ্যাট পছন্দের তালিকায় যুক্ত করুন, ❤️ LaTeX সূত্র কপি করুন, আপনার দক্ষতা দ্বিগুণ করুন!"
+    "message": "আপনার AI কথোপকথনকে ইন্টারঅ্যাক্টিভ টাইমলাইনে রূপান্তর করুন। 🚀দ্রুত পূর্বরূপ এবং নেভিগেশন, 📌কথোপকথন নোডগুলি চিহ্নিত করুন, ⭐️চ্যাট পৃষ্ঠাগুলি চিহ্নিত করুন, ❤️LaTeX সূত্র অনুলিপি করুন, আপনার দক্ষতা দ্বিগুণ করুন!"
   },
   "viewStarred": {
     "message": "প্রিয় দেখুন"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "কপি করা হয়েছে"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "কথোপকথন প্রিয়তে যোগ করুন"
+    "message": "চ্যাট পৃষ্ঠা চিহ্নিত করুন"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "বিষয়বস্তু খালি হতে পারে না"
   },
   "dataStorageNote": {
-    "message": "সমস্ত ডেটা শুধুমাত্র আপনার ব্রাউজারে স্থানীয়ভাবে সংরক্ষিত। আপনার অনুমতি ছাড়া আমরা কখনও কোন চ্যাট ডেটা সার্ভারে আপলোড করব না"
+    "message": "সমস্ত ডেটা স্থানীয়ভাবে সংরক্ষিত"
   },
   "projectOpenSource": {
-    "message": "এই প্রকল্পটি ওপেন সোর্স, স্বাগতম"
+    "message": "ওপেন সোর্স, স্বাগতম"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "পছন্দ হয়েছে? বন্ধুদের সাথে শেয়ার করুন!"
+    "message": "বন্ধুদের সাথে শেয়ার করুন"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "LaTeX সূত্র কপি করুন"
   },
   "latexFormulaCopied": {
     "message": "সফলভাবে কপি করা হয়েছে"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

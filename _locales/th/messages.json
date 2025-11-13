@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - ไทม์ไลน์แบบโต้ตอบสำหรับ ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - ไทม์ไลน์เชิงโต้ตอบสำหรับการสนทนา AI, คัดลอก LaTeX ได้ง่าย"
   },
   "extDescription": {
-    "message": "เปลี่ยนการสนทนา AI ของคุณให้เป็นไทม์ไลน์แบบโต้ตอบ 🚀 ดูตัวอย่างอย่างรวดเร็วและนำทาง 📌 ทำเครื่องหมายบทสนทนาสำคัญ ⭐️ รายการโปรดแชทสำคัญ ❤️ คัดลอกสูตร LaTeX เพิ่มประสิทธิภาพเป็นสองเท่า!"
+    "message": "แปลงการสนทนา AI ของคุณเป็นไทม์ไลน์เชิงโต้ตอบ 🚀แสดงตัวอย่างและนำทางอย่างรวดเร็ว, 📌ทำเครื่องหมายโหนดการสนทนา, ⭐️ทำเครื่องหมายหน้าแชท, ❤️คัดลอกสูตร LaTeX, เพิ่มประสิทธิภาพเป็นสองเท่า!"
   },
   "viewStarred": {
     "message": "ดูรายการโปรด"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "คัดลอกแล้ว"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "เพิ่มบทสนทนาในรายการโปรด"
+    "message": "ทำเครื่องหมายหน้าแชท"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "เนื้อหาต้องไม่ว่างเปล่า"
   },
   "dataStorageNote": {
-    "message": "ข้อมูลทั้งหมดจัดเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น เราจะไม่อัปโหลดข้อมูลแชทใดๆ ไปยังเซิร์ฟเวอร์โดยไม่ได้รับอนุญาตจากคุณ"
+    "message": "ข้อมูลทั้งหมดเก็บไว้ในเครื่อง"
   },
   "projectOpenSource": {
-    "message": "โครงการนี้เป็นโอเพ่นซอร์ส ยินดีต้อนรับ"
+    "message": "โอเพ่นซอร์ส, ยินดีต้อนรับ"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "ชอบไหม? แชร์ให้เพื่อนสิ!"
+    "message": "แชร์กับเพื่อน"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "คัดลอกสูตร LaTeX"
   },
   "latexFormulaCopied": {
     "message": "คัดลอกสำเร็จ"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - Interaktīva laika skala ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - Interaktīva laika līnija AI sarunām, vienkārša LaTeX kopēšana"
   },
   "extDescription": {
-    "message": "Pārveidojiet savas AI sarunas par interaktīvām laika līnijām. 🚀 Ātra priekšskatīšana un navigācija, 📌 atzīmēt galvenos dialogus, ⭐️ favorīti svarīgās sarunas, ❤️ kopēt LaTeX formulas, divkāršot efektivitāti!"
+    "message": "Pārvērtiet savas AI sarunas interaktīvā laika līnijā. 🚀Ātra priekšskatīšana un navigācija, 📌Atzīmējiet sarunu mezglus, ⭐️Atzīmējiet tērzēšanas lapas, ❤️Kopējiet LaTeX formulas, divkāršojiet savu efektivitāti!"
   },
   "viewStarred": {
     "message": "Skatīt izlasi"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Nokopēts"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Pievienot sarunu izlasei"
+    "message": "Atzīmēt tērzēšanas lapu"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Content cannot be empty"
   },
   "dataStorageNote": {
-    "message": "Visi dati tiek glabāti tikai lokāli jūsu pārlūkprogrammā. Mēs nekad neaugšupielādēsim nekādus tērzēšanas datus uz serveriem bez jūsu atļaujas"
+    "message": "Visi dati glabāti lokāli"
   },
   "projectOpenSource": {
-    "message": "Šis projekts ir atvērtā koda, laipni lūdzam"
+    "message": "Atvērtais kods, laipni lūdzam"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Patīk? Dalieties ar draugiem!"
+    "message": "Dalīties ar draugiem"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "Kopēt LaTeX formulu"
   },
   "latexFormulaCopied": {
     "message": "Veiksmīgi nokopēts"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

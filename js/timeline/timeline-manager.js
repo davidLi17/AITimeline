@@ -321,57 +321,6 @@ class TimelineManager {
         
         // ✅ 添加收藏整个聊天的按钮（插入到平台原生UI中）
         this.injectStarChatButton();
-        
-        // ✅ 修复：先查询 DOM，避免重复创建收藏面板
-        let starredPanel = document.querySelector('.timeline-starred-panel');
-        if (!starredPanel) {
-            starredPanel = document.createElement('div');
-            starredPanel.className = 'timeline-starred-panel';
-            starredPanel.innerHTML = `
-                <div class="timeline-starred-content">
-                    <div class="timeline-starred-header">
-                        <h3>${chrome.i18n.getMessage('starredList')}</h3>
-                        <button class="timeline-starred-close" aria-label="${chrome.i18n.getMessage('close')}">×</button>
-                    </div>
-                    <div class="timeline-starred-list"></div>
-                    <div class="timeline-starred-footer">
-                        <div class="timeline-starred-footer-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
-                            <span>${chrome.i18n.getMessage('dataStorageNote')}</span>
-                        </div>
-                        <div class="timeline-starred-footer-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-                            </svg>
-                            <span>${chrome.i18n.getMessage('shareIfUseful')}</span>
-                            <a href="https://chromewebstore.google.com/detail/ai-chat-timeline-chatgpt/fgebdnlceacaiaeikopldglhffljjlhh" target="_blank" class="timeline-github-link">
-                                ${chrome.i18n.getMessage('chromeWebStore')} ❤️
-                            </a>
-                        </div>
-                        <div class="timeline-starred-footer-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                            </svg>
-                            <span>${chrome.i18n.getMessage('projectOpenSource')}</span>
-                            <a href="https://github.com/houyanchao/AITimeline" target="_blank" class="timeline-github-link">
-                                ${chrome.i18n.getMessage('starOnGitHub')} ⭐
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(starredPanel);
-        } else {
-            // ✅ 修复：复用的元素，clone后替换，清除旧的事件监听器
-            const newPanel = starredPanel.cloneNode(true);
-            starredPanel.replaceWith(newPanel);
-            starredPanel = newPanel;
-        }
-        this.ui.starredPanel = starredPanel;
-        this.ui.starredList = starredPanel.querySelector('.timeline-starred-list');
-        this.ui.starredClose = starredPanel.querySelector('.timeline-starred-close');
     }
     
     /**
@@ -530,8 +479,7 @@ class TimelineManager {
                 };
                 await StorageAdapter.set(key, value);
                 
-                // 更新收藏列表UI
-                this.updateStarredListUI();
+                // ✅ 不再需要手动更新收藏列表UI，StarredTab 会自动监听存储变化
                 return true;
             }
         } catch (e) {
@@ -1279,39 +1227,29 @@ class TimelineManager {
                 // ✅ 重新渲染所有图钉
                 this.renderPinMarkers();
                 
-                // 更新收藏列表 UI
-                this.updateStarredListUI();
                 // 更新收藏按钮显示状态
                 this.updateStarredBtnVisibility();
             } catch {}
         };
         try { StorageAdapter.addChangeListener(this.onStorage); } catch {}
         
-        // ✅ 收藏按钮点击事件（查看收藏列表）
+        // ✅ 收藏按钮点击事件（打开 Panel Modal 并显示收藏 tab）
         if (this.ui.starredBtn) {
             this.ui.starredBtn.addEventListener('click', () => {
-                this.toggleStarredPanel();
-            });
-        }
-        
-        // ✅ 关闭按钮点击事件
-        if (this.ui.starredClose) {
-            this.ui.starredClose.addEventListener('click', () => {
-                this.hideStarredPanel();
-            });
-        }
-        
-        // ✅ 点击弹窗外部关闭
-        if (this.ui.starredPanel) {
-            this.ui.starredPanel.addEventListener('click', (e) => {
-                if (e.target === this.ui.starredPanel) {
-                    this.hideStarredPanel();
+                if (window.panelModal) {
+                    window.panelModal.show('starred');
                 }
             });
         }
         
         // ✅ 优化：监听主题变化，清空缓存
         this.setupThemeChangeListener();
+        
+        // ✅ 注册依赖 Timeline 的 Panel Modal tabs
+        // PanelModal 已在脚本加载时自动初始化，这里只注册需要 timeline 的 tabs
+        if (typeof registerTimelineTabs === 'function') {
+            registerTimelineTabs(this);
+        }
     }
     
     /**
@@ -2345,9 +2283,8 @@ class TimelineManager {
         // ✅ 注意：不再清理 tooltip（由 GlobalTooltipManager 管理）
         TimelineUtils.removeElementSafe(this.measureEl);
         
-        // ✅ 修复：清理收藏按钮和面板
+        // ✅ 修复：清理收藏按钮
         TimelineUtils.removeElementSafe(this.ui.starredBtn);
-        TimelineUtils.removeElementSafe(this.ui.starredPanel);
         
         // Clear references
         this.ui = { timelineBar: null, track: null, trackContent: null };
@@ -2549,8 +2486,7 @@ class TimelineManager {
             } catch {}
         }
         
-        // 更新收藏列表 UI
-        this.updateStarredListUI();
+        // ✅ 不再需要手动更新收藏列表UI，StarredTab 会自动监听存储变化
         // 更新收藏按钮显示状态
         this.updateStarredBtnVisibility();
     }
@@ -2615,351 +2551,6 @@ class TimelineManager {
         
         // 按时间倒序排序（最新的在前）
         return starredMessages.sort((a, b) => b.timestamp - a.timestamp);
-    }
-    
-    // 切换收藏面板显示/隐藏
-    toggleStarredPanel() {
-        if (!this.ui.starredPanel) return;
-        const isVisible = this.ui.starredPanel.classList.contains('visible');
-        if (isVisible) {
-            this.hideStarredPanel();
-        } else {
-            this.showStarredPanel();
-        }
-    }
-    
-    // 显示收藏面板
-    async showStarredPanel() {
-        if (!this.ui.starredPanel) return;
-        await this.updateStarredListUI();
-        this.ui.starredPanel.classList.add('visible');
-    }
-    
-    // 隐藏收藏面板
-    hideStarredPanel() {
-        if (!this.ui.starredPanel) return;
-        this.ui.starredPanel.classList.remove('visible');
-    }
-    
-    // 更新收藏列表UI
-    async updateStarredListUI() {
-        if (!this.ui.starredList) return;
-        
-        // ✅ 修复：只在收藏面板可见时才隐藏tooltip（避免影响节点tooltip）
-        const isPanelVisible = this.ui.starredPanel?.classList.contains('visible');
-        if (isPanelVisible) {
-            window.globalTooltipManager.forceHideAll();
-        }
-        
-        const starredMessages = await this.getStarredMessages();
-        
-        if (starredMessages.length === 0) {
-            this.ui.starredList.innerHTML = `<div class="timeline-starred-empty">${chrome.i18n.getMessage('noStarredItems')}</div>`;
-            return;
-        }
-        
-        const itemsHTML = starredMessages.map((item) => {
-            // 从 URL 中提取 hostname，并从 siteNameMap 获取对应颜色和 logo
-            let siteColor = '#000000'; // 默认黑色
-            let siteLogo = null;
-            try {
-                const urlParts = item.urlWithoutProtocol.split('/');
-                const hostname = urlParts[0];
-                // 在 siteNameMap 中查找匹配的颜色和 logo
-                for (const [key, value] of Object.entries(this.siteNameMap)) {
-                    if (hostname.includes(key) || key.includes(hostname)) {
-                        siteColor = value.color;
-                        siteLogo = value.logo || null;
-                        break;
-                    }
-                }
-            } catch (e) {}
-            
-            // 如果有 logo，直接显示图片；否则显示带背景色的文字标签
-            const tagHTML = siteLogo 
-                ? `<img src="${siteLogo}" alt="${this.escapeHTML(item.siteName)}" class="timeline-starred-item-logo" />`
-                : `<span class="timeline-starred-item-tag" style="background-color: ${siteColor}; color: #FFFFFF;">${this.escapeHTML(item.siteName)}</span>`;
-            
-            return `
-                <div class="timeline-starred-item" data-url="${this.escapeHTML(item.urlWithoutProtocol)}" data-index="${item.index}">
-                    ${tagHTML}
-                    <span class="timeline-starred-item-question">
-                        <span class="timeline-starred-item-question-text" data-full-text='${this.escapeHTML(item.question)}'>${this.escapeHTML(item.question)}</span>
-                    </span>
-                    <div class="timeline-starred-item-actions">
-                        <button class="timeline-starred-item-edit" data-url="${this.escapeHTML(item.urlWithoutProtocol)}" data-index="${item.index}" data-current-text='${this.escapeHTML(item.question)}' data-tooltip="${this.escapeHTML(chrome.i18n.getMessage('edit'))}">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                            </svg>
-                        </button>
-                        <button class="timeline-starred-item-copy" data-full-text='${this.escapeHTML(item.question)}' data-tooltip="复制">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                        </button>
-                        <button class="timeline-starred-item-star" data-url="${this.escapeHTML(item.urlWithoutProtocol)}" data-index="${item.index}" data-tooltip="${this.escapeHTML(chrome.i18n.getMessage('unstar'))}">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path fill="rgb(255, 125, 3)" stroke="rgb(255, 125, 3)" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        
-        this.ui.starredList.innerHTML = itemsHTML;
-        
-        // 绑定编辑按钮点击事件
-        this.ui.starredList.querySelectorAll('.timeline-starred-item-edit').forEach(btn => {
-            // 添加tooltip事件（使用全局TooltipManager）
-            btn.addEventListener('mouseenter', () => {
-                const tooltipText = btn.getAttribute('data-tooltip');
-                if (!tooltipText) return;
-                
-                window.globalTooltipManager.show(
-                    `edit-btn-${btn.dataset.url}-${btn.dataset.index}`,
-                    'button',
-                    btn,
-                    tooltipText,
-                    { placement: 'top' }
-                );
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                window.globalTooltipManager.hide();
-            });
-            
-            btn.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                
-                const url = btn.dataset.url;
-                const index = parseInt(btn.dataset.index, 10);
-                const currentText = btn.dataset.currentText;
-                
-                // 显示编辑对话框
-                const newText = await this.showEditDialog(currentText);
-                if (newText && newText !== currentText) {
-                    // 更新存储
-                    try {
-                        const key = `chatTimelineStar:${url}:${index}`;
-                        const existingValue = await StorageAdapter.get(key);
-                        if (existingValue) {
-                            // ✅ 限制收藏文字长度为前100个字符
-                            existingValue.question = this.truncateText(newText, 100);
-                            existingValue.timestamp = Date.now(); // 更新时间戳
-                            await StorageAdapter.set(key, existingValue);
-                            
-                            // 刷新列表
-                            await this.updateStarredListUI();
-                        }
-                    } catch (e) {
-                        console.error('Failed to update starred item:', e);
-                    }
-                }
-            });
-        });
-        
-        // 绑定五角星点击事件（取消收藏）
-        this.ui.starredList.querySelectorAll('.timeline-starred-item-star').forEach(btn => {
-            // 添加tooltip事件（使用全局TooltipManager）
-            btn.addEventListener('mouseenter', () => {
-                const tooltipText = btn.getAttribute('data-tooltip');
-                if (!tooltipText) return;
-                
-                window.globalTooltipManager.show(
-                    `star-btn-${btn.dataset.url}-${btn.dataset.index}`,
-                    'button',
-                    btn,
-                    tooltipText,
-                    { placement: 'top' }
-                );
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                window.globalTooltipManager.hide();
-            });
-            
-            btn.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                
-                // ✅ 修复：使用全局TooltipManager隐藏tooltip
-                window.globalTooltipManager.hide();
-                
-                const url = btn.dataset.url;
-                const index = parseInt(btn.dataset.index, 10);
-                
-                // ✅ 处理整个聊天收藏（index = -1）和普通收藏
-                if (index === -1 || !isNaN(index)) {
-                    // 直接删除存储条目
-                    try {
-                        const key = `chatTimelineStar:${url}:${index}`;
-                        await StorageAdapter.remove(key);
-                        
-                        // 如果是当前页面
-                        if (url === location.href.replace(/^https?:\/\//, '')) {
-                            if (index === -1) {
-                                // 更新整个聊天按钮的状态
-                                if (this.ui.starChatBtn) {
-                                    const svg = this.ui.starChatBtn.querySelector('svg');
-                                    if (svg) {
-                                        svg.setAttribute('fill', 'none');
-                                        svg.setAttribute('stroke', 'currentColor');
-                                    }
-                                }
-                            } else {
-                                // 更新单个问题的状态
-                                this.starredIndexes.delete(index);
-                                const marker = this.markers[index];
-                                if (marker && marker.id) {
-                                    this.starred.delete(marker.id);
-                                    marker.starred = false;
-                                    if (marker.dotElement) {
-                                        marker.dotElement.classList.remove('starred');
-                                        // ✅ 更新 tooltip 中的星标状态（如果正在显示）
-                                        this._updateTooltipStarIfVisible(marker.dotElement, marker.id);
-                                    }
-                                }
-                            }
-                        }
-                        
-                        // 重新渲染列表
-                        await this.updateStarredListUI();
-                        // 更新收藏按钮显示状态
-                        await this.updateStarredBtnVisibility();
-                    } catch (e) {
-                        // Silently fail
-                    }
-                }
-            });
-        });
-        
-        // 绑定问题文本的tooltip事件（即时显示完整文本）
-        this.ui.starredList.querySelectorAll('.timeline-starred-item-question-text').forEach(questionTextEl => {
-            questionTextEl.addEventListener('mouseenter', () => {
-                const fullText = questionTextEl.getAttribute('data-full-text');
-                if (!fullText) return;
-                
-                window.globalTooltipManager.show(
-                    `question-text-${questionTextEl.getAttribute('data-full-text')?.substring(0, 20)}`,
-                    'button',
-                    questionTextEl,
-                    fullText,
-                    {
-                        placement: 'top',
-                        maxWidth: 500  // 问题文本tooltip宽度更大
-                    }
-                );
-            });
-            
-            questionTextEl.addEventListener('mouseleave', () => {
-                window.globalTooltipManager.hide();
-            });
-            
-            // ✅ 添加点击前往功能（改为与前往按钮相同的逻辑）
-            questionTextEl.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                
-                // 获取父元素的data属性
-                const item = questionTextEl.closest('.timeline-starred-item');
-                if (!item) return;
-                
-                const targetUrl = item.dataset.url;
-                const index = parseInt(item.dataset.index, 10);
-                
-                // 判断是否是当前页面
-                const currentUrl = location.href.replace(/^https?:\/\//, '');
-                const isCurrentPage = targetUrl === currentUrl;
-                
-                // 判断是否跨网站
-                const currentHostname = location.hostname;
-                let targetHostname = currentHostname;
-                
-                try {
-                    // targetUrl没有协议，需要补充
-                    const fullUrl = targetUrl.startsWith('http') ? targetUrl : `https://${targetUrl}`;
-                    const url = new URL(fullUrl);
-                    targetHostname = url.hostname;
-                } catch (e) {
-                    // 解析失败，假设是同一网站
-                }
-                
-                const isCrossSite = currentHostname !== targetHostname;
-                
-                // ✅ 处理整个聊天收藏（index = -1）
-                if (index === -1) {
-                    if (isCurrentPage) {
-                        // 当前页面的整个聊天，滚动到顶部
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        this.hideStarredPanel();
-                    } else if (isCrossSite) {
-                        // 跨网站，新标签页打开
-                        const fullUrl = targetUrl.startsWith('http') ? targetUrl : `https://${targetUrl}`;
-                        window.open(fullUrl, '_blank');
-                    } else {
-                        // 同一网站，当前标签页打开
-                        const fullUrl = targetUrl.startsWith('http') ? targetUrl : `https://${targetUrl}`;
-                        window.location.href = fullUrl;
-                    }
-                    return;
-                }
-                
-                if (isNaN(index)) return;
-                
-                if (isCurrentPage) {
-                    // 当前页面，直接定位
-                    const marker = this.markers[index];
-                    if (marker && marker.element) {
-                        this.smoothScrollTo(marker.element);
-                        this.hideStarredPanel();
-                    }
-                } else {
-                    // 跨页面跳转
-                    if (isCrossSite) {
-                        // 跨网站：新标签页打开，并设置导航数据
-                        const fullUrl = targetUrl.startsWith('http') ? targetUrl : `https://${targetUrl}`;
-                        await this.setNavigateDataForUrl(fullUrl, index);
-                        window.open(fullUrl, '_blank');
-                    } else {
-                        // 同一网站：当前标签页跳转
-                        const fullUrl = targetUrl.startsWith('http') ? targetUrl : `https://${targetUrl}`;
-                        await this.setNavigateDataForUrl(fullUrl, index);
-                        await this.setNavigateData('targetIndex', index);
-                        window.location.href = fullUrl;
-                    }
-                }
-            });
-        });
-        
-        // 绑定复制按钮点击事件
-        this.ui.starredList.querySelectorAll('.timeline-starred-item-copy').forEach(btn => {
-            // 添加tooltip事件（使用全局TooltipManager）
-            btn.addEventListener('mouseenter', () => {
-                const tooltipText = btn.getAttribute('data-tooltip');
-                if (!tooltipText) return;
-                
-                window.globalTooltipManager.show(
-                    `copy-btn-${btn.getAttribute('data-full-text')?.substring(0, 20)}`,
-                    'button',
-                    btn,
-                    tooltipText,
-                    { placement: 'top' }
-                );
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                window.globalTooltipManager.hide();
-            });
-            
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const fullText = btn.getAttribute('data-full-text');
-                if (fullText) {
-                    this.copyToClipboard(fullText, btn);
-                }
-            });
-        });
     }
     
     // ✅ 复制文本到剪贴板并显示反馈

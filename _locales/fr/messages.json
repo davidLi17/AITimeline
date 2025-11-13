@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - Timeline interactive pour ChatGPT, Gemini, DeepSeek, grok"
+    "message": "AI Timeline - Chronologie interactive pour les conversations IA, copie facile de LaTeX"
   },
   "extDescription": {
-    "message": "Transformez vos conversations IA en chronologies interactives. 🚀 Aperçu rapide et navigation, 📌 marquer les dialogues clés, ⭐️ favoris des chats importants, ❤️ copier les formules LaTeX, doublez votre efficacité!"
+    "message": "Transformez vos conversations IA en chronologies interactives. 🚀Aperçu rapide et navigation, 📌Marquer les nœuds de conversation, ⭐️Mettre en favoris les pages de chat, ❤️Copier les formules LaTeX, doublez votre efficacité !"
   },
   "viewStarred": {
     "message": "Voir les favoris"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Copié"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Marquer la conversation"
+    "message": "Mettre en favoris la page de chat"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Le contenu ne peut pas être vide"
   },
   "dataStorageNote": {
-    "message": "Toutes les données sont stockées uniquement en local dans votre navigateur. Nous ne téléchargerons jamais de données de chat sur des serveurs sans votre permission"
+    "message": "Toutes les données stockées localement"
   },
   "projectOpenSource": {
-    "message": "Ce projet est open source, bienvenue à"
+    "message": "Open source, bienvenue"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Vous aimez ? Partagez avec vos amis !"
+    "message": "Partager avec des amis"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "Copier la formule LaTeX"
   },
   "latexFormulaCopied": {
     "message": "Copié avec succès"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }

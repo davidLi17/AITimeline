@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline - ChatGPT, Gemini, DeepSeek, grok üçün interaktiv zaman qrafiki"
+    "message": "AI Timeline - AI söhbətləri üçün interaktiv xronologiya, asan LaTeX kopyalama"
   },
   "extDescription": {
-    "message": "AI söhbətlərinizi interaktiv zaman xəttinə çevirin. 🚀 Sürətli önbaxış və keçid, 📌 əsas dialoqları qeyd edin, ⭐️ vacib söhbətləri sevimlilərdə saxlayın, ❤️ LaTeX formullarını kopyalayın, səmərəliliyinizi ikiqat artırın!"
+    "message": "AI söhbətlərinizi interaktiv xronologiyalara çevirin. 🚀Sürətli önizləmə və naviqasiya, 📌Söhbət qovşaqlarını qeyd edin, ⭐️Çat səhifələrini qeyd edin, ❤️LaTeX düsturlarını kopyalayın, səmərəliliyinizi ikiqat artırın!"
   },
   "viewStarred": {
     "message": "Sevimliləri göstər"
@@ -17,6 +17,9 @@
   "unstarSuccess": {
     "message": "Unstarred"
   },
+  "unstarFailed": {
+    "message": "Failed to unstar"
+  },
   "starSuccess": {
     "message": "Starred"
   },
@@ -26,8 +29,14 @@
   "copied": {
     "message": "Kopyalandı"
   },
+  "copyContent": {
+    "message": "Copy Content"
+  },
+  "copyFailed": {
+    "message": "Copy Failed"
+  },
   "starChat": {
-    "message": "Söhbəti sevimlilərə əlavə et"
+    "message": "Çat səhifəsini qeyd et"
   },
   "unstarChat": {
     "message": "Unstar"
@@ -63,24 +72,105 @@
     "message": "Content cannot be empty"
   },
   "dataStorageNote": {
-    "message": "Bütün məlumatlar yalnız brauzerizdə yerli olaraq saxlanılır. Biz heç vaxt icazəniz olmadan çat məlumatlarını serverlərə yükləməyəcəyik"
+    "message": "Bütün məlumatlar yerli olaraq saxlanılır"
   },
   "projectOpenSource": {
-    "message": "Bu layihə açıq mənbəlidir, xoş gəlmisiniz"
+    "message": "Açıq mənbə, xoş gəldiniz"
   },
   "starOnGitHub": {
     "message": "Star on GitHub"
   },
   "shareIfUseful": {
-    "message": "Bəyəndiniz? Dostlarınızla paylaşın!"
+    "message": "Dostlarla paylaş"
   },
   "chromeWebStore": {
-    "message": "Chrome Web Store"
+    "message": "Chrome Store"
   },
   "copyLatexFormula": {
     "message": "LaTeX formulunu kopyala"
   },
   "latexFormulaCopied": {
     "message": "Uğurla kopyalandı"
+  },
+  "createFolder": {
+    "message": "Create Folder"
+  },
+  "createSubfolder": {
+    "message": "Create Subfolder"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "defaultFolder": {
+    "message": "Default Folder"
+  },
+  "createNewFolder": {
+    "message": "Create New Folder"
+  },
+  "createSubfolderIn": {
+    "message": "Create subfolder in «{folderName}»"
+  },
+  "folderNamePlaceholder": {
+    "message": "Enter folder name"
+  },
+  "folderNameRequired": {
+    "message": "Folder name is required"
+  },
+  "editFolderName": {
+    "message": "Edit Folder Name"
+  },
+  "newNamePlaceholder": {
+    "message": "Enter new name"
+  },
+  "folderNameExists": {
+    "message": "Folder name already exists"
+  },
+  "folderCreated": {
+    "message": "Folder created successfully"
+  },
+  "folderUpdated": {
+    "message": "Folder updated successfully"
+  },
+  "editFailed": {
+    "message": "Edit failed"
+  },
+  "folderNotFound": {
+    "message": "Folder not found"
+  },
+  "folderDeleted": {
+    "message": "Folder deleted successfully"
+  },
+  "deleteFailed": {
+    "message": "Delete failed"
+  },
+  "updated": {
+    "message": "Updated"
+  },
+  "createFolderFirst": {
+    "message": "Please create a folder first"
+  },
+  "selectTargetFolder": {
+    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  },
+  "invalidSelection": {
+    "message": "Invalid selection"
+  },
+  "moved": {
+    "message": "Moved successfully"
+  },
+  "move": {
+    "message": "Move"
+  },
+  "copyLink": {
+    "message": "Copy Link"
+  },
+  "moveFailed": {
+    "message": "Move failed"
+  },
+  "confirmDeleteFolder": {
+    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  },
+  "uncategorized": {
+    "message": "Uncategorized"
   }
 }
