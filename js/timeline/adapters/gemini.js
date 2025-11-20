@@ -14,7 +14,7 @@ class GeminiAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('gemini.google.com');
+        return matchesPlatform(url, 'gemini');
     }
 
     getUserMessageSelector() {
@@ -138,11 +138,12 @@ class GeminiAdapter extends SiteAdapter {
     
     /**
      * 检测是否应该隐藏时间轴
-     * Gemini: 当存在沉浸式面板时隐藏
+     * Gemini: 当存在沉浸式面板或生成式UI框架时隐藏
      * @returns {boolean}
      */
     shouldHideTimeline() {
-        return document.querySelector('.ng-trigger-immersivePanelTransitions') !== null;
+        return document.querySelector('.ng-trigger-immersivePanelTransitions') !== null ||
+               document.querySelector('generative-ui-frame') !== null;
     }
 }
 

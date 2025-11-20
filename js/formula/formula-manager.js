@@ -30,6 +30,12 @@ class FormulaManager {
         // ✅ URL 变化监听（组件自治）
         this._currentUrl = location.href;
         
+        // ✅ 功能启用状态（默认开启）
+        this.featureEnabled = true;
+        
+        // ✅ Storage 监听器
+        this.storageListener = null;
+        
         // 绑定事件处理器
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -43,14 +49,20 @@ class FormulaManager {
     /**
      * 初始化公式管理器
      */
-    init() {
+    async init() {
         if (this.isEnabled) return;
+        
+        // ✅ 检查功能是否启用
+        const enabled = await this.checkIfEnabled();
+        if (!enabled) {
+            console.log('[FormulaManager] Feature is disabled, skip initialization');
+            return;
+        }
+        
         this.isEnabled = true;
 
-        // 创建 tooltip 元素
+        // ✅ 始终创建降级方案的 tooltip 和反馈元素（以防全局管理器失败）
         this.createTooltip();
-        
-        // 创建复制成功反馈元素
         this.createCopyFeedback();
         
         // 处理现有公式
@@ -58,6 +70,52 @@ class FormulaManager {
         
         // 监听新增公式
         this.observeNewFormulas();
+        
+        // ✅ 监听功能开关变化
+        this.attachStorageListener();
+    }
+    
+    /**
+     * ✅ 检查功能是否启用
+     */
+    async checkIfEnabled() {
+        try {
+            const result = await chrome.storage.local.get('formulaEnabled');
+            // 默认开启（!== false）
+            this.featureEnabled = result.formulaEnabled !== false;
+            return this.featureEnabled;
+        } catch (e) {
+            console.error('[FormulaManager] Failed to check if enabled:', e);
+            // 出错默认开启
+            this.featureEnabled = true;
+            return true;
+        }
+    }
+    
+    /**
+     * ✅ 监听 Storage 变化（功能开关）
+     */
+    attachStorageListener() {
+        this.storageListener = (changes, areaName) => {
+            if (areaName === 'local' && changes.formulaEnabled) {
+                const newValue = changes.formulaEnabled.newValue;
+                this.featureEnabled = newValue !== false;
+                
+                console.log('[FormulaManager] Feature enabled changed to:', this.featureEnabled);
+            }
+        };
+        
+        chrome.storage.onChanged.addListener(this.storageListener);
+    }
+    
+    /**
+     * ✅ 移除 Storage 监听器
+     */
+    detachStorageListener() {
+        if (this.storageListener) {
+            chrome.storage.onChanged.removeListener(this.storageListener);
+            this.storageListener = null;
+        }
     }
 
     /**
@@ -69,7 +127,7 @@ class FormulaManager {
         this.tooltip = document.createElement('div');
         this.tooltip.className = 'timeline-tooltip-base formula-tooltip';
         this.tooltip.setAttribute('data-placement', 'top');
-        this.tooltip.textContent = chrome.i18n.getMessage('copyLatexFormula');
+        this.tooltip.textContent = chrome.i18n.getMessage('mvxkpz');
         
         // 设置颜色（根据当前主题模式）
         const isDarkMode = document.documentElement.classList.contains('dark');
@@ -146,19 +204,27 @@ class FormulaManager {
         // 添加 hover 样式
         formulaElement.classList.add('formula-hover');
         
-        // 显示 tooltip - 使用全局管理器
-        if (typeof window.globalTooltipManager !== 'undefined') {
-            // 使用全局管理器
-            const formulaId = formulaElement.getAttribute('data-formula-id') || 
-                             'formula-' + Date.now();
-            
-            window.globalTooltipManager.show(
-                formulaId,
-                'formula',
-                formulaElement,
-                chrome.i18n.getMessage('copyLatexFormula'),
-                { placement: 'top' }
-            );
+        // 显示 tooltip - 优先使用全局管理器
+        if (typeof window.globalTooltipManager !== 'undefined' && window.globalTooltipManager) {
+            try {
+                // 使用全局管理器
+                const formulaId = 'formula-' + Date.now();
+                
+                // 获取 tooltip 文本
+                const tooltipText = chrome.i18n.getMessage('mvxkpz');
+                
+                window.globalTooltipManager.show(
+                    formulaId,
+                    'formula',
+                    formulaElement,
+                    tooltipText,
+                    { placement: 'top' }
+                );
+            } catch (error) {
+                console.error('[FormulaManager] Failed to show tooltip via global manager:', error);
+                // 降级到旧逻辑
+                this.showTooltip(formulaElement);
+            }
         } else {
             // 降级：使用旧逻辑
             this.showTooltip(formulaElement);
@@ -174,15 +240,16 @@ class FormulaManager {
         // 移除 hover 样式
         formulaElement.classList.remove('formula-hover');
         
+        // 清空当前 hover 元素
+        if (this.currentHoverElement === formulaElement) {
+            this.currentHoverElement = null;
+        }
+        
         // 隐藏 tooltip
         if (typeof window.globalTooltipManager !== 'undefined') {
             window.globalTooltipManager.hide();
         } else {
             this.hideTooltip();
-        }
-        
-        if (this.currentHoverElement === formulaElement) {
-            this.currentHoverElement = null;
         }
     }
 
@@ -214,10 +281,15 @@ class FormulaManager {
             await navigator.clipboard.writeText(latexCode);
             
             // 显示成功反馈
-            this.showCopyFeedback(chrome.i18n.getMessage('latexFormulaCopied'), formulaElement, false);
+            const successMsg = chrome.i18n.getMessage('xpzmvk');
+            this.showCopyFeedback(successMsg, formulaElement, false);
             
-            // 隐藏 tooltip
-            this.hideTooltip();
+            // 隐藏 tooltip（使用统一的隐藏逻辑）
+            if (typeof window.globalTooltipManager !== 'undefined') {
+                window.globalTooltipManager.hide(true);  // 立即隐藏
+            } else {
+                this.hideTooltip();
+            }
         } catch (err) {
             console.error('复制公式失败:', err);
             this.showCopyFeedback('⚠ 复制失败', formulaElement, true);
@@ -454,6 +526,15 @@ class FormulaManager {
             }
         });
     }
+    
+    /**
+     * 强制重新扫描页面上的所有公式
+     * 用于功能重新开启时，识别在关闭期间生成的新公式
+     */
+    rescan() {
+        console.log('[FormulaManager] Rescanning all formulas...');
+        this.scanAndAttachFormulas();
+    }
 
     /**
      * 销毁公式管理器
@@ -461,6 +542,9 @@ class FormulaManager {
     destroy() {
         // ✅ 先设置为 false，阻止所有异步回调继续执行
         this.isEnabled = false;
+        
+        // ✅ 移除 Storage 监听器
+        this.detachStorageListener();
 
         // 断开 MutationObserver
         if (this.mutationObserver) {

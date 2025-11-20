@@ -1,182 +1,195 @@
 {
   "extName": {
-    "message": "AI Timeline - Timeline interaktif untuk percakapan AI, menyalin LaTeX dengan mudah"
+    "message": "AI Timeline: Salin LaTeX, timeline, Enter untuk baris baru, memo prompt"
   },
   "extDescription": {
-    "message": "Ubah percakapan AI Anda menjadi timeline interaktif. 🚀Pratinjau cepat dan navigasi, 📌Tandai node percakapan, ⭐️Tandai halaman obrolan, ❤️Salin rumus LaTeX, gandakan efisiensi Anda!"
+    "message": "Untuk ChatGPT, DeepSeek, Gemini, Grok dan model lainnya. Alat kolaborasi AI paling kuat, gandakan efisiensi AI Anda!"
   },
-  "viewStarred": {
-    "message": "Lihat favorit"
+  "qwxpzm": {
+    "message": "Simpan"
   },
-  "starredList": {
-    "message": "Favorit Saya"
+  "hkjvnr": {
+    "message": "Lihat tersimpan"
   },
-  "close": {
-    "message": "Tutup"
+  "zmvkpx": {
+    "message": "Simpan percakapan"
   },
-  "unstarSuccess": {
-    "message": "Unstarred"
+  "bpxjkw": {
+    "message": "Hapus dari tersimpan"
   },
-  "unstarFailed": {
-    "message": "Failed to unstar"
+  "vnkxpm": {
+    "message": "Daftar tersimpan"
   },
-  "starSuccess": {
-    "message": "Starred"
+  "kxpmzv": {
+    "message": "Berhasil disimpan"
   },
-  "noStarredItems": {
-    "message": "Tidak ada favorit"
+  "pzmvkx": {
+    "message": "Dihapus dari tersimpan"
   },
-  "copied": {
-    "message": "Disalin"
+  "jwvnkp": {
+    "message": "Tidak ada data"
   },
-  "copyContent": {
-    "message": "Copy Content"
+  "mvkxpz": {
+    "message": "Salin"
   },
-  "copyFailed": {
-    "message": "Copy Failed"
+  "xpzmvk": {
+    "message": "Tersalin"
   },
-  "starChat": {
-    "message": "Tandai halaman obrolan"
+  "vkpxzm": {
+    "message": "Edit"
   },
-  "unstarChat": {
-    "message": "Unstar"
+  "kpzmvx": {
+    "message": "Gagal menyalin"
   },
-  "inputChatTheme": {
-    "message": "Masukkan judul favorit:"
+  "zmxvkp": {
+    "message": "Silakan masukkan"
   },
-  "themePlaceholder": {
-    "message": "Masukkan"
-  },
-  "cancel": {
+  "pxvkmz": {
     "message": "Batal"
   },
-  "confirm": {
+  "vkmzpx": {
     "message": "Konfirmasi"
   },
-  "themeRequired": {
+  "mzpxvk": {
     "message": "Tema tidak boleh kosong"
   },
-  "unstar": {
-    "message": "Hapus dari favorit"
+  "xvkpmz": {
+    "message": "Ubah nama"
   },
-  "viewStarredList": {
-    "message": "Lihat daftar favorit"
-  },
-  "edit": {
-    "message": "Edit konten"
-  },
-  "editStarredContent": {
-    "message": "Edit judul favorit"
-  },
-  "contentRequired": {
+  "pzmkvx": {
     "message": "Konten tidak boleh kosong"
   },
-  "dataStorageNote": {
-    "message": "Semua data disimpan secara lokal"
+  "kmvxpz": {
+    "message": "Semua data disimpan secara lokal di browser Anda"
   },
-  "projectOpenSource": {
+  "vxpzmk": {
     "message": "Open source, selamat datang"
   },
-  "starOnGitHub": {
-    "message": "Star on GitHub"
+  "mkvxpz": {
+    "message": "Bintang di GitHub"
   },
-  "shareIfUseful": {
-    "message": "Bagikan dengan teman"
+  "xpzmkv": {
+    "message": "Bagikan ke teman"
   },
-  "chromeWebStore": {
-    "message": "Chrome Store"
+  "pkmzvx": {
+    "message": "Chrome Web Store"
   },
-  "copyLatexFormula": {
+  "mvxkpz": {
     "message": "Salin rumus LaTeX"
   },
-  "latexFormulaCopied": {
-    "message": "Berhasil disalin"
+  "kxvpmz": {
+    "message": "Folder baru"
   },
-  "createFolder": {
-    "message": "Create Folder"
+  "vpmzkx": {
+    "message": "Subfolder baru"
   },
-  "createSubfolder": {
-    "message": "Create Subfolder"
+  "mzxvkp": {
+    "message": "Hapus"
   },
-  "delete": {
-    "message": "Delete"
+  "pkxvmz": {
+    "message": "Folder default"
   },
-  "defaultFolder": {
-    "message": "Default Folder"
+  "xmkvpz": {
+    "message": "Buat subfolder di「{folderName}」"
   },
-  "createNewFolder": {
-    "message": "Create New Folder"
+  "vzkpmx": {
+    "message": "Silakan masukkan nama folder"
   },
-  "createSubfolderIn": {
-    "message": "Create subfolder in «{folderName}»"
+  "kmxpvz": {
+    "message": "Nama folder diperlukan"
   },
-  "folderNamePlaceholder": {
-    "message": "Enter folder name"
+  "pxmzvk": {
+    "message": "Ubah nama folder"
   },
-  "folderNameRequired": {
-    "message": "Folder name is required"
+  "mvzxkp": {
+    "message": "Silakan masukkan nama baru"
   },
-  "editFolderName": {
-    "message": "Edit Folder Name"
+  "kpvzmx": {
+    "message": "Nama folder sudah ada"
   },
-  "newNamePlaceholder": {
-    "message": "Enter new name"
+  "xzvkpm": {
+    "message": "Berhasil dibuat"
   },
-  "folderNameExists": {
-    "message": "Folder name already exists"
+  "vmkxpz": {
+    "message": "Berhasil diperbarui"
   },
-  "folderCreated": {
-    "message": "Folder created successfully"
+  "zpxmkv": {
+    "message": "Folder tidak ditemukan"
   },
-  "folderUpdated": {
-    "message": "Folder updated successfully"
+  "kvpzmx": {
+    "message": "Folder dihapus"
   },
-  "editFailed": {
-    "message": "Edit failed"
+  "mxkvzp": {
+    "message": "Gagal menghapus"
   },
-  "folderNotFound": {
-    "message": "Folder not found"
+  "pzvkmx": {
+    "message": "Berhasil dipindahkan"
   },
-  "folderDeleted": {
-    "message": "Folder deleted successfully"
+  "vxkpmz": {
+    "message": "Pindah ke"
   },
-  "deleteFailed": {
-    "message": "Delete failed"
+  "wjxnkp": {
+    "message": "Hapus folder「{folderName}」?\n\nFolder ini dan subfoldernya berisi {count} item tersimpan. Item akan dipindahkan ke folder default."
   },
-  "updated": {
-    "message": "Updated"
+  "qzmvkx": {
+    "message": "Apakah Anda yakin ingin menghapus folder「{folderName}」?"
   },
-  "createFolderFirst": {
-    "message": "Please create a folder first"
+  "mvkzpx": {
+    "message": "Cari di tersimpan..."
   },
-  "selectTargetFolder": {
-    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  "kxzpmv": {
+    "message": "Simpan ke"
   },
-  "invalidSelection": {
-    "message": "Invalid selection"
+  "vmzpkx": {
+    "message": "Folder default"
   },
-  "moved": {
-    "message": "Moved successfully"
+  "pkmvxz": {
+    "message": "Judul"
   },
-  "move": {
-    "message": "Pindahkan ke"
+  "pxkmvz": {
+    "message": "Garis Waktu"
   },
-  "copyLink": {
-    "message": "Copy Link"
+  "mzkvxp": {
+    "message": "Saat diaktifkan, garis waktu interaktif akan muncul di sisi kanan halaman AI."
   },
-  "moveFailed": {
-    "message": "Move failed"
+  "vkpmzx": {
+    "message": "Gunakan tombol keyboard ↑ / ↓ untuk menavigasi percakapan"
   },
-  "confirmDeleteFolder": {
-    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  "xpvmkz": {
+    "message": "Saat diaktifkan, gunakan tombol keyboard ↑ / ↓ untuk melompat cepat antar catatan percakapan."
   },
-  "uncategorized": {
-    "message": "Uncategorized"
+  "xmvkpz": {
+    "message": "Kotak input percakapan"
   },
-  "confirmDeleteEmptyFolder": {
-    "message": "Apakah Anda yakin ingin menghapus folder «{folderName}»?"
+  "kvzmxp": {
+    "message": "Gunakan tombol Enter keyboard untuk baris baru"
   },
-  "searchStarred": {
-    "message": "Cari favorit..."
+  "mxpzvk": {
+    "message": "Saat diaktifkan, di kotak input percakapan AI, tekan tombol Enter sekali untuk baris baru, dua kali dengan cepat untuk mengirim pesan."
+  },
+  "kpxvmz": {
+    "message": "Salin rumus"
+  },
+  "zmkvpx": {
+    "message": "Salin rumus LaTeX"
+  },
+  "vxkpzm": {
+    "message": "Saat diaktifkan, secara otomatis mengidentifikasi rumus di halaman dan klik untuk menyalin dalam format LaTeX."
+  },
+  "mkvzpx": {
+    "message": "Platform yang didukung"
+  },
+  "zpkmvx": {
+    "message": "Enter untuk baris baru"
+  },
+  "vxmkpz": {
+    "message": "Tombol Enter: Sekali untuk baris baru, dua kali untuk mengirim"
+  },
+  "mkpxvz": {
+    "message": "Saat diaktifkan, di kotak input percakapan AI, tekan tombol Enter sekali untuk baris baru, dua kali dengan cepat untuk mengirim pesan."
+  },
+  "zpvmkx": {
+    "message": "Gagal menyimpan"
   }
 }
+

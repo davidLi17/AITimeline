@@ -1,182 +1,195 @@
 {
   "extName": {
-    "message": "AI Timeline - Интерактивная временная шкала для разговоров с ИИ, простое копирование LaTeX"
+    "message": "AI Timeline: LaTeX, временная шкала, Enter новая строка, memo"
   },
   "extDescription": {
-    "message": "Превратите ваши разговоры с ИИ в интерактивные временные шкалы. 🚀Быстрый просмотр и переход, 📌Отметьте узлы разговора, ⭐️Отметьте страницы чата, ❤️Копируйте формулы LaTeX, удвойте свою эффективность!"
+    "message": "Для ChatGPT, DeepSeek, Gemini, Grok и других моделей. Самый мощный инструмент для совместной работы с ИИ, удвойте эффективность работы с ИИ!"
   },
-  "viewStarred": {
-    "message": "Просмотр избранного"
+  "qwxpzm": {
+    "message": "Сохранить"
   },
-  "starredList": {
-    "message": "Моё избранное"
+  "hkjvnr": {
+    "message": "Просмотр сохранённых"
   },
-  "close": {
-    "message": "Закрыть"
+  "zmvkpx": {
+    "message": "Сохранить разговор"
   },
-  "unstarSuccess": {
-    "message": "Unstarred"
+  "bpxjkw": {
+    "message": "Удалить из сохранённых"
   },
-  "unstarFailed": {
-    "message": "Failed to unstar"
+  "vnkxpm": {
+    "message": "Список сохранённых"
   },
-  "starSuccess": {
-    "message": "Starred"
+  "kxpmzv": {
+    "message": "Успешно сохранено"
   },
-  "noStarredItems": {
-    "message": "Нет избранного"
+  "pzmvkx": {
+    "message": "Удалено из сохранённых"
   },
-  "copied": {
+  "jwvnkp": {
+    "message": "Нет данных"
+  },
+  "mvkxpz": {
+    "message": "Копировать"
+  },
+  "xpzmvk": {
     "message": "Скопировано"
   },
-  "copyContent": {
-    "message": "Copy Content"
+  "vkpxzm": {
+    "message": "Редактировать"
   },
-  "copyFailed": {
-    "message": "Copy Failed"
+  "kpzmvx": {
+    "message": "Ошибка копирования"
   },
-  "starChat": {
-    "message": "Отметить страницу чата"
+  "zmxvkp": {
+    "message": "Пожалуйста, введите"
   },
-  "unstarChat": {
-    "message": "Unstar"
-  },
-  "inputChatTheme": {
-    "message": "Введите заголовок избранного:"
-  },
-  "themePlaceholder": {
-    "message": "Введите"
-  },
-  "cancel": {
+  "pxvkmz": {
     "message": "Отмена"
   },
-  "confirm": {
+  "vkmzpx": {
     "message": "Подтвердить"
   },
-  "themeRequired": {
+  "mzpxvk": {
     "message": "Тема не может быть пустой"
   },
-  "unstar": {
-    "message": "Удалить из избранного"
+  "xvkpmz": {
+    "message": "Переименовать"
   },
-  "viewStarredList": {
-    "message": "Просмотр списка избранного"
+  "pzmkvx": {
+    "message": "Содержание не может быть пустым"
   },
-  "edit": {
-    "message": "Редактировать содержимое"
+  "kmvxpz": {
+    "message": "Все данные хранятся локально в вашем браузере"
   },
-  "editStarredContent": {
-    "message": "Редактировать название избранного"
-  },
-  "contentRequired": {
-    "message": "Содержимое не может быть пустым"
-  },
-  "dataStorageNote": {
-    "message": "Все данные хранятся локально"
-  },
-  "projectOpenSource": {
+  "vxpzmk": {
     "message": "Открытый исходный код, добро пожаловать"
   },
-  "starOnGitHub": {
-    "message": "Star on GitHub"
+  "mkvxpz": {
+    "message": "Звезда на GitHub"
   },
-  "shareIfUseful": {
+  "xpzmkv": {
     "message": "Поделиться с друзьями"
   },
-  "chromeWebStore": {
-    "message": "Chrome Store"
+  "pkmzvx": {
+    "message": "Интернет-магазин Chrome"
   },
-  "copyLatexFormula": {
+  "mvxkpz": {
     "message": "Копировать формулу LaTeX"
   },
-  "latexFormulaCopied": {
-    "message": "Успешно скопировано"
+  "kxvpmz": {
+    "message": "Новая папка"
   },
-  "createFolder": {
-    "message": "Create Folder"
+  "vpmzkx": {
+    "message": "Новая подпапка"
   },
-  "createSubfolder": {
-    "message": "Create Subfolder"
+  "mzxvkp": {
+    "message": "Удалить"
   },
-  "delete": {
-    "message": "Delete"
+  "pkxvmz": {
+    "message": "Папка по умолчанию"
   },
-  "defaultFolder": {
-    "message": "Default Folder"
+  "xmkvpz": {
+    "message": "Создать подпапку в「{folderName}」"
   },
-  "createNewFolder": {
-    "message": "Create New Folder"
+  "vzkpmx": {
+    "message": "Пожалуйста, введите имя папки"
   },
-  "createSubfolderIn": {
-    "message": "Create subfolder in «{folderName}»"
+  "kmxpvz": {
+    "message": "Имя папки обязательно"
   },
-  "folderNamePlaceholder": {
-    "message": "Enter folder name"
+  "pxmzvk": {
+    "message": "Переименовать папку"
   },
-  "folderNameRequired": {
-    "message": "Folder name is required"
+  "mvzxkp": {
+    "message": "Пожалуйста, введите новое имя"
   },
-  "editFolderName": {
-    "message": "Edit Folder Name"
+  "kpvzmx": {
+    "message": "Имя папки уже существует"
   },
-  "newNamePlaceholder": {
-    "message": "Enter new name"
+  "xzvkpm": {
+    "message": "Успешно создано"
   },
-  "folderNameExists": {
-    "message": "Folder name already exists"
+  "vmkxpz": {
+    "message": "Успешно обновлено"
   },
-  "folderCreated": {
-    "message": "Folder created successfully"
+  "zpxmkv": {
+    "message": "Папка не найдена"
   },
-  "folderUpdated": {
-    "message": "Folder updated successfully"
+  "kvpzmx": {
+    "message": "Папка удалена"
   },
-  "editFailed": {
-    "message": "Edit failed"
+  "mxkvzp": {
+    "message": "Ошибка удаления"
   },
-  "folderNotFound": {
-    "message": "Folder not found"
+  "pzvkmx": {
+    "message": "Успешно перемещено"
   },
-  "folderDeleted": {
-    "message": "Folder deleted successfully"
-  },
-  "deleteFailed": {
-    "message": "Delete failed"
-  },
-  "updated": {
-    "message": "Updated"
-  },
-  "createFolderFirst": {
-    "message": "Please create a folder first"
-  },
-  "selectTargetFolder": {
-    "message": "Select target folder (enter number):\n0. Uncategorized\n"
-  },
-  "invalidSelection": {
-    "message": "Invalid selection"
-  },
-  "moved": {
-    "message": "Moved successfully"
-  },
-  "move": {
+  "vxkpmz": {
     "message": "Переместить в"
   },
-  "copyLink": {
-    "message": "Copy Link"
+  "wjxnkp": {
+    "message": "Удалить папку「{folderName}」?\n\nЭта папка и её подпапки содержат {count} сохранённых элементов. Они будут перемещены в папку по умолчанию."
   },
-  "moveFailed": {
-    "message": "Move failed"
+  "qzmvkx": {
+    "message": "Вы уверены, что хотите удалить папку「{folderName}」?"
   },
-  "confirmDeleteFolder": {
-    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  "mvkzpx": {
+    "message": "Поиск в сохранённых..."
   },
-  "uncategorized": {
-    "message": "Uncategorized"
+  "kxzpmv": {
+    "message": "Сохранить в"
   },
-  "confirmDeleteEmptyFolder": {
-    "message": "Вы уверены, что хотите удалить папку «{folderName}»?"
+  "vmzpkx": {
+    "message": "Папка по умолчанию"
   },
-  "searchStarred": {
-    "message": "Поиск в избранном..."
+  "pkmvxz": {
+    "message": "Заголовок"
+  },
+  "pxkmvz": {
+    "message": "Временная шкала"
+  },
+  "mzkvxp": {
+    "message": "При включении интерактивная временная шкала появится справа на странице AI."
+  },
+  "vkpmzx": {
+    "message": "Использовать клавиши клавиатуры ↑ / ↓ для навигации по разговорам"
+  },
+  "xpvmkz": {
+    "message": "При включении используйте клавиши клавиатуры ↑ / ↓ для быстрого перехода между записями разговоров."
+  },
+  "xmvkpz": {
+    "message": "Поле ввода разговора"
+  },
+  "kvzmxp": {
+    "message": "Использовать клавишу Enter клавиатуры для новой строки"
+  },
+  "mxpzvk": {
+    "message": "При включении, в поле ввода разговора AI, нажмите клавишу Enter один раз для новой строки, дважды быстро для отправки сообщения."
+  },
+  "kpxvmz": {
+    "message": "Копировать формулу"
+  },
+  "zmkvpx": {
+    "message": "Копировать формулу LaTeX"
+  },
+  "vxkpzm": {
+    "message": "При включении автоматически определять формулы на странице и нажимать для копирования в формате LaTeX."
+  },
+  "mkvzpx": {
+    "message": "Поддерживаемые платформы"
+  },
+  "zpkmvx": {
+    "message": "Enter для новой строки"
+  },
+  "vxmkpz": {
+    "message": "Клавиша Enter: Один раз для новой строки, дважды для отправки"
+  },
+  "mkpxvz": {
+    "message": "При включении, в поле ввода разговора AI, нажмите клавишу Enter один раз для новой строки, дважды быстро для отправки сообщения."
+  },
+  "zpvmkx": {
+    "message": "Ошибка сохранения"
   }
 }
+

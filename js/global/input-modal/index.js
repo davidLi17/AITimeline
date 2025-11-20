@@ -86,13 +86,13 @@ class GlobalInputModal {
             const config = {
                 title: options.title,
                 defaultValue: options.defaultValue || '',
-                placeholder: options.placeholder || chrome.i18n.getMessage('themePlaceholder') || '请输入',
+                placeholder: options.placeholder || chrome.i18n.getMessage('zmxvkp'),
                 required: options.required !== undefined ? options.required : false,
-                requiredMessage: options.requiredMessage || chrome.i18n.getMessage('contentRequired') || '内容不能为空',
+                requiredMessage: options.requiredMessage || chrome.i18n.getMessage('pzmkvx'),
                 maxLength: options.maxLength || this.config.defaultMaxLength,
                 validator: options.validator || null,
-                confirmText: options.confirmText || chrome.i18n.getMessage('confirm') || '确定',
-                cancelText: options.cancelText || chrome.i18n.getMessage('cancel') || '取消'
+                confirmText: options.confirmText || chrome.i18n.getMessage('vkmzpx'),
+                cancelText: options.cancelText || chrome.i18n.getMessage('pxvkmz')
             };
             
             return await this._showModal(config);

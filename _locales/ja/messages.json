@@ -1,182 +1,195 @@
 {
   "extName": {
-    "message": "AI Timeline - AI会話用のインタラクティブなタイムライン、簡単なLaTeXコピー"
+    "message": "AI Timeline：LaTeXをコピー、タイムライン、Enterで改行、プロンプトメモ"
   },
   "extDescription": {
-    "message": "AI会話をインタラクティブなタイムラインに変換します。🚀クイックプレビューとジャンプ、📌会話ノードをマーク、⭐️チャットページをスター、❤️LaTeX数式をコピー、効率が倍増！"
+    "message": "ChatGPT、DeepSeek、Gemini、Grokなど、すべての主流AIモデル対応。最強のAI協力ツール、AI作業効率を倍増！"
   },
-  "viewStarred": {
-    "message": "お気に入りを表示"
+  "qwxpzm": {
+    "message": "保存"
   },
-  "starredList": {
-    "message": "お気に入りリスト"
+  "hkjvnr": {
+    "message": "保存済みを表示"
   },
-  "close": {
-    "message": "閉じる"
+  "zmvkpx": {
+    "message": "会話を保存"
   },
-  "unstarSuccess": {
-    "message": "Unstarred"
+  "bpxjkw": {
+    "message": "保存を解除"
   },
-  "unstarFailed": {
-    "message": "Failed to unstar"
+  "vnkxpm": {
+    "message": "保存済みリスト"
   },
-  "starSuccess": {
-    "message": "Starred"
+  "kxpmzv": {
+    "message": "保存しました"
   },
-  "noStarredItems": {
-    "message": "お気に入りがありません"
+  "pzmvkx": {
+    "message": "保存を解除しました"
   },
-  "copied": {
+  "jwvnkp": {
+    "message": "データなし"
+  },
+  "mvkxpz": {
+    "message": "コピー"
+  },
+  "xpzmvk": {
     "message": "コピーしました"
   },
-  "copyContent": {
-    "message": "Copy Content"
+  "vkpxzm": {
+    "message": "編集"
   },
-  "copyFailed": {
-    "message": "Copy Failed"
+  "kpzmvx": {
+    "message": "コピーに失敗しました"
   },
-  "starChat": {
-    "message": "チャットページをスター"
-  },
-  "unstarChat": {
-    "message": "Unstar"
-  },
-  "inputChatTheme": {
-    "message": "お気に入りタイトルを入力："
-  },
-  "themePlaceholder": {
+  "zmxvkp": {
     "message": "入力してください"
   },
-  "cancel": {
+  "pxvkmz": {
     "message": "キャンセル"
   },
-  "confirm": {
+  "vkmzpx": {
     "message": "確認"
   },
-  "themeRequired": {
-    "message": "テーマを入力してください"
+  "mzpxvk": {
+    "message": "テーマを空にできません"
   },
-  "unstar": {
-    "message": "スター解除"
+  "xvkpmz": {
+    "message": "名前を変更"
   },
-  "viewStarredList": {
-    "message": "スターリストを表示"
+  "pzmkvx": {
+    "message": "コンテンツを空にできません"
   },
-  "edit": {
-    "message": "内容を編集"
+  "kmvxpz": {
+    "message": "すべてのデータはブラウザにローカル保存されます"
   },
-  "editStarredContent": {
-    "message": "お気に入りタイトルを編集"
+  "vxpzmk": {
+    "message": "オープンソース、ようこそ"
   },
-  "contentRequired": {
-    "message": "コンテンツを入力してください"
+  "mkvxpz": {
+    "message": "GitHubでスター"
   },
-  "dataStorageNote": {
-    "message": "すべてのデータはブラウザにローカル保存"
-  },
-  "projectOpenSource": {
-    "message": "オープンソース、歓迎"
-  },
-  "starOnGitHub": {
-    "message": "Star on GitHub"
-  },
-  "shareIfUseful": {
+  "xpzmkv": {
     "message": "友達と共有"
   },
-  "chromeWebStore": {
-    "message": "Chrome ストア"
+  "pkmzvx": {
+    "message": "Chrome ウェブストア"
   },
-  "copyLatexFormula": {
-    "message": "LaTeX 数式をコピー"
+  "mvxkpz": {
+    "message": "LaTeX数式をコピー"
   },
-  "latexFormulaCopied": {
-    "message": "コピーしました"
+  "kxvpmz": {
+    "message": "新しいフォルダ"
   },
-  "createFolder": {
-    "message": "Create Folder"
+  "vpmzkx": {
+    "message": "新しいサブフォルダ"
   },
-  "createSubfolder": {
-    "message": "Create Subfolder"
+  "mzxvkp": {
+    "message": "削除"
   },
-  "delete": {
-    "message": "Delete"
+  "pkxvmz": {
+    "message": "デフォルトフォルダ"
   },
-  "defaultFolder": {
-    "message": "Default Folder"
+  "xmkvpz": {
+    "message": "「{folderName}」にサブフォルダを作成"
   },
-  "createNewFolder": {
-    "message": "Create New Folder"
+  "vzkpmx": {
+    "message": "フォルダ名を入力してください"
   },
-  "createSubfolderIn": {
-    "message": "Create subfolder in «{folderName}»"
+  "kmxpvz": {
+    "message": "フォルダ名は必須です"
   },
-  "folderNamePlaceholder": {
-    "message": "Enter folder name"
+  "pxmzvk": {
+    "message": "フォルダ名を変更"
   },
-  "folderNameRequired": {
-    "message": "Folder name is required"
+  "mvzxkp": {
+    "message": "新しい名前を入力してください"
   },
-  "editFolderName": {
-    "message": "Edit Folder Name"
+  "kpvzmx": {
+    "message": "フォルダ名は既に存在します"
   },
-  "newNamePlaceholder": {
-    "message": "Enter new name"
+  "xzvkpm": {
+    "message": "作成しました"
   },
-  "folderNameExists": {
-    "message": "Folder name already exists"
+  "vmkxpz": {
+    "message": "更新しました"
   },
-  "folderCreated": {
-    "message": "Folder created successfully"
+  "zpxmkv": {
+    "message": "フォルダが見つかりません"
   },
-  "folderUpdated": {
-    "message": "Folder updated successfully"
+  "kvpzmx": {
+    "message": "フォルダを削除しました"
   },
-  "editFailed": {
-    "message": "Edit failed"
+  "mxkvzp": {
+    "message": "削除に失敗しました"
   },
-  "folderNotFound": {
-    "message": "Folder not found"
+  "pzvkmx": {
+    "message": "移動しました"
   },
-  "folderDeleted": {
-    "message": "Folder deleted successfully"
-  },
-  "deleteFailed": {
-    "message": "Delete failed"
-  },
-  "updated": {
-    "message": "Updated"
-  },
-  "createFolderFirst": {
-    "message": "Please create a folder first"
-  },
-  "selectTargetFolder": {
-    "message": "Select target folder (enter number):\n0. Uncategorized\n"
-  },
-  "invalidSelection": {
-    "message": "Invalid selection"
-  },
-  "moved": {
-    "message": "Moved successfully"
-  },
-  "move": {
+  "vxkpmz": {
     "message": "移動先"
   },
-  "copyLink": {
-    "message": "Copy Link"
+  "wjxnkp": {
+    "message": "フォルダ「{folderName}」を削除しますか？\n\nこのフォルダとそのサブフォルダには{count}個の保存項目があります。これらはデフォルトフォルダに移動されます。"
   },
-  "moveFailed": {
-    "message": "Move failed"
-  },
-  "confirmDeleteFolder": {
-    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
-  },
-  "uncategorized": {
-    "message": "Uncategorized"
-  },
-  "confirmDeleteEmptyFolder": {
+  "qzmvkx": {
     "message": "フォルダ「{folderName}」を削除してもよろしいですか？"
   },
-  "searchStarred": {
-    "message": "お気に入りを検索..."
+  "mvkzpx": {
+    "message": "保存済みを検索..."
+  },
+  "kxzpmv": {
+    "message": "保存先"
+  },
+  "vmzpkx": {
+    "message": "デフォルトフォルダ"
+  },
+  "pkmvxz": {
+    "message": "タイトル"
+  },
+  "pxkmvz": {
+    "message": "タイムライン"
+  },
+  "mzkvxp": {
+    "message": "有効にすると、AIページの右側にインタラクティブなタイムラインが表示されます。"
+  },
+  "vkpmzx": {
+    "message": "キーボード ↑ / ↓ キーで会話をナビゲート"
+  },
+  "xpvmkz": {
+    "message": "有効にすると、キーボード ↑ / ↓ キーで会話記録間を素早くジャンプできます。"
+  },
+  "xmvkpz": {
+    "message": "会話入力ボックス"
+  },
+  "kvzmxp": {
+    "message": "キーボード Enter キーで改行"
+  },
+  "mxpzvk": {
+    "message": "有効にすると、AI会話入力ボックスで、Enter キーを1回押すと改行、素早く2回押すとメッセージを送信します。"
+  },
+  "kpxvmz": {
+    "message": "数式をコピー"
+  },
+  "zmkvpx": {
+    "message": "LaTeX数式をコピー"
+  },
+  "vxkpzm": {
+    "message": "有効にすると、ページ上の数式を自動的に識別し、クリックするとLaTeX形式でコピーできます。"
+  },
+  "mkvzpx": {
+    "message": "対応プラットフォーム"
+  },
+  "zpkmvx": {
+    "message": "Enterで改行"
+  },
+  "vxmkpz": {
+    "message": "Enterキー：1回で改行、2回で送信"
+  },
+  "mkpxvz": {
+    "message": "有効にすると、AI会話入力ボックスで、Enterキーを1回押すと改行、素早く2回押すとメッセージを送信します。"
+  },
+  "zpvmkx": {
+    "message": "保存に失敗しました"
   }
 }
+

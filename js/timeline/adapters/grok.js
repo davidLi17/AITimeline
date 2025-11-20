@@ -13,7 +13,7 @@ class GrokAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('grok.com');
+        return matchesPlatform(url, 'grok');
     }
 
     getUserMessageSelector() {

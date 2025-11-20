@@ -11,7 +11,7 @@ class DoubaoAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('doubao.com');
+        return matchesPlatform(url, 'doubao');
     }
 
     getUserMessageSelector() {

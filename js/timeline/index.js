@@ -47,6 +47,28 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Helper function: check if current platform is enabled
+async function isPlatformEnabled() {
+    try {
+        const platform = getCurrentPlatform();
+        if (!platform) return true; // 未知平台，默认启用
+        
+        // ✅ 首先检查平台是否支持时间轴功能
+        if (platform.features?.timeline !== true) {
+            return false; // 平台不支持该功能
+        }
+        
+        const result = await chrome.storage.local.get('timelinePlatformSettings');
+        const settings = result.timelinePlatformSettings || {};
+        
+        // 默认启用（!== false）
+        return settings[platform.id] !== false;
+    } catch (e) {
+        console.error('[Timeline] Failed to check platform enabled:', e);
+        return true; // 出错默认启用
+    }
+}
+
 // Helper function: lightweight check if timeline can be initialized
 function canInitialize() {
     if (!currentAdapter) {
@@ -76,6 +98,12 @@ async function initWithRetry(version, delays, retryIndex = 0) {
     // Double-check we're still on a conversation route
     if (!isConversationRoute()) {
         return;
+    }
+    
+    // ✅ 检查当前平台是否启用时间轴功能
+    const platformEnabled = await isPlatformEnabled();
+    if (!platformEnabled) {
+        return; // 当前平台未启用，不初始化
     }
     
     // Lightweight check: can we initialize?
@@ -155,7 +183,7 @@ function initializeTimeline() {
     }
 }
 
-function handleUrlChange() {
+async function handleUrlChange() {
     // 检测 URL 是否变化
     if (location.href === currentUrl) return;
     currentUrl = location.href;
@@ -190,10 +218,60 @@ function handleUrlChange() {
     // 如果不是对话 URL，只清理（上面已经做了）
 }
 
+// ✅ 监听平台设置变化，动态启用/禁用时间轴
+function setupPlatformSettingsListener() {
+    chrome.storage.onChanged.addListener((changes, areaName) => {
+        if (areaName !== 'local') return;
+        
+        // 监听平台设置变化
+        if (changes.timelinePlatformSettings) {
+            const platform = getCurrentPlatform();
+            if (!platform) return;
+            
+            // ✅ 检查平台是否支持时间轴功能
+            if (platform.features?.timeline !== true) {
+                return; // 平台不支持该功能，忽略
+            }
+            
+            const oldSettings = changes.timelinePlatformSettings.oldValue || {};
+            const newSettings = changes.timelinePlatformSettings.newValue || {};
+            
+            const wasEnabled = oldSettings[platform.id] !== false;
+            const isEnabled = newSettings[platform.id] !== false;
+            
+            // 状态发生变化
+            if (wasEnabled !== isEnabled) {
+                if (isEnabled) {
+                    // 从禁用到启用：重新初始化时间轴
+                    if (!timelineManagerInstance && isConversationRoute()) {
+                        initVersion++;
+                        const currentVersion = initVersion;
+                        initWithRetry(currentVersion, TIMELINE_CONFIG.INIT_RETRY_DELAYS);
+                    }
+                } else {
+                    // 从启用到禁用：销毁时间轴
+                    if (timelineManagerInstance) {
+                        try { timelineManagerInstance.destroy(); } catch {}
+                        timelineManagerInstance = null;
+                    }
+                    
+                    // 清理 UI 元素
+                    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper'));
+                    TimelineUtils.removeElementSafe(document.querySelector('.timeline-starred-panel'));
+                    TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
+                }
+            }
+        }
+    });
+}
+
 // Check if current site is supported before initializing
 if (!adapterRegistry.isSupportedSite()) {
 } else {
     currentAdapter = adapterRegistry.detectAdapter();
+    
+    // ✅ 设置平台设置监听器（监听用户在设置中切换平台开关）
+    setupPlatformSettingsListener();
     
     // ✅ 修复：先检查DOM中是否已存在用户消息（SPA路由切换场景）
     const checkAndInit = () => {
@@ -217,16 +295,24 @@ if (!adapterRegistry.isSupportedSite()) {
     };
     
     // ✅ 修复：立即检查一次（处理SPA路由切换到对话页的情况）
-    if (checkAndInit()) {
-        // 已经初始化成功，不需要observer
-    } else {
-        // 还没有用户消息，设置observer等待
-        const initialObserver = new MutationObserver(() => {
-            if (checkAndInit()) {
-                // 初始化成功，断开observer
-                TimelineUtils.disconnectObserverSafe(initialObserver);
-            }
-        });
-        try { initialObserver.observe(document.body, { childList: true, subtree: true }); } catch {}
-    }
+    // ✅ 异步检查平台是否启用
+    (async () => {
+        const platformEnabled = await isPlatformEnabled();
+        if (!platformEnabled) {
+            return; // 当前平台未启用，不初始化
+        }
+        
+        if (checkAndInit()) {
+            // 已经初始化成功，不需要observer
+        } else {
+            // 还没有用户消息，设置observer等待
+            const initialObserver = new MutationObserver(() => {
+                if (checkAndInit()) {
+                    // 初始化成功，断开observer
+                    TimelineUtils.disconnectObserverSafe(initialObserver);
+                }
+            });
+            try { initialObserver.observe(document.body, { childList: true, subtree: true }); } catch {}
+        }
+    })();
 }

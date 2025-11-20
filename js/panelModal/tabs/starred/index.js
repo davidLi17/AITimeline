@@ -7,7 +7,7 @@ class StarredTab extends BaseTab {
     constructor(timelineManager) {
         super();
         this.id = 'starred';
-        this.name = chrome.i18n.getMessage('starredList') || '收藏列表';
+        this.name = chrome.i18n.getMessage('vnkxpm');
         this.icon = `<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0.5">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
         </svg>`;
@@ -17,6 +17,12 @@ class StarredTab extends BaseTab {
         
         // 文件夹管理器
         this.folderManager = new FolderManager(StorageAdapter);
+        
+        // Toast 颜色配置（黑/白反转）
+        this.toastColor = {
+            light: { backgroundColor: '#0d0d0d', textColor: '#ffffff', borderColor: '#262626' },
+            dark: { backgroundColor: '#ffffff', textColor: '#1f2937', borderColor: '#d1d5db' }
+        };
     }
     
     /**
@@ -61,7 +67,7 @@ class StarredTab extends BaseTab {
                 'add-folder-btn',
                 'button',
                 addFolderBtn,
-                chrome.i18n.getMessage('createFolder'),
+                chrome.i18n.getMessage('kxvpmz'),
                 { placement: 'top' }
             );
         });
@@ -76,7 +82,7 @@ class StarredTab extends BaseTab {
         const searchInput = document.createElement('input');
         searchInput.type = 'text';
         searchInput.className = 'starred-toolbar-search';
-        searchInput.placeholder = chrome.i18n.getMessage('searchStarred') || '搜索收藏...';
+        searchInput.placeholder = chrome.i18n.getMessage('mvkzpx');
         searchInput.autocomplete = 'off'; // ✨ 防止浏览器缓存输入值
         searchInput.value = ''; // ✨ 总是用空值初始化
         
@@ -165,7 +171,7 @@ class StarredTab extends BaseTab {
         const hasData = tree.folders.length > 0 || tree.uncategorized.length > 0;
         
         if (!hasData) {
-            listContainer.innerHTML = `<div class="timeline-starred-empty">${chrome.i18n.getMessage('noStarredItems')}</div>`;
+            listContainer.innerHTML = `<div class="timeline-starred-empty">${chrome.i18n.getMessage('jwvnkp')}</div>`;
             return;
         }
         
@@ -255,14 +261,25 @@ class StarredTab extends BaseTab {
         // 文件夹图标和名称
         const folderInfo = document.createElement('div');
         folderInfo.className = 'folder-info';
+        
+        // 根据展开状态选择不同的图标
+        const folderIconSvg = isExpanded 
+            ? `<svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
+            </svg>`  // 打开的文件夹
+            : `<svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+            </svg>`;  // 关闭的文件夹
+        
+        // 递归统计所有收藏项
+        const totalItems = this._countAllItems(folder);
+        
         folderInfo.innerHTML = `
             <span class="folder-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
-                </svg>
+                ${folderIconSvg}
             </span>
             <span class="folder-name">${this.escapeHtml(folder.name)}</span>
-            <span class="folder-count">(${folder.items.length + (folder.children || []).reduce((sum, child) => sum + child.items.length, 0)})</span>
+            <span class="folder-count">(${totalItems})</span>
         `;
         // 点击文件夹名称也可以展开/收起
         folderInfo.style.cursor = 'pointer';
@@ -301,7 +318,7 @@ class StarredTab extends BaseTab {
                     </svg>
                 `;
                 items.push({
-                    label: chrome.i18n.getMessage('createSubfolder'),
+                    label: chrome.i18n.getMessage('vpmzkx'),
                     icon: addChildIcon.firstElementChild.outerHTML,
                     onClick: () => this.handleCreateFolder(folder.id)
                 });
@@ -316,7 +333,7 @@ class StarredTab extends BaseTab {
                 </svg>
             `;
             items.push({
-                label: chrome.i18n.getMessage('renameFolder'),
+                label: chrome.i18n.getMessage('xvkpmz'),
                 icon: editIcon.firstElementChild.outerHTML,
                 onClick: () => this.handleEditFolder(folder.id, folder.name)
             });
@@ -335,7 +352,7 @@ class StarredTab extends BaseTab {
                 </svg>
             `;
             items.push({
-                label: chrome.i18n.getMessage('delete'),
+                label: chrome.i18n.getMessage('mzxvkp'),
                 icon: deleteIcon.firstElementChild.outerHTML,
                 className: 'danger',
                 onClick: () => this.handleDeleteFolder(folder.id)
@@ -426,13 +443,21 @@ class StarredTab extends BaseTab {
         // 文件夹信息
         const folderInfo = document.createElement('div');
         folderInfo.className = 'folder-info';
+        
+        // 根据展开状态选择不同的图标
+        const folderIconSvg = isExpanded 
+            ? `<svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
+            </svg>`  // 打开的文件夹
+            : `<svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+            </svg>`;  // 关闭的文件夹
+        
         folderInfo.innerHTML = `
             <span class="folder-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
-                </svg>
+                ${folderIconSvg}
             </span>
-            <span class="folder-name">${chrome.i18n.getMessage('defaultFolder')}</span>
+            <span class="folder-name">${chrome.i18n.getMessage('pkxvmz')}</span>
             <span class="folder-count">(${filteredItems.length})</span>
         `;
         // 点击文件夹名称也可以展开/收起
@@ -535,7 +560,7 @@ class StarredTab extends BaseTab {
             
             const items = [
                 {
-                    label: chrome.i18n.getMessage('move'),
+                    label: chrome.i18n.getMessage('vxkpmz'),
                     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="17 1 21 5 17 9"/>
                         <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
@@ -545,7 +570,7 @@ class StarredTab extends BaseTab {
                     children: moveChildren  // ✨ 使用子菜单
                 },
                 {
-                    label: chrome.i18n.getMessage('edit'),
+                    label: chrome.i18n.getMessage('vkpxzm'),
                     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
@@ -553,24 +578,16 @@ class StarredTab extends BaseTab {
                     onClick: () => this.handleEditStarred(item.turnId, item.theme)
                 },
                 {
-                    label: chrome.i18n.getMessage('copyContent') || '复制内容',
+                    label: chrome.i18n.getMessage('mvkxpz'),
                     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
                     </svg>`,
                     onClick: () => this.handleCopy(item.theme)
                 },
-                {
-                    label: chrome.i18n.getMessage('copyLink'),
-                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                    </svg>`,
-                    onClick: () => this.handleCopy(item.url)
-                },
                 { type: 'divider' },
                 {
-                    label: chrome.i18n.getMessage('unstar'),
+                    label: chrome.i18n.getMessage('bpxjkw'),
                     icon: `<svg viewBox="0 0 24 24" fill="rgb(255, 125, 3)" stroke="rgb(255, 125, 3)" stroke-width="0.5">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>`,
@@ -702,14 +719,30 @@ class StarredTab extends BaseTab {
         if (folderElement) {
             const toggle = folderElement.querySelector('.folder-toggle');
             const content = folderElement.querySelector('.folder-content');
+            const folderIcon = folderElement.querySelector('.folder-icon');
             
             if (toggle && content) {
-                if (folderStates[folderId]) {
+                const isExpanded = folderStates[folderId];
+                
+                if (isExpanded) {
                     toggle.classList.add('expanded');
                     content.classList.add('expanded');
                 } else {
                     toggle.classList.remove('expanded');
                     content.classList.remove('expanded');
+                }
+                
+                // 更新文件夹图标
+                if (folderIcon) {
+                    const folderIconSvg = isExpanded
+                        ? `<svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
+                        </svg>`  // 打开的文件夹
+                        : `<svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                        </svg>`;  // 关闭的文件夹
+                    
+                    folderIcon.innerHTML = folderIconSvg;
                 }
             }
         }
@@ -722,15 +755,15 @@ class StarredTab extends BaseTab {
         try {
             const parentPath = parentId ? await this.folderManager.getFolderPath(parentId) : '';
             const title = parentId 
-                ? chrome.i18n.getMessage('createSubfolderIn').replace('{folderName}', parentPath)
-                : chrome.i18n.getMessage('createNewFolder');
+                ? chrome.i18n.getMessage('xmkvpz').replace('{folderName}', parentPath)
+                : chrome.i18n.getMessage('kxvpmz');
             
             const name = await window.globalInputModal.show({
                 title: title,
                 defaultValue: '',
-                placeholder: chrome.i18n.getMessage('folderNamePlaceholder'),
+                placeholder: chrome.i18n.getMessage('vzkpmx'),
                 required: true,
-                requiredMessage: chrome.i18n.getMessage('folderNameRequired'),
+                requiredMessage: chrome.i18n.getMessage('kmxpvz'),
                 maxLength: 10
             });
             
@@ -741,12 +774,12 @@ class StarredTab extends BaseTab {
             // 检查名称是否已存在
             const exists = await this.folderManager.isFolderNameExists(name.trim(), parentId);
             if (exists) {
-                window.globalToastManager.error(chrome.i18n.getMessage('folderNameExists'));
+                window.globalToastManager.error(chrome.i18n.getMessage('kpvzmx'), null, { color: this.toastColor });
                 return;
             }
             
             await this.folderManager.createFolder(name.trim(), parentId);
-            window.globalToastManager.success(chrome.i18n.getMessage('folderCreated'));
+            window.globalToastManager.success(chrome.i18n.getMessage('xzvkpm'), null, { color: this.toastColor });
             await this.updateList();
         } catch (error) {
             console.error('[StarredTab] Create folder failed:', error);
@@ -762,9 +795,9 @@ class StarredTab extends BaseTab {
     async handleEditFolder(folderId, currentName) {
         try {
             const newName = await window.globalInputModal.show({
-                title: chrome.i18n.getMessage('editFolderName'),
+                title: chrome.i18n.getMessage('pxmzvk'),
                 defaultValue: currentName,
-                placeholder: chrome.i18n.getMessage('newNamePlaceholder'),
+                placeholder: chrome.i18n.getMessage('mvzxkp'),
                 required: true,
                 requiredMessage: '文件夹名称不能为空',
                 maxLength: 10
@@ -791,7 +824,6 @@ class StarredTab extends BaseTab {
             await this.updateList();
         } catch (error) {
             console.error('[StarredTab] Edit folder failed:', error);
-            window.globalToastManager.error(chrome.i18n.getMessage('editFailed'));
         }
     }
     
@@ -815,33 +847,34 @@ class StarredTab extends BaseTab {
             }
             
             if (!folderData) {
-                window.globalToastManager.error(chrome.i18n.getMessage('folderNotFound'));
+                window.globalToastManager.error(chrome.i18n.getMessage('zpxmkv'), null, { color: this.toastColor });
                 return;
             }
             
-            const totalItems = folderData.items.length + 
-                (folderData.children || []).reduce((sum, child) => sum + child.items.length, 0);
+            // 递归统计文件夹及其所有子孙文件夹的收藏项总数
+            const totalItems = this._countAllItems(folderData);
             
-            // 总是弹窗二次确认
+            // 根据是否有收藏项，显示不同的确认消息
             let message;
             if (totalItems > 0) {
-                message = chrome.i18n.getMessage('confirmDeleteFolder')
+                // 有收藏项：显示详细提示（包含数量）
+                message = chrome.i18n.getMessage('wjxnkp')
                     .replace('{folderName}', folderData.name)
                     .replace('{count}', totalItems);
             } else {
-                message = chrome.i18n.getMessage('confirmDeleteEmptyFolder')
-                    ? chrome.i18n.getMessage('confirmDeleteEmptyFolder').replace('{folderName}', folderData.name)
-                    : `确定要删除文件夹「${folderData.name}」吗？`;
+                // 空文件夹：显示简单提示
+                message = chrome.i18n.getMessage('qzmvkx').replace('{folderName}', folderData.name);
             }
+            
             const confirmed = confirm(message);
             if (!confirmed) return;
             
             await this.folderManager.deleteFolder(folderId, null);
-            window.globalToastManager.success(chrome.i18n.getMessage('folderDeleted'));
+            window.globalToastManager.success(chrome.i18n.getMessage('kvpzmx'), null, { color: this.toastColor });
             await this.updateList();
         } catch (error) {
             console.error('[StarredTab] Delete folder failed:', error);
-            window.globalToastManager.error(chrome.i18n.getMessage('deleteFailed'));
+            window.globalToastManager.error(chrome.i18n.getMessage('mxkvzp'), null, { color: this.toastColor });
         }
     }
     
@@ -858,7 +891,7 @@ class StarredTab extends BaseTab {
         
         // 添加"默认文件夹"选项
         children.push({
-            label: chrome.i18n.getMessage('defaultFolder') || '默认文件夹',
+            label: chrome.i18n.getMessage('pkxvmz'),
             icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
             </svg>`,
@@ -913,11 +946,10 @@ class StarredTab extends BaseTab {
     async handleMoveToFolder(turnId, targetFolderId) {
         try {
             await this.folderManager.moveStarredToFolder(turnId, targetFolderId);
-            window.globalToastManager.success(chrome.i18n.getMessage('moved'));
+            window.globalToastManager.success(chrome.i18n.getMessage('pzvkmx'), null, { color: this.toastColor });
             await this.updateList();
         } catch (error) {
             console.error('[StarredTab] Move starred failed:', error);
-            window.globalToastManager.error(chrome.i18n.getMessage('moveFailed'));
         }
     }
     
@@ -927,11 +959,11 @@ class StarredTab extends BaseTab {
     async handleEditStarred(turnId, currentTheme) {
         try {
             const newTheme = await window.globalInputModal.show({
-                title: chrome.i18n.getMessage('editStarredContent') || '编辑收藏标题',
+                title: chrome.i18n.getMessage('vkpxzm'),
                 defaultValue: currentTheme,
-                placeholder: chrome.i18n.getMessage('themePlaceholder') || '请输入',
+                placeholder: chrome.i18n.getMessage('zmxvkp'),
                 required: true,
-                requiredMessage: chrome.i18n.getMessage('themeRequired') || '标题不能为空'
+                requiredMessage: chrome.i18n.getMessage('mzpxvk')
             });
             
             if (!newTheme || !newTheme.trim()) {
@@ -946,12 +978,14 @@ class StarredTab extends BaseTab {
                 // 更新 question 字段（原有字段名）
                 item.question = newTheme.trim();
                 await StorageAdapter.set(key, item);
-                window.globalToastManager.success(chrome.i18n.getMessage('updated'));
-                // 列表会通过 storage listener 自动刷新
+                
+                window.globalToastManager.success(chrome.i18n.getMessage('vmkxpz'), null, { color: this.toastColor });
+                
+                // 手动刷新列表（确保立即更新）
+                await this.updateList();
             }
         } catch (error) {
             console.error('[StarredTab] Edit starred failed:', error);
-            window.globalToastManager.error(chrome.i18n.getMessage('editFailed') || '编辑失败');
         }
     }
     
@@ -961,7 +995,7 @@ class StarredTab extends BaseTab {
     async handleCopy(text) {
         try {
             await navigator.clipboard.writeText(text);
-            window.globalToastManager.success(chrome.i18n.getMessage('copied'));
+            window.globalToastManager.success(chrome.i18n.getMessage('xpzmvk'), null, { color: this.toastColor });
         } catch (err) {
             // Fallback: 使用传统方法
             const textarea = document.createElement('textarea');
@@ -973,10 +1007,10 @@ class StarredTab extends BaseTab {
             
             try {
                 document.execCommand('copy');
-                window.globalToastManager.success(chrome.i18n.getMessage('copied'));
+                window.globalToastManager.success(chrome.i18n.getMessage('xpzmvk'), null, { color: this.toastColor });
             } catch (e) {
                 console.error('[StarredTab] Copy failed:', e);
-                window.globalToastManager.error(chrome.i18n.getMessage('copyFailed') || '复制失败');
+                window.globalToastManager.error(chrome.i18n.getMessage('kpzmvx'), null, { color: this.toastColor });
             } finally {
                 document.body.removeChild(textarea);
             }
@@ -993,13 +1027,27 @@ class StarredTab extends BaseTab {
             await StorageAdapter.remove(key);
             
             // 显示成功提示
-            window.globalToastManager.success(chrome.i18n.getMessage('unstarSuccess') || '已取消收藏');
+            window.globalToastManager.success(chrome.i18n.getMessage('pzmvkx'), null, { color: this.toastColor });
             
             // 自动刷新列表（通过 storage listener）
         } catch (error) {
             console.error('[StarredTab] Unstar failed:', error);
-            window.globalToastManager.error(chrome.i18n.getMessage('unstarFailed') || '取消收藏失败');
         }
+    }
+    
+    /**
+     * 递归统计文件夹及其所有子孙文件夹的收藏项总数
+     * @param {Object} folder - 文件夹数据
+     * @returns {number} 收藏项总数
+     */
+    _countAllItems(folder) {
+        let count = folder.items.length;
+        if (folder.children && folder.children.length > 0) {
+            for (const child of folder.children) {
+                count += this._countAllItems(child);  // 递归统计
+            }
+        }
+        return count;
     }
     
     /**
@@ -1039,23 +1087,10 @@ class StarredTab extends BaseTab {
     
     /**
      * 获取网站信息
+     * 使用共享的 constants.js 中的函数
      */
     getSiteInfo(url) {
-        try {
-            const urlObj = new URL(url);
-            const hostname = urlObj.hostname;
-            
-            const siteNameMap = {
-                'chatgpt.com': { name: 'ChatGPT', color: '#10a37f', logo: chrome.runtime.getURL('images/logo/chatgpt.webp') },
-                'gemini.google.com': { name: 'Gemini', color: '#1a73e8', logo: chrome.runtime.getURL('images/logo/gemini.webp') },
-                'chat.deepseek.com': { name: 'DeepSeek', color: '#0084ff', logo: chrome.runtime.getURL('images/logo/deepseek.webp') },
-                'x.com': { name: 'Grok', color: '#000000', logo: chrome.runtime.getURL('images/logo/grok.webp') }
-            };
-            
-            return siteNameMap[hostname] || { name: hostname, color: '#666', logo: null };
-        } catch (e) {
-            return { name: 'Unknown', color: '#666', logo: null };
-        }
+        return getSiteInfoByUrl(url);
     }
     
     /**

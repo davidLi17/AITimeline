@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 99999;  /* 最底层，低于主菜单和子菜单 */
+    z-index: 2147483646;  /* 高于 modal，但低于主菜单 */
     background: transparent;
     cursor: default;
     /* 阻止点击下层元素，但主菜单和子菜单的 z-index 更高，不受影响 */
@@ -19,7 +19,7 @@
 /* 下拉菜单容器 */
 .global-dropdown {
     position: fixed;
-    z-index: 100000;  /* 中间层，高于遮罩层 */
+    z-index: 2147483647;  /* 高于 modal 和遮罩层 */
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
@@ -27,7 +27,7 @@
     padding: 6px 0;
     opacity: 0;
     transform: translateY(-8px);
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     max-height: 400px;
@@ -238,17 +238,17 @@ html.dark .global-dropdown-item.has-submenu:hover .global-dropdown-item-arrow {
 
 /* 子菜单容器 */
 .global-dropdown-submenu {
-    z-index: 100001 !important;  /* 最高层，必须高于遮罩层和主菜单 */
+    z-index: 2147483647 !important;  /* 与主菜单同级，高于 modal */
 }
 
 /* 二级子菜单 */
 .global-dropdown-submenu[data-level="1"] {
-    z-index: 100001 !important;
+    z-index: 2147483647 !important;
 }
 
 /* 三级子菜单（更高的 z-index） */
 .global-dropdown-submenu[data-level="2"] {
-    z-index: 100002 !important;
+    z-index: 2147483647 !important;
 }
 
 /* 子菜单中的选项（确保继承所有样式） */

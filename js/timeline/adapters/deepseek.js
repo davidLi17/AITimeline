@@ -12,7 +12,7 @@ class DeepSeekAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('chat.deepseek.com');
+        return matchesPlatform(url, 'deepseek');
     }
 
     getUserMessageSelector() {

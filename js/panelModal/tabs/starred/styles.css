@@ -125,8 +125,8 @@
 /* Logo 容器 */
 .timeline-starred-item-logo {
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,8 +142,8 @@
 
 /* Logo 首字母（备用方案）*/
 .timeline-starred-item-initial {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -405,10 +405,11 @@
 .folder-icon svg {
     width: 100%;
     height: 100%;
+    color: #FFA726;
 }
 
-.folder-icon svg path {
-    fill: #FFA726;
+html.dark .folder-icon svg {
+    color: #FFB74D;
 }
 
 

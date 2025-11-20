@@ -11,7 +11,7 @@ class YiyanAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('yiyan.baidu.com');
+        return matchesPlatform(url, 'yiyan');
     }
 
     getUserMessageSelector() {

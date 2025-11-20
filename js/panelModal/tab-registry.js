@@ -27,9 +27,12 @@ function registerTimelineTabs(timelineManager) {
     }
     
     try {
-        // 注册 Starred Tab（收藏列表）
+        // 1. 注册 Starred Tab（收藏列表）
         const starredTab = new StarredTab(timelineManager);
         window.panelModal.registerTab(starredTab);
+        
+        // 2. 注册独立的设置 Tabs（在收藏列表之后）
+        registerSettingsTabs();
         
         console.log('[TabRegistry] Timeline tabs registered');
     } catch (error) {
@@ -37,8 +40,40 @@ function registerTimelineTabs(timelineManager) {
     }
 }
 
-// ✅ 未来可以添加其他注册函数
-// 例如：registerSettingsTabs()、registerHistoryTabs() 等
+/**
+ * 注册独立的设置 Tabs
+ * 由 PanelModal 初始化时调用（不依赖其他模块）
+ */
+function registerSettingsTabs() {
+    if (!window.panelModal) {
+        console.error('[TabRegistry] PanelModal not initialized');
+        return;
+    }
+    
+    try {
+        // 1. 注册时间轴设置 Tab（第二位）
+        if (typeof TimelineSettingsTab !== 'undefined') {
+            const timelineSettingsTab = new TimelineSettingsTab();
+            window.panelModal.registerTab(timelineSettingsTab);
+        }
+        
+        // 2. 注册智能输入框设置 Tab（第三位）
+        if (typeof SmartInputBoxTab !== 'undefined') {
+            const smartInputBoxTab = new SmartInputBoxTab();
+            window.panelModal.registerTab(smartInputBoxTab);
+        }
+        
+        // 3. 注册复制公式设置 Tab（第四位）
+        if (typeof FormulaTab !== 'undefined') {
+            const formulaTab = new FormulaTab();
+            window.panelModal.registerTab(formulaTab);
+        }
+        
+        console.log('[TabRegistry] Settings tabs registered');
+    } catch (error) {
+        console.error('[TabRegistry] Failed to register settings tabs:', error);
+    }
+}
 
 /**
  * @deprecated 使用 registerTimelineTabs 代替

@@ -11,7 +11,7 @@ class KimiAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('kimi.com');
+        return matchesPlatform(url, 'kimi');
     }
 
     getUserMessageSelector() {

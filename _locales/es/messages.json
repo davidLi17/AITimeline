@@ -1,182 +1,195 @@
 {
   "extName": {
-    "message": "AI Timeline - Línea de tiempo interactiva para conversaciones de IA, copia fácil de LaTeX"
+    "message": "AI Timeline: Copiar LaTeX, timeline, Enter nueva línea, memo prompt"
   },
   "extDescription": {
-    "message": "Transforma tus conversaciones de IA en líneas de tiempo interactivas. 🚀Vista previa rápida y saltos, 📌Marca nodos de conversación, ⭐️Marca páginas de chat, ❤️Copia fórmulas LaTeX, ¡duplica tu eficiencia!"
+    "message": "Para ChatGPT, DeepSeek, Gemini, Grok y más modelos. ¡La herramienta de colaboración de IA más potente, duplica tu eficiencia con IA!"
   },
-  "viewStarred": {
-    "message": "Ver favoritos"
+  "qwxpzm": {
+    "message": "Guardar"
   },
-  "starredList": {
-    "message": "Mis Favoritos"
+  "hkjvnr": {
+    "message": "Ver guardados"
   },
-  "close": {
-    "message": "Cerrar"
+  "zmvkpx": {
+    "message": "Guardar conversación"
   },
-  "unstarSuccess": {
-    "message": "Unstarred"
+  "bpxjkw": {
+    "message": "Quitar de guardados"
   },
-  "unstarFailed": {
-    "message": "Failed to unstar"
+  "vnkxpm": {
+    "message": "Lista de guardados"
   },
-  "starSuccess": {
-    "message": "Starred"
+  "kxpmzv": {
+    "message": "Guardado con éxito"
   },
-  "noStarredItems": {
-    "message": "Sin favoritos"
+  "pzmvkx": {
+    "message": "Eliminado de guardados"
   },
-  "copied": {
+  "jwvnkp": {
+    "message": "Sin datos"
+  },
+  "mvkxpz": {
+    "message": "Copiar"
+  },
+  "xpzmvk": {
     "message": "Copiado"
   },
-  "copyContent": {
-    "message": "Copy Content"
+  "vkpxzm": {
+    "message": "Editar"
   },
-  "copyFailed": {
-    "message": "Copy Failed"
+  "kpzmvx": {
+    "message": "Error al copiar"
   },
-  "starChat": {
-    "message": "Marcar página de chat"
-  },
-  "unstarChat": {
-    "message": "Unstar"
-  },
-  "inputChatTheme": {
-    "message": "Ingrese el título del favorito:"
-  },
-  "themePlaceholder": {
+  "zmxvkp": {
     "message": "Por favor ingrese"
   },
-  "cancel": {
+  "pxvkmz": {
     "message": "Cancelar"
   },
-  "confirm": {
+  "vkmzpx": {
     "message": "Confirmar"
   },
-  "themeRequired": {
+  "mzpxvk": {
     "message": "El tema no puede estar vacío"
   },
-  "unstar": {
-    "message": "Quitar de favoritos"
+  "xvkpmz": {
+    "message": "Renombrar"
   },
-  "viewStarredList": {
-    "message": "Ver lista de favoritos"
-  },
-  "edit": {
-    "message": "Editar contenido"
-  },
-  "editStarredContent": {
-    "message": "Editar título favorito"
-  },
-  "contentRequired": {
+  "pzmkvx": {
     "message": "El contenido no puede estar vacío"
   },
-  "dataStorageNote": {
-    "message": "Todos los datos almacenados localmente"
+  "kmvxpz": {
+    "message": "Todos los datos se almacenan localmente en tu navegador"
   },
-  "projectOpenSource": {
+  "vxpzmk": {
     "message": "Código abierto, bienvenido"
   },
-  "starOnGitHub": {
-    "message": "Star on GitHub"
+  "mkvxpz": {
+    "message": "Estrella en GitHub"
   },
-  "shareIfUseful": {
+  "xpzmkv": {
     "message": "Compartir con amigos"
   },
-  "chromeWebStore": {
-    "message": "Chrome Store"
+  "pkmzvx": {
+    "message": "Chrome Web Store"
   },
-  "copyLatexFormula": {
+  "mvxkpz": {
     "message": "Copiar fórmula LaTeX"
   },
-  "latexFormulaCopied": {
-    "message": "Copiado exitosamente"
+  "kxvpmz": {
+    "message": "Nueva carpeta"
   },
-  "createFolder": {
-    "message": "Create Folder"
+  "vpmzkx": {
+    "message": "Nueva subcarpeta"
   },
-  "createSubfolder": {
-    "message": "Create Subfolder"
+  "mzxvkp": {
+    "message": "Eliminar"
   },
-  "delete": {
-    "message": "Delete"
+  "pkxvmz": {
+    "message": "Carpeta predeterminada"
   },
-  "defaultFolder": {
-    "message": "Default Folder"
+  "xmkvpz": {
+    "message": "Crear subcarpeta en「{folderName}」"
   },
-  "createNewFolder": {
-    "message": "Create New Folder"
+  "vzkpmx": {
+    "message": "Por favor ingrese el nombre de la carpeta"
   },
-  "createSubfolderIn": {
-    "message": "Create subfolder in «{folderName}»"
+  "kmxpvz": {
+    "message": "Se requiere el nombre de la carpeta"
   },
-  "folderNamePlaceholder": {
-    "message": "Enter folder name"
+  "pxmzvk": {
+    "message": "Renombrar carpeta"
   },
-  "folderNameRequired": {
-    "message": "Folder name is required"
+  "mvzxkp": {
+    "message": "Por favor ingrese un nuevo nombre"
   },
-  "editFolderName": {
-    "message": "Edit Folder Name"
+  "kpvzmx": {
+    "message": "El nombre de la carpeta ya existe"
   },
-  "newNamePlaceholder": {
-    "message": "Enter new name"
+  "xzvkpm": {
+    "message": "Creado con éxito"
   },
-  "folderNameExists": {
-    "message": "Folder name already exists"
+  "vmkxpz": {
+    "message": "Actualizado con éxito"
   },
-  "folderCreated": {
-    "message": "Folder created successfully"
+  "zpxmkv": {
+    "message": "Carpeta no encontrada"
   },
-  "folderUpdated": {
-    "message": "Folder updated successfully"
+  "kvpzmx": {
+    "message": "Carpeta eliminada"
   },
-  "editFailed": {
-    "message": "Edit failed"
+  "mxkvzp": {
+    "message": "Error al eliminar"
   },
-  "folderNotFound": {
-    "message": "Folder not found"
+  "pzvkmx": {
+    "message": "Movido con éxito"
   },
-  "folderDeleted": {
-    "message": "Folder deleted successfully"
-  },
-  "deleteFailed": {
-    "message": "Delete failed"
-  },
-  "updated": {
-    "message": "Updated"
-  },
-  "createFolderFirst": {
-    "message": "Please create a folder first"
-  },
-  "selectTargetFolder": {
-    "message": "Select target folder (enter number):\n0. Uncategorized\n"
-  },
-  "invalidSelection": {
-    "message": "Invalid selection"
-  },
-  "moved": {
-    "message": "Moved successfully"
-  },
-  "move": {
+  "vxkpmz": {
     "message": "Mover a"
   },
-  "copyLink": {
-    "message": "Copy Link"
+  "wjxnkp": {
+    "message": "¿Eliminar carpeta「{folderName}」?\n\nEsta carpeta y sus subcarpetas contienen {count} elementos guardados. Se moverán a la carpeta predeterminada."
   },
-  "moveFailed": {
-    "message": "Move failed"
+  "qzmvkx": {
+    "message": "¿Está seguro de que desea eliminar la carpeta「{folderName}」?"
   },
-  "confirmDeleteFolder": {
-    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  "mvkzpx": {
+    "message": "Buscar en guardados..."
   },
-  "uncategorized": {
-    "message": "Uncategorized"
+  "kxzpmv": {
+    "message": "Guardar en"
   },
-  "confirmDeleteEmptyFolder": {
-    "message": "¿Está seguro de que desea eliminar la carpeta «{folderName}»?"
+  "vmzpkx": {
+    "message": "Carpeta predeterminada"
   },
-  "searchStarred": {
-    "message": "Buscar favoritos..."
+  "pkmvxz": {
+    "message": "Título"
+  },
+  "pxkmvz": {
+    "message": "Línea de tiempo"
+  },
+  "mzkvxp": {
+    "message": "Cuando esté activado, aparecerá una línea de tiempo interactiva en el lado derecho de la página de IA."
+  },
+  "vkpmzx": {
+    "message": "Usar teclas de teclado ↑ / ↓ para navegar conversaciones"
+  },
+  "xpvmkz": {
+    "message": "Cuando esté activado, use teclas de teclado ↑ / ↓ para saltar rápidamente entre registros de conversación."
+  },
+  "xmvkpz": {
+    "message": "Cuadro de entrada de conversación"
+  },
+  "kvzmxp": {
+    "message": "Usar tecla Enter del teclado para nueva línea"
+  },
+  "mxpzvk": {
+    "message": "Cuando esté activado, en el cuadro de entrada de conversación de IA, presione tecla Enter una vez para nueva línea, dos veces rápidamente para enviar mensaje."
+  },
+  "kpxvmz": {
+    "message": "Copiar fórmula"
+  },
+  "zmkvpx": {
+    "message": "Copiar fórmula LaTeX"
+  },
+  "vxkpzm": {
+    "message": "Cuando esté activado, identificar automáticamente fórmulas en la página y hacer clic para copiar en formato LaTeX."
+  },
+  "mkvzpx": {
+    "message": "Plataformas compatibles"
+  },
+  "zpkmvx": {
+    "message": "Enter para nueva línea"
+  },
+  "vxmkpz": {
+    "message": "Tecla Enter: Una vez para nueva línea, doble para enviar"
+  },
+  "mkpxvz": {
+    "message": "Cuando esté activado, en el cuadro de entrada de conversación de IA, presione tecla Enter una vez para nueva línea, dos veces rápidamente para enviar mensaje."
+  },
+  "zpvmkx": {
+    "message": "Error al guardar"
   }
 }
+

@@ -54,6 +54,10 @@ class TimelineManager {
         this.cancelLongPress = null;
         // ✅ 键盘导航
         this.onKeyDown = null;
+        // ✅ 键盘导航功能启用状态（内存缓存，默认开启）
+        this.arrowKeysNavigationEnabled = true;
+        // ✅ 平台设置（内存缓存）
+        this.platformSettings = {};
         // Timers and RAF IDs
         this.scrollRafId = null;
         this.activeChangeTimer = null;
@@ -109,7 +113,7 @@ class TimelineManager {
         this.pinned = new Set();
         this.pinnedIndexes = new Set();
         
-        // ✅ URL 到网站信息的映射字典（包含名称和颜色）
+        // ✅ URL 到网站信息的映射字典（包含名称和 logo）
         // 使用 constants.js 中的函数生成 siteNameMap
         this.siteNameMap = getSiteNameMap();
         
@@ -151,6 +155,10 @@ class TimelineManager {
         await this.loadStars();
         // ✅ 加载标记数据
         await this.loadPins();
+        // ✅ 加载键盘导航功能状态
+        await this.loadArrowKeysNavigationState();
+        // ✅ 加载平台设置
+        await this.loadPlatformSettings();
         
         // Trigger initial rendering after a short delay to ensure DOM is stable
         // This fixes the bug where nodes don't appear until scroll
@@ -295,7 +303,7 @@ class TimelineManager {
             starredBtn = document.createElement('button');
             starredBtn.className = 'timeline-starred-btn';
             starredBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 26 26"><path fill="rgb(255, 125, 3)" stroke="rgb(255, 125, 3)" stroke-width="0.5" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
-            starredBtn.setAttribute('aria-label', chrome.i18n.getMessage('viewStarred'));
+            starredBtn.setAttribute('aria-label', chrome.i18n.getMessage('hkjvnr'));
             // ✅ 初始状态：隐藏，等时间轴渲染完成后再显示
             starredBtn.style.display = 'none';
             
@@ -305,7 +313,7 @@ class TimelineManager {
                     'starred-btn',
                     'button',
                     starredBtn,
-                    chrome.i18n.getMessage('viewStarredList'),
+                    chrome.i18n.getMessage('vnkxpm'),
                     { placement: 'left' }
                 );
             });
@@ -388,7 +396,7 @@ class TimelineManager {
             starChatBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
             
             const isStarred = await this.isChatStarred();
-            const tooltipText = isStarred ? chrome.i18n.getMessage('unstarChat') : chrome.i18n.getMessage('starChat');
+            const tooltipText = isStarred ? chrome.i18n.getMessage('bpxjkw') : chrome.i18n.getMessage('zmvkpx');
             
             window.globalTooltipManager.show(
                 'star-chat-btn',
@@ -406,15 +414,30 @@ class TimelineManager {
         
         // 8. 点击事件
         starChatBtn.addEventListener('click', async () => {
-            const success = await this.toggleChatStar();
-            if (success) {
+            const result = await this.toggleChatStar();
+            
+            if (result && result.success) {
                 const nowStarred = await this.isChatStarred();
                 starChatBtn.querySelector('svg').setAttribute('fill', nowStarred ? 'rgb(255, 125, 3)' : 'none');
                 starChatBtn.querySelector('svg').setAttribute('stroke', nowStarred ? 'rgb(255, 125, 3)' : 'currentColor');
                 
                 // 更新 tooltip 文本
-                const newText = nowStarred ? chrome.i18n.getMessage('unstarChat') : chrome.i18n.getMessage('starChat');
+                const newText = nowStarred ? chrome.i18n.getMessage('bpxjkw') : chrome.i18n.getMessage('zmvkpx');
                 window.globalTooltipManager.updateContent(newText);
+                
+                // 显示 toast
+                if (window.globalToastManager) {
+                    const toastColor = {
+                        light: { backgroundColor: '#0d0d0d', textColor: '#ffffff', borderColor: '#262626' },
+                        dark: { backgroundColor: '#ffffff', textColor: '#1f2937', borderColor: '#d1d5db' }
+                    };
+                    
+                    if (result.action === 'star') {
+                        window.globalToastManager.success(chrome.i18n.getMessage('kxpmzv'), null, { color: toastColor });
+                    } else if (result.action === 'unstar') {
+                        window.globalToastManager.info(chrome.i18n.getMessage('pzmvkx'), null, { color: toastColor });
+                    }
+                }
             }
         });
         
@@ -435,11 +458,11 @@ class TimelineManager {
         }
         
         return await window.globalInputModal.show({
-            title: chrome.i18n.getMessage('editStarredContent'),
+            title: chrome.i18n.getMessage('vkpxzm'),
             defaultValue: currentText,
-            placeholder: chrome.i18n.getMessage('themePlaceholder'),
+            placeholder: chrome.i18n.getMessage('zmxvkp'),
             required: true,
-            requiredMessage: chrome.i18n.getMessage('contentRequired'),
+            requiredMessage: chrome.i18n.getMessage('pzmkvx'),
             maxLength: 100
         });
     }
@@ -470,28 +493,28 @@ class TimelineManager {
             if (existingValue) {
                 // 已收藏，取消收藏
                 await StorageAdapter.remove(key);
-                return true;
+                return { success: true, action: 'unstar' };
             } else {
                 // 未收藏，显示输入主题弹窗（带文件夹选择器）
                 if (!window.starInputModal) {
                     console.error('[TimelineManager] starInputModal not available');
-                    return false;
+                    return { success: false, action: null };
                 }
                 
                 // 获取默认主题（通过 Adapter 提供）
                 const defaultTheme = this.adapter.getDefaultChatTheme?.() || '';
                 
                 const result = await window.starInputModal.show({
-                    title: chrome.i18n.getMessage('inputChatTheme'),
+                    title: chrome.i18n.getMessage('qwxpzm'),
                     defaultValue: defaultTheme,
-                    placeholder: chrome.i18n.getMessage('themePlaceholder'),
+                    placeholder: chrome.i18n.getMessage('zmxvkp'),
                     folderManager: this.folderManager,
                     defaultFolderId: null
                 });
                 
                 if (!result) {
-                    // 用户取消了，返回 false
-                    return false;
+                    // 用户取消了
+                    return { success: false, action: 'cancelled' };
                 }
                 
                 // 添加收藏
@@ -508,11 +531,11 @@ class TimelineManager {
                 await StorageAdapter.set(key, value);
                 
                 // ✅ 不再需要手动更新收藏列表UI，StarredTab 会自动监听存储变化
-                return true;
+                return { success: true, action: 'star' };
             }
         } catch (e) {
             console.error('Failed to toggle chat star:', e);
-            return false;
+            return { success: false, action: null };
         }
     }
     
@@ -529,11 +552,11 @@ class TimelineManager {
             const defaultTheme = this.adapter.getDefaultChatTheme?.() || '';
             
         return await window.globalInputModal.show({
-            title: chrome.i18n.getMessage('inputChatTheme'),
+            title: chrome.i18n.getMessage('qwxpzm'),
             defaultValue: defaultTheme,
-            placeholder: chrome.i18n.getMessage('themePlaceholder'),
+            placeholder: chrome.i18n.getMessage('zmxvkp'),
             required: true,
-            requiredMessage: chrome.i18n.getMessage('themeRequired'),
+            requiredMessage: chrome.i18n.getMessage('mzpxvk'),
             maxLength: 100
         });
     }
@@ -996,6 +1019,16 @@ class TimelineManager {
             // 只处理上下方向键
             if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
             
+            // ✅ 检查功能是否启用
+            if (!this.arrowKeysNavigationEnabled) {
+                return; // 功能关闭，不处理
+            }
+            
+            // ✅ 检查当前平台是否启用
+            if (!this.isPlatformEnabled()) {
+                return; // 当前平台被禁用，不处理
+            }
+            
             // 阻止默认滚动行为
             e.preventDefault();
             
@@ -1254,6 +1287,16 @@ class TimelineManager {
                 
                 // ✅ 重新渲染所有图钉
                 this.renderPinMarkers();
+                
+                // ✅ 监听箭头键导航功能状态变化
+                if (changes.arrowKeysNavigationEnabled) {
+                    this.arrowKeysNavigationEnabled = changes.arrowKeysNavigationEnabled.newValue !== false;
+                }
+                
+                // ✅ 监听平台设置变化
+                if (changes.timelinePlatformSettings) {
+                    this.platformSettings = changes.timelinePlatformSettings.newValue || {};
+                }
                 
                 // 更新收藏按钮显示状态
                 this.updateStarredBtnVisibility();
@@ -1595,24 +1638,35 @@ class TimelineManager {
             starSpan.classList.add('not-starred');
         }
         
-        // ✅ 添加点击切换收藏事件（不需要悬停tooltip，点击时显示toast）
-        starSpan.addEventListener('click', (e) => {
+        // ✅ 添加点击切换收藏事件
+        starSpan.addEventListener('click', async (e) => {
             e.stopPropagation(); // 阻止事件冒泡
             const turnId = starSpan.dataset.targetTurnId;
-            this.toggleStar(turnId); // 切换收藏状态
             
-            // 立即更新样式类
-            const nowStarred = this.starred.has(turnId);
+            const result = await this.toggleStar(turnId); // 切换收藏状态（异步，可能显示modal）
             
-            if (nowStarred) {
-                starSpan.classList.remove('not-starred');
-                // ✅ 显示收藏成功toast
-                window.globalToastManager.success(chrome.i18n.getMessage('starSuccess'), starSpan);
-            } else {
-                starSpan.classList.add('not-starred');
-                // ✅ 显示取消收藏toast
-                window.globalToastManager.info(chrome.i18n.getMessage('unstarSuccess'), starSpan);
+            // 根据操作结果显示 toast 和更新样式
+            if (result && result.success) {
+                const toastColor = {
+                    light: { backgroundColor: '#0d0d0d', textColor: '#ffffff', borderColor: '#262626' },
+                    dark: { backgroundColor: '#ffffff', textColor: '#1f2937', borderColor: '#d1d5db' }
+                };
+                
+                if (result.action === 'star') {
+                    // 添加收藏成功
+                    starSpan.classList.remove('not-starred');
+                    if (window.globalToastManager) {
+                        window.globalToastManager.success(chrome.i18n.getMessage('kxpmzv'), null, { color: toastColor });
+                    }
+                } else if (result.action === 'unstar') {
+                    // 取消收藏成功
+                    starSpan.classList.add('not-starred');
+                    if (window.globalToastManager) {
+                        window.globalToastManager.info(chrome.i18n.getMessage('pzmvkx'), null, { color: toastColor });
+                    }
+                }
             }
+            // 如果用户取消了操作（action === 'cancelled'），不显示 toast
         });
         
         // 组装
@@ -2386,6 +2440,55 @@ class TimelineManager {
     }
 
     /**
+     * ✅ 加载箭头键导航功能状态
+     */
+    async loadArrowKeysNavigationState() {
+        try {
+            const result = await chrome.storage.local.get('arrowKeysNavigationEnabled');
+            // 默认开启（!== false）
+            this.arrowKeysNavigationEnabled = result.arrowKeysNavigationEnabled !== false;
+        } catch (e) {
+            console.error('[Timeline] Failed to load arrow keys navigation state:', e);
+            // 读取失败，默认开启
+            this.arrowKeysNavigationEnabled = true;
+        }
+    }
+
+    /**
+     * ✅ 加载平台设置
+     */
+    async loadPlatformSettings() {
+        try {
+            const result = await chrome.storage.local.get('timelinePlatformSettings');
+            this.platformSettings = result.timelinePlatformSettings || {};
+        } catch (e) {
+            console.error('[Timeline] Failed to load platform settings:', e);
+            this.platformSettings = {};
+        }
+    }
+
+    /**
+     * ✅ 检查当前平台是否启用箭头键导航
+     */
+    isPlatformEnabled() {
+        try {
+            // 获取当前平台信息
+            const platform = getCurrentPlatform();
+            if (!platform) return true; // 未知平台，默认启用
+            
+            // ✅ 首先检查平台是否支持时间轴功能
+            if (platform.features?.timeline !== true) {
+                return false; // 平台不支持该功能
+            }
+            
+            // 从缓存中检查（默认启用）
+            return this.platformSettings[platform.id] !== false;
+        } catch (e) {
+            return true; // 出错默认启用
+        }
+    }
+
+    /**
      * ✅ 截断文本到指定长度，超出添加 "..."
      * 
      * 用途：
@@ -2452,7 +2555,7 @@ class TimelineManager {
         }
     }
     
-    // ✅ 从 URL 获取网站信息（名称和颜色）
+    // ✅ 从 URL 获取网站信息
     getSiteInfoFromUrl(url) {
         try {
             // 提取域名
@@ -2471,17 +2574,17 @@ class TimelineManager {
                 }
             }
             
-            // 如果没有匹配，返回域名的主要部分和默认颜色
+            // 如果没有匹配，返回域名的主要部分
             const parts = hostname.split('.');
             if (parts.length >= 2) {
                 return { 
-                    name: parts[parts.length - 2], 
-                    color: '#6B7280' // 默认灰色
+                    name: parts[parts.length - 2],
+                    logo: null
                 };
             }
-            return { name: '未知网站', color: '#6B7280' };
+            return { name: '未知网站', logo: null };
         } catch {
-            return { name: '未知网站', color: '#6B7280' };
+            return { name: '未知网站', logo: null };
         }
     }
     
@@ -2490,11 +2593,6 @@ class TimelineManager {
         return this.getSiteInfoFromUrl(url).name;
     }
     
-    // ✅ 从 URL 获取网站颜色
-    getSiteColorFromUrl(url) {
-        return this.getSiteInfoFromUrl(url).color;
-    }
-
     async removeStarItem(index) {
         try {
             const url = location.href.replace(/^https?:\/\//, '');
@@ -2507,13 +2605,13 @@ class TimelineManager {
 
     async toggleStar(turnId) {
         const id = String(turnId || '');
-        if (!id) return;
+        if (!id) return { success: false, action: null };
         
         const m = this.markerMap.get(id);
-        if (!m) return;
+        if (!m) return { success: false, action: null };
         
         const index = this.markers.indexOf(m);
-        if (index === -1) return;
+        if (index === -1) return { success: false, action: null };
         
         // 切换收藏状态
         if (this.starred.has(id)) {
@@ -2521,46 +2619,57 @@ class TimelineManager {
             this.starred.delete(id);
             this.starredIndexes.delete(index);
             this.removeStarItem(index);
+            
+            m.starred = false;
+            
+            // ✅ 更新圆点样式
+            if (m.dotElement) {
+                try {
+                    m.dotElement.classList.remove('starred');
+                    this._updateTooltipStarIfVisible(m.dotElement, id);
+                } catch {}
+            }
+            
+            this.updateStarredBtnVisibility();
+            return { success: true, action: 'unstar' };
         } else {
             // 添加收藏 - 显示弹窗输入主题和选择文件夹
             if (!window.starInputModal) {
                 console.error('[TimelineManager] starInputModal not available');
-                return;
+                return { success: false, action: null };
             }
             
             const result = await window.starInputModal.show({
-                title: chrome.i18n.getMessage('inputChatTheme'),
+                title: chrome.i18n.getMessage('qwxpzm'),
                 defaultValue: m.summary,
-                placeholder: chrome.i18n.getMessage('themePlaceholder'),
+                placeholder: chrome.i18n.getMessage('zmxvkp'),
                 folderManager: this.folderManager,
                 defaultFolderId: null
             });
             
             if (!result) {
                 // 用户取消了
-                return;
+                return { success: false, action: 'cancelled' };
             }
             
             this.starred.add(id);
             this.starredIndexes.add(index);
             // 使用用户输入的主题和选择的文件夹保存
             this.saveStarItemWithFolder(index, result.value, result.folderId);
+            
+            m.starred = true;
+            
+            // ✅ 更新圆点样式
+            if (m.dotElement) {
+                try {
+                    m.dotElement.classList.add('starred');
+                    this._updateTooltipStarIfVisible(m.dotElement, id);
+                } catch {}
+            }
+            
+            this.updateStarredBtnVisibility();
+            return { success: true, action: 'star' };
         }
-        
-        m.starred = this.starred.has(id);
-        
-        // ✅ 更新圆点样式：添加或移除 starred 类（变橙金色）
-        if (m.dotElement) {
-            try {
-                m.dotElement.classList.toggle('starred', this.starred.has(id));
-                // ✅ 更新 tooltip 中的星标状态（如果正在显示）
-                this._updateTooltipStarIfVisible(m.dotElement, id);
-            } catch {}
-        }
-        
-        // ✅ 不再需要手动更新收藏列表UI，StarredTab 会自动监听存储变化
-        // 更新收藏按钮显示状态
-        this.updateStarredBtnVisibility();
     }
     
     // 获取所有收藏的消息（所有网站的收藏，不限于当前网站）
@@ -2593,7 +2702,6 @@ class TimelineManager {
                             url: fullUrl,
                             urlWithoutProtocol: urlWithoutProtocol,
                             siteName: siteInfo.name,
-                            siteColor: siteInfo.color,
                             timestamp: data.timestamp || 0,
                             isCurrentPage: urlWithoutProtocol === location.href.replace(/^https?:\/\//, ''),
                             isFullChat: true  // 标识这是整个聊天
@@ -2607,7 +2715,6 @@ class TimelineManager {
                             url: fullUrl,
                             urlWithoutProtocol: urlWithoutProtocol,
                             siteName: siteInfo.name,
-                            siteColor: siteInfo.color,
                             timestamp: data.timestamp || 0,
                             isCurrentPage: urlWithoutProtocol === location.href.replace(/^https?:\/\//, ''),
                             isFullChat: false  // 标识这是单个问题
@@ -2657,7 +2764,7 @@ class TimelineManager {
     // ✅ 显示复制成功的反馈提示（使用全局 Toast 管理器）
     showCopyFeedback(targetElement) {
         window.globalToastManager.success(
-            chrome.i18n.getMessage('copied'),
+            chrome.i18n.getMessage('xpzmvk'),
             targetElement
         );
     }

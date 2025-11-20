@@ -1,197 +1,191 @@
 {
   "extName": {
-    "message": "AI Timeline - Interactive timeline for AI conversations, easy LaTeX copying"
+    "message": "AI Timeline: Copy LaTeX, Timeline, Enter for Newline, Prompt Memo"
   },
   "extDescription": {
-    "message": "Transform your AI conversations into interactive timelines. 🚀Quick preview and jump, 📌Mark conversation nodes, ⭐️Star chat pages, ❤️Copy LaTeX formulas, double your efficiency!"
+    "message": "For ChatGPT, DeepSeek, Gemini, Grok and more models. The most powerful AI collaboration tool, double your AI efficiency!"
   },
-  "viewStarred": {
-    "message": "View starred"
+  "qwxpzm": {
+    "message": "Star"
   },
-  "starredList": {
+  "hkjvnr": {
+    "message": "View Starred"
+  },
+  "zmvkpx": {
+    "message": "Star Conversation"
+  },
+  "bpxjkw": {
+    "message": "Unstar"
+  },
+  "vnkxpm": {
     "message": "My Starred"
   },
-  "close": {
-    "message": "Close"
-  },
-  "starSuccess": {
+  "kxpmzv": {
     "message": "Starred"
   },
-  "unstarSuccess": {
+  "pzmvkx": {
     "message": "Unstarred"
   },
-  "unstarFailed": {
-    "message": "Failed to unstar"
+  "jwvnkp": {
+    "message": "No data"
   },
-  "starChat": {
-    "message": "Star chat page"
+  "mvkxpz": {
+    "message": "Copy"
   },
-  "unstarChat": {
-    "message": "Unstar"
-  },
-  "noStarredItems": {
-    "message": "No starred items"
-  },
-  "copied": {
+  "xpzmvk": {
     "message": "Copied"
   },
-  "copyContent": {
-    "message": "Copy Content"
+  "vkpxzm": {
+    "message": "Edit"
   },
-  "copyFailed": {
-    "message": "Copy Failed"
+  "kpzmvx": {
+    "message": "Copy failed"
   },
-  "inputChatTheme": {
-    "message": "Enter starred title:"
+  "zmxvkp": {
+    "message": "Enter"
   },
-  "themePlaceholder": {
-    "message": "Please enter"
-  },
-  "cancel": {
+  "pxvkmz": {
     "message": "Cancel"
   },
-  "confirm": {
+  "vkmzpx": {
     "message": "Confirm"
   },
-  "themeRequired": {
+  "mzpxvk": {
     "message": "Theme cannot be empty"
   },
-  "unstar": {
-    "message": "Unstar"
+  "xvkpmz": {
+    "message": "Rename"
   },
-  "viewStarredList": {
-    "message": "View starred list"
-  },
-  "edit": {
-    "message": "Edit Content"
-  },
-  "renameFolder": {
-    "message": "Rename Folder"
-  },
-  "actions": {
-    "message": "Actions"
-  },
-  "editStarredContent": {
-    "message": "Edit starred title"
-  },
-  "contentRequired": {
+  "pzmkvx": {
     "message": "Content cannot be empty"
   },
-  "dataStorageNote": {
+  "kmvxpz": {
     "message": "All data stored locally in your browser"
   },
-  "projectOpenSource": {
+  "vxpzmk": {
     "message": "Open source, welcome"
   },
-  "starOnGitHub": {
+  "mkvxpz": {
     "message": "Star on GitHub"
   },
-  "shareIfUseful": {
+  "xpzmkv": {
     "message": "Share with friends"
   },
-  "chromeWebStore": {
-    "message": "Chrome Store"
+  "pkmzvx": {
+    "message": "Chrome Web Store"
   },
-  "copyLatexFormula": {
-    "message": "Copy LaTeX formula"
+  "mvxkpz": {
+    "message": "Copy LaTeX Formula"
   },
-  "latexFormulaCopied": {
-    "message": "Copied successfully"
+  "kxvpmz": {
+    "message": "New Folder"
   },
-  "createFolder": {
-    "message": "Create Folder"
+  "vpmzkx": {
+    "message": "New Subfolder"
   },
-  "createSubfolder": {
-    "message": "Create Subfolder"
-  },
-  "delete": {
+  "mzxvkp": {
     "message": "Delete"
   },
-  "defaultFolder": {
+  "pkxvmz": {
     "message": "Default Folder"
   },
-  "createNewFolder": {
-    "message": "Create New Folder"
+  "xmkvpz": {
+    "message": "New subfolder in「{folderName}」"
   },
-  "createSubfolderIn": {
-    "message": "Create subfolder in «{folderName}»"
-  },
-  "folderNamePlaceholder": {
+  "vzkpmx": {
     "message": "Enter folder name"
   },
-  "folderNameRequired": {
-    "message": "Folder name is required"
+  "kmxpvz": {
+    "message": "Folder name required"
   },
-  "editFolderName": {
-    "message": "Edit Folder Name"
+  "pxmzvk": {
+    "message": "Rename Folder"
   },
-  "newNamePlaceholder": {
+  "mvzxkp": {
     "message": "Enter new name"
   },
-  "folderNameExists": {
-    "message": "Folder name already exists"
+  "kpvzmx": {
+    "message": "Folder name exists"
   },
-  "folderCreated": {
-    "message": "Folder created successfully"
+  "xzvkpm": {
+    "message": "Created"
   },
-  "folderUpdated": {
-    "message": "Folder updated successfully"
-  },
-  "editFailed": {
-    "message": "Edit failed"
-  },
-  "folderNotFound": {
-    "message": "Folder not found"
-  },
-  "folderDeleted": {
-    "message": "Folder deleted successfully"
-  },
-  "deleteFailed": {
-    "message": "Delete failed"
-  },
-  "updated": {
+  "vmkxpz": {
     "message": "Updated"
   },
-  "createFolderFirst": {
-    "message": "Please create a folder first"
+  "zpxmkv": {
+    "message": "Folder not found"
   },
-  "selectTargetFolder": {
-    "message": "Select target folder (enter number):\n0. Uncategorized\n"
+  "kvpzmx": {
+    "message": "Folder deleted"
   },
-  "invalidSelection": {
-    "message": "Invalid selection"
+  "mxkvzp": {
+    "message": "Delete failed"
   },
-  "moved": {
-    "message": "Moved successfully"
+  "pzvkmx": {
+    "message": "Moved"
   },
-  "move": {
+  "vxkpmz": {
     "message": "Move to"
   },
-  "copyLink": {
-    "message": "Copy Link"
+  "wjxnkp": {
+    "message": "Delete folder「{folderName}」?\n\nThis folder and its subfolders contain {count} starred items. These items will be moved to the default folder."
   },
-  "moveFailed": {
-    "message": "Move failed"
+  "qzmvkx": {
+    "message": "Delete folder「{folderName}」?"
   },
-  "confirmDeleteFolder": {
-    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
-  },
-  "confirmDeleteEmptyFolder": {
-    "message": "Are you sure you want to delete folder «{folderName}»?"
-  },
-  "uncategorized": {
-    "message": "Uncategorized"
-  },
-  "searchStarred": {
+  "mvkzpx": {
     "message": "Search starred..."
   },
-  "selectFolder": {
-    "message": "Select Folder"
+  "kxzpmv": {
+    "message": "Save to"
   },
-  "noFolderSelected": {
-    "message": "None"
+  "vmzpkx": {
+    "message": "Default Folder"
   },
-  "starTitle": {
+  "pkmvxz": {
     "message": "Title"
+  },
+  "pxkmvz": {
+    "message": "Timeline"
+  },
+  "mzkvxp": {
+    "message": "When enabled, an interactive timeline will appear on the right side of the AI page."
+  },
+  "vkpmzx": {
+    "message": "Use Keyboard ↑ / ↓ Keys to Navigate Conversations"
+  },
+  "xpvmkz": {
+    "message": "When enabled, use keyboard ↑ / ↓ keys to quickly jump between conversation records."
+  },
+  "xmvkpz": {
+    "message": "Conversation Input Box"
+  },
+  "kvzmxp": {
+    "message": "Use Keyboard Enter Key for New Line"
+  },
+  "mxpzvk": {
+    "message": "When enabled, in the AI conversation input box, press Enter key once for new line, double-press Enter key quickly to send message."
+  },
+  "kpxvmz": {
+    "message": "Copy Formula"
+  },
+  "zmkvpx": {
+    "message": "Copy LaTeX Formula"
+  },
+  "vxkpzm": {
+    "message": "When enabled, automatically identify formulas on the page and click to copy as LaTeX format."
+  },
+  "mkvzpx": {
+    "message": "Supported Platforms"
+  },
+  "zpkmvx": {
+    "message": "Press Enter for New Line"
+  },
+  "vxmkpz": {
+    "message": "Enter key: Press once for new line, double-press to send"
+  },
+  "mkpxvz": {
+    "message": "When enabled, in the AI conversation input box, press Enter key once for new line, double-press Enter key quickly to send message."
   }
 }

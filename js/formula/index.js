@@ -17,7 +17,7 @@
     /**
      * 初始化公式复制功能
      */
-    function initFormulaModule() {
+    async function initFormulaModule() {
         // 避免重复初始化
         if (globalFormulaManager) {
             console.log('[Formula] Already initialized');
@@ -36,9 +36,9 @@
         }
         
         try {
-            // 创建并初始化 FormulaManager
+            // 创建并初始化 FormulaManager（内部会检查是否启用）
             globalFormulaManager = new FormulaManager();
-            globalFormulaManager.init();
+            await globalFormulaManager.init();
             
             console.log('[Formula] Initialized successfully');
         } catch (error) {
@@ -61,6 +61,38 @@
         }
     }
     
+    /**
+     * ✅ 监听功能开关变化，动态启用/禁用公式复制功能
+     */
+    function setupStorageListener() {
+        chrome.storage.onChanged.addListener((changes, areaName) => {
+            if (areaName !== 'local') return;
+            
+            if (changes.formulaEnabled) {
+                const isEnabled = changes.formulaEnabled.newValue !== false;
+                
+                if (isEnabled) {
+                    // 从禁用到启用
+                    if (!globalFormulaManager) {
+                        // 如果没有实例，重新初始化
+                        console.log('[Formula] Feature enabled, initializing...');
+                        initFormulaModule();
+                    } else {
+                        // 如果已有实例，强制重新扫描（处理关闭期间生成的新公式）
+                        console.log('[Formula] Feature re-enabled, rescanning...');
+                        globalFormulaManager.rescan();
+                    }
+                } else {
+                    // 从启用到禁用：销毁
+                    if (globalFormulaManager) {
+                        console.log('[Formula] Feature disabled, destroying...');
+                        destroyFormulaModule();
+                    }
+                }
+            }
+        });
+    }
+    
     // 页面加载完成后自动初始化
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initFormulaModule);
@@ -68,6 +100,9 @@
         // 如果已经加载完成，立即初始化
         initFormulaModule();
     }
+    
+    // ✅ 设置 Storage 监听器
+    setupStorageListener();
     
     // 页面卸载时清理
     window.addEventListener('beforeunload', destroyFormulaModule);

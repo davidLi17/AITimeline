@@ -11,7 +11,7 @@ class TongyiAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('tongyi.com');
+        return matchesPlatform(url, 'tongyi');
     }
 
     getUserMessageSelector() {

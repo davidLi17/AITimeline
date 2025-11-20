@@ -11,7 +11,7 @@ class YuanbaoAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('yuanbao.tencent.com');
+        return matchesPlatform(url, 'yuanbao');
     }
 
     getUserMessageSelector() {

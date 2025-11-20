@@ -1,182 +1,195 @@
 {
   "extName": {
-    "message": "AI Timeline - Dòng thời gian tương tác cho các cuộc trò chuyện AI, sao chép LaTeX dễ dàng"
+    "message": "AI Timeline: Sao chép LaTeX, timeline, Enter xuống dòng, memo prompt"
   },
   "extDescription": {
-    "message": "Chuyển đổi các cuộc trò chuyện AI của bạn thành dòng thời gian tương tác. 🚀Xem trước nhanh và điều hướng, 📌Đánh dấu các nút hội thoại, ⭐️Đánh dấu các trang trò chuyện, ❤️Sao chép công thức LaTeX, tăng gấp đôi hiệu suất!"
+    "message": "Cho ChatGPT, DeepSeek, Gemini, Grok và nhiều mô hình khác. Công cụ cộng tác AI mạnh nhất, tăng gấp đôi hiệu quả làm việc với AI!"
   },
-  "viewStarred": {
-    "message": "Xem yêu thích"
+  "qwxpzm": {
+    "message": "Lưu"
   },
-  "starredList": {
-    "message": "Danh Sách Yêu Thích"
+  "hkjvnr": {
+    "message": "Xem đã lưu"
   },
-  "close": {
-    "message": "Đóng"
+  "zmvkpx": {
+    "message": "Lưu cuộc trò chuyện"
   },
-  "unstarSuccess": {
-    "message": "Unstarred"
-  },
-  "unstarFailed": {
-    "message": "Failed to unstar"
-  },
-  "starSuccess": {
-    "message": "Starred"
-  },
-  "noStarredItems": {
-    "message": "Không có mục yêu thích"
-  },
-  "copied": {
-    "message": "Đã sao chép"
-  },
-  "copyContent": {
-    "message": "Copy Content"
-  },
-  "copyFailed": {
-    "message": "Copy Failed"
-  },
-  "starChat": {
-    "message": "Đánh dấu trang trò chuyện"
-  },
-  "unstarChat": {
-    "message": "Unstar"
-  },
-  "inputChatTheme": {
-    "message": "Nhập tiêu đề yêu thích:"
-  },
-  "themePlaceholder": {
-    "message": "Nhập"
-  },
-  "cancel": {
-    "message": "Hủy"
-  },
-  "confirm": {
-    "message": "Xác nhận"
-  },
-  "themeRequired": {
-    "message": "Chủ đề không được để trống"
-  },
-  "unstar": {
+  "bpxjkw": {
     "message": "Bỏ lưu"
   },
-  "viewStarredList": {
-    "message": "Xem danh sách yêu thích"
+  "vnkxpm": {
+    "message": "Danh sách đã lưu"
   },
-  "edit": {
-    "message": "Chỉnh sửa nội dung"
+  "kxpmzv": {
+    "message": "Lưu thành công"
   },
-  "editStarredContent": {
-    "message": "Chỉnh sửa tiêu đề yêu thích"
+  "pzmvkx": {
+    "message": "Đã bỏ lưu"
   },
-  "contentRequired": {
+  "jwvnkp": {
+    "message": "Không có dữ liệu"
+  },
+  "mvkxpz": {
+    "message": "Sao chép"
+  },
+  "xpzmvk": {
+    "message": "Đã sao chép"
+  },
+  "vkpxzm": {
+    "message": "Chỉnh sửa"
+  },
+  "kpzmvx": {
+    "message": "Sao chép thất bại"
+  },
+  "zmxvkp": {
+    "message": "Vui lòng nhập"
+  },
+  "pxvkmz": {
+    "message": "Hủy"
+  },
+  "vkmzpx": {
+    "message": "Xác nhận"
+  },
+  "mzpxvk": {
+    "message": "Chủ đề không được để trống"
+  },
+  "xvkpmz": {
+    "message": "Đổi tên"
+  },
+  "pzmkvx": {
     "message": "Nội dung không được để trống"
   },
-  "dataStorageNote": {
-    "message": "Tất cả dữ liệu lưu cục bộ"
+  "kmvxpz": {
+    "message": "Tất cả dữ liệu được lưu trữ cục bộ trong trình duyệt của bạn"
   },
-  "projectOpenSource": {
+  "vxpzmk": {
     "message": "Mã nguồn mở, chào mừng"
   },
-  "starOnGitHub": {
-    "message": "Star on GitHub"
+  "mkvxpz": {
+    "message": "Gắn sao trên GitHub"
   },
-  "shareIfUseful": {
+  "xpzmkv": {
     "message": "Chia sẻ với bạn bè"
   },
-  "chromeWebStore": {
-    "message": "Chrome Store"
+  "pkmzvx": {
+    "message": "Cửa hàng Chrome"
   },
-  "copyLatexFormula": {
+  "mvxkpz": {
     "message": "Sao chép công thức LaTeX"
   },
-  "latexFormulaCopied": {
-    "message": "Sao chép thành công"
+  "kxvpmz": {
+    "message": "Thư mục mới"
   },
-  "createFolder": {
-    "message": "Create Folder"
+  "vpmzkx": {
+    "message": "Thư mục con mới"
   },
-  "createSubfolder": {
-    "message": "Create Subfolder"
+  "mzxvkp": {
+    "message": "Xóa"
   },
-  "delete": {
-    "message": "Delete"
+  "pkxvmz": {
+    "message": "Thư mục mặc định"
   },
-  "defaultFolder": {
-    "message": "Default Folder"
+  "xmkvpz": {
+    "message": "Tạo thư mục con trong「{folderName}」"
   },
-  "createNewFolder": {
-    "message": "Create New Folder"
+  "vzkpmx": {
+    "message": "Vui lòng nhập tên thư mục"
   },
-  "createSubfolderIn": {
-    "message": "Create subfolder in «{folderName}»"
+  "kmxpvz": {
+    "message": "Tên thư mục là bắt buộc"
   },
-  "folderNamePlaceholder": {
-    "message": "Enter folder name"
+  "pxmzvk": {
+    "message": "Đổi tên thư mục"
   },
-  "folderNameRequired": {
-    "message": "Folder name is required"
+  "mvzxkp": {
+    "message": "Vui lòng nhập tên mới"
   },
-  "editFolderName": {
-    "message": "Edit Folder Name"
+  "kpvzmx": {
+    "message": "Tên thư mục đã tồn tại"
   },
-  "newNamePlaceholder": {
-    "message": "Enter new name"
+  "xzvkpm": {
+    "message": "Tạo thành công"
   },
-  "folderNameExists": {
-    "message": "Folder name already exists"
+  "vmkxpz": {
+    "message": "Cập nhật thành công"
   },
-  "folderCreated": {
-    "message": "Folder created successfully"
+  "zpxmkv": {
+    "message": "Không tìm thấy thư mục"
   },
-  "folderUpdated": {
-    "message": "Folder updated successfully"
+  "kvpzmx": {
+    "message": "Đã xóa thư mục"
   },
-  "editFailed": {
-    "message": "Edit failed"
+  "mxkvzp": {
+    "message": "Xóa thất bại"
   },
-  "folderNotFound": {
-    "message": "Folder not found"
+  "pzvkmx": {
+    "message": "Di chuyển thành công"
   },
-  "folderDeleted": {
-    "message": "Folder deleted successfully"
-  },
-  "deleteFailed": {
-    "message": "Delete failed"
-  },
-  "updated": {
-    "message": "Updated"
-  },
-  "createFolderFirst": {
-    "message": "Please create a folder first"
-  },
-  "selectTargetFolder": {
-    "message": "Select target folder (enter number):\n0. Uncategorized\n"
-  },
-  "invalidSelection": {
-    "message": "Invalid selection"
-  },
-  "moved": {
-    "message": "Moved successfully"
-  },
-  "move": {
+  "vxkpmz": {
     "message": "Di chuyển đến"
   },
-  "copyLink": {
-    "message": "Copy Link"
+  "wjxnkp": {
+    "message": "Xóa thư mục「{folderName}」?\n\nThư mục này và các thư mục con chứa {count} mục đã lưu. Chúng sẽ được chuyển đến thư mục mặc định."
   },
-  "moveFailed": {
-    "message": "Move failed"
+  "qzmvkx": {
+    "message": "Bạn có chắc chắn muốn xóa thư mục「{folderName}」?"
   },
-  "confirmDeleteFolder": {
-    "message": "Delete folder «{folderName}»?\n\n{count} starred items in this folder and its subfolders will be moved to Uncategorized."
+  "mvkzpx": {
+    "message": "Tìm kiếm đã lưu..."
   },
-  "uncategorized": {
-    "message": "Uncategorized"
+  "kxzpmv": {
+    "message": "Lưu vào"
   },
-  "confirmDeleteEmptyFolder": {
-    "message": "Bạn có chắc chắn muốn xóa thư mục «{folderName}» không?"
+  "vmzpkx": {
+    "message": "Thư mục mặc định"
   },
-  "searchStarred": {
-    "message": "Tìm kiếm yêu thích..."
+  "pkmvxz": {
+    "message": "Tiêu đề"
+  },
+  "pxkmvz": {
+    "message": "Dòng thời gian"
+  },
+  "mzkvxp": {
+    "message": "Khi bật, dòng thời gian tương tác sẽ xuất hiện ở phía bên phải của trang AI."
+  },
+  "vkpmzx": {
+    "message": "Sử dụng phím bàn phím ↑ / ↓ để điều hướng cuộc trò chuyện"
+  },
+  "xpvmkz": {
+    "message": "Khi bật, sử dụng phím bàn phím ↑ / ↓ để nhảy nhanh giữa các bản ghi cuộc trò chuyện."
+  },
+  "xmvkpz": {
+    "message": "Hộp nhập cuộc trò chuyện"
+  },
+  "kvzmxp": {
+    "message": "Sử dụng phím Enter trên bàn phím để xuống dòng"
+  },
+  "mxpzvk": {
+    "message": "Khi bật, trong hộp nhập cuộc trò chuyện AI, nhấn phím Enter một lần để xuống dòng, hai lần nhanh để gửi tin nhắn."
+  },
+  "kpxvmz": {
+    "message": "Sao chép công thức"
+  },
+  "zmkvpx": {
+    "message": "Sao chép công thức LaTeX"
+  },
+  "vxkpzm": {
+    "message": "Khi bật, tự động nhận dạng công thức trên trang và nhấp để sao chép sang định dạng LaTeX."
+  },
+  "mkvzpx": {
+    "message": "Nền tảng được hỗ trợ"
+  },
+  "zpkmvx": {
+    "message": "Enter để xuống dòng"
+  },
+  "vxmkpz": {
+    "message": "Phím Enter: Nhấn một lần để xuống dòng, hai lần để gửi"
+  },
+  "mkpxvz": {
+    "message": "Khi bật, trong hộp nhập cuộc trò chuyện AI, nhấn phím Enter một lần để xuống dòng, hai lần nhanh để gửi tin nhắn."
+  },
+  "zpvmkx": {
+    "message": "Lưu thất bại"
   }
 }
+

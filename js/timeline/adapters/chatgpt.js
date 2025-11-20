@@ -14,7 +14,7 @@ class ChatGPTAdapter extends SiteAdapter {
     }
 
     matches(url) {
-        return url.includes('chatgpt.com') || url.includes('chat.openai.com');
+        return matchesPlatform(url, 'chatgpt');
     }
 
     getUserMessageSelector() {

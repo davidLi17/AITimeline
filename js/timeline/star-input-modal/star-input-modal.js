@@ -89,12 +89,12 @@ class StarInputModal {
             const config = {
                 title: options.title,
                 defaultValue: options.defaultValue || '',
-                placeholder: options.placeholder || chrome.i18n.getMessage('themePlaceholder') || '请输入',
+                placeholder: options.placeholder || chrome.i18n.getMessage('zmxvkp'),
                 required: options.required !== undefined ? options.required : true,
-                requiredMessage: options.requiredMessage || chrome.i18n.getMessage('themeRequired') || '内容不能为空',
+                requiredMessage: options.requiredMessage || chrome.i18n.getMessage('mzpxvk'),
                 maxLength: options.maxLength || this.config.defaultMaxLength,
-                confirmText: options.confirmText || chrome.i18n.getMessage('confirm') || '确定',
-                cancelText: options.cancelText || chrome.i18n.getMessage('cancel') || '取消',
+                confirmText: options.confirmText || chrome.i18n.getMessage('vkmzpx'),
+                cancelText: options.cancelText || chrome.i18n.getMessage('pxvkmz'),
                 folderManager: options.folderManager,
                 defaultFolderId: options.defaultFolderId || null
             };
@@ -157,10 +157,10 @@ class StarInputModal {
                 <div class="star-input-modal-body">
                     <div class="star-input-modal-row">
                         <label class="star-input-modal-label">
-                            ${chrome.i18n.getMessage('selectFolder') || '选择文件夹'}
+                            ${chrome.i18n.getMessage('kxzpmv')}
                         </label>
                         <div class="star-input-modal-folder-selector">
-                            <span class="star-input-modal-folder-text">${chrome.i18n.getMessage('noFolderSelected') || '不选择'}</span>
+                            <span class="star-input-modal-folder-text">${chrome.i18n.getMessage('vmzpkx')}</span>
                             <svg class="star-input-modal-folder-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
@@ -168,16 +168,15 @@ class StarInputModal {
                     </div>
                     <div class="star-input-modal-row">
                         <label class="star-input-modal-label">
-                            ${chrome.i18n.getMessage('starTitle') || '标题'}
+                            ${chrome.i18n.getMessage('pkmvxz')}
                         </label>
-                        <input 
-                            type="text" 
+                        <textarea 
                             class="star-input-modal-input" 
                             placeholder="${escapeHTML(config.placeholder)}" 
-                            value="${escapeHTML(config.defaultValue)}" 
                             maxlength="${config.maxLength}"
                             autocomplete="off"
-                        />
+                            rows="3"
+                        >${escapeHTML(config.defaultValue)}</textarea>
                     </div>
                 </div>
                 <div class="star-input-modal-footer">
@@ -220,17 +219,16 @@ class StarInputModal {
                 const folders = await config.folderManager.getFolders();
                 const items = [];
                 
-                // "不选择"选项
+                // "默认文件夹"选项
                 items.push({
-                    label: chrome.i18n.getMessage('noFolderSelected') || '不选择',
+                    label: chrome.i18n.getMessage('vmzpkx'),
                     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
                     </svg>`,
                     onClick: () => {
                         selectedFolderId = null;
                         selectedFolderPath = '';
-                        folderText.textContent = chrome.i18n.getMessage('noFolderSelected') || '不选择';
+                        folderText.textContent = chrome.i18n.getMessage('vmzpkx');
                     }
                 });
                 
@@ -258,9 +256,12 @@ class StarInputModal {
                         }
                     };
                     
-                    // 如果有子文件夹，添加到 children
-                    if (childFolders.length > 0) {
-                        folderItem.children = childFolders.map(childFolder => ({
+                    // 构建子菜单
+                    const subItems = [];
+                    
+                    // 添加子文件夹
+                    childFolders.forEach(childFolder => {
+                        subItems.push({
                             label: childFolder.name,
                             icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
@@ -270,11 +271,55 @@ class StarInputModal {
                                 selectedFolderPath = `${rootFolder.name} / ${childFolder.name}`;
                                 folderText.textContent = selectedFolderPath;
                             }
-                        }));
+                        });
+                    });
+                    
+                    // 添加"新建子文件夹"选项
+                    // 只有当有子文件夹时才添加分隔线
+                    if (childFolders.length > 0) {
+                        subItems.push({ type: 'divider' });
                     }
+                    subItems.push({
+                        label: chrome.i18n.getMessage('vpmzkx'),
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                            <line x1="12" y1="11" x2="12" y2="17"/>
+                            <line x1="9" y1="14" x2="15" y2="14"/>
+                        </svg>`,
+                        onClick: async () => {
+                            const newFolder = await this._createFolder(rootFolder.id, config.folderManager);
+                            if (newFolder) {
+                                selectedFolderId = newFolder.id;
+                                selectedFolderPath = `${rootFolder.name} / ${newFolder.name}`;
+                                folderText.textContent = selectedFolderPath;
+                            }
+                        }
+                    });
+                    
+                    // 添加子菜单
+                    folderItem.children = subItems;
                     
                     items.push(folderItem);
                 }
+                
+                // 添加"新建一级文件夹"选项
+                items.push({ type: 'divider' });
+                items.push({
+                    label: chrome.i18n.getMessage('kxvpmz'),
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        <line x1="12" y1="11" x2="12" y2="17"/>
+                        <line x1="9" y1="14" x2="15" y2="14"/>
+                    </svg>`,
+                    onClick: async () => {
+                        const newFolder = await this._createFolder(null, config.folderManager);
+                        if (newFolder) {
+                            selectedFolderId = newFolder.id;
+                            selectedFolderPath = newFolder.name;
+                            folderText.textContent = newFolder.name;
+                        }
+                    }
+                });
                 
                 // 显示下拉菜单
                 window.globalDropdownManager.show({
@@ -350,12 +395,14 @@ class StarInputModal {
             // 取消按钮
             cancelBtn.addEventListener('click', cancelInput);
             
-            // ESC 键取消，Enter 键确认
+            // ESC 键取消，Ctrl/Cmd+Enter 键确认
             const handleKeyDown = (e) => {
                 if (e.key === 'Escape') {
                     cancelInput();
                     document.removeEventListener('keydown', handleKeyDown);
-                } else if (e.key === 'Enter' && document.activeElement === input) {
+                } else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && document.activeElement === input) {
+                    // Ctrl+Enter 或 Cmd+Enter 提交
+                    e.preventDefault();
                     submitInput();
                 }
             };
@@ -448,6 +495,70 @@ class StarInputModal {
             if (this.state.isShowing) {
                 this.forceClose();
             }
+        }
+    }
+    
+    /**
+     * 创建文件夹（一级或二级）
+     * @param {string|null} parentId - 父文件夹 ID（null = 一级文件夹）
+     * @param {Object} folderManager - FolderManager 实例
+     * @returns {Promise<Object|null>} 新创建的文件夹对象，失败返回 null
+     */
+    async _createFolder(parentId, folderManager) {
+        try {
+            if (!window.globalInputModal || !folderManager) {
+                return null;
+            }
+            
+            // 构建标题
+            let title;
+            if (parentId) {
+                const parentPath = await folderManager.getFolderPath(parentId);
+                title = chrome.i18n.getMessage('xmkvpz')
+                    ? chrome.i18n.getMessage('xmkvpz').replace('{folderName}', parentPath)
+                    : `在「${parentPath}」下创建子文件夹`;
+            } else {
+                title = chrome.i18n.getMessage('kxvpmz');
+            }
+            
+            // 显示输入框
+            const name = await window.globalInputModal.show({
+                title: title,
+                defaultValue: '',
+                placeholder: chrome.i18n.getMessage('vzkpmx'),
+                required: true,
+                requiredMessage: chrome.i18n.getMessage('kmxpvz'),
+                maxLength: 10
+            });
+            
+            if (!name || !name.trim()) {
+                return null;
+            }
+            
+            // 检查名称是否已存在
+            const exists = await folderManager.isFolderNameExists(name.trim(), parentId);
+            if (exists) {
+                if (window.globalToastManager) {
+                    window.globalToastManager.error(chrome.i18n.getMessage('kpvzmx'));
+                }
+                return null;
+            }
+            
+            // 创建文件夹
+            const newFolder = await folderManager.createFolder(name.trim(), parentId);
+            
+            // 显示成功提示
+            if (window.globalToastManager) {
+                window.globalToastManager.success(chrome.i18n.getMessage('xzvkpm'));
+            }
+            
+            return newFolder;
+        } catch (error) {
+            console.error('[StarInputModal] Failed to create folder:', error);
+            if (window.globalToastManager && error.message) {
+                window.globalToastManager.error(error.message);
+            }
+            return null;
         }
     }
 }

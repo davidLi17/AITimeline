@@ -96,18 +96,19 @@ html.dark .star-input-modal-header h3 {
 /* 左右两栏行 */
 .star-input-modal-row {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 /* 左侧标签 */
 .star-input-modal-label {
     flex-shrink: 0;
-    width: 80px;
+    width: 50px;
     font-size: 14px;
     font-weight: 500;
     color: #374151;
     text-align: right;
+    padding-top: 10px;
 }
 
 html.dark .star-input-modal-label {
@@ -163,7 +164,7 @@ html.dark .star-input-modal-folder-selector:hover {
     opacity: 0.5;
 }
 
-/* 输入框 */
+/* 输入框（textarea） */
 .star-input-modal-input {
     flex: 1;
     padding: 10px 14px;
@@ -176,6 +177,9 @@ html.dark .star-input-modal-folder-selector:hover {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: #1f2937;
     background: #ffffff;
+    resize: vertical;
+    min-height: 60px;
+    line-height: 1.5;
 }
 
 html.dark .star-input-modal-input {

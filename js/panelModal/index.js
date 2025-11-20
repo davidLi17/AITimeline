@@ -76,7 +76,6 @@ class PanelModal {
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         `;
-        this.closeBtn.setAttribute('aria-label', chrome.i18n.getMessage('close'));
         
         // Tab 栏（可滚动区域）
         this.tabsContainer = document.createElement('div');
@@ -86,9 +85,9 @@ class PanelModal {
         const footer = document.createElement('div');
         footer.className = 'panel-modal-footer';
         footer.innerHTML = `
-            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>${chrome.i18n.getMessage('dataStorageNote')}</span></div>
-            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>${chrome.i18n.getMessage('shareIfUseful')}</span><a href="https://chromewebstore.google.com/detail/ai-chat-timeline-chatgpt/fgebdnlceacaiaeikopldglhffljjlhh" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('chromeWebStore')} ❤️</a></div>
-            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>${chrome.i18n.getMessage('projectOpenSource')}</span><a href="https://github.com/houyanchao/AITimeline" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('starOnGitHub')} ⭐</a></div>
+            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>${chrome.i18n.getMessage('kmvxpz')}</span></div>
+            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>${chrome.i18n.getMessage('xpzmkv')}</span><a href="https://chromewebstore.google.com/detail/ai-chat-timeline-chatgpt/fgebdnlceacaiaeikopldglhffljjlhh" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('pkmzvx')} ❤️</a></div>
+            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>${chrome.i18n.getMessage('vxpzmk')}</span><a href="https://github.com/houyanchao/AITimeline" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('mkvxpz')} ⭐</a></div>
         `;
         
         sidebar.appendChild(this.closeBtn);
@@ -381,4 +380,7 @@ class PanelModal {
 // 脚本加载时立即创建，其他模块可直接使用 window.panelModal
 if (typeof window !== 'undefined') {
     window.panelModal = new PanelModal();
+    
+    // ✅ 注意：设置 Tabs 在 Timeline 初始化后注册，确保顺序正确
+    // 见 tab-registry.js 中的 registerTimelineTabs()
 }

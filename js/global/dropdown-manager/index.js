@@ -750,7 +750,7 @@ class GlobalDropdownManager {
             height: window.innerHeight
         };
         
-        const gap = 10; // 主菜单和子菜单之间的间隙
+        const gap = 9; // 主菜单和子菜单之间的间隙
         let left, top;
         
         // 水平定位：优先显示在右侧
@@ -814,16 +814,23 @@ class GlobalDropdownManager {
         
         console.log('[DropdownManager] Closing ' + toClose.length + ' submenu(s), keeping ' + toKeep.length);
         
-        // 关闭子菜单
+        // 关闭子菜单（添加淡出动画）
         toClose.forEach(submenu => {
             // 移除父元素激活状态
             if (submenu.parentElement) {
                 submenu.parentElement.classList.remove('submenu-active');
             }
             
-            // 移除元素
-            if (submenu.element && submenu.element.parentNode) {
-                submenu.element.remove();
+            // 先移除 visible 类（触发淡出动画）
+            if (submenu.element) {
+                submenu.element.classList.remove('visible');
+                
+                // 等待动画完成后移除元素
+                setTimeout(() => {
+                    if (submenu.element && submenu.element.parentNode) {
+                        submenu.element.remove();
+                    }
+                }, 200); // 与 CSS transition 时间一致
             }
         });
         
