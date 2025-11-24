@@ -1,194 +1,86 @@
 {
   "extName": {
-    "message": "AI Timeline：最强大的AI提效助手：ChatGPT、Gemini、DeepSeek"
+    "message": "AI Chat Timeline - 为 AI 对话添加交互式时间轴，支持 ChatGPT、Gemini、DeepSeek、Claude 等"
   },
   "extDescription": {
-    "message": "功能描述：复制LaTeX公式、对话时间轴、Enter键换行、Prompt辅助，支持所有主流AI平台，助您使用AI的效率翻倍。"
+    "message": "让你跟 AI 聊天的效率直接翻倍！给 ChatGPT、Gemini、DeepSeek 添加交互式时间轴，🚀轻松跳转至任意对话，📌标记重点对话，⭐️收藏重要聊天。"
   },
-  "qwxpzm": {
-    "message": "收藏"
-  },
-  "hkjvnr": {
+  "viewStarred": {
     "message": "查看收藏"
   },
-  "zmvkpx": {
-    "message": "收藏对话"
-  },
-  "bpxjkw": {
-    "message": "取消收藏"
-  },
-  "vnkxpm": {
+  "starredList": {
     "message": "收藏列表"
   },
-  "kxpmzv": {
-    "message": "收藏成功"
+  "close": {
+    "message": "关闭"
   },
-  "pzmvkx": {
-    "message": "已取消收藏"
+  "clickToStar": {
+    "message": "收藏提问"
   },
-  "jwvnkp": {
-    "message": "暂无数据"
+  "clickToUnstar": {
+    "message": "取消收藏提问"
   },
-  "mvkxpz": {
-    "message": "复制"
+  "starChat": {
+    "message": "收藏聊天"
   },
-  "xpzmvk": {
-    "message": "复制成功"
+  "unstarChat": {
+    "message": "取消收藏聊天"
   },
-  "vkpxzm": {
-    "message": "编辑"
+  "noStarredItems": {
+    "message": "暂无收藏"
   },
-  "kpzmvx": {
-    "message": "复制失败"
-  },
-  "zmxvkp": {
-    "message": "请输入"
-  },
-  "pxvkmz": {
-    "message": "取消"
-  },
-  "vkmzpx": {
-    "message": "确定"
-  },
-  "mzpxvk": {
-    "message": "主题不能为空"
-  },
-  "xvkpmz": {
-    "message": "重命名"
-  },
-  "pzmkvx": {
-    "message": "内容不能为空"
-  },
-  "kmvxpz": {
-    "message": "所有数据存储在您的浏览器本地"
-  },
-  "vxpzmk": {
-    "message": "已开源"
-  },
-  "mkvxpz": {
-    "message": "Star on GitHub"
-  },
-  "xpzmkv": {
-    "message": "分享 & 提意见"
-  },
-  "pkmzvx": {
+  "goTo": {
     "message": "前往"
   },
-  "mvxkpz": {
-    "message": "复制 LaTeX 公式"
+  "goToTooltip": {
+    "message": "前往聊天详情页"
   },
-  "kxvpmz": {
-    "message": "新建文件夹"
+  "copied": {
+    "message": "已复制"
   },
-  "vpmzkx": {
-    "message": "新建子文件夹"
+  "inputChatTheme": {
+    "message": "请输入收藏标题："
   },
-  "mzxvkp": {
-    "message": "删除"
+  "themePlaceholder": {
+    "message": "请输入"
   },
-  "pkxvmz": {
-    "message": "默认文件夹"
+  "cancel": {
+    "message": "取消"
   },
-  "xmkvpz": {
-    "message": "在「{folderName}」下新建子文件夹"
+  "confirm": {
+    "message": "确定"
   },
-  "vzkpmx": {
-    "message": "请输入文件夹名称"
+  "themeRequired": {
+    "message": "主题不能为空"
   },
-  "kmxpvz": {
-    "message": "文件夹名称不能为空"
+  "unstar": {
+    "message": "取消收藏"
   },
-  "pxmzvk": {
-    "message": "修改文件夹名称"
-  },
-  "mvzxkp": {
-    "message": "请输入新名称"
-  },
-  "kpvzmx": {
-    "message": "文件夹名称已存在"
-  },
-  "xzvkpm": {
-    "message": "创建成功"
-  },
-  "vmkxpz": {
-    "message": "更新成功"
-  },
-  "zpxmkv": {
-    "message": "文件夹不存在"
-  },
-  "kvpzmx": {
-    "message": "文件夹已删除"
-  },
-  "mxkvzp": {
-    "message": "删除失败"
-  },
-  "pzvkmx": {
-    "message": "移动成功"
-  },
-  "vxkpmz": {
-    "message": "移动到"
-  },
-  "wjxnkp": {
-    "message": "确定要删除文件夹「{folderName}」吗？\n\n该文件夹及其子文件夹中有 {count} 个收藏项，删除后这些收藏项将移至默认文件夹。"
-  },
-  "qzmvkx": {
-    "message": "确定要删除文件夹「{folderName}」吗？"
-  },
-  "mvkzpx": {
-    "message": "搜索收藏..."
-  },
-  "kxzpmv": {
-    "message": "收藏到"
-  },
-  "vmzpkx": {
-    "message": "默认文件夹"
-  },
-  "pkmvxz": {
-    "message": "标题"
-  },
-  "pxkmvz": {
-    "message": "时间轴"
-  },
-  "mzkvxp": {
-    "message": "启用后，AI 页面右侧会显示可交互时间轴。"
-  },
-  "vkpmzx": {
-    "message": "使用键盘 ↑ / ↓ 键跳转对话"
-  },
-  "xpvmkz": {
-    "message": "启用后，使用键盘 ↑ / ↓ 键，在对话记录间快速跳转。"
-  },
-  "xmvkpz": {
-    "message": "对话输入框"
-  },
-  "kvzmxp": {
-    "message": "使用键盘 Enter 键换行"
-  },
-  "mxpzvk": {
-    "message": "启用后，在 AI 对话输入框中，单击 Enter 键换行，快速双击 Enter 键发送消息。"
-  },
-  "kpxvmz": {
-    "message": "复制公式"
-  },
-  "zmkvpx": {
-    "message": "复制LaTeX公式"
-  },
-  "vxkpzm": {
-    "message": "启用后，自动识别页面上的公式，点击即可复制为 LaTeX 格式。"
-  },
-  "mkvzpx": {
-    "message": "支持的平台"
-  },
-  "zpkmvx": {
-    "message": "单击Enter键换行"
-  },
-  "vxmkpz": {
-    "message": "Enter键：单击换行，双击发送消息"
-  },
-  "mkpxvz": {
-    "message": "启用后，在 AI 对话输入框中，单击 Enter 键换行，快速双击 Enter 键发送消息。"
-  },
-  "xvpmkz": {
+  "viewStarredList": {
     "message": "查看收藏列表"
+  },
+  "edit": {
+    "message": "编辑"
+  },
+  "editStarredContent": {
+    "message": "编辑收藏标题"
+  },
+  "contentRequired": {
+    "message": "内容不能为空"
+  },
+  "dataStorageNote": {
+    "message": "所有数据存储在您的浏览器本地，不上传服务器"
+  },
+  "projectOpenSource": {
+    "message": "本项目已开源，欢迎"
+  },
+  "starOnGitHub": {
+    "message": "Star on GitHub"
+  },
+  "shareIfUseful": {
+    "message": "如果对您有帮助，欢迎推荐给朋友"
+  },
+  "chromeWebStore": {
+    "message": "Chrome 应用商店"
   }
 }

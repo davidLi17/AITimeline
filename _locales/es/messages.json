@@ -1,198 +1,86 @@
 {
   "extName": {
-    "message": "AI Timeline: El asistente de eficiencia de IA más potente: ChatGPT, Gemini"
+    "message": "AI Chat Timeline - Línea de tiempo interactiva para ChatGPT, Gemini"
   },
   "extDescription": {
-    "message": "Copiar fórmulas LaTeX, línea de tiempo, Enter para nueva línea, asistencia Prompt. ¡Duplica tu eficiencia con IA!"
+    "message": "¡Duplica tu eficiencia de chat con IA! Añade línea de tiempo interactiva a ChatGPT, Gemini, DeepSeek, 🚀 salta fácilmente a cualquier conversación, 📌 marca conversaciones clave, ⭐️ favoritos de chats importantes."
   },
-  "qwxpzm": {
-    "message": "Guardar"
+  "viewStarred": {
+    "message": "Ver favoritos"
   },
-  "hkjvnr": {
-    "message": "Ver guardados"
+  "starredList": {
+    "message": "Mis Favoritos"
   },
-  "zmvkpx": {
-    "message": "Guardar conversación"
+  "close": {
+    "message": "Cerrar"
   },
-  "bpxjkw": {
-    "message": "Quitar de guardados"
+  "clickToStar": {
+    "message": "Clic para añadir a favoritos"
   },
-  "vnkxpm": {
-    "message": "Lista de guardados"
+  "clickToUnstar": {
+    "message": "Quitar pregunta de favoritos"
   },
-  "kxpmzv": {
-    "message": "Guardado con éxito"
+  "noStarredItems": {
+    "message": "Sin favoritos"
   },
-  "pzmvkx": {
-    "message": "Eliminado de guardados"
-  },
-  "jwvnkp": {
-    "message": "Sin datos"
-  },
-  "mvkxpz": {
-    "message": "Copiar"
-  },
-  "xpzmvk": {
-    "message": "Copiado"
-  },
-  "vkpxzm": {
-    "message": "Editar"
-  },
-  "kpzmvx": {
-    "message": "Error al copiar"
-  },
-  "zmxvkp": {
-    "message": "Por favor ingrese"
-  },
-  "pxvkmz": {
-    "message": "Cancelar"
-  },
-  "vkmzpx": {
-    "message": "Confirmar"
-  },
-  "mzpxvk": {
-    "message": "El tema no puede estar vacío"
-  },
-  "xvkpmz": {
-    "message": "Renombrar"
-  },
-  "pzmkvx": {
-    "message": "El contenido no puede estar vacío"
-  },
-  "kmvxpz": {
-    "message": "Todos los datos se almacenan localmente en tu navegador"
-  },
-  "vxpzmk": {
-    "message": "Código abierto"
-  },
-  "mkvxpz": {
-    "message": "Estrella en GitHub"
-  },
-  "xpzmkv": {
-    "message": "Compartir & Comentarios"
-  },
-  "pkmzvx": {
+  "goTo": {
     "message": "Ir a"
   },
-  "mvxkpz": {
-    "message": "Copiar fórmula LaTeX"
+  "goToTooltip": {
+    "message": "Ir a detalles del chat"
   },
-  "kxvpmz": {
-    "message": "Nueva carpeta"
+  "copied": {
+    "message": "Copiado"
   },
-  "vpmzkx": {
-    "message": "Nueva subcarpeta"
+  "starChat": {
+    "message": "Marcar chat como favorito"
   },
-  "mzxvkp": {
-    "message": "Eliminar"
+  "unstarChat": {
+    "message": "Quitar chat de favoritos"
   },
-  "pkxvmz": {
-    "message": "Carpeta predeterminada"
+  "inputChatTheme": {
+    "message": "Ingrese el título del favorito:"
   },
-  "xmkvpz": {
-    "message": "Crear subcarpeta en「{folderName}」"
+  "themePlaceholder": {
+    "message": "Por favor ingrese"
   },
-  "vzkpmx": {
-    "message": "Por favor ingrese el nombre de la carpeta"
+  "cancel": {
+    "message": "Cancelar"
   },
-  "kmxpvz": {
-    "message": "Se requiere el nombre de la carpeta"
+  "confirm": {
+    "message": "Confirmar"
   },
-  "pxmzvk": {
-    "message": "Renombrar carpeta"
+  "themeRequired": {
+    "message": "El tema no puede estar vacío"
   },
-  "mvzxkp": {
-    "message": "Por favor ingrese un nuevo nombre"
+  "unstar": {
+    "message": "Quitar de favoritos"
   },
-  "kpvzmx": {
-    "message": "El nombre de la carpeta ya existe"
-  },
-  "xzvkpm": {
-    "message": "Creado con éxito"
-  },
-  "vmkxpz": {
-    "message": "Actualizado con éxito"
-  },
-  "zpxmkv": {
-    "message": "Carpeta no encontrada"
-  },
-  "kvpzmx": {
-    "message": "Carpeta eliminada"
-  },
-  "mxkvzp": {
-    "message": "Error al eliminar"
-  },
-  "pzvkmx": {
-    "message": "Movido con éxito"
-  },
-  "vxkpmz": {
-    "message": "Mover a"
-  },
-  "wjxnkp": {
-    "message": "¿Eliminar carpeta「{folderName}」?\n\nEsta carpeta y sus subcarpetas contienen {count} elementos guardados. Se moverán a la carpeta predeterminada."
-  },
-  "qzmvkx": {
-    "message": "¿Está seguro de que desea eliminar la carpeta「{folderName}」?"
-  },
-  "mvkzpx": {
-    "message": "Buscar en guardados..."
-  },
-  "kxzpmv": {
-    "message": "Guardar en"
-  },
-  "vmzpkx": {
-    "message": "Carpeta predeterminada"
-  },
-  "pkmvxz": {
-    "message": "Título"
-  },
-  "pxkmvz": {
-    "message": "Línea de tiempo"
-  },
-  "mzkvxp": {
-    "message": "Cuando esté activado, aparecerá una línea de tiempo interactiva en el lado derecho de la página de IA."
-  },
-  "vkpmzx": {
-    "message": "Usar teclas de teclado ↑ / ↓ para navegar conversaciones"
-  },
-  "xpvmkz": {
-    "message": "Cuando esté activado, use teclas de teclado ↑ / ↓ para saltar rápidamente entre registros de conversación."
-  },
-  "xmvkpz": {
-    "message": "Cuadro de entrada de conversación"
-  },
-  "kvzmxp": {
-    "message": "Usar tecla Enter del teclado para nueva línea"
-  },
-  "mxpzvk": {
-    "message": "Cuando esté activado, en el cuadro de entrada de conversación de IA, presione tecla Enter una vez para nueva línea, dos veces rápidamente para enviar mensaje."
-  },
-  "kpxvmz": {
-    "message": "Copiar fórmula"
-  },
-  "zmkvpx": {
-    "message": "Copiar fórmula LaTeX"
-  },
-  "vxkpzm": {
-    "message": "Cuando esté activado, identificar automáticamente fórmulas en la página y hacer clic para copiar en formato LaTeX."
-  },
-  "mkvzpx": {
-    "message": "Plataformas compatibles"
-  },
-  "zpkmvx": {
-    "message": "Enter para nueva línea"
-  },
-  "vxmkpz": {
-    "message": "Tecla Enter: Una vez para nueva línea, doble para enviar"
-  },
-  "mkpxvz": {
-    "message": "Cuando esté activado, en el cuadro de entrada de conversación de IA, presione tecla Enter una vez para nueva línea, dos veces rápidamente para enviar mensaje."
-  },
-  "zpvmkx": {
-    "message": "Error al guardar"
-  },
-  "xvpmkz": {
+  "viewStarredList": {
     "message": "Ver lista de favoritos"
+  },
+  "edit": {
+    "message": "Editar"
+  },
+  "editStarredContent": {
+    "message": "Editar título favorito"
+  },
+  "contentRequired": {
+    "message": "El contenido no puede estar vacío"
+  },
+  "dataStorageNote": {
+    "message": "Todos los datos se almacenan únicamente en su navegador localmente. Nunca subiremos ningún dato de chat a servidores sin su permiso"
+  },
+  "projectOpenSource": {
+    "message": "Este proyecto es de código abierto, bienvenido a"
+  },
+  "starOnGitHub": {
+    "message": "Star on GitHub"
+  },
+  "shareIfUseful": {
+    "message": "Si te ayuda, no dudes en recomendarlo a tus amigos"
+  },
+  "chromeWebStore": {
+    "message": "Chrome Web Store"
   }
 }
-

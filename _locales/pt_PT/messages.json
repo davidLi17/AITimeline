@@ -1,198 +1,86 @@
 {
   "extName": {
-    "message": "AI Timeline: O assistente de IA definitivo: ChatGPT, Gemini, DeepSeek"
+    "message": "AI Chat Timeline - Linha do tempo interativa para ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Copiar fórmulas LaTeX, cronologia, tecla Enter para nova linha, assistência de Prompt. Duplique sua eficiência com IA!"
+    "message": "Duplique a sua eficiência de chat com IA! Adicione linha do tempo interativa ao ChatGPT, Gemini, DeepSeek, 🚀 salte facilmente para qualquer conversa, 📌 marque conversas-chave, ⭐️ adicione chats importantes aos favoritos."
   },
-  "qwxpzm": {
-    "message": "Guardar"
+  "viewStarred": {
+    "message": "Ver favoritos"
   },
-  "hkjvnr": {
-    "message": "Ver guardados"
+  "starredList": {
+    "message": "Os Meus Favoritos"
   },
-  "zmvkpx": {
-    "message": "Guardar conversa"
+  "close": {
+    "message": "Fechar"
   },
-  "bpxjkw": {
-    "message": "Remover dos guardados"
+  "clickToStar": {
+    "message": "Clique para adicionar aos favoritos"
   },
-  "vnkxpm": {
-    "message": "Lista de guardados"
+  "clickToUnstar": {
+    "message": "Clique para remover dos favoritos"
   },
-  "kxpmzv": {
-    "message": "Guardado com sucesso"
+  "noStarredItems": {
+    "message": "Sem favoritos"
   },
-  "pzmvkx": {
-    "message": "Removido dos guardados"
-  },
-  "jwvnkp": {
-    "message": "Sem dados"
-  },
-  "mvkxpz": {
-    "message": "Copiar"
-  },
-  "xpzmvk": {
-    "message": "Copiado"
-  },
-  "vkpxzm": {
-    "message": "Editar"
-  },
-  "kpzmvx": {
-    "message": "Falha ao copiar"
-  },
-  "zmxvkp": {
-    "message": "Por favor introduza"
-  },
-  "pxvkmz": {
-    "message": "Cancelar"
-  },
-  "vkmzpx": {
-    "message": "Confirmar"
-  },
-  "mzpxvk": {
-    "message": "O tema não pode estar vazio"
-  },
-  "xvkpmz": {
-    "message": "Renomear"
-  },
-  "pzmkvx": {
-    "message": "O conteúdo não pode estar vazio"
-  },
-  "kmvxpz": {
-    "message": "Todos os dados são armazenados localmente no seu navegador"
-  },
-  "vxpzmk": {
-    "message": "Código aberto"
-  },
-  "mkvxpz": {
-    "message": "Estrela no GitHub"
-  },
-  "xpzmkv": {
-    "message": "Partilhar & Comentários"
-  },
-  "pkmzvx": {
+  "goTo": {
     "message": "Ir para"
   },
-  "mvxkpz": {
-    "message": "Copiar fórmula LaTeX"
+  "goToTooltip": {
+    "message": "Ir para detalhes do chat"
   },
-  "kxvpmz": {
-    "message": "Nova pasta"
+  "copied": {
+    "message": "Copiado"
   },
-  "vpmzkx": {
-    "message": "Nova subpasta"
+  "starChat": {
+    "message": "Favoritar conversa"
   },
-  "mzxvkp": {
-    "message": "Eliminar"
+  "unstarChat": {
+    "message": "Desfavoritar conversa"
   },
-  "pkxvmz": {
-    "message": "Pasta predefinida"
+  "inputChatTheme": {
+    "message": "Introduza o título do favorito:"
   },
-  "xmkvpz": {
-    "message": "Criar subpasta em「{folderName}」"
+  "themePlaceholder": {
+    "message": "Introduza"
   },
-  "vzkpmx": {
-    "message": "Por favor introduza o nome da pasta"
+  "cancel": {
+    "message": "Cancelar"
   },
-  "kmxpvz": {
-    "message": "O nome da pasta é obrigatório"
+  "confirm": {
+    "message": "Confirmar"
   },
-  "pxmzvk": {
-    "message": "Renomear pasta"
+  "themeRequired": {
+    "message": "O tema não pode estar vazio"
   },
-  "mvzxkp": {
-    "message": "Por favor introduza um novo nome"
+  "unstar": {
+    "message": "Remover dos favoritos"
   },
-  "kpvzmx": {
-    "message": "O nome da pasta já existe"
+  "viewStarredList": {
+    "message": "Ver lista de favoritos"
   },
-  "xzvkpm": {
-    "message": "Criada com sucesso"
+  "edit": {
+    "message": "Editar"
   },
-  "vmkxpz": {
-    "message": "Atualizada com sucesso"
+  "editStarredContent": {
+    "message": "Editar título favorito"
   },
-  "zpxmkv": {
-    "message": "Pasta não encontrada"
+  "contentRequired": {
+    "message": "O conteúdo não pode estar vazio"
   },
-  "kvpzmx": {
-    "message": "Pasta eliminada"
+  "dataStorageNote": {
+    "message": "Todos os dados são armazenados apenas localmente no seu navegador. Nunca faremos o carregamento de quaisquer dados de chat para servidores sem a sua permissão"
   },
-  "mxkvzp": {
-    "message": "Falha ao eliminar"
+  "projectOpenSource": {
+    "message": "Este projeto é de código aberto, bem-vindo a"
   },
-  "pzvkmx": {
-    "message": "Movida com sucesso"
+  "starOnGitHub": {
+    "message": "Star on GitHub"
   },
-  "vxkpmz": {
-    "message": "Mover para"
+  "shareIfUseful": {
+    "message": "Se o ajudar, sinta-se à vontade para o recomendar aos seus amigos"
   },
-  "wjxnkp": {
-    "message": "Eliminar pasta「{folderName}」?\n\nEsta pasta e as suas subpastas contêm {count} itens guardados. Serão movidos para a pasta predefinida."
-  },
-  "qzmvkx": {
-    "message": "Tem a certeza de que pretende eliminar a pasta「{folderName}」?"
-  },
-  "mvkzpx": {
-    "message": "Pesquisar nos guardados..."
-  },
-  "kxzpmv": {
-    "message": "Guardar em"
-  },
-  "vmzpkx": {
-    "message": "Pasta predefinida"
-  },
-  "pkmvxz": {
-    "message": "Título"
-  },
-  "pxkmvz": {
-    "message": "Linha do tempo"
-  },
-  "mzkvxp": {
-    "message": "Quando ativado, uma linha do tempo interativa aparecerá no lado direito da página AI."
-  },
-  "vkpmzx": {
-    "message": "Usar teclas de teclado ↑ / ↓ para navegar conversações"
-  },
-  "xpvmkz": {
-    "message": "Quando ativado, use teclas de teclado ↑ / ↓ para saltar rapidamente entre registos de conversação."
-  },
-  "xmvkpz": {
-    "message": "Caixa de entrada de conversação"
-  },
-  "kvzmxp": {
-    "message": "Usar tecla Enter do teclado para nova linha"
-  },
-  "mxpzvk": {
-    "message": "Quando ativado, na caixa de entrada de conversação AI, pressione tecla Enter uma vez para nova linha, duas vezes rapidamente para enviar mensagem."
-  },
-  "kpxvmz": {
-    "message": "Copiar fórmula"
-  },
-  "zmkvpx": {
-    "message": "Copiar fórmula LaTeX"
-  },
-  "vxkpzm": {
-    "message": "Quando ativado, identificar automaticamente fórmulas na página e clicar para copiar no formato LaTeX."
-  },
-  "mkvzpx": {
-    "message": "Plataformas suportadas"
-  },
-  "zpkmvx": {
-    "message": "Enter para nova linha"
-  },
-  "vxmkpz": {
-    "message": "Tecla Enter: Uma vez para nova linha, duplo para enviar"
-  },
-  "mkpxvz": {
-    "message": "Quando ativado, na caixa de entrada de conversação AI, pressione tecla Enter uma vez para nova linha, duas vezes rapidamente para enviar mensagem."
-  },
-  "zpvmkx": {
-    "message": "Falha ao guardar"
-  },
-  "xvpmkz": {
-    "message": "Ver Lista de Favoritos"
+  "chromeWebStore": {
+    "message": "Chrome Web Store"
   }
 }
-

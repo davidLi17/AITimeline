@@ -1,198 +1,86 @@
 {
   "extName": {
-    "message": "AI Timeline: Najpotężniejszy asystent wydajności AI: ChatGPT, Gemini"
+    "message": "AI Chat Timeline - Interaktywna oś czasu dla ChatGPT, Gemini, DeepSeek itp."
   },
   "extDescription": {
-    "message": "Kopiowanie formuł LaTeX, oś czasu, Enter dla nowej linii, wsparcie Prompt. Podwój swoją efektywność AI!"
+    "message": "Podwój swoją efektywność czatu AI! Dodaj interaktywną oś czasu do ChatGPT, Gemini, DeepSeek, 🚀 łatwo przeskocz do dowolnej rozmowy, 📌 oznacz kluczowe rozmowy, ⭐️ dodaj ważne czaty do ulubionych."
   },
-  "qwxpzm": {
-    "message": "Zapisz"
+  "viewStarred": {
+    "message": "Zobacz ulubione"
   },
-  "hkjvnr": {
-    "message": "Zobacz zapisane"
+  "starredList": {
+    "message": "Moje Ulubione"
   },
-  "zmvkpx": {
-    "message": "Zapisz rozmowę"
+  "close": {
+    "message": "Zamknij"
   },
-  "bpxjkw": {
-    "message": "Usuń z zapisanych"
+  "clickToStar": {
+    "message": "Dodaj pytanie do ulubionych"
   },
-  "vnkxpm": {
-    "message": "Lista zapisanych"
+  "clickToUnstar": {
+    "message": "Usuń pytanie z ulubionych"
   },
-  "kxpmzv": {
-    "message": "Pomyślnie zapisano"
+  "noStarredItems": {
+    "message": "Brak ulubionych"
   },
-  "pzmvkx": {
-    "message": "Usunięto z zapisanych"
-  },
-  "jwvnkp": {
-    "message": "Brak danych"
-  },
-  "mvkxpz": {
-    "message": "Kopiuj"
-  },
-  "xpzmvk": {
-    "message": "Skopiowano"
-  },
-  "vkpxzm": {
-    "message": "Edytuj"
-  },
-  "kpzmvx": {
-    "message": "Kopiowanie nie powiodło się"
-  },
-  "zmxvkp": {
-    "message": "Proszę wprowadzić"
-  },
-  "pxvkmz": {
-    "message": "Anuluj"
-  },
-  "vkmzpx": {
-    "message": "Potwierdź"
-  },
-  "mzpxvk": {
-    "message": "Temat nie może być pusty"
-  },
-  "xvkpmz": {
-    "message": "Zmień nazwę"
-  },
-  "pzmkvx": {
-    "message": "Treść nie może być pusta"
-  },
-  "kmvxpz": {
-    "message": "Wszystkie dane są przechowywane lokalnie w Twojej przeglądarce"
-  },
-  "vxpzmk": {
-    "message": "Open source"
-  },
-  "mkvxpz": {
-    "message": "Gwiazdka na GitHub"
-  },
-  "xpzmkv": {
-    "message": "Udostępnij & Opinia"
-  },
-  "pkmzvx": {
+  "goTo": {
     "message": "Przejdź do"
   },
-  "mvxkpz": {
-    "message": "Kopiuj formułę LaTeX"
+  "goToTooltip": {
+    "message": "Przejdź do szczegółów czatu"
   },
-  "kxvpmz": {
-    "message": "Nowy folder"
+  "copied": {
+    "message": "Skopiowano"
   },
-  "vpmzkx": {
-    "message": "Nowy podfolder"
+  "starChat": {
+    "message": "Dodaj czat do ulubionych"
   },
-  "mzxvkp": {
-    "message": "Usuń"
+  "unstarChat": {
+    "message": "Usuń czat z ulubionych"
   },
-  "pkxvmz": {
-    "message": "Domyślny folder"
+  "inputChatTheme": {
+    "message": "Wprowadź tytuł ulubionego:"
   },
-  "xmkvpz": {
-    "message": "Utwórz podfolder w「{folderName}」"
+  "themePlaceholder": {
+    "message": "Wprowadź"
   },
-  "vzkpmx": {
-    "message": "Proszę wprowadzić nazwę folderu"
+  "cancel": {
+    "message": "Anuluj"
   },
-  "kmxpvz": {
-    "message": "Nazwa folderu jest wymagana"
+  "confirm": {
+    "message": "Potwierdź"
   },
-  "pxmzvk": {
-    "message": "Zmień nazwę folderu"
+  "themeRequired": {
+    "message": "Temat nie może być pusty"
   },
-  "mvzxkp": {
-    "message": "Proszę wprowadzić nową nazwę"
+  "unstar": {
+    "message": "Usuń z ulubionych"
   },
-  "kpvzmx": {
-    "message": "Nazwa folderu już istnieje"
+  "viewStarredList": {
+    "message": "Zobacz listę ulubionych"
   },
-  "xzvkpm": {
-    "message": "Pomyślnie utworzono"
+  "edit": {
+    "message": "Edytuj"
   },
-  "vmkxpz": {
-    "message": "Pomyślnie zaktualizowano"
+  "editStarredContent": {
+    "message": "Edytuj tytuł ulubionego"
   },
-  "zpxmkv": {
-    "message": "Folder nie znaleziony"
+  "contentRequired": {
+    "message": "Zawartość nie może być pusta"
   },
-  "kvpzmx": {
-    "message": "Folder usunięty"
+  "dataStorageNote": {
+    "message": "Wszystkie dane są przechowywane wyłącznie lokalnie w Twojej przeglądarce. Nigdy nie będziemy przesyłać żadnych danych czatu na serwery bez Twojej zgody"
   },
-  "mxkvzp": {
-    "message": "Usuwanie nie powiodło się"
+  "projectOpenSource": {
+    "message": "Ten projekt jest open source, zapraszamy do"
   },
-  "pzvkmx": {
-    "message": "Pomyślnie przeniesiono"
+  "starOnGitHub": {
+    "message": "Star on GitHub"
   },
-  "vxkpmz": {
-    "message": "Przenieś do"
+  "shareIfUseful": {
+    "message": "Jeśli ci pomaga, polec go znajomym"
   },
-  "wjxnkp": {
-    "message": "Usunąć folder「{folderName}」?\n\nTen folder i jego podfoldery zawierają {count} zapisanych elementów. Zostaną przeniesione do domyślnego folderu."
-  },
-  "qzmvkx": {
-    "message": "Czy na pewno chcesz usunąć folder「{folderName}」?"
-  },
-  "mvkzpx": {
-    "message": "Szukaj w zapisanych..."
-  },
-  "kxzpmv": {
-    "message": "Zapisz w"
-  },
-  "vmzpkx": {
-    "message": "Domyślny folder"
-  },
-  "pkmvxz": {
-    "message": "Tytuł"
-  },
-  "pxkmvz": {
-    "message": "Oś czasu"
-  },
-  "mzkvxp": {
-    "message": "Po włączeniu interaktywna oś czasu pojawi się po prawej stronie strony AI."
-  },
-  "vkpmzx": {
-    "message": "Użyj klawiszy klawiatury ↑ / ↓ do nawigacji rozmów"
-  },
-  "xpvmkz": {
-    "message": "Po włączeniu użyj klawiszy klawiatury ↑ / ↓, aby szybko przeskakiwać między rekordami rozmów."
-  },
-  "xmvkpz": {
-    "message": "Pole wprowadzania rozmowy"
-  },
-  "kvzmxp": {
-    "message": "Użyj klawisza Enter klawiatury dla nowej linii"
-  },
-  "mxpzvk": {
-    "message": "Po włączeniu, w polu wprowadzania rozmowy AI, naciśnij klawisz Enter raz dla nowej linii, dwa razy szybko, aby wysłać wiadomość."
-  },
-  "kpxvmz": {
-    "message": "Kopiuj formułę"
-  },
-  "zmkvpx": {
-    "message": "Kopiuj formułę LaTeX"
-  },
-  "vxkpzm": {
-    "message": "Po włączeniu automatycznie identyfikuj formuły na stronie i kliknij, aby skopiować w formacie LaTeX."
-  },
-  "mkvzpx": {
-    "message": "Obsługiwane platformy"
-  },
-  "zpkmvx": {
-    "message": "Enter dla nowej linii"
-  },
-  "vxmkpz": {
-    "message": "Klawisz Enter: Raz dla nowej linii, podwójnie aby wysłać"
-  },
-  "mkpxvz": {
-    "message": "Po włączeniu, w polu wprowadzania rozmowy AI, naciśnij klawisz Enter raz dla nowej linii, dwa razy szybko, aby wysłać wiadomość."
-  },
-  "zpvmkx": {
-    "message": "Zapisywanie nie powiodło się"
-  },
-  "xvpmkz": {
-    "message": "Wyświetl listę ulubionych"
+  "chromeWebStore": {
+    "message": "Chrome Web Store"
   }
 }
-

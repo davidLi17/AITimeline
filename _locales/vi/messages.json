@@ -1,198 +1,86 @@
 {
   "extName": {
-    "message": "AI Timeline: Trợ lý hiệu suất AI mạnh mẽ nhất: ChatGPT, Gemini, DeepSeek"
+    "message": "AI Chat Timeline - Dòng thời gian tương tác cho ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Tính năng: Sao chép LaTeX, dòng thời gian, Enter xuống dòng, hỗ trợ Prompt. Tăng gấp đôi hiệu suất AI của bạn!"
+    "message": "Tăng gấp đôi hiệu quả trò chuyện AI của bạn! Thêm dòng thời gian tương tác vào ChatGPT, Gemini, DeepSeek, 🚀 chuyển đến bất kỳ cuộc trò chuyện nào một cách dễ dàng, 📌 đánh dấu các cuộc trò chuyện chính, ⭐️ yêu thích các cuộc trò chuyện quan trọng."
   },
-  "qwxpzm": {
-    "message": "Lưu"
+  "viewStarred": {
+    "message": "Xem yêu thích"
   },
-  "hkjvnr": {
-    "message": "Xem đã lưu"
+  "starredList": {
+    "message": "Danh Sách Yêu Thích"
   },
-  "zmvkpx": {
-    "message": "Lưu cuộc trò chuyện"
+  "close": {
+    "message": "Đóng"
   },
-  "bpxjkw": {
-    "message": "Bỏ lưu"
+  "clickToStar": {
+    "message": "Nhấp để thêm vào yêu thích"
   },
-  "vnkxpm": {
-    "message": "Danh sách đã lưu"
+  "clickToUnstar": {
+    "message": "Nhấp để xóa khỏi yêu thích"
   },
-  "kxpmzv": {
-    "message": "Lưu thành công"
+  "noStarredItems": {
+    "message": "Không có mục yêu thích"
   },
-  "pzmvkx": {
-    "message": "Đã bỏ lưu"
-  },
-  "jwvnkp": {
-    "message": "Không có dữ liệu"
-  },
-  "mvkxpz": {
-    "message": "Sao chép"
-  },
-  "xpzmvk": {
-    "message": "Đã sao chép"
-  },
-  "vkpxzm": {
-    "message": "Chỉnh sửa"
-  },
-  "kpzmvx": {
-    "message": "Sao chép thất bại"
-  },
-  "zmxvkp": {
-    "message": "Vui lòng nhập"
-  },
-  "pxvkmz": {
-    "message": "Hủy"
-  },
-  "vkmzpx": {
-    "message": "Xác nhận"
-  },
-  "mzpxvk": {
-    "message": "Chủ đề không được để trống"
-  },
-  "xvkpmz": {
-    "message": "Đổi tên"
-  },
-  "pzmkvx": {
-    "message": "Nội dung không được để trống"
-  },
-  "kmvxpz": {
-    "message": "Tất cả dữ liệu được lưu trữ cục bộ trong trình duyệt của bạn"
-  },
-  "vxpzmk": {
-    "message": "Mã nguồn mở"
-  },
-  "mkvxpz": {
-    "message": "Gắn sao trên GitHub"
-  },
-  "xpzmkv": {
-    "message": "Chia sẻ & Phản hồi"
-  },
-  "pkmzvx": {
+  "goTo": {
     "message": "Đi tới"
   },
-  "mvxkpz": {
-    "message": "Sao chép công thức LaTeX"
+  "goToTooltip": {
+    "message": "Đi tới chi tiết trò chuyện"
   },
-  "kxvpmz": {
-    "message": "Thư mục mới"
+  "copied": {
+    "message": "Đã sao chép"
   },
-  "vpmzkx": {
-    "message": "Thư mục con mới"
+  "starChat": {
+    "message": "Lưu cuộc trò chuyện"
   },
-  "mzxvkp": {
-    "message": "Xóa"
+  "unstarChat": {
+    "message": "Bỏ lưu cuộc trò chuyện"
   },
-  "pkxvmz": {
-    "message": "Thư mục mặc định"
+  "inputChatTheme": {
+    "message": "Nhập tiêu đề yêu thích:"
   },
-  "xmkvpz": {
-    "message": "Tạo thư mục con trong「{folderName}」"
+  "themePlaceholder": {
+    "message": "Nhập"
   },
-  "vzkpmx": {
-    "message": "Vui lòng nhập tên thư mục"
+  "cancel": {
+    "message": "Hủy"
   },
-  "kmxpvz": {
-    "message": "Tên thư mục là bắt buộc"
+  "confirm": {
+    "message": "Xác nhận"
   },
-  "pxmzvk": {
-    "message": "Đổi tên thư mục"
+  "themeRequired": {
+    "message": "Chủ đề không được để trống"
   },
-  "mvzxkp": {
-    "message": "Vui lòng nhập tên mới"
+  "unstar": {
+    "message": "Bỏ lưu"
   },
-  "kpvzmx": {
-    "message": "Tên thư mục đã tồn tại"
+  "viewStarredList": {
+    "message": "Xem danh sách yêu thích"
   },
-  "xzvkpm": {
-    "message": "Tạo thành công"
+  "edit": {
+    "message": "Chỉnh sửa"
   },
-  "vmkxpz": {
-    "message": "Cập nhật thành công"
+  "editStarredContent": {
+    "message": "Chỉnh sửa tiêu đề yêu thích"
   },
-  "zpxmkv": {
-    "message": "Không tìm thấy thư mục"
+  "contentRequired": {
+    "message": "Nội dung không được để trống"
   },
-  "kvpzmx": {
-    "message": "Đã xóa thư mục"
+  "dataStorageNote": {
+    "message": "Tất cả dữ liệu chỉ được lưu trữ cục bộ trong trình duyệt của bạn. Chúng tôi sẽ không bao giờ tải bất kỳ dữ liệu trò chuyện nào lên máy chủ mà không có sự cho phép của bạn"
   },
-  "mxkvzp": {
-    "message": "Xóa thất bại"
+  "projectOpenSource": {
+    "message": "Dự án này là mã nguồn mở, chào mừng đến"
   },
-  "pzvkmx": {
-    "message": "Di chuyển thành công"
+  "starOnGitHub": {
+    "message": "Star on GitHub"
   },
-  "vxkpmz": {
-    "message": "Di chuyển đến"
+  "shareIfUseful": {
+    "message": "Nếu nó giúp ích cho bạn, hãy giới thiệu nó cho bạn bè của bạn"
   },
-  "wjxnkp": {
-    "message": "Xóa thư mục「{folderName}」?\n\nThư mục này và các thư mục con chứa {count} mục đã lưu. Chúng sẽ được chuyển đến thư mục mặc định."
-  },
-  "qzmvkx": {
-    "message": "Bạn có chắc chắn muốn xóa thư mục「{folderName}」?"
-  },
-  "mvkzpx": {
-    "message": "Tìm kiếm đã lưu..."
-  },
-  "kxzpmv": {
-    "message": "Lưu vào"
-  },
-  "vmzpkx": {
-    "message": "Thư mục mặc định"
-  },
-  "pkmvxz": {
-    "message": "Tiêu đề"
-  },
-  "pxkmvz": {
-    "message": "Dòng thời gian"
-  },
-  "mzkvxp": {
-    "message": "Khi bật, dòng thời gian tương tác sẽ xuất hiện ở phía bên phải của trang AI."
-  },
-  "vkpmzx": {
-    "message": "Sử dụng phím bàn phím ↑ / ↓ để điều hướng cuộc trò chuyện"
-  },
-  "xpvmkz": {
-    "message": "Khi bật, sử dụng phím bàn phím ↑ / ↓ để nhảy nhanh giữa các bản ghi cuộc trò chuyện."
-  },
-  "xmvkpz": {
-    "message": "Hộp nhập cuộc trò chuyện"
-  },
-  "kvzmxp": {
-    "message": "Sử dụng phím Enter trên bàn phím để xuống dòng"
-  },
-  "mxpzvk": {
-    "message": "Khi bật, trong hộp nhập cuộc trò chuyện AI, nhấn phím Enter một lần để xuống dòng, hai lần nhanh để gửi tin nhắn."
-  },
-  "kpxvmz": {
-    "message": "Sao chép công thức"
-  },
-  "zmkvpx": {
-    "message": "Sao chép công thức LaTeX"
-  },
-  "vxkpzm": {
-    "message": "Khi bật, tự động nhận dạng công thức trên trang và nhấp để sao chép sang định dạng LaTeX."
-  },
-  "mkvzpx": {
-    "message": "Nền tảng được hỗ trợ"
-  },
-  "zpkmvx": {
-    "message": "Enter để xuống dòng"
-  },
-  "vxmkpz": {
-    "message": "Phím Enter: Nhấn một lần để xuống dòng, hai lần để gửi"
-  },
-  "mkpxvz": {
-    "message": "Khi bật, trong hộp nhập cuộc trò chuyện AI, nhấn phím Enter một lần để xuống dòng, hai lần nhanh để gửi tin nhắn."
-  },
-  "zpvmkx": {
-    "message": "Lưu thất bại"
-  },
-  "xvpmkz": {
-    "message": "Xem Danh Sách Yêu Thích"
+  "chromeWebStore": {
+    "message": "Chrome Web Store"
   }
 }
-

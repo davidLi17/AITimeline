@@ -1,198 +1,86 @@
 {
   "extName": {
-    "message": "AI Timeline: Der leistungsstärkste KI-Effizienz-Assistent: ChatGPT, Gemini"
+    "message": "AI Chat Timeline - Interaktive Zeitleiste für ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "LaTeX-Formeln kopieren, Gesprächs-Timeline, Enter für Zeilenumbruch, Prompt-Unterstützung. Verdoppeln Sie Ihre KI-Effizienz!"
+    "message": "Verdoppeln Sie Ihre KI-Chat-Effizienz! Fügen Sie ChatGPT, Gemini, DeepSeek eine interaktive Zeitleiste hinzu, 🚀 springen Sie einfach zu jedem Gespräch, 📌 markieren Sie wichtige Gespräche, ⭐️ setzen Sie wichtige Chats als Favoriten."
   },
-  "qwxpzm": {
-    "message": "Speichern"
+  "viewStarred": {
+    "message": "Favoriten anzeigen"
   },
-  "hkjvnr": {
-    "message": "Gespeicherte anzeigen"
+  "starredList": {
+    "message": "Meine Favoriten"
   },
-  "zmvkpx": {
-    "message": "Gespräch speichern"
+  "close": {
+    "message": "Schließen"
   },
-  "bpxjkw": {
-    "message": "Speicherung aufheben"
+  "clickToStar": {
+    "message": "Klicken zum Favorisieren"
   },
-  "vnkxpm": {
-    "message": "Gespeicherte Liste"
+  "clickToUnstar": {
+    "message": "Klicken zum Entfernen"
   },
-  "kxpmzv": {
-    "message": "Erfolgreich gespeichert"
+  "noStarredItems": {
+    "message": "Keine Favoriten"
   },
-  "pzmvkx": {
-    "message": "Speicherung aufgehoben"
-  },
-  "jwvnkp": {
-    "message": "Keine Daten"
-  },
-  "mvkxpz": {
-    "message": "Kopieren"
-  },
-  "xpzmvk": {
-    "message": "Kopiert"
-  },
-  "vkpxzm": {
-    "message": "Bearbeiten"
-  },
-  "kpzmvx": {
-    "message": "Kopieren fehlgeschlagen"
-  },
-  "zmxvkp": {
-    "message": "Bitte eingeben"
-  },
-  "pxvkmz": {
-    "message": "Abbrechen"
-  },
-  "vkmzpx": {
-    "message": "Bestätigen"
-  },
-  "mzpxvk": {
-    "message": "Thema darf nicht leer sein"
-  },
-  "xvkpmz": {
-    "message": "Umbenennen"
-  },
-  "pzmkvx": {
-    "message": "Inhalt darf nicht leer sein"
-  },
-  "kmvxpz": {
-    "message": "Alle Daten werden lokal in Ihrem Browser gespeichert"
-  },
-  "vxpzmk": {
-    "message": "Open Source"
-  },
-  "mkvxpz": {
-    "message": "Stern auf GitHub"
-  },
-  "xpzmkv": {
-    "message": "Teilen & Feedback"
-  },
-  "pkmzvx": {
+  "goTo": {
     "message": "Gehe zu"
   },
-  "mvxkpz": {
-    "message": "LaTeX-Formel kopieren"
+  "goToTooltip": {
+    "message": "Zu Chat-Details gehen"
   },
-  "kxvpmz": {
-    "message": "Neuer Ordner"
+  "copied": {
+    "message": "Kopiert"
   },
-  "vpmzkx": {
-    "message": "Neuer Unterordner"
+  "starChat": {
+    "message": "Chat markieren"
   },
-  "mzxvkp": {
-    "message": "Löschen"
+  "unstarChat": {
+    "message": "Chat-Markierung entfernen"
   },
-  "pkxvmz": {
-    "message": "Standardordner"
+  "inputChatTheme": {
+    "message": "Titel des Favoriten eingeben:"
   },
-  "xmkvpz": {
-    "message": "Neuen Unterordner in「{folderName}」erstellen"
+  "themePlaceholder": {
+    "message": "Bitte eingeben"
   },
-  "vzkpmx": {
-    "message": "Bitte Ordnernamen eingeben"
+  "cancel": {
+    "message": "Abbrechen"
   },
-  "kmxpvz": {
-    "message": "Ordnername erforderlich"
+  "confirm": {
+    "message": "Bestätigen"
   },
-  "pxmzvk": {
-    "message": "Ordner umbenennen"
+  "themeRequired": {
+    "message": "Thema darf nicht leer sein"
   },
-  "mvzxkp": {
-    "message": "Bitte neuen Namen eingeben"
+  "unstar": {
+    "message": "Markierung entfernen"
   },
-  "kpvzmx": {
-    "message": "Ordnername existiert bereits"
-  },
-  "xzvkpm": {
-    "message": "Erfolgreich erstellt"
-  },
-  "vmkxpz": {
-    "message": "Erfolgreich aktualisiert"
-  },
-  "zpxmkv": {
-    "message": "Ordner nicht gefunden"
-  },
-  "kvpzmx": {
-    "message": "Ordner gelöscht"
-  },
-  "mxkvzp": {
-    "message": "Löschen fehlgeschlagen"
-  },
-  "pzvkmx": {
-    "message": "Erfolgreich verschoben"
-  },
-  "vxkpmz": {
-    "message": "Verschieben nach"
-  },
-  "wjxnkp": {
-    "message": "Ordner「{folderName}」löschen?\n\nDieser Ordner und seine Unterordner enthalten {count} gespeicherte Elemente. Diese werden in den Standardordner verschoben."
-  },
-  "qzmvkx": {
-    "message": "Sind Sie sicher, dass Sie den Ordner「{folderName}」löschen möchten?"
-  },
-  "mvkzpx": {
-    "message": "Gespeicherte durchsuchen..."
-  },
-  "kxzpmv": {
-    "message": "Speichern in"
-  },
-  "vmzpkx": {
-    "message": "Standardordner"
-  },
-  "pkmvxz": {
-    "message": "Titel"
-  },
-  "pxkmvz": {
-    "message": "Zeitleiste"
-  },
-  "mzkvxp": {
-    "message": "Wenn aktiviert, wird eine interaktive Zeitleiste auf der rechten Seite der AI-Seite angezeigt."
-  },
-  "vkpmzx": {
-    "message": "Tastatur ↑ / ↓ Tasten zum Navigieren verwenden"
-  },
-  "xpvmkz": {
-    "message": "Wenn aktiviert, verwenden Sie Tastatur ↑ / ↓ Tasten, um schnell zwischen Gesprächsaufzeichnungen zu springen."
-  },
-  "xmvkpz": {
-    "message": "Gesprächseingabefeld"
-  },
-  "kvzmxp": {
-    "message": "Tastatur Enter-Taste für neue Zeile"
-  },
-  "mxpzvk": {
-    "message": "Wenn aktiviert, drücken Sie im AI-Gesprächseingabefeld Enter-Taste einmal für eine neue Zeile, zweimal schnell um Nachricht zu senden."
-  },
-  "kpxvmz": {
-    "message": "Formel kopieren"
-  },
-  "zmkvpx": {
-    "message": "LaTeX-Formel kopieren"
-  },
-  "vxkpzm": {
-    "message": "Wenn aktiviert, werden Formeln auf der Seite automatisch erkannt und können durch Klicken im LaTeX-Format kopiert werden."
-  },
-  "mkvzpx": {
-    "message": "Unterstützte Plattformen"
-  },
-  "zpkmvx": {
-    "message": "Enter für neue Zeile"
-  },
-  "vxmkpz": {
-    "message": "Enter-Taste: Einmal für neue Zeile, doppelt zum Senden"
-  },
-  "mkpxvz": {
-    "message": "Wenn aktiviert, drücken Sie im AI-Gesprächseingabefeld Enter-Taste einmal für eine neue Zeile, zweimal schnell um Nachricht zu senden."
-  },
-  "zpvmkx": {
-    "message": "Speichern fehlgeschlagen"
-  },
-  "xvpmkz": {
+  "viewStarredList": {
     "message": "Favoritenliste anzeigen"
+  },
+  "edit": {
+    "message": "Bearbeiten"
+  },
+  "editStarredContent": {
+    "message": "Favoriten-Titel bearbeiten"
+  },
+  "contentRequired": {
+    "message": "Inhalt darf nicht leer sein"
+  },
+  "dataStorageNote": {
+    "message": "Alle Daten werden nur lokal in Ihrem Browser gespeichert. Wir werden ohne Ihre Erlaubnis niemals Chat-Daten auf Server hochladen"
+  },
+  "projectOpenSource": {
+    "message": "Dieses Projekt ist Open Source, willkommen zu"
+  },
+  "starOnGitHub": {
+    "message": "Star on GitHub"
+  },
+  "shareIfUseful": {
+    "message": "Wenn es Ihnen hilft, empfehlen Sie es gerne Ihren Freunden weiter"
+  },
+  "chromeWebStore": {
+    "message": "Chrome Web Store"
   }
 }
-
