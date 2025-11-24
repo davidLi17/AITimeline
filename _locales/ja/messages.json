@@ -1,86 +1,198 @@
 {
   "extName": {
-    "message": "AI Chat Timeline - AI対話にインタラクティブなタイムラインを追加、ChatGPT、DeepSeek等対応"
+    "message": "AI Timeline：最強AIアシスタント：ChatGPT、Gemini、DeepSeek"
   },
   "extDescription": {
-    "message": "AIチャットの効率を2倍にします！ChatGPT、Gemini、DeepSeekにインタラクティブなタイムラインを追加、🚀任意の会話に簡単にジャンプ、📌重要な会話をマーク、⭐️重要なチャットをお気に入り。"
+    "message": "機能：LaTeXコピー、タイムライン、Enter改行、Promptメモ。全AIプラットフォーム対応。AI効率を倍増！"
   },
-  "viewStarred": {
-    "message": "お気に入りを表示"
+  "qwxpzm": {
+    "message": "保存"
   },
-  "starredList": {
-    "message": "お気に入りリスト"
+  "hkjvnr": {
+    "message": "保存済みを表示"
   },
-  "close": {
-    "message": "閉じる"
+  "zmvkpx": {
+    "message": "会話を保存"
   },
-  "clickToStar": {
-    "message": "クリックしてお気に入りに追加"
+  "bpxjkw": {
+    "message": "保存を解除"
   },
-  "clickToUnstar": {
-    "message": "クリックしてお気に入りから削除"
+  "vnkxpm": {
+    "message": "保存済みリスト"
   },
-  "noStarredItems": {
-    "message": "お気に入りがありません"
+  "kxpmzv": {
+    "message": "保存しました"
   },
-  "goTo": {
-    "message": "移動"
+  "pzmvkx": {
+    "message": "保存を解除しました"
   },
-  "goToTooltip": {
-    "message": "チャット詳細へ移動"
+  "jwvnkp": {
+    "message": "データなし"
   },
-  "copied": {
+  "mvkxpz": {
+    "message": "コピー"
+  },
+  "xpzmvk": {
     "message": "コピーしました"
   },
-  "starChat": {
-    "message": "チャットをスター"
-  },
-  "unstarChat": {
-    "message": "チャットのスターを解除"
-  },
-  "inputChatTheme": {
-    "message": "お気に入りタイトルを入力："
-  },
-  "themePlaceholder": {
-    "message": "入力してください"
-  },
-  "cancel": {
-    "message": "キャンセル"
-  },
-  "confirm": {
-    "message": "確認"
-  },
-  "themeRequired": {
-    "message": "テーマを入力してください"
-  },
-  "unstar": {
-    "message": "スター解除"
-  },
-  "viewStarredList": {
-    "message": "スターリストを表示"
-  },
-  "edit": {
+  "vkpxzm": {
     "message": "編集"
   },
-  "editStarredContent": {
-    "message": "お気に入りタイトルを編集"
+  "kpzmvx": {
+    "message": "コピーに失敗しました"
   },
-  "contentRequired": {
-    "message": "コンテンツを入力してください"
+  "zmxvkp": {
+    "message": "入力してください"
   },
-  "dataStorageNote": {
-    "message": "すべてのデータはブラウザのローカルにのみ保存されます。お客様の許可なく、チャットデータをサーバーにアップロードすることは一切ありません"
+  "pxvkmz": {
+    "message": "キャンセル"
   },
-  "projectOpenSource": {
-    "message": "このプロジェクトはオープンソースです。"
+  "vkmzpx": {
+    "message": "確認"
   },
-  "starOnGitHub": {
-    "message": "Star on GitHub"
+  "mzpxvk": {
+    "message": "テーマを空にできません"
   },
-  "shareIfUseful": {
-    "message": "お役に立ちましたら、ぜひ友達におすすめください"
+  "xvkpmz": {
+    "message": "名前を変更"
   },
-  "chromeWebStore": {
-    "message": "Chrome ウェブストア"
+  "pzmkvx": {
+    "message": "コンテンツを空にできません"
+  },
+  "kmvxpz": {
+    "message": "すべてのデータはブラウザにローカル保存されます"
+  },
+  "vxpzmk": {
+    "message": "オープンソース"
+  },
+  "mkvxpz": {
+    "message": "GitHubでスター"
+  },
+  "xpzmkv": {
+    "message": "共有 & フィードバック"
+  },
+  "pkmzvx": {
+    "message": "移動"
+  },
+  "mvxkpz": {
+    "message": "LaTeX数式をコピー"
+  },
+  "kxvpmz": {
+    "message": "新しいフォルダ"
+  },
+  "vpmzkx": {
+    "message": "新しいサブフォルダ"
+  },
+  "mzxvkp": {
+    "message": "削除"
+  },
+  "pkxvmz": {
+    "message": "デフォルトフォルダ"
+  },
+  "xmkvpz": {
+    "message": "「{folderName}」にサブフォルダを作成"
+  },
+  "vzkpmx": {
+    "message": "フォルダ名を入力してください"
+  },
+  "kmxpvz": {
+    "message": "フォルダ名は必須です"
+  },
+  "pxmzvk": {
+    "message": "フォルダ名を変更"
+  },
+  "mvzxkp": {
+    "message": "新しい名前を入力してください"
+  },
+  "kpvzmx": {
+    "message": "フォルダ名は既に存在します"
+  },
+  "xzvkpm": {
+    "message": "作成しました"
+  },
+  "vmkxpz": {
+    "message": "更新しました"
+  },
+  "zpxmkv": {
+    "message": "フォルダが見つかりません"
+  },
+  "kvpzmx": {
+    "message": "フォルダを削除しました"
+  },
+  "mxkvzp": {
+    "message": "削除に失敗しました"
+  },
+  "pzvkmx": {
+    "message": "移動しました"
+  },
+  "vxkpmz": {
+    "message": "移動先"
+  },
+  "wjxnkp": {
+    "message": "フォルダ「{folderName}」を削除しますか？\n\nこのフォルダとそのサブフォルダには{count}個の保存項目があります。これらはデフォルトフォルダに移動されます。"
+  },
+  "qzmvkx": {
+    "message": "フォルダ「{folderName}」を削除してもよろしいですか？"
+  },
+  "mvkzpx": {
+    "message": "保存済みを検索..."
+  },
+  "kxzpmv": {
+    "message": "保存先"
+  },
+  "vmzpkx": {
+    "message": "デフォルトフォルダ"
+  },
+  "pkmvxz": {
+    "message": "タイトル"
+  },
+  "pxkmvz": {
+    "message": "タイムライン"
+  },
+  "mzkvxp": {
+    "message": "有効にすると、AIページの右側にインタラクティブなタイムラインが表示されます。"
+  },
+  "vkpmzx": {
+    "message": "キーボード ↑ / ↓ キーで会話をナビゲート"
+  },
+  "xpvmkz": {
+    "message": "有効にすると、キーボード ↑ / ↓ キーで会話記録間を素早くジャンプできます。"
+  },
+  "xmvkpz": {
+    "message": "会話入力ボックス"
+  },
+  "kvzmxp": {
+    "message": "キーボード Enter キーで改行"
+  },
+  "mxpzvk": {
+    "message": "有効にすると、AI会話入力ボックスで、Enter キーを1回押すと改行、素早く2回押すとメッセージを送信します。"
+  },
+  "kpxvmz": {
+    "message": "数式をコピー"
+  },
+  "zmkvpx": {
+    "message": "LaTeX数式をコピー"
+  },
+  "vxkpzm": {
+    "message": "有効にすると、ページ上の数式を自動的に識別し、クリックするとLaTeX形式でコピーできます。"
+  },
+  "mkvzpx": {
+    "message": "対応プラットフォーム"
+  },
+  "zpkmvx": {
+    "message": "Enterで改行"
+  },
+  "vxmkpz": {
+    "message": "Enterキー：1回で改行、2回で送信"
+  },
+  "mkpxvz": {
+    "message": "有効にすると、AI会話入力ボックスで、Enterキーを1回押すと改行、素早く2回押すとメッセージを送信します。"
+  },
+  "zpvmkx": {
+    "message": "保存に失敗しました"
+  },
+  "xvpmkz": {
+    "message": "お気に入りリストを表示"
   }
 }
+
