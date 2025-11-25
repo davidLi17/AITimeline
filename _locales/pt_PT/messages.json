@@ -150,13 +150,19 @@
     "message": "Linha do tempo"
   },
   "mzkvxp": {
-    "message": "Quando ativado, uma linha do tempo interativa aparecerá no lado direito da página AI."
+    "message": "Quando ativado, uma linha do tempo interativa aparecerá no lado direito da página de conversa AI."
   },
   "vkpmzx": {
-    "message": "Usar teclas de teclado ↑ / ↓ para navegar conversações"
+    "message": "Teclas ↑ / ↓ do teclado para navegar entre nós de conversa"
   },
   "xpvmkz": {
-    "message": "Quando ativado, use teclas de teclado ↑ / ↓ para saltar rapidamente entre registos de conversação."
+    "message": "Quando ativado, use as teclas ↑ / ↓ do teclado para saltar rapidamente entre os nós de conversa."
+  },
+  "pxmzkv": {
+    "message": "📌 Marcar conversas-chave"
+  },
+  "kzxvpm": {
+    "message": "Pressione longamente num nó de conversa na linha do tempo para o marcar como importante."
   },
   "xmvkpz": {
     "message": "Caixa de entrada de conversação"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Ver Lista de Favoritos"
+  },
+  "qoytxz": {
+    "message": "Esta funcionalidade está sempre ativada e não pode ser desativada"
   }
 }
 

@@ -150,13 +150,19 @@
     "message": "Chronologie"
   },
   "mzkvxp": {
-    "message": "Lorsqu'activé, une chronologie interactive apparaîtra sur le côté droit de la page IA."
+    "message": "Lorsqu'activé, une chronologie interactive apparaîtra sur le côté droit de la page de conversation IA."
   },
   "vkpmzx": {
-    "message": "Utiliser les touches clavier ↑ / ↓ pour naviguer dans les conversations"
+    "message": "Touches ↑ / ↓ du clavier pour naviguer entre les nœuds de conversation"
   },
   "xpvmkz": {
-    "message": "Lorsqu'activé, utilisez les touches clavier ↑ / ↓ pour sauter rapidement entre les enregistrements de conversation."
+    "message": "Lorsque activé, utilisez les touches ↑ / ↓ du clavier pour sauter rapidement entre les nœuds de conversation."
+  },
+  "pxmzkv": {
+    "message": "📌 Marquer les conversations clés"
+  },
+  "kzxvpm": {
+    "message": "Appuyez longuement sur un nœud de conversation dans la chronologie pour le marquer comme important."
   },
   "xmvkpz": {
     "message": "Zone de saisie de conversation"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Afficher la liste des favoris"
+  },
+  "qoytxz": {
+    "message": "Cette fonctionnalité est toujours activée et ne peut pas être désactivée"
   }
 }
 

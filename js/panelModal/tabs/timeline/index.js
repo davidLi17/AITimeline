@@ -65,6 +65,24 @@ class TimelineSettingsTab extends BaseTab {
         // 分隔线
         const divider = `<div class="divider"></div>`;
         
+        // 第一部分：长按标记重点对话开关
+        const longPressMarkSection = `
+            <div class="setting-section">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">${chrome.i18n.getMessage('pxmzkv')}</div>
+                        <div class="setting-hint">
+                            ${chrome.i18n.getMessage('kzxvpm')}
+                        </div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="long-press-mark-toggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        `;
+        
         // 第二部分：箭头键导航开关
         const arrowKeysSection = `
             <div class="setting-section">
@@ -83,7 +101,7 @@ class TimelineSettingsTab extends BaseTab {
             </div>
         `;
         
-        container.innerHTML = platformSection + divider + arrowKeysSection;
+        container.innerHTML = longPressMarkSection + divider + arrowKeysSection + divider + platformSection;
         
         return container;
     }
@@ -94,7 +112,41 @@ class TimelineSettingsTab extends BaseTab {
     async mounted() {
         super.mounted();
         
-        // 1. 处理全局箭头键导航开关
+        // 1. 处理长按标记重点对话开关（默认开启，无法关闭）
+        const longPressCheckbox = document.getElementById('long-press-mark-toggle');
+        if (longPressCheckbox) {
+            // 设置为默认开启
+            longPressCheckbox.checked = true;
+            
+            // 监听点击事件，阻止关闭并显示提示
+            this.addEventListener(longPressCheckbox, 'change', (e) => {
+                // 阻止关闭，保持开启状态
+                e.target.checked = true;
+                
+                // 显示 toast 提示
+                if (window.globalToastManager) {
+                    const message = chrome.i18n.getMessage('qoytxz') || '此功能默认开启，无法关闭';
+                    window.globalToastManager.info(message, e.target, {
+                        duration: 2200,
+                        icon: '',  // 不显示图标
+                        color: {
+                            light: {
+                                backgroundColor: '#0d0d0d',  // 浅色模式：黑色背景
+                                textColor: '#ffffff',        // 浅色模式：白色文字
+                                borderColor: '#0d0d0d'       // 浅色模式：黑色边框
+                            },
+                            dark: {
+                                backgroundColor: '#ffffff',  // 深色模式：白色背景
+                                textColor: '#1f2937',        // 深色模式：深灰色文字
+                                borderColor: '#e5e7eb'       // 深色模式：浅灰色边框
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        
+        // 2. 处理全局箭头键导航开关
         const checkbox = document.getElementById('arrow-keys-nav-toggle');
         if (checkbox) {
             // 读取当前状态（默认开启）
@@ -124,7 +176,7 @@ class TimelineSettingsTab extends BaseTab {
             });
         }
         
-        // 2. 处理平台开关
+        // 3. 处理平台开关
         await this.loadPlatformSettings();
     }
     

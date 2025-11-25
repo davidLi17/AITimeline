@@ -150,13 +150,19 @@
     "message": "Línea de tiempo"
   },
   "mzkvxp": {
-    "message": "Cuando esté activado, aparecerá una línea de tiempo interactiva en el lado derecho de la página de IA."
+    "message": "Cuando esté activado, aparecerá una línea de tiempo interactiva en el lado derecho de la página de conversación de IA."
   },
   "vkpmzx": {
-    "message": "Usar teclas de teclado ↑ / ↓ para navegar conversaciones"
+    "message": "Teclas ↑ / ↓ del teclado para navegar entre nodos de conversación"
   },
   "xpvmkz": {
-    "message": "Cuando esté activado, use teclas de teclado ↑ / ↓ para saltar rápidamente entre registros de conversación."
+    "message": "Cuando esté habilitado, usa las teclas ↑ / ↓ del teclado para saltar rápidamente entre nodos de conversación."
+  },
+  "pxmzkv": {
+    "message": "📌 Marcar conversaciones clave"
+  },
+  "kzxvpm": {
+    "message": "Mantenga presionado un nodo de conversación en la línea de tiempo para marcarlo como importante."
   },
   "xmvkpz": {
     "message": "Cuadro de entrada de conversación"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Ver lista de favoritos"
+  },
+  "qoytxz": {
+    "message": "Esta función está siempre activada y no se puede desactivar"
   }
 }
 

@@ -150,13 +150,19 @@
     "message": "Timeline"
   },
   "mzkvxp": {
-    "message": "When enabled, an interactive timeline will appear on the right side of the AI page."
+    "message": "When enabled, an interactive timeline will appear on the right side of the AI conversation page."
   },
   "vkpmzx": {
-    "message": "Use Keyboard ↑ / ↓ Keys to Navigate Conversations"
+    "message": "Keyboard ↑ / ↓ Keys to Navigate Conversation Nodes"
   },
   "xpvmkz": {
-    "message": "When enabled, use keyboard ↑ / ↓ keys to quickly jump between conversation records."
+    "message": "When enabled, use keyboard ↑ / ↓ keys to quickly jump between conversation nodes."
+  },
+  "pxmzkv": {
+    "message": "📌 Mark Key Conversations"
+  },
+  "kzxvpm": {
+    "message": "Long press on a conversation node in the timeline to mark it as important."
   },
   "xmvkpz": {
     "message": "Conversation Input Box"
@@ -190,5 +196,8 @@
   },
   "xvpmkz": {
     "message": "View Starred List"
+  },
+  "qoytxz": {
+    "message": "This feature is always enabled and cannot be turned off"
   }
 }

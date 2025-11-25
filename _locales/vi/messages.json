@@ -150,13 +150,19 @@
     "message": "Dòng thời gian"
   },
   "mzkvxp": {
-    "message": "Khi bật, dòng thời gian tương tác sẽ xuất hiện ở phía bên phải của trang AI."
+    "message": "Khi bật, dòng thời gian tương tác sẽ xuất hiện ở phía bên phải của trang hội thoại AI."
   },
   "vkpmzx": {
-    "message": "Sử dụng phím bàn phím ↑ / ↓ để điều hướng cuộc trò chuyện"
+    "message": "Phím ↑ / ↓ trên bàn phím để điều hướng giữa các nút hội thoại"
   },
   "xpvmkz": {
-    "message": "Khi bật, sử dụng phím bàn phím ↑ / ↓ để nhảy nhanh giữa các bản ghi cuộc trò chuyện."
+    "message": "Khi được bật, sử dụng phím ↑ / ↓ trên bàn phím để chuyển nhanh giữa các nút hội thoại."
+  },
+  "pxmzkv": {
+    "message": "📌 Đánh dấu cuộc trò chuyện quan trọng"
+  },
+  "kzxvpm": {
+    "message": "Nhấn giữ vào nút hội thoại trên dòng thời gian để đánh dấu là quan trọng."
   },
   "xmvkpz": {
     "message": "Hộp nhập cuộc trò chuyện"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Xem Danh Sách Yêu Thích"
+  },
+  "qoytxz": {
+    "message": "Tính năng này luôn được bật và không thể tắt"
   }
 }
 

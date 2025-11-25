@@ -150,13 +150,19 @@
     "message": "Oś czasu"
   },
   "mzkvxp": {
-    "message": "Po włączeniu interaktywna oś czasu pojawi się po prawej stronie strony AI."
+    "message": "Po włączeniu interaktywna oś czasu pojawi się po prawej stronie strony rozmowy AI."
   },
   "vkpmzx": {
-    "message": "Użyj klawiszy klawiatury ↑ / ↓ do nawigacji rozmów"
+    "message": "Klawisze ↑ / ↓ na klawiaturze, aby nawigować między węzłami rozmów"
   },
   "xpvmkz": {
-    "message": "Po włączeniu użyj klawiszy klawiatury ↑ / ↓, aby szybko przeskakiwać między rekordami rozmów."
+    "message": "Po włączeniu użyj klawiszy ↑ / ↓ na klawiaturze, aby szybko przeskakiwać między węzłami rozmów."
+  },
+  "pxmzkv": {
+    "message": "📌 Oznacz kluczowe rozmowy"
+  },
+  "kzxvpm": {
+    "message": "Długo naciśnij węzeł rozmowy na osi czasu, aby oznaczyć go jako ważny."
   },
   "xmvkpz": {
     "message": "Pole wprowadzania rozmowy"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Wyświetl listę ulubionych"
+  },
+  "qoytxz": {
+    "message": "Ta funkcja jest zawsze włączona i nie można jej wyłączyć"
   }
 }
 

@@ -150,13 +150,19 @@
     "message": "Garis Waktu"
   },
   "mzkvxp": {
-    "message": "Saat diaktifkan, garis waktu interaktif akan muncul di sisi kanan halaman AI."
+    "message": "Saat diaktifkan, garis waktu interaktif akan muncul di sisi kanan halaman percakapan AI."
   },
   "vkpmzx": {
-    "message": "Gunakan tombol keyboard ↑ / ↓ untuk menavigasi percakapan"
+    "message": "Tombol Keyboard ↑ / ↓ untuk Menavigasi Node Percakapan"
   },
   "xpvmkz": {
-    "message": "Saat diaktifkan, gunakan tombol keyboard ↑ / ↓ untuk melompat cepat antar catatan percakapan."
+    "message": "Saat diaktifkan, gunakan tombol keyboard ↑ / ↓ untuk melompat dengan cepat antar node percakapan."
+  },
+  "pxmzkv": {
+    "message": "📌 Tandai Percakapan Penting"
+  },
+  "kzxvpm": {
+    "message": "Tekan lama pada node percakapan di timeline untuk menandainya sebagai penting."
   },
   "xmvkpz": {
     "message": "Kotak input percakapan"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Lihat Daftar Favorit"
+  },
+  "qoytxz": {
+    "message": "Fitur ini selalu aktif dan tidak dapat dimatikan"
   }
 }
 

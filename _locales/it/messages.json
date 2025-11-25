@@ -150,13 +150,19 @@
     "message": "Timeline"
   },
   "mzkvxp": {
-    "message": "Quando attivato, apparirà una timeline interattiva sul lato destro della pagina AI."
+    "message": "Quando attivato, apparirà una timeline interattiva sul lato destro della pagina di conversazione AI."
   },
   "vkpmzx": {
-    "message": "Usa i tasti tastiera ↑ / ↓ per navigare tra le conversazioni"
+    "message": "Tasti ↑ / ↓ della tastiera per navigare tra i nodi di conversazione"
   },
   "xpvmkz": {
-    "message": "Quando attivato, usa i tasti tastiera ↑ / ↓ per saltare rapidamente tra i record di conversazione."
+    "message": "Quando abilitato, usa i tasti ↑ / ↓ della tastiera per saltare rapidamente tra i nodi di conversazione."
+  },
+  "pxmzkv": {
+    "message": "📌 Contrassegna conversazioni chiave"
+  },
+  "kzxvpm": {
+    "message": "Premi a lungo su un nodo di conversazione nella timeline per contrassegnarlo come importante."
   },
   "xmvkpz": {
     "message": "Casella di input conversazione"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Visualizza Elenco Preferiti"
+  },
+  "qoytxz": {
+    "message": "Questa funzione è sempre abilitata e non può essere disattivata"
   }
 }
 

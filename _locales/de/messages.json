@@ -150,13 +150,19 @@
     "message": "Zeitleiste"
   },
   "mzkvxp": {
-    "message": "Wenn aktiviert, wird eine interaktive Zeitleiste auf der rechten Seite der AI-Seite angezeigt."
+    "message": "Wenn aktiviert, wird eine interaktive Zeitleiste auf der rechten Seite der AI-Gesprächsseite angezeigt."
   },
   "vkpmzx": {
-    "message": "Tastatur ↑ / ↓ Tasten zum Navigieren verwenden"
+    "message": "Pfeiltasten ↑ / ↓ um zwischen Gesprächsknoten zu navigieren"
   },
   "xpvmkz": {
-    "message": "Wenn aktiviert, verwenden Sie Tastatur ↑ / ↓ Tasten, um schnell zwischen Gesprächsaufzeichnungen zu springen."
+    "message": "Wenn aktiviert, verwenden Sie die Pfeiltasten ↑ / ↓, um schnell zwischen Gesprächsknoten zu springen."
+  },
+  "pxmzkv": {
+    "message": "📌 Wichtige Gespräche markieren"
+  },
+  "kzxvpm": {
+    "message": "Drücken Sie lange auf einen Gesprächsknoten in der Zeitleiste, um ihn als wichtig zu markieren."
   },
   "xmvkpz": {
     "message": "Gesprächseingabefeld"
@@ -193,6 +199,9 @@
   },
   "xvpmkz": {
     "message": "Favoritenliste anzeigen"
+  },
+  "qoytxz": {
+    "message": "Diese Funktion ist immer aktiviert und kann nicht ausgeschaltet werden"
   }
 }
 
