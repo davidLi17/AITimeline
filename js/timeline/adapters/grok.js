@@ -62,9 +62,37 @@ class GrokAdapter extends SiteAdapter {
          * 
          * 优势：比传统的向上遍历更精确，避免找到过于外层的容器
          */
+        
+        // ✅ 隐藏 Grok 自带的时间轴元素，避免与本插件冲突
+        this.hideNativeTimeline();
+        
         return ContainerFinder.findConversationContainer(firstMessage, {
             messageSelector: this.getUserMessageSelector()
         });
+    }
+    
+    /**
+     * ✅ 隐藏 Grok 自带的时间轴元素
+     */
+    hideNativeTimeline() {
+        try {
+            const nativeTimeline = document.querySelector('.group\\/timeline');
+            if (nativeTimeline) {
+                nativeTimeline.style.display = 'none';
+            }
+        } catch {}
+    }
+    
+    /**
+     * ✅ 恢复显示 Grok 自带的时间轴元素
+     */
+    showNativeTimeline() {
+        try {
+            const nativeTimeline = document.querySelector('.group\\/timeline');
+            if (nativeTimeline) {
+                nativeTimeline.style.display = '';
+            }
+        } catch {}
     }
 
     getTimelinePosition() {

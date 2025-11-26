@@ -93,6 +93,9 @@ class TimelineManager {
         this.usePixelTop = false;
         this._cssVarTopSupported = null;
 
+        // ✅ 紧凑模式状态
+        this.isCompactMode = false;
+
         // Markers and rendering
         this.markersVersion = 0;
 
@@ -1560,6 +1563,48 @@ class TimelineManager {
         return this.getCSSVarNumber(this.ui.timelineBar, '--timeline-min-gap', 25);
     }
 
+    /**
+     * ✅ 获取紧凑模式的默认间距
+     */
+    getCompactGap() {
+        if (!this.ui.timelineBar) return 20;
+        return this.getCSSVarNumber(this.ui.timelineBar, '--timeline-compact-gap', 20);
+    }
+
+    /**
+     * ✅ 判断是否应该使用紧凑模式
+     * 简单逻辑：平均空间 = 时间轴高度 / 节点数
+     * 平均空间 < 40px → 切换到紧凑模式
+     * 平均空间 > 45px → 切换回正常模式
+     * 40-45px 之间 → 保持当前模式（滞后区间）
+     */
+    shouldBeCompactMode() {
+        const N = this.markers.length;
+        if (N === 0) return false;
+        
+        const barHeight = this.ui.timelineBar?.clientHeight || 0;
+        if (barHeight <= 0) return false;
+        
+        const avgSpace = barHeight / N;
+        
+        // 滞后阈值，防止频繁切换
+        const threshold = this.isCompactMode ? 45 : 40;
+        return avgSpace < threshold;
+    }
+
+    /**
+     * ✅ 更新紧凑模式状态
+     */
+    updateCompactMode() {
+        const shouldBeCompact = this.shouldBeCompactMode();
+        if (shouldBeCompact !== this.isCompactMode) {
+            this.isCompactMode = shouldBeCompact;
+            if (this.ui.timelineBar) {
+                this.ui.timelineBar.classList.toggle('compact-mode', this.isCompactMode);
+            }
+        }
+    }
+
     // Enforce a minimum pixel gap between positions while staying within bounds
     applyMinGap(positions, minTop, maxTop, gap) {
         const n = positions.length;
@@ -1887,38 +1932,60 @@ class TimelineManager {
      */
     updateTimelineGeometry() {
         if (!this.ui.timelineBar || !this.ui.trackContent) return;
+        
+        // ✅ 检查并更新紧凑模式
+        this.updateCompactMode();
+        
         const H = this.ui.timelineBar.clientHeight || 0;
-        const pad = this.getTrackPadding();          // 顶部和底部的边距
-        const minGap = this.getMinGap();             // 节点之间的最小间距
+        const pad = this.getTrackPadding();
         const N = this.markers.length;
         
-        // 计算内容高度，确保节点之间有足够的间距
-        const desired = Math.max(H, (N > 0 ? (2 * pad + Math.max(0, N - 1) * minGap) : H));
-        this.contentHeight = Math.ceil(desired);
-        this.scale = (H > 0) ? (this.contentHeight / H) : 1;
-        try { this.ui.trackContent.style.height = `${this.contentHeight}px`; } catch {}
+        let adjusted;
+        
+        if (this.isCompactMode) {
+            // ✅ 紧凑模式：均匀分布，间距自适应，整体垂直居中
+            this.contentHeight = H;
+            this.scale = 1;
+            try { this.ui.trackContent.style.height = `${H}px`; } catch {}
+            
+            const defaultGap = this.getCompactGap();
+            const usableH = Math.max(1, H - 2 * pad);
+            const requiredHeight = Math.max(0, N - 1) * defaultGap;
+            
+            // 如果空间不足，自动缩小间距
+            const actualGap = (N <= 1) ? defaultGap : 
+                (requiredHeight > usableH) ? (usableH / Math.max(1, N - 1)) : defaultGap;
+            
+            const totalHeight = Math.max(0, N - 1) * actualGap;
+            const startY = (H - totalHeight) / 2; // 垂直居中
+            adjusted = this.markers.map((_, i) => startY + i * actualGap);
+        } else {
+            // 正常模式：原有逻辑
+            const minGap = this.getMinGap();
+            const desired = Math.max(H, (N > 0 ? (2 * pad + Math.max(0, N - 1) * minGap) : H));
+            this.contentHeight = Math.ceil(desired);
+            this.scale = (H > 0) ? (this.contentHeight / H) : 1;
+            try { this.ui.trackContent.style.height = `${this.contentHeight}px`; } catch {}
 
-        // 计算可用空间（减去顶部和底部的padding）
-        const usableC = Math.max(1, this.contentHeight - 2 * pad);
+            const usableC = Math.max(1, this.contentHeight - 2 * pad);
+            const desiredY = this.markers.map(m => pad + Math.max(0, Math.min(1, (m.baseN ?? m.n ?? 0))) * usableC);
+            adjusted = this.applyMinGap(desiredY, pad, pad + usableC, minGap);
+        }
         
-        // 根据归一化位置计算期望的Y坐标
-        // y = pad + n * usableC，确保第一个和最后一个节点不会贴边
-        const desiredY = this.markers.map(m => pad + Math.max(0, Math.min(1, (m.baseN ?? m.n ?? 0))) * usableC);
-        
-        // 应用最小间距约束，避免节点重叠
-        const adjusted = this.applyMinGap(desiredY, pad, pad + usableC, minGap);
         this.yPositions = adjusted;
+        
         // Update normalized n for CSS positioning
+        const usableForN = Math.max(1, this.contentHeight - 2 * pad);
         for (let i = 0; i < N; i++) {
             const top = adjusted[i];
-            const n = (top - pad) / usableC;
+            const n = (top - pad) / usableForN;
             this.markers[i].n = Math.max(0, Math.min(1, n));
             if (this.markers[i].dotElement && !this.usePixelTop) {
                 try { this.markers[i].dotElement.style.setProperty('--n', String(this.markers[i].n)); } catch {}
             }
         }
         if (this._cssVarTopSupported === null) {
-            this._cssVarTopSupported = this.detectCssVarTopSupport(pad, usableC);
+            this._cssVarTopSupported = this.detectCssVarTopSupport(pad, usableForN);
             this.usePixelTop = !this._cssVarTopSupported;
         }
     }
@@ -2014,6 +2081,8 @@ class TimelineManager {
                 try { 
                     dot.classList.toggle('pinned', this.pinned.has(marker.id));
                 } catch {}
+                // ✅ 添加：奇偶标识（用于紧凑模式长短交替）
+                try { dot.classList.add(i % 2 === 0 ? 'line-even' : 'line-odd'); } catch {}
                 marker.dotElement = dot;
                 frag.appendChild(dot);
             } else {

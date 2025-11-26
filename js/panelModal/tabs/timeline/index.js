@@ -211,6 +211,16 @@ class TimelineSettingsTab extends BaseTab {
                         
                         // 保存到 Storage
                         await chrome.storage.local.set({ timelinePlatformSettings: settings });
+                        
+                        // ✅ 特殊处理：Grok 平台关闭时恢复原生时间轴
+                        if (platformId === 'grok' && !enabled) {
+                            try {
+                                const nativeTimeline = document.querySelector('.group\\/timeline');
+                                if (nativeTimeline) {
+                                    nativeTimeline.style.display = '';
+                                }
+                            } catch {}
+                        }
                     } catch (e) {
                         console.error('[TimelineSettingsTab] Failed to save platform setting:', e);
                         

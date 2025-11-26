@@ -39,6 +39,12 @@
     --timeline-tooltip-gap-visual: 4px;   /* ✅ 需求1：减少间距，让 tooltip 靠近圆点 (8px → 4px) */
     --timeline-tooltip-gap-box: 2px;      /* ✅ 需求1：同步减少 box gap (4px → 2px) */
     /* ✅ 移除：--timeline-hold-ms 已删除，长按功能已移除 */
+    
+    /* ✅ 紧凑模式（横线样式）变量 */
+    --timeline-compact-gap: 20px;              /* 紧凑模式默认间距 */
+    --timeline-compact-line-width-long: 20px;  /* 长横线宽度 */
+    --timeline-compact-line-width-short: 14px; /* 短横线宽度 */
+    --timeline-compact-line-height: 2px;       /* 横线高度 */
 }
 
 /* Override variables when chat's dark mode is active */
