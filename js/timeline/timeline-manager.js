@@ -1567,8 +1567,8 @@ class TimelineManager {
      * ✅ 获取紧凑模式的默认间距
      */
     getCompactGap() {
-        if (!this.ui.timelineBar) return 20;
-        return this.getCSSVarNumber(this.ui.timelineBar, '--timeline-compact-gap', 20);
+        if (!this.ui.timelineBar) return 30;
+        return this.getCSSVarNumber(this.ui.timelineBar, '--timeline-compact-gap', 30);
     }
 
     /**
