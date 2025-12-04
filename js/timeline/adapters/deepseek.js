@@ -105,13 +105,5 @@ class DeepSeekAdapter extends SiteAdapter {
         return title.replace(/\s*-\s*DeepSeek\s*$/i, '').trim();
     }
     
-    /**
-     * 检测 DeepSeek 的深色模式
-     * DeepSeek 通过 body 元素的 class 控制主题 (dark/light)
-     * @returns {boolean}
-     */
-    detectDarkMode() {
-        return document.body.classList.contains('dark');
-    }
 }
 

@@ -872,55 +872,11 @@ class GlobalTooltipManager {
     
     /**
      * ✅ 检测当前是否为深色模式
-     * 兼容各 AI 平台的 dark 模式检测方式
+     * 使用全局 detectDarkMode 函数（定义在 constants.js）
      */
     _detectDarkMode() {
-        try {
-            // 1. 首先检查 html 元素的 dark 类（由 syncDarkModeClass 同步）
-            if (document.documentElement?.classList?.contains('dark')) {
-                return true;
-            }
-            
-            // 2. 检查 body 元素的 dark 类（DeepSeek、Grok 等）
-            if (document.body?.classList?.contains('dark')) {
-                return true;
-            }
-            
-            // 3. 检查 body 元素的 dark-theme 类（Gemini）
-            if (document.body?.classList?.contains('dark-theme')) {
-                return true;
-            }
-            
-            // 4. 检查 html 元素的 color-scheme 样式（ChatGPT）
-            try {
-                const colorScheme = document.documentElement?.style?.colorScheme || 
-                                   getComputedStyle(document.documentElement).colorScheme;
-                if (colorScheme && colorScheme.includes('dark')) {
-                    return true;
-                }
-            } catch (e) {
-                // getComputedStyle 可能失败，忽略
-            }
-            
-            // 5. 检查 html 元素的 data-theme 属性（通义等）
-            const dataTheme = document.documentElement?.getAttribute?.('data-theme');
-            if (dataTheme && dataTheme.includes('dark')) {
-                return true;
-            }
-            
-            // 6. 检查元宝的 yb-theme-mode 属性
-            const ybThemeMode = document.documentElement?.getAttribute?.('yb-theme-mode') ||
-                               document.body?.getAttribute?.('yb-theme-mode');
-            if (ybThemeMode && ybThemeMode.includes('dark')) {
-                return true;
-            }
-            
-            return false;
-        } catch (error) {
-            // 发生任何错误时，返回 false（默认浅色模式）
-            console.warn('[TooltipManager] _detectDarkMode error:', error);
-            return false;
-        }
+        // 调用全局函数，如果不存在则返回 false
+        return typeof detectDarkMode === 'function' ? detectDarkMode() : false;
     }
     
     // ==================== URL 变化监听（组件自治）====================

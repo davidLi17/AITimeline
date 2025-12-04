@@ -106,19 +106,11 @@ class SiteAdapter {
     
     /**
      * Detect if the site is in dark mode
-     * 各平台 adapter 应该覆盖此方法以提供平台特定的检测逻辑
+     * 使用全局 detectDarkMode 函数（定义在 constants.js）
      * @returns {boolean} - true if dark mode is detected
      */
     detectDarkMode() {
-        // 默认检测策略
-        if (document.documentElement.classList.contains('dark')) {
-            return true;
-        }
-        const bodyClasses = document.body.className.toLowerCase();
-        if (bodyClasses.includes('dark')) {
-            return true;
-        }
-        return false;
+        return typeof detectDarkMode === 'function' ? detectDarkMode() : false;
     }
     
     /**

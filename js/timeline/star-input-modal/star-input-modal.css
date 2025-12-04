@@ -43,7 +43,7 @@
     animation: starInputModalSlideIn 0.3s ease;
 }
 
-html.dark .star-input-modal {
+html[data-timeline-theme="dark"] .star-input-modal {
     background: #2a2a2a;
 }
 
@@ -67,7 +67,7 @@ html.dark .star-input-modal {
     border-bottom: 1px solid #e5e7eb;
 }
 
-html.dark .star-input-modal-header {
+html[data-timeline-theme="dark"] .star-input-modal-header {
     border-bottom-color: #404040;
 }
 
@@ -78,7 +78,7 @@ html.dark .star-input-modal-header {
     color: #1f2937;
 }
 
-html.dark .star-input-modal-header h3 {
+html[data-timeline-theme="dark"] .star-input-modal-header h3 {
     color: #f3f4f6;
 }
 
@@ -111,7 +111,7 @@ html.dark .star-input-modal-header h3 {
     padding-top: 10px;
 }
 
-html.dark .star-input-modal-label {
+html[data-timeline-theme="dark"] .star-input-modal-label {
     color: #d1d5db;
 }
 
@@ -133,7 +133,7 @@ html.dark .star-input-modal-label {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-html.dark .star-input-modal-folder-selector {
+html[data-timeline-theme="dark"] .star-input-modal-folder-selector {
     background: #1a1a1a;
     border-color: #404040;
     color: #f3f4f6;
@@ -144,7 +144,7 @@ html.dark .star-input-modal-folder-selector {
     background: #f9fafb;
 }
 
-html.dark .star-input-modal-folder-selector:hover {
+html[data-timeline-theme="dark"] .star-input-modal-folder-selector:hover {
     border-color: #6b7280;
     background: #262626;
 }
@@ -182,7 +182,7 @@ html.dark .star-input-modal-folder-selector:hover {
     line-height: 1.5;
 }
 
-html.dark .star-input-modal-input {
+html[data-timeline-theme="dark"] .star-input-modal-input {
     background: #1a1a1a;
     border-color: #404040;
     color: #f3f4f6;
@@ -192,7 +192,7 @@ html.dark .star-input-modal-input {
     border-color: #9ca3af;
 }
 
-html.dark .star-input-modal-input:hover {
+html[data-timeline-theme="dark"] .star-input-modal-input:hover {
     border-color: #6b7280;
 }
 
@@ -201,7 +201,7 @@ html.dark .star-input-modal-input:hover {
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-html.dark .star-input-modal-input:focus {
+html[data-timeline-theme="dark"] .star-input-modal-input:focus {
     border-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
@@ -210,7 +210,7 @@ html.dark .star-input-modal-input:focus {
     color: #9ca3af;
 }
 
-html.dark .star-input-modal-input::placeholder {
+html[data-timeline-theme="dark"] .star-input-modal-input::placeholder {
     color: #6b7280;
 }
 
@@ -226,7 +226,7 @@ html.dark .star-input-modal-input::placeholder {
     border-top: 1px solid #e5e7eb;
 }
 
-html.dark .star-input-modal-footer {
+html[data-timeline-theme="dark"] .star-input-modal-footer {
     border-top-color: #404040;
 }
 
@@ -253,7 +253,7 @@ html.dark .star-input-modal-footer {
     color: #374151;
 }
 
-html.dark .star-input-modal-cancel {
+html[data-timeline-theme="dark"] .star-input-modal-cancel {
     background: #404040;
     color: #d1d5db;
 }
@@ -262,7 +262,7 @@ html.dark .star-input-modal-cancel {
     background: #e5e7eb;
 }
 
-html.dark .star-input-modal-cancel:hover {
+html[data-timeline-theme="dark"] .star-input-modal-cancel:hover {
     background: #4b5563;
 }
 
@@ -272,7 +272,7 @@ html.dark .star-input-modal-cancel:hover {
     color: #ffffff;
 }
 
-html.dark .star-input-modal-confirm {
+html[data-timeline-theme="dark"] .star-input-modal-confirm {
     background: #ffffff;
     color: #000000;
 }
@@ -281,7 +281,7 @@ html.dark .star-input-modal-confirm {
     background: #1f1f1f;
 }
 
-html.dark .star-input-modal-confirm:hover {
+html[data-timeline-theme="dark"] .star-input-modal-confirm:hover {
     background: #e5e7eb;
 }
 

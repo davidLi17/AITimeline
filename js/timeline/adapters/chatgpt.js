@@ -137,16 +137,6 @@ class ChatGPTAdapter extends SiteAdapter {
     }
     
     /**
-     * 检测 ChatGPT 的深色模式
-     * ChatGPT 通过 html 元素的 style.colorScheme 控制主题
-     * @returns {boolean}
-     */
-    detectDarkMode() {
-        const colorScheme = document.documentElement.style.colorScheme;
-        return colorScheme === 'dark';
-    }
-    
-    /**
      * 检测是否应该隐藏时间轴
      * ChatGPT: 当页面存在 .text-token-primary 元素时隐藏
      * @returns {boolean}

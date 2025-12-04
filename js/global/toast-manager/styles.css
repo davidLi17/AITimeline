@@ -35,7 +35,7 @@
 }
 
 /* 深色主题下的"已复制"toast */
-html.dark .timeline-copy-feedback {
+html[data-timeline-theme="dark"] .timeline-copy-feedback {
     background-color: #ffffff;
     color: #1f2937;
     border-color: #d1d5db;

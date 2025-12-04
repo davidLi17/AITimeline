@@ -247,3 +247,58 @@ function platformSupportsFeature(platformId, feature) {
     return platform?.features?.[feature] === true;
 }
 
+/**
+ * 检测当前页面是否为深色模式
+ * 整合了所有 AI 平台的 dark mode 检测逻辑
+ * 
+ * @returns {boolean} true 表示深色模式
+ */
+function detectDarkMode() {
+    try {
+        // 1. 检查 html 元素的 dark 类（Kimi、Grok 等平台原生添加）
+        if (document.documentElement?.classList?.contains('dark')) {
+            return true;
+        }
+        
+        // 2. 检查 body 元素的 dark 类（DeepSeek、Grok 等）
+        if (document.body?.classList?.contains('dark')) {
+            return true;
+        }
+        
+        // 3. 检查 body 元素的 dark-theme 类（Gemini）
+        if (document.body?.classList?.contains('dark-theme')) {
+            return true;
+        }
+        
+        // 4. 检查 html 元素的 color-scheme 样式（ChatGPT）
+        try {
+            const colorScheme = document.documentElement?.style?.colorScheme || 
+                               getComputedStyle(document.documentElement).colorScheme;
+            if (colorScheme && colorScheme.includes('dark')) {
+                return true;
+            }
+        } catch (e) {
+            // getComputedStyle 可能失败，忽略
+        }
+        
+        // 5. 检查 html 元素的 data-theme 属性（通义、豆包等）
+        const dataTheme = document.documentElement?.getAttribute?.('data-theme');
+        if (dataTheme && dataTheme.includes('dark')) {
+            return true;
+        }
+        
+        // 6. 检查元宝的 yb-theme-mode 属性
+        const ybThemeMode = document.documentElement?.getAttribute?.('yb-theme-mode') ||
+                           document.body?.getAttribute?.('yb-theme-mode');
+        if (ybThemeMode && ybThemeMode.includes('dark')) {
+            return true;
+        }
+        
+        return false;
+    } catch (error) {
+        // 发生任何错误时，返回 false（默认浅色模式）
+        console.warn('[detectDarkMode] error:', error);
+        return false;
+    }
+}
+

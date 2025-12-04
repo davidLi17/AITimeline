@@ -48,7 +48,7 @@
 }
 
 /* Override variables when chat's dark mode is active */
-html.dark {
+html[data-timeline-theme="dark"] {
     --timeline-dot-color: #A0A0A0; /* ✅✅ 进一步提升亮度：#888 → #A0A0A0，深色主题下更清晰 */
     --timeline-dot-active-color: #8B5CF6; /* ✅✅ 更明亮的紫色：#7C3AED → #8B5CF6 (violet-500)，对比度更强 */
     --timeline-star-color: #FB923C; /* 橙色保持不变，已经很好 */

@@ -56,7 +56,7 @@
 /* ==================== 深色模式适配 ==================== */
 
 /* 深色模式 */
-html.dark .smart-input-prompt-btn,
+html[data-timeline-theme="dark"] .smart-input-prompt-btn,
 html[class*="dark"] .smart-input-prompt-btn,
 body.dark .smart-input-prompt-btn,
 body[class*="dark"] .smart-input-prompt-btn {
@@ -68,7 +68,7 @@ body[class*="dark"] .smart-input-prompt-btn {
         inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
-html.dark .smart-input-prompt-btn:hover,
+html[data-timeline-theme="dark"] .smart-input-prompt-btn:hover,
 html[class*="dark"] .smart-input-prompt-btn:hover,
 body.dark .smart-input-prompt-btn:hover,
 body[class*="dark"] .smart-input-prompt-btn:hover {

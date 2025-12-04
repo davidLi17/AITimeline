@@ -37,10 +37,10 @@
     cursor: pointer;
 }
 
-html.dark .katex.formula-interactive.formula-hover,
-html.dark .mwe-math-element.formula-interactive.formula-hover,
-html.dark .MathJax_SVG.formula-interactive.formula-hover,
-html.dark .MathJax.formula-interactive.formula-hover {
+html[data-timeline-theme="dark"] .katex.formula-interactive.formula-hover,
+html[data-timeline-theme="dark"] .mwe-math-element.formula-interactive.formula-hover,
+html[data-timeline-theme="dark"] .MathJax_SVG.formula-interactive.formula-hover,
+html[data-timeline-theme="dark"] .MathJax.formula-interactive.formula-hover {
     background-color: rgba(255, 255, 255, 0.08) !important;
 }
 

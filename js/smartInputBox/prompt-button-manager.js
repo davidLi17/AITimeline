@@ -177,15 +177,7 @@ class PromptButtonManager {
         button.className = 'smart-input-prompt-btn';
         button.innerHTML = `
             <svg class="smart-input-prompt-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 4V2"/>
-                <path d="M15 16v-2"/>
-                <path d="M8 9h2"/>
-                <path d="M20 9h2"/>
-                <path d="M17.8 11.8L19 13"/>
-                <path d="M15 9h0"/>
-                <path d="M17.8 6.2L19 5"/>
-                <path d="m3 21 9-9"/>
-                <path d="M12.2 6.2L11 5"/>
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
             </svg>
         `;
         
@@ -404,6 +396,9 @@ class PromptButtonManager {
         header.className = 'prompt-dropdown-header';
         header.innerHTML = `
             <div class="prompt-dropdown-title-wrapper">
+                <svg class="prompt-dropdown-title-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
                 <span class="prompt-dropdown-title">${chrome.i18n.getMessage('hosegod')}</span>
             </div>
             <button class="prompt-dropdown-action-btn" title="${chrome.i18n.getMessage('addpmpt') || '新增提示词'}">
@@ -495,9 +490,12 @@ class PromptButtonManager {
         const item = document.createElement('div');
         item.className = 'prompt-dropdown-item';
         
-        // 截取内容前30个字符
+        // 名称
+        const promptName = prompt.name || '未命名';
+        
+        // 截取内容前50个字符
         const displayText = prompt.content ? 
-            (prompt.content.length > 30 ? prompt.content.substring(0, 30) + '...' : prompt.content) 
+            (prompt.content.length > 50 ? prompt.content.substring(0, 50) + '...' : prompt.content) 
             : '空提示词';
         
         // 置顶图标
@@ -511,7 +509,12 @@ class PromptButtonManager {
             </span>
         ` : '';
         
-        item.innerHTML = `${iconHtml}<span class="prompt-dropdown-item-label">${this._escapeHtml(displayText)}</span>`;
+        item.innerHTML = `
+            <div class="prompt-dropdown-item-main">
+                ${iconHtml}<span class="prompt-dropdown-item-name">${this._escapeHtml(promptName)}</span>
+            </div>
+            <div class="prompt-dropdown-item-content">${this._escapeHtml(displayText)}</div>
+        `;
         
         item.addEventListener('click', () => {
             this._hidePromptDropdown();
@@ -575,13 +578,14 @@ class PromptButtonManager {
         if (!this._promptDropdown || !this.buttonElement) return;
         
         const buttonRect = this.buttonElement.getBoundingClientRect();
-        const dropdownWidth = 250;
-        const dropdownHeight = 420;
+        const dropdownWidth = 320;
+        const dropdownHeight = 400;
         const topPadding = 20; // 顶部安全距离
         const gap = 8; // 弹窗与按钮的间距
         
-        // 先设置宽度以便计算高度
+        // 设置固定宽高
         this._promptDropdown.style.width = `${dropdownWidth}px`;
+        this._promptDropdown.style.height = `${dropdownHeight}px`;
         this._promptDropdown.style.visibility = 'hidden';
         this._promptDropdown.style.display = 'flex';
         
@@ -593,23 +597,8 @@ class PromptButtonManager {
         left = Math.max(8, left);
         
         // 垂直位置：往上展开，底部挨着按钮顶部
-        // 可用高度 = 按钮顶部位置 - 顶部安全距离 - gap
-        const availableHeight = buttonRect.top - topPadding - gap;
-        
-        // 设置 body 的最大高度
-        const headerHeight = 44; // header 高度
-        const maxBodyHeight = Math.min(dropdownHeight - headerHeight, availableHeight - headerHeight);
-        const bodyEl = this._promptDropdown.querySelector('.prompt-dropdown-body');
-        if (bodyEl && maxBodyHeight > 0) {
-            bodyEl.style.maxHeight = `${maxBodyHeight}px`;
-        }
-        
-        // 重新获取弹窗实际高度
-        const actualHeight = this._promptDropdown.offsetHeight;
-        
-        // 底部位置 = 按钮顶部 - gap，顶部位置 = 底部位置 - 弹窗高度
-        const bottom = buttonRect.top - gap;
-        const top = Math.max(topPadding, bottom - actualHeight);
+        // 如果超过顶部安全距离，就把弹窗往下移
+        const top = Math.max(topPadding, buttonRect.top - gap - dropdownHeight);
         
         this._promptDropdown.style.left = `${left}px`;
         this._promptDropdown.style.top = `${top}px`;

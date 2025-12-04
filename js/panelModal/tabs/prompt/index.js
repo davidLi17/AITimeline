@@ -173,32 +173,36 @@ class PromptTab extends BaseTab {
             // 获取平台 logo
             const platform = this._getPlatformInfo(prompt.platformId);
             const platformLogo = platform ? `<img class="prompt-platform-logo" src="${chrome.runtime.getURL(platform.logoPath)}" alt="${platform.name}" title="${platform.name}">` : '';
+            const promptName = this._escapeHtml(prompt.name || '');
             
             return `
             <div class="prompt-item ${prompt.pinned ? 'pinned' : ''}" data-id="${prompt.id}">
                 <div class="prompt-item-content">
-                    <div class="prompt-item-text">${prompt.pinned ? pinIcon : ''}${platformLogo}<span class="prompt-item-text-content">${this._escapeHtml(prompt.content)}</span></div>
-                </div>
-                <div class="prompt-item-actions">
-                    <button class="prompt-item-btn prompt-pin-btn ${prompt.pinned ? 'active' : ''}" data-id="${prompt.id}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <line x1="5" y1="3" x2="19" y2="3"/>
-                            <line x1="12" y1="7" x2="12" y2="21"/>
-                            <polyline points="8 11 12 7 16 11"/>
-                        </svg>
-                    </button>
-                    <button class="prompt-item-btn prompt-edit-btn" data-id="${prompt.id}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                        </svg>
-                    </button>
-                    <button class="prompt-item-btn prompt-delete-btn" data-id="${prompt.id}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="3 6 5 6 21 6"/>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                        </svg>
-                    </button>
+                    <div class="prompt-item-header">
+                        <div class="prompt-item-name">${prompt.pinned ? pinIcon : ''}${platformLogo}<span class="prompt-item-name-text">${promptName}</span></div>
+                        <div class="prompt-item-actions">
+                            <button class="prompt-item-btn prompt-pin-btn ${prompt.pinned ? 'active' : ''}" data-id="${prompt.id}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <line x1="5" y1="3" x2="19" y2="3"/>
+                                    <line x1="12" y1="7" x2="12" y2="21"/>
+                                    <polyline points="8 11 12 7 16 11"/>
+                                </svg>
+                            </button>
+                            <button class="prompt-item-btn prompt-edit-btn" data-id="${prompt.id}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                            </button>
+                            <button class="prompt-item-btn prompt-delete-btn" data-id="${prompt.id}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="prompt-item-text"><span class="prompt-item-text-content">${this._escapeHtml(prompt.content)}</span></div>
                 </div>
             </div>`;
         }).join('');
@@ -250,50 +254,6 @@ class PromptTab extends BaseTab {
             });
         });
         
-        // 提示词项 hover tooltip
-        const promptItems = document.querySelectorAll('.prompt-item');
-        const prompts = this.getState('prompts') || [];
-        promptItems.forEach(item => {
-            const id = item.getAttribute('data-id');
-            const prompt = prompts.find(p => p.id === id);
-            if (!prompt) return;
-            
-            this.addEventListener(item, 'mouseenter', () => {
-                if (window.globalTooltipManager) {
-                    const tooltipId = 'prompt-tab-' + id;
-                    window.globalTooltipManager.show(
-                        tooltipId,
-                        'button',
-                        item,
-                        prompt.content,
-                        {
-                            placement: 'right',
-                            maxWidth: 300,
-                            showDelay: 300,
-                            gap: 8,
-                            color: {
-                                light: {
-                                    backgroundColor: '#0d0d0d',
-                                    textColor: '#ffffff',
-                                    borderColor: '#0d0d0d'
-                                },
-                                dark: {
-                                    backgroundColor: '#ffffff',
-                                    textColor: '#1f2937',
-                                    borderColor: '#e5e7eb'
-                                }
-                            }
-                        }
-                    );
-                }
-            });
-            
-            this.addEventListener(item, 'mouseleave', () => {
-                if (window.globalTooltipManager) {
-                    window.globalTooltipManager.hide();
-                }
-            });
-        });
     }
     
     /**
@@ -370,6 +330,13 @@ class PromptTab extends BaseTab {
             </div>
             <div class="prompt-modal-body">
                 <div class="prompt-modal-field">
+                    <label>提示词名称<span class="required-mark">*</span></label>
+                    <input type="text" class="prompt-modal-input" id="prompt-name-input"
+                        placeholder="输入提示词名称"
+                        maxlength="12" value="${this._escapeHtml(prompt?.name || '')}">
+                </div>
+                <div class="prompt-modal-field">
+                    <label>提示词内容<span class="required-mark">*</span></label>
                     <textarea class="prompt-modal-textarea" id="prompt-content-input"
                         placeholder="${chrome.i18n.getMessage('uwkjwjw')}"
                         rows="4" maxlength="1000">${this._escapeHtml(prompt?.content || '')}</textarea>
@@ -395,6 +362,7 @@ class PromptTab extends BaseTab {
         document.body.appendChild(overlay);
         
         // 获取元素
+        const nameInput = modal.querySelector('#prompt-name-input');
         const contentInput = modal.querySelector('#prompt-content-input');
         const charCount = modal.querySelector('#prompt-char-count');
         const closeBtn = modal.querySelector('.prompt-modal-close');
@@ -446,7 +414,6 @@ class PromptTab extends BaseTab {
         // 显示动画
         requestAnimationFrame(() => {
             overlay.classList.add('visible');
-            contentInput.focus();
         });
         
         // 关闭弹窗
@@ -461,9 +428,19 @@ class PromptTab extends BaseTab {
         
         // 保存
         const savePrompt = async () => {
+            const name = nameInput.value.trim();
             const content = contentInput.value.trim();
             
-            // 验证
+            // 验证名称
+            if (!name) {
+                if (window.globalToastManager) {
+                    window.globalToastManager.show('error', chrome.i18n.getMessage('zmxvkp'));
+                }
+                nameInput.focus();
+                return;
+            }
+            
+            // 验证内容
             if (!content) {
                 if (window.globalToastManager) {
                     window.globalToastManager.show('error', chrome.i18n.getMessage('zmxvkp'));
@@ -474,9 +451,9 @@ class PromptTab extends BaseTab {
             
             // 保存
             if (isEdit) {
-                await this.updatePrompt(prompt.id, { content, platformId: selectedPlatformId });
+                await this.updatePrompt(prompt.id, { name, content, platformId: selectedPlatformId });
             } else {
-                await this.byaskjndg({ content, platformId: selectedPlatformId });
+                await this.byaskjndg({ name, content, platformId: selectedPlatformId });
             }
             
             closeModal();
@@ -509,6 +486,7 @@ class PromptTab extends BaseTab {
         const prompts = this.getState('prompts') || [];
         const newPrompt = {
             id: Date.now().toString(),
+            name: values.name?.trim() || '',
             content: values.content.trim(),
             platformId: values.platformId || '',
             createdAt: Date.now()
@@ -547,6 +525,7 @@ class PromptTab extends BaseTab {
         if (index !== -1) {
             prompts[index] = {
                 ...prompts[index],
+                name: values.name !== undefined ? values.name.trim() : (prompts[index].name || ''),
                 content: values.content.trim(),
                 platformId: values.platformId !== undefined ? values.platformId : (prompts[index].platformId || ''),
                 updatedAt: Date.now()

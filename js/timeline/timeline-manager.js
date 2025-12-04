@@ -1395,20 +1395,16 @@ class TimelineManager {
     
     /**
      * ✅ 同步深色模式状态到 html 元素
-     * 确保时间轴样式能正确应用深色模式
+     * 使用 data-timeline-theme 属性，避免与 detectDarkMode() 的检测冲突
      */
     syncDarkModeClass() {
         const isDarkMode = this.adapter.detectDarkMode?.() || false;
         const htmlElement = document.documentElement;
         
         if (isDarkMode) {
-            if (!htmlElement.classList.contains('dark')) {
-                htmlElement.classList.add('dark');
-            }
+            htmlElement.setAttribute('data-timeline-theme', 'dark');
         } else {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-            }
+            htmlElement.setAttribute('data-timeline-theme', 'light');
         }
     }
     

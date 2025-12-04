@@ -115,13 +115,4 @@ class GrokAdapter extends SiteAdapter {
         return title.replace(/\s*-\s*Grok\s*$/i, '').trim();
     }
     
-    /**
-     * 检测 Grok 的深色模式
-     * Grok 通过 html 元素的 class 控制主题 (dark/light)
-     * @returns {boolean}
-     */
-    detectDarkMode() {
-        return document.documentElement.classList.contains('dark') || 
-               document.body.classList.contains('dark');
-    }
 }

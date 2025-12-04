@@ -55,7 +55,7 @@
     animation: inputModalSlideIn 0.3s ease;
 }
 
-html.dark .global-input-modal {
+html[data-timeline-theme="dark"] .global-input-modal {
     background: #2a2a2a;
 }
 
@@ -79,7 +79,7 @@ html.dark .global-input-modal {
     border-bottom: 1px solid #e5e7eb;
 }
 
-html.dark .global-input-modal-header {
+html[data-timeline-theme="dark"] .global-input-modal-header {
     border-bottom-color: #404040;
 }
 
@@ -90,7 +90,7 @@ html.dark .global-input-modal-header {
     color: #1f2937;
 }
 
-html.dark .global-input-modal-header h3 {
+html[data-timeline-theme="dark"] .global-input-modal-header h3 {
     color: #f3f4f6;
 }
 
@@ -117,7 +117,7 @@ html.dark .global-input-modal-header h3 {
     background: #ffffff;
 }
 
-html.dark .global-input-modal-input {
+html[data-timeline-theme="dark"] .global-input-modal-input {
     background: #1a1a1a;
     border-color: #404040;
     color: #f3f4f6;
@@ -127,7 +127,7 @@ html.dark .global-input-modal-input {
     border-color: #9ca3af;
 }
 
-html.dark .global-input-modal-input:hover {
+html[data-timeline-theme="dark"] .global-input-modal-input:hover {
     border-color: #6b7280;
 }
 
@@ -136,7 +136,7 @@ html.dark .global-input-modal-input:hover {
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-html.dark .global-input-modal-input:focus {
+html[data-timeline-theme="dark"] .global-input-modal-input:focus {
     border-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
@@ -145,7 +145,7 @@ html.dark .global-input-modal-input:focus {
     color: #9ca3af;
 }
 
-html.dark .global-input-modal-input::placeholder {
+html[data-timeline-theme="dark"] .global-input-modal-input::placeholder {
     color: #6b7280;
 }
 
@@ -161,7 +161,7 @@ html.dark .global-input-modal-input::placeholder {
     border-top: 1px solid #e5e7eb;
 }
 
-html.dark .global-input-modal-footer {
+html[data-timeline-theme="dark"] .global-input-modal-footer {
     border-top-color: #404040;
 }
 
@@ -189,7 +189,7 @@ html.dark .global-input-modal-footer {
     color: #374151;
 }
 
-html.dark .global-input-modal-cancel {
+html[data-timeline-theme="dark"] .global-input-modal-cancel {
     background: #404040;
     color: #d1d5db;
 }
@@ -198,7 +198,7 @@ html.dark .global-input-modal-cancel {
     background: #e5e7eb;
 }
 
-html.dark .global-input-modal-cancel:hover {
+html[data-timeline-theme="dark"] .global-input-modal-cancel:hover {
     background: #4b5563;
 }
 
@@ -208,7 +208,7 @@ html.dark .global-input-modal-cancel:hover {
     color: #ffffff;
 }
 
-html.dark .global-input-modal-confirm {
+html[data-timeline-theme="dark"] .global-input-modal-confirm {
     background: #ffffff;
     color: #000000;
 }
@@ -217,7 +217,7 @@ html.dark .global-input-modal-confirm {
     background: #1f1f1f;
 }
 
-html.dark .global-input-modal-confirm:hover {
+html[data-timeline-theme="dark"] .global-input-modal-confirm:hover {
     background: #e5e7eb;
 }
 

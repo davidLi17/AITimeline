@@ -90,14 +90,5 @@ class DoubaoAdapter extends SiteAdapter {
         return title.replace(/\s*-\s*豆包\s*$/i, '').trim();
     }
     
-    /**
-     * 检测豆包的深色模式
-     * 豆包通过 html 元素的 data-theme 属性控制主题 (dark/light)
-     * @returns {boolean}
-     */
-    detectDarkMode() {
-        const theme = document.documentElement.getAttribute('data-theme');
-        return theme === 'dark';
-    }
 }
 

@@ -71,14 +71,5 @@ class TongyiAdapter extends SiteAdapter {
         return '';
     }
     
-    /**
-     * 检测通义千问的深色模式
-     * 通义通过 html 元素的 data-theme 属性控制主题 (dark/light)
-     * @returns {boolean}
-     */
-    detectDarkMode() {
-        const theme = document.documentElement.getAttribute('data-theme');
-        return theme === 'dark';
-    }
 }
 

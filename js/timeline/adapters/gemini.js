@@ -127,15 +127,6 @@ class GeminiAdapter extends SiteAdapter {
     }
     
     /**
-     * 检测 Gemini 的深色模式
-     * Gemini 通过 body 元素的 class 控制主题 (dark-theme/light-theme)
-     * @returns {boolean}
-     */
-    detectDarkMode() {
-        return document.body.classList.contains('dark-theme');
-    }
-    
-    /**
      * 检测是否应该隐藏时间轴
      * Gemini: 当存在沉浸式面板或生成式UI框架时隐藏
      * @returns {boolean}
