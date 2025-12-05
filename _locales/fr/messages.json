@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline : Assistant IA ultime : ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline : L'assistant d'efficacité IA le plus puissant pour ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Copier des formules LaTeX, chronologie, touche Entrée pour nouvelle ligne, assistance Prompt. Doublez votre efficacité IA !"
+    "message": "Copier les formules LaTeX, chronologie de conversation interactive, retour à la ligne avec Entrée, bibliothèque de prompts. Doublez votre efficacité avec l'IA."
   },
   "qwxpzm": {
-    "message": "Enregistrer"
+    "message": "Favori"
   },
   "hkjvnr": {
-    "message": "Voir les enregistrements"
+    "message": "Voir les favoris"
   },
   "zmvkpx": {
-    "message": "Enregistrer la conversation"
+    "message": "Ajouter la conversation aux favoris"
   },
   "bpxjkw": {
-    "message": "Retirer des enregistrements"
+    "message": "Retirer des favoris"
   },
   "vnkxpm": {
-    "message": "Liste des enregistrements"
+    "message": "Liste des favoris"
   },
   "kxpmzv": {
-    "message": "Enregistré avec succès"
+    "message": "Ajouté aux favoris"
   },
   "pzmvkx": {
-    "message": "Retiré des enregistrements"
+    "message": "Retiré des favoris"
   },
   "jwvnkp": {
     "message": "Aucune donnée"
@@ -51,7 +51,7 @@
     "message": "Confirmer"
   },
   "mzpxvk": {
-    "message": "Le thème ne peut pas être vide"
+    "message": "Le titre ne peut pas être vide"
   },
   "xvkpmz": {
     "message": "Renommer"
@@ -63,13 +63,13 @@
     "message": "Toutes les données sont stockées localement dans votre navigateur"
   },
   "vxpzmk": {
-    "message": "Open source"
+    "message": "Open Source"
   },
   "mkvxpz": {
-    "message": "Étoile sur GitHub"
+    "message": "Mettre une étoile sur GitHub"
   },
   "xpzmkv": {
-    "message": "Bienvenue à"
+    "message": "Bienvenue"
   },
   "pkmzvx": {
     "message": "Partager avec des amis"
@@ -93,19 +93,19 @@
     "message": "Dossier par défaut"
   },
   "xmkvpz": {
-    "message": "Créer un sous-dossier dans「{folderName}」"
+    "message": "Créer un sous-dossier dans « {folderName} »"
   },
   "vzkpmx": {
-    "message": "Veuillez saisir le nom du dossier"
+    "message": "Entrez le nom du dossier"
   },
   "kmxpvz": {
-    "message": "Le nom du dossier est requis"
+    "message": "Le nom du dossier ne peut pas être vide"
   },
   "pxmzvk": {
     "message": "Renommer le dossier"
   },
   "mvzxkp": {
-    "message": "Veuillez saisir un nouveau nom"
+    "message": "Entrez le nouveau nom"
   },
   "kpvzmx": {
     "message": "Le nom du dossier existe déjà"
@@ -132,13 +132,13 @@
     "message": "Déplacer vers"
   },
   "wjxnkp": {
-    "message": "Supprimer le dossier「{folderName}」?\n\nCe dossier et ses sous-dossiers contiennent {count} éléments enregistrés. Ils seront déplacés vers le dossier par défaut."
+    "message": "Êtes-vous sûr de vouloir supprimer le dossier « {folderName} » ?\n\nCe dossier et ses sous-dossiers contiennent {count} éléments favoris. Après la suppression, ces éléments seront déplacés vers le dossier par défaut."
   },
   "qzmvkx": {
-    "message": "Êtes-vous sûr de vouloir supprimer le dossier「{folderName}」?"
+    "message": "Êtes-vous sûr de vouloir supprimer le dossier « {folderName} » ?"
   },
   "mvkzpx": {
-    "message": "Rechercher dans les enregistrements..."
+    "message": "Rechercher dans les favoris..."
   },
   "kxzpmv": {
     "message": "Enregistrer dans"
@@ -153,16 +153,16 @@
     "message": "Chronologie"
   },
   "mzkvxp": {
-    "message": "Lorsqu'activé, une chronologie interactive apparaîtra sur le côté droit de la page de conversation IA."
+    "message": "Lorsque activé, une chronologie interactive s'affichera sur le côté droit de la page de conversation IA."
   },
   "vkpmzx": {
-    "message": "Touches ↑ / ↓ du clavier pour naviguer entre les nœuds de conversation"
+    "message": "Utiliser les touches ↑ / ↓ pour naviguer entre les nœuds de conversation"
   },
   "xpvmkz": {
-    "message": "Lorsque activé, utilisez les touches ↑ / ↓ du clavier pour sauter rapidement entre les nœuds de conversation."
+    "message": "Lorsque activé, utilisez les touches ↑ / ↓ pour passer rapidement d'un nœud de conversation à l'autre."
   },
   "pxmzkv": {
-    "message": "📌 Marquer les conversations clés"
+    "message": "📌 Marquer les conversations importantes"
   },
   "kzxvpm": {
     "message": "Appuyez longuement sur un nœud de conversation dans la chronologie pour le marquer comme important."
@@ -171,51 +171,93 @@
     "message": "Zone de chat"
   },
   "kvzmxp": {
-    "message": "Utiliser la touche Entrée du clavier pour nouvelle ligne"
-  },
-  "mxpzvk": {
-    "message": "Lorsqu'activé, dans la zone de saisie de conversation IA, appuyez touche Entrée une fois pour une nouvelle ligne, deux fois rapidement pour envoyer le message."
+    "message": "Utiliser la touche Entrée pour retour à la ligne"
   },
   "kpxvmz": {
-    "message": "Copier formule"
+    "message": "Copier la formule"
   },
   "zmkvpx": {
-    "message": "Copier formule LaTeX"
+    "message": "Copier la formule LaTeX"
   },
   "vxkpzm": {
-    "message": "Lorsqu'activé, identifier automatiquement les formules sur la page et cliquer pour copier au format LaTeX."
+    "message": "Lorsque activé, détecte automatiquement les formules sur la page et cliquez pour copier au format LaTeX."
   },
   "mkvzpx": {
     "message": "Plateformes prises en charge"
   },
-  "zpkmvx": {
-    "message": "Entrée pour nouvelle ligne"
-  },
   "vxmkpz": {
-    "message": "Touche Entrée : Une fois pour nouvelle ligne, double pour envoyer"
+    "message": "Touche Entrée : appuyez une fois pour retour à la ligne, deux fois pour envoyer"
   },
   "mkpxvz": {
-    "message": "Lorsqu'activé, dans la zone de saisie de conversation IA, appuyez touche Entrée une fois pour une nouvelle ligne, deux fois rapidement pour envoyer le message."
-  },
-  "zpvmkx": {
-    "message": "Échec de l'enregistrement"
+    "message": "Lorsque activé, dans la zone de saisie du chat IA, appuyez sur Entrée une fois pour retour à la ligne, appuyez rapidement deux fois pour envoyer le message."
   },
   "xvpmkz": {
-    "message": "Afficher la liste des favoris"
+    "message": "Voir la liste des favoris"
   },
   "qoytxz": {
-    "message": "Cette fonctionnalité est toujours activée et ne peut pas être désactivée"
-  }
-,
+    "message": "Cette fonctionnalité est activée par défaut et ne peut pas être désactivée"
+  },
   "hosegod": {
     "message": "Bibliothèque de prompts"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Bouton Prompts"
   },
   "hobsidbg": {
-    "message": "Lorsque activé, afficher le bouton raccourci prompts à gauche de la zone de chat"
+    "message": "Lorsque activé, affiche le bouton d'accès rapide aux prompts sur le côté gauche de la zone de chat"
+  },
+  "biwhckdj": {
+    "message": "Liste des prompts"
+  },
+  "byaskjndg": {
+    "message": "Ajouter un prompt"
+  },
+  "hsksuywm": {
+    "message": "Modifier le prompt"
+  },
+  "hsuywkw": {
+    "message": "Nom du prompt"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Entrez le nom du prompt"
+  },
+  "promptContent": {
+    "message": "Contenu"
+  },
+  "uwkjwjw": {
+    "message": "Entrez le contenu du prompt"
+  },
+  "hsiwhwl": {
+    "message": "Aucun prompt"
+  },
+  "shwsuwk": {
+    "message": "Prompt ajouté"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt mis à jour"
+  },
+  "qrtypd": {
+    "message": "Prompt supprimé"
+  },
+  "dcnfmq": {
+    "message": "Êtes-vous sûr de vouloir supprimer ce prompt ?"
+  },
+  "pbtdsq": {
+    "message": "Bouton de prompt"
+  },
+  "svkbtn": {
+    "message": "Enregistrer"
+  },
+  "pmpknd": {
+    "message": "Épinglé"
+  },
+  "pmuknp": {
+    "message": "Désépinglé"
+  },
+  "addkbt": {
+    "message": "Ajouter"
+  },
+  "ptfmsl": {
+    "message": "S'applique à"
+  },
+  "allptfm": {
+    "message": "Toutes les plateformes IA"
   }
 }
-

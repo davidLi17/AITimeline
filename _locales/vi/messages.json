@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: Trợ lý hiệu suất AI mạnh mẽ nhất: ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline: Trợ lý hiệu suất AI mạnh nhất cho ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Tính năng: Sao chép LaTeX, dòng thời gian, Enter xuống dòng, hỗ trợ Prompt. Tăng gấp đôi hiệu suất AI của bạn!"
+    "message": "Sao chép công thức LaTeX, dòng thời gian hội thoại tương tác, xuống dòng bằng Enter, thư viện prompt. Nhân đôi hiệu suất AI của bạn."
   },
   "qwxpzm": {
-    "message": "Lưu"
+    "message": "Yêu thích"
   },
   "hkjvnr": {
-    "message": "Xem đã lưu"
+    "message": "Xem mục yêu thích"
   },
   "zmvkpx": {
-    "message": "Lưu cuộc trò chuyện"
+    "message": "Thêm hội thoại vào yêu thích"
   },
   "bpxjkw": {
-    "message": "Bỏ lưu"
+    "message": "Xóa khỏi yêu thích"
   },
   "vnkxpm": {
-    "message": "Danh sách đã lưu"
+    "message": "Danh sách yêu thích"
   },
   "kxpmzv": {
-    "message": "Lưu thành công"
+    "message": "Đã thêm vào yêu thích"
   },
   "pzmvkx": {
-    "message": "Đã bỏ lưu"
+    "message": "Đã xóa khỏi yêu thích"
   },
   "jwvnkp": {
     "message": "Không có dữ liệu"
@@ -51,7 +51,7 @@
     "message": "Xác nhận"
   },
   "mzpxvk": {
-    "message": "Chủ đề không được để trống"
+    "message": "Tiêu đề không được để trống"
   },
   "xvkpmz": {
     "message": "Đổi tên"
@@ -66,7 +66,7 @@
     "message": "Mã nguồn mở"
   },
   "mkvxpz": {
-    "message": "Gắn sao trên GitHub"
+    "message": "Đánh dấu sao trên GitHub"
   },
   "xpzmkv": {
     "message": "Chào mừng"
@@ -93,19 +93,19 @@
     "message": "Thư mục mặc định"
   },
   "xmkvpz": {
-    "message": "Tạo thư mục con trong「{folderName}」"
+    "message": "Tạo thư mục con trong \"{folderName}\""
   },
   "vzkpmx": {
-    "message": "Vui lòng nhập tên thư mục"
+    "message": "Nhập tên thư mục"
   },
   "kmxpvz": {
-    "message": "Tên thư mục là bắt buộc"
+    "message": "Tên thư mục không được để trống"
   },
   "pxmzvk": {
     "message": "Đổi tên thư mục"
   },
   "mvzxkp": {
-    "message": "Vui lòng nhập tên mới"
+    "message": "Nhập tên mới"
   },
   "kpvzmx": {
     "message": "Tên thư mục đã tồn tại"
@@ -132,13 +132,13 @@
     "message": "Di chuyển đến"
   },
   "wjxnkp": {
-    "message": "Xóa thư mục「{folderName}」?\n\nThư mục này và các thư mục con chứa {count} mục đã lưu. Chúng sẽ được chuyển đến thư mục mặc định."
+    "message": "Bạn có chắc muốn xóa thư mục \"{folderName}\"?\n\nThư mục này và các thư mục con chứa {count} mục yêu thích. Sau khi xóa, các mục này sẽ được chuyển đến thư mục mặc định."
   },
   "qzmvkx": {
-    "message": "Bạn có chắc chắn muốn xóa thư mục「{folderName}」?"
+    "message": "Bạn có chắc muốn xóa thư mục \"{folderName}\"?"
   },
   "mvkzpx": {
-    "message": "Tìm kiếm đã lưu..."
+    "message": "Tìm kiếm yêu thích..."
   },
   "kxzpmv": {
     "message": "Lưu vào"
@@ -153,28 +153,25 @@
     "message": "Dòng thời gian"
   },
   "mzkvxp": {
-    "message": "Khi bật, dòng thời gian tương tác sẽ xuất hiện ở phía bên phải của trang hội thoại AI."
+    "message": "Khi bật, dòng thời gian tương tác sẽ hiển thị ở bên phải trang hội thoại AI."
   },
   "vkpmzx": {
-    "message": "Phím ↑ / ↓ trên bàn phím để điều hướng giữa các nút hội thoại"
+    "message": "Sử dụng phím ↑ / ↓ để di chuyển giữa các nút hội thoại"
   },
   "xpvmkz": {
-    "message": "Khi được bật, sử dụng phím ↑ / ↓ trên bàn phím để chuyển nhanh giữa các nút hội thoại."
+    "message": "Khi bật, sử dụng phím ↑ / ↓ để nhảy nhanh giữa các nút hội thoại."
   },
   "pxmzkv": {
-    "message": "📌 Đánh dấu cuộc trò chuyện quan trọng"
+    "message": "📌 Đánh dấu hội thoại quan trọng"
   },
   "kzxvpm": {
-    "message": "Nhấn giữ vào nút hội thoại trên dòng thời gian để đánh dấu là quan trọng."
+    "message": "Nhấn giữ nút hội thoại trên dòng thời gian để đánh dấu là quan trọng."
   },
   "xmvkpz": {
-    "message": "Hộp trò chuyện"
+    "message": "Hộp chat"
   },
   "kvzmxp": {
-    "message": "Sử dụng phím Enter trên bàn phím để xuống dòng"
-  },
-  "mxpzvk": {
-    "message": "Khi bật, trong hộp nhập cuộc trò chuyện AI, nhấn phím Enter một lần để xuống dòng, hai lần nhanh để gửi tin nhắn."
+    "message": "Sử dụng phím Enter để xuống dòng"
   },
   "kpxvmz": {
     "message": "Sao chép công thức"
@@ -183,39 +180,85 @@
     "message": "Sao chép công thức LaTeX"
   },
   "vxkpzm": {
-    "message": "Khi bật, tự động nhận dạng công thức trên trang và nhấp để sao chép sang định dạng LaTeX."
+    "message": "Khi bật, tự động phát hiện công thức trên trang và nhấp để sao chép dưới dạng LaTeX."
   },
   "mkvzpx": {
     "message": "Nền tảng được hỗ trợ"
   },
-  "zpkmvx": {
-    "message": "Enter để xuống dòng"
-  },
   "vxmkpz": {
-    "message": "Phím Enter: Nhấn một lần để xuống dòng, hai lần để gửi"
+    "message": "Phím Enter: nhấn một lần để xuống dòng, hai lần để gửi"
   },
   "mkpxvz": {
-    "message": "Khi bật, trong hộp nhập cuộc trò chuyện AI, nhấn phím Enter một lần để xuống dòng, hai lần nhanh để gửi tin nhắn."
-  },
-  "zpvmkx": {
-    "message": "Lưu thất bại"
+    "message": "Khi bật, trong hộp nhập chat AI, nhấn Enter một lần để xuống dòng, nhấn nhanh hai lần để gửi tin nhắn."
   },
   "xvpmkz": {
-    "message": "Xem Danh Sách Yêu Thích"
+    "message": "Xem danh sách yêu thích"
   },
   "qoytxz": {
-    "message": "Tính năng này luôn được bật và không thể tắt"
-  }
-,
+    "message": "Tính năng này được bật theo mặc định và không thể tắt"
+  },
   "hosegod": {
-    "message": "Thư viện prompt"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Nút Prompt"
+    "message": "Thư viện Prompt"
   },
   "hobsidbg": {
-    "message": "Khi bật, hiển thị nút phím tắt prompt ở bên trái hộp trò chuyện"
+    "message": "Khi bật, hiển thị nút truy cập nhanh prompt ở bên trái hộp chat"
+  },
+  "biwhckdj": {
+    "message": "Danh sách Prompt"
+  },
+  "byaskjndg": {
+    "message": "Thêm Prompt"
+  },
+  "hsksuywm": {
+    "message": "Chỉnh sửa Prompt"
+  },
+  "hsuywkw": {
+    "message": "Tên Prompt"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Nhập tên prompt"
+  },
+  "promptContent": {
+    "message": "Nội dung"
+  },
+  "uwkjwjw": {
+    "message": "Nhập nội dung prompt"
+  },
+  "hsiwhwl": {
+    "message": "Chưa có prompt"
+  },
+  "shwsuwk": {
+    "message": "Đã thêm prompt"
+  },
+  "hwkwbhwk": {
+    "message": "Đã cập nhật prompt"
+  },
+  "qrtypd": {
+    "message": "Đã xóa prompt"
+  },
+  "dcnfmq": {
+    "message": "Bạn có chắc muốn xóa prompt này?"
+  },
+  "pbtdsq": {
+    "message": "Nút Prompt"
+  },
+  "svkbtn": {
+    "message": "Lưu"
+  },
+  "pmpknd": {
+    "message": "Đã ghim"
+  },
+  "pmuknp": {
+    "message": "Đã bỏ ghim"
+  },
+  "addkbt": {
+    "message": "Thêm"
+  },
+  "ptfmsl": {
+    "message": "Áp dụng cho"
+  },
+  "allptfm": {
+    "message": "Tất cả nền tảng AI"
   }
 }
 

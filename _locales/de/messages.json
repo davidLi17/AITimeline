@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: Der leistungsstärkste KI-Effizienz-Assistent: ChatGPT, Gemini"
+    "message": "AI Timeline: Der leistungsstärkste KI-Effizienzassistent für ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "LaTeX-Formeln kopieren, Gesprächs-Timeline, Enter für Zeilenumbruch, Prompt-Unterstützung. Verdoppeln Sie Ihre KI-Effizienz!"
+    "message": "LaTeX-Formeln kopieren, interaktive Gesprächszeitleiste, Zeilenumbruch mit Enter, Prompt-Bibliothek. Verdoppeln Sie Ihre KI-Effizienz."
   },
   "qwxpzm": {
-    "message": "Speichern"
+    "message": "Favorisieren"
   },
   "hkjvnr": {
-    "message": "Gespeicherte anzeigen"
+    "message": "Favoriten ansehen"
   },
   "zmvkpx": {
-    "message": "Gespräch speichern"
+    "message": "Gespräch favorisieren"
   },
   "bpxjkw": {
-    "message": "Speicherung aufheben"
+    "message": "Favorit entfernen"
   },
   "vnkxpm": {
-    "message": "Gespeicherte Liste"
+    "message": "Favoritenliste"
   },
   "kxpmzv": {
-    "message": "Erfolgreich gespeichert"
+    "message": "Erfolgreich favorisiert"
   },
   "pzmvkx": {
-    "message": "Speicherung aufgehoben"
+    "message": "Favorit entfernt"
   },
   "jwvnkp": {
     "message": "Keine Daten"
@@ -51,7 +51,7 @@
     "message": "Bestätigen"
   },
   "mzpxvk": {
-    "message": "Thema darf nicht leer sein"
+    "message": "Titel darf nicht leer sein"
   },
   "xvkpmz": {
     "message": "Umbenennen"
@@ -66,10 +66,10 @@
     "message": "Open Source"
   },
   "mkvxpz": {
-    "message": "Stern auf GitHub"
+    "message": "Auf GitHub bewerten"
   },
   "xpzmkv": {
-    "message": "Willkommen zu"
+    "message": "Willkommen"
   },
   "pkmzvx": {
     "message": "Mit Freunden teilen"
@@ -93,19 +93,19 @@
     "message": "Standardordner"
   },
   "xmkvpz": {
-    "message": "Neuen Unterordner in「{folderName}」erstellen"
+    "message": "Unterordner in \"{folderName}\" erstellen"
   },
   "vzkpmx": {
-    "message": "Bitte Ordnernamen eingeben"
+    "message": "Ordnernamen eingeben"
   },
   "kmxpvz": {
-    "message": "Ordnername erforderlich"
+    "message": "Ordnername darf nicht leer sein"
   },
   "pxmzvk": {
     "message": "Ordner umbenennen"
   },
   "mvzxkp": {
-    "message": "Bitte neuen Namen eingeben"
+    "message": "Neuen Namen eingeben"
   },
   "kpvzmx": {
     "message": "Ordnername existiert bereits"
@@ -132,16 +132,16 @@
     "message": "Verschieben nach"
   },
   "wjxnkp": {
-    "message": "Ordner「{folderName}」löschen?\n\nDieser Ordner und seine Unterordner enthalten {count} gespeicherte Elemente. Diese werden in den Standardordner verschoben."
+    "message": "Möchten Sie den Ordner \"{folderName}\" wirklich löschen?\n\nDieser Ordner und seine Unterordner enthalten {count} Favoriten. Nach dem Löschen werden diese in den Standardordner verschoben."
   },
   "qzmvkx": {
-    "message": "Sind Sie sicher, dass Sie den Ordner「{folderName}」löschen möchten?"
+    "message": "Möchten Sie den Ordner \"{folderName}\" wirklich löschen?"
   },
   "mvkzpx": {
-    "message": "Gespeicherte durchsuchen..."
+    "message": "Favoriten durchsuchen..."
   },
   "kxzpmv": {
-    "message": "Speichern in"
+    "message": "Speichern unter"
   },
   "vmzpkx": {
     "message": "Standardordner"
@@ -153,13 +153,13 @@
     "message": "Zeitleiste"
   },
   "mzkvxp": {
-    "message": "Wenn aktiviert, wird eine interaktive Zeitleiste auf der rechten Seite der AI-Gesprächsseite angezeigt."
+    "message": "Wenn aktiviert, wird eine interaktive Zeitleiste auf der rechten Seite der KI-Gesprächsseite angezeigt."
   },
   "vkpmzx": {
-    "message": "Pfeiltasten ↑ / ↓ um zwischen Gesprächsknoten zu navigieren"
+    "message": "Mit ↑ / ↓ Tasten zwischen Gesprächsknoten navigieren"
   },
   "xpvmkz": {
-    "message": "Wenn aktiviert, verwenden Sie die Pfeiltasten ↑ / ↓, um schnell zwischen Gesprächsknoten zu springen."
+    "message": "Wenn aktiviert, können Sie mit ↑ / ↓ Tasten schnell zwischen Gesprächsknoten wechseln."
   },
   "pxmzkv": {
     "message": "📌 Wichtige Gespräche markieren"
@@ -168,13 +168,10 @@
     "message": "Drücken Sie lange auf einen Gesprächsknoten in der Zeitleiste, um ihn als wichtig zu markieren."
   },
   "xmvkpz": {
-    "message": "Chatfeld"
+    "message": "Chat-Box"
   },
   "kvzmxp": {
-    "message": "Tastatur Enter-Taste für neue Zeile"
-  },
-  "mxpzvk": {
-    "message": "Wenn aktiviert, drücken Sie im AI-Gesprächseingabefeld Enter-Taste einmal für eine neue Zeile, zweimal schnell um Nachricht zu senden."
+    "message": "Enter-Taste für Zeilenumbruch"
   },
   "kpxvmz": {
     "message": "Formel kopieren"
@@ -183,39 +180,84 @@
     "message": "LaTeX-Formel kopieren"
   },
   "vxkpzm": {
-    "message": "Wenn aktiviert, werden Formeln auf der Seite automatisch erkannt und können durch Klicken im LaTeX-Format kopiert werden."
+    "message": "Wenn aktiviert, werden Formeln auf der Seite automatisch erkannt und können per Klick als LaTeX kopiert werden."
   },
   "mkvzpx": {
     "message": "Unterstützte Plattformen"
   },
-  "zpkmvx": {
-    "message": "Enter für neue Zeile"
-  },
   "vxmkpz": {
-    "message": "Enter-Taste: Einmal für neue Zeile, doppelt zum Senden"
+    "message": "Enter-Taste: Einmal für Zeilenumbruch, doppelt für Senden"
   },
   "mkpxvz": {
-    "message": "Wenn aktiviert, drücken Sie im AI-Gesprächseingabefeld Enter-Taste einmal für eine neue Zeile, zweimal schnell um Nachricht zu senden."
-  },
-  "zpvmkx": {
-    "message": "Speichern fehlgeschlagen"
+    "message": "Wenn aktiviert, erzeugt einmaliges Drücken von Enter einen Zeilenumbruch, schnelles doppeltes Drücken sendet die Nachricht."
   },
   "xvpmkz": {
     "message": "Favoritenliste anzeigen"
   },
   "qoytxz": {
-    "message": "Diese Funktion ist immer aktiviert und kann nicht ausgeschaltet werden"
-  }
-,
+    "message": "Diese Funktion ist standardmäßig aktiviert und kann nicht deaktiviert werden"
+  },
   "hosegod": {
     "message": "Prompt-Bibliothek"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Prompt-Button"
   },
   "hobsidbg": {
-    "message": "Wenn aktiviert, Prompt-Schnellzugriff links neben dem Chatfeld anzeigen"
+    "message": "Wenn aktiviert, wird links neben der Chat-Box eine Prompt-Schnellzugriffstaste angezeigt"
+  },
+  "biwhckdj": {
+    "message": "Prompt-Liste"
+  },
+  "byaskjndg": {
+    "message": "Prompt hinzufügen"
+  },
+  "hsksuywm": {
+    "message": "Prompt bearbeiten"
+  },
+  "hsuywkw": {
+    "message": "Prompt-Name"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Prompt-Namen eingeben"
+  },
+  "promptContent": {
+    "message": "Inhalt"
+  },
+  "uwkjwjw": {
+    "message": "Prompt-Inhalt eingeben"
+  },
+  "hsiwhwl": {
+    "message": "Keine Prompts vorhanden"
+  },
+  "shwsuwk": {
+    "message": "Prompt hinzugefügt"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt aktualisiert"
+  },
+  "qrtypd": {
+    "message": "Prompt gelöscht"
+  },
+  "dcnfmq": {
+    "message": "Möchten Sie diesen Prompt wirklich löschen?"
+  },
+  "pbtdsq": {
+    "message": "Prompt-Schaltfläche"
+  },
+  "svkbtn": {
+    "message": "Speichern"
+  },
+  "pmpknd": {
+    "message": "Angepinnt"
+  },
+  "pmuknp": {
+    "message": "Pin entfernt"
+  },
+  "addkbt": {
+    "message": "Hinzufügen"
+  },
+  "ptfmsl": {
+    "message": "Gilt für"
+  },
+  "allptfm": {
+    "message": "Alle KI-Plattformen"
   }
 }
-

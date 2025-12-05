@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: O assistente de IA definitivo: ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline: O assistente de eficiência de IA mais poderoso para ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Copiar fórmulas LaTeX, cronologia, tecla Enter para nova linha, assistência de Prompt. Duplique sua eficiência com IA!"
+    "message": "Copiar fórmulas LaTeX, cronologia de conversação interativa, nova linha com Enter, biblioteca de prompts. Duplique a sua eficiência com IA."
   },
   "qwxpzm": {
-    "message": "Guardar"
+    "message": "Favorito"
   },
   "hkjvnr": {
-    "message": "Ver guardados"
+    "message": "Ver favoritos"
   },
   "zmvkpx": {
-    "message": "Guardar conversa"
+    "message": "Adicionar conversa aos favoritos"
   },
   "bpxjkw": {
-    "message": "Remover dos guardados"
+    "message": "Remover dos favoritos"
   },
   "vnkxpm": {
-    "message": "Lista de guardados"
+    "message": "Lista de favoritos"
   },
   "kxpmzv": {
-    "message": "Guardado com sucesso"
+    "message": "Adicionado aos favoritos"
   },
   "pzmvkx": {
-    "message": "Removido dos guardados"
+    "message": "Removido dos favoritos"
   },
   "jwvnkp": {
     "message": "Sem dados"
@@ -42,7 +42,7 @@
     "message": "Falha ao copiar"
   },
   "zmxvkp": {
-    "message": "Por favor introduza"
+    "message": "Por favor, introduza"
   },
   "pxvkmz": {
     "message": "Cancelar"
@@ -51,7 +51,7 @@
     "message": "Confirmar"
   },
   "mzpxvk": {
-    "message": "O tema não pode estar vazio"
+    "message": "O título não pode estar vazio"
   },
   "xvkpmz": {
     "message": "Renomear"
@@ -66,7 +66,7 @@
     "message": "Código aberto"
   },
   "mkvxpz": {
-    "message": "Estrela no GitHub"
+    "message": "Dar estrela no GitHub"
   },
   "xpzmkv": {
     "message": "Bem-vindo"
@@ -75,7 +75,7 @@
     "message": "Partilhar com amigos"
   },
   "fbklink": {
-    "message": "Comentários"
+    "message": "Feedback"
   },
   "mvxkpz": {
     "message": "Copiar fórmula LaTeX"
@@ -93,28 +93,28 @@
     "message": "Pasta predefinida"
   },
   "xmkvpz": {
-    "message": "Criar subpasta em「{folderName}」"
+    "message": "Criar subpasta em \"{folderName}\""
   },
   "vzkpmx": {
-    "message": "Por favor introduza o nome da pasta"
+    "message": "Introduza o nome da pasta"
   },
   "kmxpvz": {
-    "message": "O nome da pasta é obrigatório"
+    "message": "O nome da pasta não pode estar vazio"
   },
   "pxmzvk": {
     "message": "Renomear pasta"
   },
   "mvzxkp": {
-    "message": "Por favor introduza um novo nome"
+    "message": "Introduza o novo nome"
   },
   "kpvzmx": {
     "message": "O nome da pasta já existe"
   },
   "xzvkpm": {
-    "message": "Criada com sucesso"
+    "message": "Criado com sucesso"
   },
   "vmkxpz": {
-    "message": "Atualizada com sucesso"
+    "message": "Atualizado com sucesso"
   },
   "zpxmkv": {
     "message": "Pasta não encontrada"
@@ -126,19 +126,19 @@
     "message": "Falha ao eliminar"
   },
   "pzvkmx": {
-    "message": "Movida com sucesso"
+    "message": "Movido com sucesso"
   },
   "vxkpmz": {
     "message": "Mover para"
   },
   "wjxnkp": {
-    "message": "Eliminar pasta「{folderName}」?\n\nEsta pasta e as suas subpastas contêm {count} itens guardados. Serão movidos para a pasta predefinida."
+    "message": "Tem a certeza de que pretende eliminar a pasta \"{folderName}\"?\n\nEsta pasta e as suas subpastas contêm {count} itens favoritos. Após a eliminação, estes itens serão movidos para a pasta predefinida."
   },
   "qzmvkx": {
-    "message": "Tem a certeza de que pretende eliminar a pasta「{folderName}」?"
+    "message": "Tem a certeza de que pretende eliminar a pasta \"{folderName}\"?"
   },
   "mvkzpx": {
-    "message": "Pesquisar nos guardados..."
+    "message": "Pesquisar favoritos..."
   },
   "kxzpmv": {
     "message": "Guardar em"
@@ -150,31 +150,28 @@
     "message": "Título"
   },
   "pxkmvz": {
-    "message": "Linha do tempo"
+    "message": "Cronologia"
   },
   "mzkvxp": {
-    "message": "Quando ativado, uma linha do tempo interativa aparecerá no lado direito da página de conversa AI."
+    "message": "Quando ativado, uma cronologia interativa será exibida no lado direito da página de conversa de IA."
   },
   "vkpmzx": {
-    "message": "Teclas ↑ / ↓ do teclado para navegar entre nós de conversa"
+    "message": "Use as teclas ↑ / ↓ para navegar entre os nós da conversa"
   },
   "xpvmkz": {
-    "message": "Quando ativado, use as teclas ↑ / ↓ do teclado para saltar rapidamente entre os nós de conversa."
+    "message": "Quando ativado, use as teclas ↑ / ↓ para saltar rapidamente entre os nós da conversa."
   },
   "pxmzkv": {
-    "message": "📌 Marcar conversas-chave"
+    "message": "📌 Marcar conversas importantes"
   },
   "kzxvpm": {
-    "message": "Pressione longamente num nó de conversa na linha do tempo para o marcar como importante."
+    "message": "Mantenha premido um nó da conversa na cronologia para o marcar como importante."
   },
   "xmvkpz": {
     "message": "Caixa de chat"
   },
   "kvzmxp": {
-    "message": "Usar tecla Enter do teclado para nova linha"
-  },
-  "mxpzvk": {
-    "message": "Quando ativado, na caixa de entrada de conversação AI, pressione tecla Enter uma vez para nova linha, duas vezes rapidamente para enviar mensagem."
+    "message": "Usar tecla Enter para nova linha"
   },
   "kpxvmz": {
     "message": "Copiar fórmula"
@@ -183,39 +180,85 @@
     "message": "Copiar fórmula LaTeX"
   },
   "vxkpzm": {
-    "message": "Quando ativado, identificar automaticamente fórmulas na página e clicar para copiar no formato LaTeX."
+    "message": "Quando ativado, deteta automaticamente fórmulas na página e clique para copiar em formato LaTeX."
   },
   "mkvzpx": {
     "message": "Plataformas suportadas"
   },
-  "zpkmvx": {
-    "message": "Enter para nova linha"
-  },
   "vxmkpz": {
-    "message": "Tecla Enter: Uma vez para nova linha, duplo para enviar"
+    "message": "Tecla Enter: prima uma vez para nova linha, duas vezes para enviar"
   },
   "mkpxvz": {
-    "message": "Quando ativado, na caixa de entrada de conversação AI, pressione tecla Enter uma vez para nova linha, duas vezes rapidamente para enviar mensagem."
-  },
-  "zpvmkx": {
-    "message": "Falha ao guardar"
+    "message": "Quando ativado, na caixa de entrada do chat de IA, prima Enter uma vez para nova linha, prima rapidamente duas vezes para enviar a mensagem."
   },
   "xvpmkz": {
-    "message": "Ver Lista de Favoritos"
+    "message": "Ver lista de favoritos"
   },
   "qoytxz": {
-    "message": "Esta funcionalidade está sempre ativada e não pode ser desativada"
-  }
-,
+    "message": "Esta funcionalidade está ativada por predefinição e não pode ser desativada"
+  },
   "hosegod": {
     "message": "Biblioteca de prompts"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Botão de Prompts"
   },
   "hobsidbg": {
-    "message": "Quando ativado, mostrar botão de atalho de prompts à esquerda da caixa de chat"
+    "message": "Quando ativado, mostra o botão de acesso rápido aos prompts no lado esquerdo da caixa de chat"
+  },
+  "biwhckdj": {
+    "message": "Lista de prompts"
+  },
+  "byaskjndg": {
+    "message": "Adicionar prompt"
+  },
+  "hsksuywm": {
+    "message": "Editar prompt"
+  },
+  "hsuywkw": {
+    "message": "Nome do prompt"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Introduza o nome do prompt"
+  },
+  "promptContent": {
+    "message": "Conteúdo"
+  },
+  "uwkjwjw": {
+    "message": "Introduza o conteúdo do prompt"
+  },
+  "hsiwhwl": {
+    "message": "Sem prompts"
+  },
+  "shwsuwk": {
+    "message": "Prompt adicionado"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt atualizado"
+  },
+  "qrtypd": {
+    "message": "Prompt eliminado"
+  },
+  "dcnfmq": {
+    "message": "Tem a certeza de que pretende eliminar este prompt?"
+  },
+  "pbtdsq": {
+    "message": "Botão de prompt"
+  },
+  "svkbtn": {
+    "message": "Guardar"
+  },
+  "pmpknd": {
+    "message": "Fixado"
+  },
+  "pmuknp": {
+    "message": "Desfixado"
+  },
+  "addkbt": {
+    "message": "Adicionar"
+  },
+  "ptfmsl": {
+    "message": "Aplica-se a"
+  },
+  "allptfm": {
+    "message": "Todas as plataformas de IA"
   }
 }
 

@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: El asistente de eficiencia de IA más potente: ChatGPT, Gemini"
+    "message": "AI Timeline: El asistente de eficiencia de IA más potente para ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Copiar fórmulas LaTeX, línea de tiempo, Enter para nueva línea, asistencia Prompt. ¡Duplica tu eficiencia con IA!"
+    "message": "Copiar fórmulas LaTeX, línea de tiempo de conversación interactiva, Enter para nueva línea, biblioteca de prompts. Duplica tu eficiencia con IA."
   },
   "qwxpzm": {
-    "message": "Guardar"
+    "message": "Favorito"
   },
   "hkjvnr": {
-    "message": "Ver guardados"
+    "message": "Ver favoritos"
   },
   "zmvkpx": {
-    "message": "Guardar conversación"
+    "message": "Agregar conversación a favoritos"
   },
   "bpxjkw": {
-    "message": "Quitar de guardados"
+    "message": "Quitar de favoritos"
   },
   "vnkxpm": {
-    "message": "Lista de guardados"
+    "message": "Lista de favoritos"
   },
   "kxpmzv": {
-    "message": "Guardado con éxito"
+    "message": "Agregado a favoritos"
   },
   "pzmvkx": {
-    "message": "Eliminado de guardados"
+    "message": "Quitado de favoritos"
   },
   "jwvnkp": {
     "message": "Sin datos"
@@ -51,7 +51,7 @@
     "message": "Confirmar"
   },
   "mzpxvk": {
-    "message": "El tema no puede estar vacío"
+    "message": "El título no puede estar vacío"
   },
   "xvkpmz": {
     "message": "Renombrar"
@@ -60,16 +60,16 @@
     "message": "El contenido no puede estar vacío"
   },
   "kmvxpz": {
-    "message": "Todos los datos se almacenan localmente en tu navegador"
+    "message": "Todos los datos se almacenan localmente en su navegador"
   },
   "vxpzmk": {
     "message": "Código abierto"
   },
   "mkvxpz": {
-    "message": "Estrella en GitHub"
+    "message": "Dar estrella en GitHub"
   },
   "xpzmkv": {
-    "message": "Bienvenido a"
+    "message": "Bienvenido"
   },
   "pkmzvx": {
     "message": "Compartir con amigos"
@@ -93,19 +93,19 @@
     "message": "Carpeta predeterminada"
   },
   "xmkvpz": {
-    "message": "Crear subcarpeta en「{folderName}」"
+    "message": "Crear subcarpeta en \"{folderName}\""
   },
   "vzkpmx": {
-    "message": "Por favor ingrese el nombre de la carpeta"
+    "message": "Ingrese el nombre de la carpeta"
   },
   "kmxpvz": {
-    "message": "Se requiere el nombre de la carpeta"
+    "message": "El nombre de la carpeta no puede estar vacío"
   },
   "pxmzvk": {
     "message": "Renombrar carpeta"
   },
   "mvzxkp": {
-    "message": "Por favor ingrese un nuevo nombre"
+    "message": "Ingrese el nuevo nombre"
   },
   "kpvzmx": {
     "message": "El nombre de la carpeta ya existe"
@@ -132,13 +132,13 @@
     "message": "Mover a"
   },
   "wjxnkp": {
-    "message": "¿Eliminar carpeta「{folderName}」?\n\nEsta carpeta y sus subcarpetas contienen {count} elementos guardados. Se moverán a la carpeta predeterminada."
+    "message": "¿Está seguro de que desea eliminar la carpeta \"{folderName}\"?\n\nEsta carpeta y sus subcarpetas contienen {count} elementos favoritos. Después de eliminar, estos elementos se moverán a la carpeta predeterminada."
   },
   "qzmvkx": {
-    "message": "¿Está seguro de que desea eliminar la carpeta「{folderName}」?"
+    "message": "¿Está seguro de que desea eliminar la carpeta \"{folderName}\"?"
   },
   "mvkzpx": {
-    "message": "Buscar en guardados..."
+    "message": "Buscar favoritos..."
   },
   "kxzpmv": {
     "message": "Guardar en"
@@ -153,16 +153,16 @@
     "message": "Línea de tiempo"
   },
   "mzkvxp": {
-    "message": "Cuando esté activado, aparecerá una línea de tiempo interactiva en el lado derecho de la página de conversación de IA."
+    "message": "Cuando está habilitado, se mostrará una línea de tiempo interactiva en el lado derecho de la página de conversación de IA."
   },
   "vkpmzx": {
-    "message": "Teclas ↑ / ↓ del teclado para navegar entre nodos de conversación"
+    "message": "Usar teclas ↑ / ↓ para navegar entre nodos de conversación"
   },
   "xpvmkz": {
-    "message": "Cuando esté habilitado, usa las teclas ↑ / ↓ del teclado para saltar rápidamente entre nodos de conversación."
+    "message": "Cuando está habilitado, use las teclas ↑ / ↓ para saltar rápidamente entre nodos de conversación."
   },
   "pxmzkv": {
-    "message": "📌 Marcar conversaciones clave"
+    "message": "📌 Marcar conversaciones importantes"
   },
   "kzxvpm": {
     "message": "Mantenga presionado un nodo de conversación en la línea de tiempo para marcarlo como importante."
@@ -171,10 +171,7 @@
     "message": "Cuadro de chat"
   },
   "kvzmxp": {
-    "message": "Usar tecla Enter del teclado para nueva línea"
-  },
-  "mxpzvk": {
-    "message": "Cuando esté activado, en el cuadro de entrada de conversación de IA, presione tecla Enter una vez para nueva línea, dos veces rápidamente para enviar mensaje."
+    "message": "Usar tecla Enter para nueva línea"
   },
   "kpxvmz": {
     "message": "Copiar fórmula"
@@ -183,39 +180,84 @@
     "message": "Copiar fórmula LaTeX"
   },
   "vxkpzm": {
-    "message": "Cuando esté activado, identificar automáticamente fórmulas en la página y hacer clic para copiar en formato LaTeX."
+    "message": "Cuando está habilitado, detecta automáticamente las fórmulas en la página y haz clic para copiar en formato LaTeX."
   },
   "mkvzpx": {
     "message": "Plataformas compatibles"
   },
-  "zpkmvx": {
-    "message": "Enter para nueva línea"
-  },
   "vxmkpz": {
-    "message": "Tecla Enter: Una vez para nueva línea, doble para enviar"
+    "message": "Tecla Enter: presione una vez para nueva línea, dos veces para enviar"
   },
   "mkpxvz": {
-    "message": "Cuando esté activado, en el cuadro de entrada de conversación de IA, presione tecla Enter una vez para nueva línea, dos veces rápidamente para enviar mensaje."
-  },
-  "zpvmkx": {
-    "message": "Error al guardar"
+    "message": "Cuando está habilitado, en el cuadro de entrada de chat de IA, presione Enter una vez para nueva línea, presione rápidamente dos veces para enviar el mensaje."
   },
   "xvpmkz": {
     "message": "Ver lista de favoritos"
   },
   "qoytxz": {
-    "message": "Esta función está siempre activada y no se puede desactivar"
-  }
-,
+    "message": "Esta función está habilitada de forma predeterminada y no se puede desactivar"
+  },
   "hosegod": {
     "message": "Biblioteca de prompts"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Botón de Prompts"
   },
   "hobsidbg": {
-    "message": "Cuando esté activado, mostrar botón de acceso rápido a prompts a la izquierda del cuadro de chat"
+    "message": "Cuando está habilitado, muestra el botón de acceso rápido a prompts en el lado izquierdo del cuadro de chat"
+  },
+  "biwhckdj": {
+    "message": "Lista de prompts"
+  },
+  "byaskjndg": {
+    "message": "Agregar prompt"
+  },
+  "hsksuywm": {
+    "message": "Editar prompt"
+  },
+  "hsuywkw": {
+    "message": "Nombre del prompt"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Ingrese el nombre del prompt"
+  },
+  "promptContent": {
+    "message": "Contenido"
+  },
+  "uwkjwjw": {
+    "message": "Ingrese el contenido del prompt"
+  },
+  "hsiwhwl": {
+    "message": "No hay prompts"
+  },
+  "shwsuwk": {
+    "message": "Prompt agregado"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt actualizado"
+  },
+  "qrtypd": {
+    "message": "Prompt eliminado"
+  },
+  "dcnfmq": {
+    "message": "¿Está seguro de que desea eliminar este prompt?"
+  },
+  "pbtdsq": {
+    "message": "Botón de prompt"
+  },
+  "svkbtn": {
+    "message": "Guardar"
+  },
+  "pmpknd": {
+    "message": "Fijado"
+  },
+  "pmuknp": {
+    "message": "Desfijado"
+  },
+  "addkbt": {
+    "message": "Agregar"
+  },
+  "ptfmsl": {
+    "message": "Aplicar a"
+  },
+  "allptfm": {
+    "message": "Todas las plataformas de IA"
   }
 }
-

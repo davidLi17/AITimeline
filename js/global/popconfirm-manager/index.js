@@ -35,6 +35,8 @@ class GlobalPopconfirmManager {
      * @param {string} options.content - 内容
      * @param {string} options.confirmText - 确认按钮文本（默认"确定"）
      * @param {string} options.cancelText - 取消按钮文本（默认"取消"）
+     * @param {string} options.confirmTextType - 确认按钮类型：'danger'(红色,默认), 'primary'(蓝色), 'success'(绿色)
+     * @param {boolean} options.showCancel - 是否显示取消按钮（默认true）
      * @returns {Promise<boolean>} 用户选择：true=确认，false=取消
      */
     show(options = {}) {
@@ -56,7 +58,9 @@ class GlobalPopconfirmManager {
                 title: options.title || '',
                 content: options.content || '',
                 confirmText: options.confirmText || chrome.i18n.getMessage('vkmzpx'),
-                cancelText: options.cancelText || chrome.i18n.getMessage('pxvkmz')
+                cancelText: options.cancelText || chrome.i18n.getMessage('pxvkmz'),
+                confirmTextType: options.confirmTextType || 'danger', // 默认红色（危险操作）
+                showCancel: options.showCancel !== false // 默认显示取消按钮
             };
             
             // 保存状态
@@ -147,25 +151,26 @@ class GlobalPopconfirmManager {
         const actions = document.createElement('div');
         actions.className = 'popconfirm-actions';
         
-        // 取消按钮
-        const cancelBtn = document.createElement('button');
-        cancelBtn.className = 'popconfirm-btn popconfirm-btn-cancel';
-        cancelBtn.textContent = config.cancelText;
-        cancelBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.hide(false);
-        });
+        // 取消按钮（可选）
+        if (config.showCancel) {
+            const cancelBtn = document.createElement('button');
+            cancelBtn.className = 'popconfirm-btn popconfirm-btn-cancel';
+            cancelBtn.textContent = config.cancelText;
+            cancelBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.hide(false);
+            });
+            actions.appendChild(cancelBtn);
+        }
         
         // 确认按钮
         const confirmBtn = document.createElement('button');
-        confirmBtn.className = 'popconfirm-btn popconfirm-btn-confirm';
+        confirmBtn.className = `popconfirm-btn popconfirm-btn-confirm popconfirm-btn-${config.confirmTextType}`;
         confirmBtn.textContent = config.confirmText;
         confirmBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             this.hide(true);
         });
-        
-        actions.appendChild(cancelBtn);
         actions.appendChild(confirmBtn);
         
         content.appendChild(actions);

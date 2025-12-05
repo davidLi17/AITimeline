@@ -99,14 +99,36 @@
     color: #374151;
 }
 
-/* 确认按钮 */
-.popconfirm-btn-confirm {
+/* 确认按钮 - 危险/删除（红色，默认） */
+.popconfirm-btn-confirm,
+.popconfirm-btn-confirm.popconfirm-btn-danger {
     background: #ef4444;
     color: #ffffff;
 }
 
-.popconfirm-btn-confirm:hover {
+.popconfirm-btn-confirm:hover,
+.popconfirm-btn-confirm.popconfirm-btn-danger:hover {
     background: #dc2626;
+}
+
+/* 确认按钮 - 主操作（蓝色） */
+.popconfirm-btn-confirm.popconfirm-btn-primary {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.popconfirm-btn-confirm.popconfirm-btn-primary:hover {
+    background: #2563eb;
+}
+
+/* 确认按钮 - 成功（绿色） */
+.popconfirm-btn-confirm.popconfirm-btn-success {
+    background: #22c55e;
+    color: #ffffff;
+}
+
+.popconfirm-btn-confirm.popconfirm-btn-success:hover {
+    background: #16a34a;
 }
 
 /* 响应式 */

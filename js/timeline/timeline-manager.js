@@ -156,6 +156,10 @@ class TimelineManager {
         this.injectTimelineUI();
         this.setupEventListeners();
         this.setupObservers();
+        
+        // ✅ 监听并隐藏冲突的其他时间轴插件（避免样式冲突）
+        this.setupConflictingTimelineObserver();
+        
         // Load persisted star markers for current conversation
         this.conversationId = this.adapter.extractConversationId(location.pathname);
         await this.loadStars();
@@ -924,6 +928,59 @@ class TimelineManager {
         } catch (e) {
             console.warn('[Timeline] Failed to setup hide state observer:', e);
         }
+    }
+
+    /**
+     * ✅ 监听并隐藏与本插件冲突的其他时间轴插件元素
+     * 
+     * 背景：市面上存在其他类似的时间轴插件，如果用户同时安装了多个插件，
+     * 可能会出现样式冲突或功能重复的问题。
+     * 
+     * 解决方案：使用 MutationObserver 持续监听 DOM 变化，
+     * 一旦检测到冲突插件的元素被添加到页面中，立即将其隐藏。
+     */
+    setupConflictingTimelineObserver() {
+        // 已知的冲突插件时间轴选择器
+        // 如果发现新的冲突插件，可以在这里添加对应的选择器
+        const conflictingSelectors = [
+            '.gemini-timeline-bar',      // Gemini 时间轴插件
+            '.chatgpt-timeline-bar',     // ChatGPT 时间轴插件
+        ];
+        
+        // 初始化时先检查一次已存在的冲突元素
+        this.hideConflictingElements(conflictingSelectors);
+        
+        // 使用 MutationObserver 持续监听 DOM 变化
+        // 无论对方插件何时加载，都能及时检测并隐藏
+        this.conflictingTimelineObserver = new MutationObserver(() => {
+            this.hideConflictingElements(conflictingSelectors);
+        });
+        
+        try {
+            this.conflictingTimelineObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        } catch (e) {
+            console.warn('[Timeline] Failed to setup conflicting timeline observer:', e);
+        }
+    }
+
+    /**
+     * ✅ 隐藏冲突的时间轴元素
+     * @param {string[]} selectors - 需要隐藏的元素选择器数组
+     */
+    hideConflictingElements(selectors) {
+        selectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                // 只处理尚未隐藏的元素，避免重复操作
+                if (el.style.display !== 'none') {
+                    el.style.display = 'none';
+                    console.log(`[AI Timeline] 已隐藏冲突的时间轴元素: ${selector}`);
+                }
+            });
+        });
     }
 
     /**
@@ -2450,6 +2507,7 @@ class TimelineManager {
         TimelineUtils.disconnectObserverSafe(this.intersectionObserver);
         TimelineUtils.disconnectObserverSafe(this.hideStateObserver); // ✅ 清理隐藏状态监听器
         TimelineUtils.disconnectObserverSafe(this.themeObserver); // ✅ 优化：清理主题监听器
+        TimelineUtils.disconnectObserverSafe(this.conflictingTimelineObserver); // ✅ 清理冲突插件监听器
         
         // ✅ 清理健康检查定时器
         if (this.healthCheckInterval) {

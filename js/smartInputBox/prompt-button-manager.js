@@ -401,7 +401,7 @@ class PromptButtonManager {
                 </svg>
                 <span class="prompt-dropdown-title">${chrome.i18n.getMessage('hosegod')}</span>
             </div>
-            <button class="prompt-dropdown-action-btn" title="${chrome.i18n.getMessage('addpmpt') || '新增提示词'}">
+            <button class="prompt-dropdown-action-btn">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px!important;height:14px!important">
                     <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
@@ -491,12 +491,12 @@ class PromptButtonManager {
         item.className = 'prompt-dropdown-item';
         
         // 名称
-        const promptName = prompt.name || '未命名';
+        const promptName = prompt.name || '';
         
         // 截取内容前50个字符
         const displayText = prompt.content ? 
             (prompt.content.length > 50 ? prompt.content.substring(0, 50) + '...' : prompt.content) 
-            : '空提示词';
+            : '';
         
         // 置顶图标
         const iconHtml = prompt.pinned ? `

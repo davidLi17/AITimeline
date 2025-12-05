@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: Asisten efisiensi AI paling kuat: ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline: Asisten Efisiensi AI Paling Kuat untuk ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Fitur: Salin rumus LaTeX, timeline, tombol Enter untuk baris baru, bantuan Prompt. Gandakan efisiensi AI Anda!"
+    "message": "Salin rumus LaTeX, lini masa percakapan interaktif, baris baru dengan Enter, perpustakaan prompt. Gandakan efisiensi AI Anda."
   },
   "qwxpzm": {
-    "message": "Simpan"
+    "message": "Favorit"
   },
   "hkjvnr": {
-    "message": "Lihat tersimpan"
+    "message": "Lihat Favorit"
   },
   "zmvkpx": {
-    "message": "Simpan percakapan"
+    "message": "Tambahkan percakapan ke favorit"
   },
   "bpxjkw": {
-    "message": "Hapus dari tersimpan"
+    "message": "Hapus dari favorit"
   },
   "vnkxpm": {
-    "message": "Daftar tersimpan"
+    "message": "Daftar Favorit"
   },
   "kxpmzv": {
-    "message": "Berhasil disimpan"
+    "message": "Ditambahkan ke favorit"
   },
   "pzmvkx": {
-    "message": "Dihapus dari tersimpan"
+    "message": "Dihapus dari favorit"
   },
   "jwvnkp": {
     "message": "Tidak ada data"
@@ -33,7 +33,7 @@
     "message": "Salin"
   },
   "xpzmvk": {
-    "message": "Tersalin"
+    "message": "Disalin"
   },
   "vkpxzm": {
     "message": "Edit"
@@ -51,10 +51,10 @@
     "message": "Konfirmasi"
   },
   "mzpxvk": {
-    "message": "Tema tidak boleh kosong"
+    "message": "Judul tidak boleh kosong"
   },
   "xvkpmz": {
-    "message": "Ubah nama"
+    "message": "Ganti nama"
   },
   "pzmkvx": {
     "message": "Konten tidak boleh kosong"
@@ -63,19 +63,19 @@
     "message": "Semua data disimpan secara lokal di browser Anda"
   },
   "vxpzmk": {
-    "message": "Open source"
+    "message": "Sumber terbuka"
   },
   "mkvxpz": {
-    "message": "Bintang di GitHub"
+    "message": "Beri bintang di GitHub"
   },
   "xpzmkv": {
     "message": "Selamat datang"
   },
   "pkmzvx": {
-    "message": "Bagikan ke Teman"
+    "message": "Bagikan ke teman"
   },
   "fbklink": {
-    "message": "Umpan Balik"
+    "message": "Umpan balik"
   },
   "mvxkpz": {
     "message": "Salin rumus LaTeX"
@@ -93,19 +93,19 @@
     "message": "Folder default"
   },
   "xmkvpz": {
-    "message": "Buat subfolder di「{folderName}」"
+    "message": "Buat subfolder di \"{folderName}\""
   },
   "vzkpmx": {
-    "message": "Silakan masukkan nama folder"
+    "message": "Masukkan nama folder"
   },
   "kmxpvz": {
-    "message": "Nama folder diperlukan"
+    "message": "Nama folder tidak boleh kosong"
   },
   "pxmzvk": {
-    "message": "Ubah nama folder"
+    "message": "Ganti nama folder"
   },
   "mvzxkp": {
-    "message": "Silakan masukkan nama baru"
+    "message": "Masukkan nama baru"
   },
   "kpvzmx": {
     "message": "Nama folder sudah ada"
@@ -129,16 +129,16 @@
     "message": "Berhasil dipindahkan"
   },
   "vxkpmz": {
-    "message": "Pindah ke"
+    "message": "Pindahkan ke"
   },
   "wjxnkp": {
-    "message": "Hapus folder「{folderName}」?\n\nFolder ini dan subfoldernya berisi {count} item tersimpan. Item akan dipindahkan ke folder default."
+    "message": "Yakin ingin menghapus folder \"{folderName}\"?\n\nFolder ini dan subfoldernya berisi {count} item favorit. Setelah dihapus, item-item ini akan dipindahkan ke folder default."
   },
   "qzmvkx": {
-    "message": "Apakah Anda yakin ingin menghapus folder「{folderName}」?"
+    "message": "Yakin ingin menghapus folder \"{folderName}\"?"
   },
   "mvkzpx": {
-    "message": "Cari di tersimpan..."
+    "message": "Cari favorit..."
   },
   "kxzpmv": {
     "message": "Simpan ke"
@@ -150,31 +150,28 @@
     "message": "Judul"
   },
   "pxkmvz": {
-    "message": "Garis Waktu"
+    "message": "Lini Masa"
   },
   "mzkvxp": {
-    "message": "Saat diaktifkan, garis waktu interaktif akan muncul di sisi kanan halaman percakapan AI."
+    "message": "Saat diaktifkan, lini masa interaktif akan ditampilkan di sisi kanan halaman percakapan AI."
   },
   "vkpmzx": {
-    "message": "Tombol Keyboard ↑ / ↓ untuk Menavigasi Node Percakapan"
+    "message": "Gunakan tombol ↑ / ↓ untuk navigasi antar node percakapan"
   },
   "xpvmkz": {
-    "message": "Saat diaktifkan, gunakan tombol keyboard ↑ / ↓ untuk melompat dengan cepat antar node percakapan."
+    "message": "Saat diaktifkan, gunakan tombol ↑ / ↓ untuk melompat cepat antar node percakapan."
   },
   "pxmzkv": {
-    "message": "📌 Tandai Percakapan Penting"
+    "message": "📌 Tandai percakapan penting"
   },
   "kzxvpm": {
-    "message": "Tekan lama pada node percakapan di timeline untuk menandainya sebagai penting."
+    "message": "Tekan lama node percakapan di lini masa untuk menandainya sebagai penting."
   },
   "xmvkpz": {
-    "message": "Kotak obrolan"
+    "message": "Kotak chat"
   },
   "kvzmxp": {
-    "message": "Gunakan tombol Enter keyboard untuk baris baru"
-  },
-  "mxpzvk": {
-    "message": "Saat diaktifkan, di kotak input percakapan AI, tekan tombol Enter sekali untuk baris baru, dua kali dengan cepat untuk mengirim pesan."
+    "message": "Gunakan tombol Enter untuk baris baru"
   },
   "kpxvmz": {
     "message": "Salin rumus"
@@ -183,39 +180,84 @@
     "message": "Salin rumus LaTeX"
   },
   "vxkpzm": {
-    "message": "Saat diaktifkan, secara otomatis mengidentifikasi rumus di halaman dan klik untuk menyalin dalam format LaTeX."
+    "message": "Saat diaktifkan, secara otomatis mendeteksi rumus di halaman dan klik untuk menyalin dalam format LaTeX."
   },
   "mkvzpx": {
     "message": "Platform yang didukung"
   },
-  "zpkmvx": {
-    "message": "Enter untuk baris baru"
-  },
   "vxmkpz": {
-    "message": "Tombol Enter: Sekali untuk baris baru, dua kali untuk mengirim"
+    "message": "Tombol Enter: tekan sekali untuk baris baru, dua kali untuk mengirim"
   },
   "mkpxvz": {
-    "message": "Saat diaktifkan, di kotak input percakapan AI, tekan tombol Enter sekali untuk baris baru, dua kali dengan cepat untuk mengirim pesan."
-  },
-  "zpvmkx": {
-    "message": "Gagal menyimpan"
+    "message": "Saat diaktifkan, di kotak input chat AI, tekan Enter sekali untuk baris baru, tekan cepat dua kali untuk mengirim pesan."
   },
   "xvpmkz": {
-    "message": "Lihat Daftar Favorit"
+    "message": "Lihat daftar favorit"
   },
   "qoytxz": {
-    "message": "Fitur ini selalu aktif dan tidak dapat dimatikan"
-  }
-,
+    "message": "Fitur ini diaktifkan secara default dan tidak dapat dimatikan"
+  },
   "hosegod": {
     "message": "Perpustakaan Prompt"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Tombol Prompt"
   },
   "hobsidbg": {
-    "message": "Saat diaktifkan, tampilkan tombol pintasan prompt di sisi kiri kotak obrolan"
+    "message": "Saat diaktifkan, menampilkan tombol pintasan prompt di sisi kiri kotak chat"
+  },
+  "biwhckdj": {
+    "message": "Daftar Prompt"
+  },
+  "byaskjndg": {
+    "message": "Tambah Prompt"
+  },
+  "hsksuywm": {
+    "message": "Edit Prompt"
+  },
+  "hsuywkw": {
+    "message": "Nama Prompt"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Masukkan nama prompt"
+  },
+  "promptContent": {
+    "message": "Konten"
+  },
+  "uwkjwjw": {
+    "message": "Masukkan konten prompt"
+  },
+  "hsiwhwl": {
+    "message": "Belum ada prompt"
+  },
+  "shwsuwk": {
+    "message": "Prompt ditambahkan"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt diperbarui"
+  },
+  "qrtypd": {
+    "message": "Prompt dihapus"
+  },
+  "dcnfmq": {
+    "message": "Yakin ingin menghapus prompt ini?"
+  },
+  "pbtdsq": {
+    "message": "Tombol Prompt"
+  },
+  "svkbtn": {
+    "message": "Simpan"
+  },
+  "pmpknd": {
+    "message": "Disematkan"
+  },
+  "pmuknp": {
+    "message": "Dilepas sematan"
+  },
+  "addkbt": {
+    "message": "Tambah"
+  },
+  "ptfmsl": {
+    "message": "Berlaku untuk"
+  },
+  "allptfm": {
+    "message": "Semua platform AI"
   }
 }
-

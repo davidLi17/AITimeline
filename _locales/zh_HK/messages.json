@@ -27,7 +27,7 @@
     "message": "已取消收藏"
   },
   "jwvnkp": {
-    "message": "暫無資料"
+    "message": "暫無數據"
   },
   "mvkxpz": {
     "message": "複製"
@@ -60,7 +60,7 @@
     "message": "內容不能為空"
   },
   "kmvxpz": {
-    "message": "所有資料儲存在您的瀏覽器本機"
+    "message": "所有數據儲存在您的瀏覽器本機"
   },
   "vxpzmk": {
     "message": "已開源"
@@ -75,40 +75,40 @@
     "message": "分享給朋友"
   },
   "fbklink": {
-    "message": "回饋"
+    "message": "反饋"
   },
   "mvxkpz": {
     "message": "複製 LaTeX 公式"
   },
   "kxvpmz": {
-    "message": "新建資料夾"
+    "message": "新建文件夾"
   },
   "vpmzkx": {
-    "message": "新建子資料夾"
+    "message": "新建子文件夾"
   },
   "mzxvkp": {
     "message": "刪除"
   },
   "pkxvmz": {
-    "message": "預設資料夾"
+    "message": "預設文件夾"
   },
   "xmkvpz": {
-    "message": "在「{folderName}」下新建子資料夾"
+    "message": "在「{folderName}」下新建子文件夾"
   },
   "vzkpmx": {
-    "message": "請輸入資料夾名稱"
+    "message": "請輸入文件夾名稱"
   },
   "kmxpvz": {
-    "message": "資料夾名稱不能為空"
+    "message": "文件夾名稱不能為空"
   },
   "pxmzvk": {
-    "message": "修改資料夾名稱"
+    "message": "修改文件夾名稱"
   },
   "mvzxkp": {
     "message": "請輸入新名稱"
   },
   "kpvzmx": {
-    "message": "資料夾名稱已存在"
+    "message": "文件夾名稱已存在"
   },
   "xzvkpm": {
     "message": "建立成功"
@@ -117,10 +117,10 @@
     "message": "更新成功"
   },
   "zpxmkv": {
-    "message": "資料夾不存在"
+    "message": "文件夾不存在"
   },
   "kvpzmx": {
-    "message": "資料夾已刪除"
+    "message": "文件夾已刪除"
   },
   "mxkvzp": {
     "message": "刪除失敗"
@@ -132,10 +132,10 @@
     "message": "移動到"
   },
   "wjxnkp": {
-    "message": "確定要刪除資料夾「{folderName}」嗎？\n\n該資料夾及其子資料夾中有 {count} 個收藏項，刪除後這些收藏項將移至預設資料夾。"
+    "message": "確定要刪除文件夾「{folderName}」嗎？\n\n該文件夾及其子文件夾中有 {count} 個收藏項，刪除後這些收藏項將移至預設文件夾。"
   },
   "qzmvkx": {
-    "message": "確定要刪除資料夾「{folderName}」嗎？"
+    "message": "確定要刪除文件夾「{folderName}」嗎？"
   },
   "mvkzpx": {
     "message": "搜尋收藏..."
@@ -144,7 +144,7 @@
     "message": "收藏到"
   },
   "vmzpkx": {
-    "message": "預設資料夾"
+    "message": "預設文件夾"
   },
   "pkmvxz": {
     "message": "標題"
@@ -261,3 +261,4 @@
     "message": "全部 AI 平台"
   }
 }
+

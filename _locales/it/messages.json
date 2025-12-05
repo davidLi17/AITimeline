@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: L'assistente di efficienza IA più potente: ChatGPT, Gemini"
+    "message": "AI Timeline: L'assistente di efficienza IA più potente per ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Copia formule LaTeX, timeline, tasto Invio per nuova riga, assistenza Prompt. Raddoppia la tua efficienza IA!"
+    "message": "Copia formule LaTeX, cronologia conversazioni interattiva, a capo con Invio, libreria di prompt. Raddoppia la tua efficienza con l'IA."
   },
   "qwxpzm": {
-    "message": "Salva"
+    "message": "Preferito"
   },
   "hkjvnr": {
-    "message": "Visualizza salvati"
+    "message": "Visualizza preferiti"
   },
   "zmvkpx": {
-    "message": "Salva conversazione"
+    "message": "Aggiungi conversazione ai preferiti"
   },
   "bpxjkw": {
-    "message": "Rimuovi dai salvati"
+    "message": "Rimuovi dai preferiti"
   },
   "vnkxpm": {
-    "message": "Elenco salvati"
+    "message": "Lista preferiti"
   },
   "kxpmzv": {
-    "message": "Salvato con successo"
+    "message": "Aggiunto ai preferiti"
   },
   "pzmvkx": {
-    "message": "Rimosso dai salvati"
+    "message": "Rimosso dai preferiti"
   },
   "jwvnkp": {
     "message": "Nessun dato"
@@ -51,7 +51,7 @@
     "message": "Conferma"
   },
   "mzpxvk": {
-    "message": "Il tema non può essere vuoto"
+    "message": "Il titolo non può essere vuoto"
   },
   "xvkpmz": {
     "message": "Rinomina"
@@ -63,16 +63,16 @@
     "message": "Tutti i dati sono memorizzati localmente nel tuo browser"
   },
   "vxpzmk": {
-    "message": "Open source"
+    "message": "Open Source"
   },
   "mkvxpz": {
-    "message": "Stella su GitHub"
+    "message": "Metti una stella su GitHub"
   },
   "xpzmkv": {
-    "message": "Benvenuto a"
+    "message": "Benvenuto"
   },
   "pkmzvx": {
-    "message": "Condividi con amici"
+    "message": "Condividi con gli amici"
   },
   "fbklink": {
     "message": "Feedback"
@@ -93,28 +93,28 @@
     "message": "Cartella predefinita"
   },
   "xmkvpz": {
-    "message": "Crea sottocartella in「{folderName}」"
+    "message": "Crea sottocartella in \"{folderName}\""
   },
   "vzkpmx": {
-    "message": "Inserisci il nome della cartella"
+    "message": "Inserisci nome cartella"
   },
   "kmxpvz": {
-    "message": "Il nome della cartella è obbligatorio"
+    "message": "Il nome della cartella non può essere vuoto"
   },
   "pxmzvk": {
     "message": "Rinomina cartella"
   },
   "mvzxkp": {
-    "message": "Inserisci un nuovo nome"
+    "message": "Inserisci nuovo nome"
   },
   "kpvzmx": {
-    "message": "Il nome della cartella esiste già"
+    "message": "Nome cartella già esistente"
   },
   "xzvkpm": {
-    "message": "Creata con successo"
+    "message": "Creato con successo"
   },
   "vmkxpz": {
-    "message": "Aggiornata con successo"
+    "message": "Aggiornato con successo"
   },
   "zpxmkv": {
     "message": "Cartella non trovata"
@@ -126,19 +126,19 @@
     "message": "Eliminazione fallita"
   },
   "pzvkmx": {
-    "message": "Spostata con successo"
+    "message": "Spostato con successo"
   },
   "vxkpmz": {
     "message": "Sposta in"
   },
   "wjxnkp": {
-    "message": "Eliminare la cartella「{folderName}」?\n\nQuesta cartella e le sue sottocartelle contengono {count} elementi salvati. Verranno spostati nella cartella predefinita."
+    "message": "Sei sicuro di voler eliminare la cartella \"{folderName}\"?\n\nQuesta cartella e le sue sottocartelle contengono {count} elementi preferiti. Dopo l'eliminazione, questi elementi saranno spostati nella cartella predefinita."
   },
   "qzmvkx": {
-    "message": "Sei sicuro di voler eliminare la cartella「{folderName}」?"
+    "message": "Sei sicuro di voler eliminare la cartella \"{folderName}\"?"
   },
   "mvkzpx": {
-    "message": "Cerca nei salvati..."
+    "message": "Cerca nei preferiti..."
   },
   "kxzpmv": {
     "message": "Salva in"
@@ -150,31 +150,28 @@
     "message": "Titolo"
   },
   "pxkmvz": {
-    "message": "Timeline"
+    "message": "Cronologia"
   },
   "mzkvxp": {
-    "message": "Quando attivato, apparirà una timeline interattiva sul lato destro della pagina di conversazione AI."
+    "message": "Quando attivato, una cronologia interattiva verrà visualizzata sul lato destro della pagina di conversazione IA."
   },
   "vkpmzx": {
-    "message": "Tasti ↑ / ↓ della tastiera per navigare tra i nodi di conversazione"
+    "message": "Usa i tasti ↑ / ↓ per navigare tra i nodi della conversazione"
   },
   "xpvmkz": {
-    "message": "Quando abilitato, usa i tasti ↑ / ↓ della tastiera per saltare rapidamente tra i nodi di conversazione."
+    "message": "Quando attivato, usa i tasti ↑ / ↓ per saltare rapidamente tra i nodi della conversazione."
   },
   "pxmzkv": {
-    "message": "📌 Contrassegna conversazioni chiave"
+    "message": "📌 Segna conversazioni importanti"
   },
   "kzxvpm": {
-    "message": "Premi a lungo su un nodo di conversazione nella timeline per contrassegnarlo come importante."
+    "message": "Tieni premuto un nodo della conversazione nella cronologia per segnarlo come importante."
   },
   "xmvkpz": {
-    "message": "Casella chat"
+    "message": "Casella di chat"
   },
   "kvzmxp": {
-    "message": "Usa il tasto Invio della tastiera per nuova riga"
-  },
-  "mxpzvk": {
-    "message": "Quando attivato, nella casella di input conversazione AI, premi tasto Invio una volta per una nuova riga, due volte rapidamente per inviare il messaggio."
+    "message": "Usa il tasto Invio per andare a capo"
   },
   "kpxvmz": {
     "message": "Copia formula"
@@ -183,39 +180,85 @@
     "message": "Copia formula LaTeX"
   },
   "vxkpzm": {
-    "message": "Quando attivato, identifica automaticamente le formule sulla pagina e fai clic per copiare in formato LaTeX."
+    "message": "Quando attivato, rileva automaticamente le formule nella pagina e clicca per copiare in formato LaTeX."
   },
   "mkvzpx": {
     "message": "Piattaforme supportate"
   },
-  "zpkmvx": {
-    "message": "Invio per nuova riga"
-  },
   "vxmkpz": {
-    "message": "Tasto Invio: Una volta per nuova riga, doppio per inviare"
+    "message": "Tasto Invio: premi una volta per andare a capo, due volte per inviare"
   },
   "mkpxvz": {
-    "message": "Quando attivato, nella casella di input conversazione AI, premi tasto Invio una volta per una nuova riga, due volte rapidamente per inviare il messaggio."
-  },
-  "zpvmkx": {
-    "message": "Salvataggio fallito"
+    "message": "Quando attivato, nella casella di input della chat IA, premi Invio una volta per andare a capo, premi rapidamente due volte per inviare il messaggio."
   },
   "xvpmkz": {
-    "message": "Visualizza Elenco Preferiti"
+    "message": "Visualizza lista preferiti"
   },
   "qoytxz": {
-    "message": "Questa funzione è sempre abilitata e non può essere disattivata"
-  }
-,
+    "message": "Questa funzione è attivata per impostazione predefinita e non può essere disattivata"
+  },
   "hosegod": {
-    "message": "Libreria prompt"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Pulsante Prompt"
+    "message": "Libreria di prompt"
   },
   "hobsidbg": {
-    "message": "Se attivato, mostra pulsante scorciatoia prompt a sinistra della casella chat"
+    "message": "Quando attivato, mostra il pulsante di accesso rapido ai prompt sul lato sinistro della casella di chat"
+  },
+  "biwhckdj": {
+    "message": "Lista prompt"
+  },
+  "byaskjndg": {
+    "message": "Aggiungi prompt"
+  },
+  "hsksuywm": {
+    "message": "Modifica prompt"
+  },
+  "hsuywkw": {
+    "message": "Nome del prompt"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Inserisci nome del prompt"
+  },
+  "promptContent": {
+    "message": "Contenuto"
+  },
+  "uwkjwjw": {
+    "message": "Inserisci contenuto del prompt"
+  },
+  "hsiwhwl": {
+    "message": "Nessun prompt"
+  },
+  "shwsuwk": {
+    "message": "Prompt aggiunto"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt aggiornato"
+  },
+  "qrtypd": {
+    "message": "Prompt eliminato"
+  },
+  "dcnfmq": {
+    "message": "Sei sicuro di voler eliminare questo prompt?"
+  },
+  "pbtdsq": {
+    "message": "Pulsante prompt"
+  },
+  "svkbtn": {
+    "message": "Salva"
+  },
+  "pmpknd": {
+    "message": "Fissato"
+  },
+  "pmuknp": {
+    "message": "Non fissato"
+  },
+  "addkbt": {
+    "message": "Aggiungi"
+  },
+  "ptfmsl": {
+    "message": "Si applica a"
+  },
+  "allptfm": {
+    "message": "Tutte le piattaforme IA"
   }
 }
 

@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: 가장 강력한 AI 효율성 어시스턴트: ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline: 최강의 AI 효율 어시스턴트 - ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "기능: LaTeX 수식 복사, 대화 타임라인, Enter 키 줄바꿈, 프롬프트 지원. 모든 주류 AI 플랫폼 지원. AI 효율을 두 배로 높입니다!"
+    "message": "LaTeX 수식 복사, 대화 타임라인, Enter키 줄바꿈, 프롬프트 라이브러리 지원. AI 사용 효율을 두 배로!"
   },
   "qwxpzm": {
-    "message": "저장"
+    "message": "즐겨찾기"
   },
   "hkjvnr": {
-    "message": "저장된 항목 보기"
+    "message": "즐겨찾기 보기"
   },
   "zmvkpx": {
-    "message": "대화 저장"
+    "message": "대화 즐겨찾기"
   },
   "bpxjkw": {
-    "message": "저장 취소"
+    "message": "즐겨찾기 해제"
   },
   "vnkxpm": {
-    "message": "저장 목록"
+    "message": "즐겨찾기 목록"
   },
   "kxpmzv": {
-    "message": "저장 완료"
+    "message": "즐겨찾기에 추가됨"
   },
   "pzmvkx": {
-    "message": "저장이 취소되었습니다"
+    "message": "즐겨찾기 해제됨"
   },
   "jwvnkp": {
     "message": "데이터 없음"
@@ -54,19 +54,19 @@
     "message": "제목은 비워둘 수 없습니다"
   },
   "xvkpmz": {
-    "message": "이름 바꾸기"
+    "message": "이름 변경"
   },
   "pzmkvx": {
     "message": "내용은 비워둘 수 없습니다"
   },
   "kmvxpz": {
-    "message": "모든 데이터는 브라우저에 로컬로 저장됩니다"
+    "message": "모든 데이터는 브라우저에 로컬 저장됩니다"
   },
   "vxpzmk": {
     "message": "오픈 소스"
   },
   "mkvxpz": {
-    "message": "GitHub에서 스타"
+    "message": "GitHub에서 스타하기"
   },
   "xpzmkv": {
     "message": "환영합니다"
@@ -99,10 +99,10 @@
     "message": "폴더 이름을 입력하세요"
   },
   "kmxpvz": {
-    "message": "폴더 이름은 필수입니다"
+    "message": "폴더 이름은 비워둘 수 없습니다"
   },
   "pxmzvk": {
-    "message": "폴더 이름 바꾸기"
+    "message": "폴더 이름 변경"
   },
   "mvzxkp": {
     "message": "새 이름을 입력하세요"
@@ -120,7 +120,7 @@
     "message": "폴더를 찾을 수 없습니다"
   },
   "kvpzmx": {
-    "message": "폴더가 삭제되었습니다"
+    "message": "폴더 삭제됨"
   },
   "mxkvzp": {
     "message": "삭제 실패"
@@ -129,19 +129,19 @@
     "message": "이동 완료"
   },
   "vxkpmz": {
-    "message": "이동 대상"
+    "message": "이동 위치"
   },
   "wjxnkp": {
-    "message": "폴더「{folderName}」을(를) 삭제하시겠습니까?\n\n이 폴더와 하위 폴더에는 {count}개의 저장된 항목이 있습니다. 기본 폴더로 이동됩니다."
+    "message": "「{folderName}」 폴더를 삭제하시겠습니까?\n\n이 폴더와 하위 폴더에는 {count}개의 즐겨찾기 항목이 있습니다. 삭제 후 이 항목들은 기본 폴더로 이동됩니다."
   },
   "qzmvkx": {
-    "message": "폴더「{folderName}」을(를) 삭제하시겠습니까?"
+    "message": "「{folderName}」 폴더를 삭제하시겠습니까?"
   },
   "mvkzpx": {
-    "message": "저장된 항목 검색..."
+    "message": "즐겨찾기 검색..."
   },
   "kxzpmv": {
-    "message": "저장 위치"
+    "message": "즐겨찾기에 저장"
   },
   "vmzpkx": {
     "message": "기본 폴더"
@@ -153,28 +153,25 @@
     "message": "타임라인"
   },
   "mzkvxp": {
-    "message": "활성화하면 AI 대화 페이지 오른쪽에 상호작용 가능한 타임라인이 표시됩니다."
+    "message": "활성화하면 AI 대화 페이지 오른쪽에 인터랙티브 타임라인이 표시됩니다."
   },
   "vkpmzx": {
-    "message": "키보드 ↑ / ↓ 키로 대화 노드 간 이동"
+    "message": "↑ / ↓ 키로 대화 노드 이동"
   },
   "xpvmkz": {
-    "message": "활성화하면 키보드 ↑ / ↓ 키를 사용하여 대화 노드 간을 빠르게 이동할 수 있습니다."
+    "message": "활성화하면 ↑ / ↓ 키로 대화 노드 사이를 빠르게 이동할 수 있습니다."
   },
   "pxmzkv": {
-    "message": "📌 중요한 대화 표시"
+    "message": "📌 중요 대화 표시"
   },
   "kzxvpm": {
-    "message": "타임라인의 대화 노드를 길게 눌러 중요 표시를 할 수 있습니다."
+    "message": "타임라인의 대화 노드를 길게 누르면 중요 표시를 할 수 있습니다."
   },
   "xmvkpz": {
-    "message": "채팅창"
+    "message": "채팅 상자"
   },
   "kvzmxp": {
-    "message": "키보드 Enter 키로 줄바꿈"
-  },
-  "mxpzvk": {
-    "message": "활성화하면 AI 대화 입력 상자에서 Enter 키를 한 번 누르면 줄바꿈, 빠르게 두 번 누르면 메시지를 전송합니다."
+    "message": "Enter 키로 줄바꿈"
   },
   "kpxvmz": {
     "message": "수식 복사"
@@ -183,39 +180,84 @@
     "message": "LaTeX 수식 복사"
   },
   "vxkpzm": {
-    "message": "활성화하면 페이지의 수식을 자동으로 식별하고 클릭하여 LaTeX 형식으로 복사할 수 있습니다."
+    "message": "활성화하면 페이지의 수식을 자동 감지하고 클릭하여 LaTeX 형식으로 복사합니다."
   },
   "mkvzpx": {
-    "message": "지원되는 플랫폼"
-  },
-  "zpkmvx": {
-    "message": "Enter로 줄바꿈"
+    "message": "지원 플랫폼"
   },
   "vxmkpz": {
-    "message": "Enter키: 한 번으로 줄바꿈, 두 번으로 전송"
+    "message": "Enter 키: 한 번 누르면 줄바꿈, 두 번 빠르게 누르면 전송"
   },
   "mkpxvz": {
-    "message": "활성화하면 AI 대화 입력 상자에서 Enter 키를 한 번 누르면 줄바꿈, 빠르게 두 번 누르면 메시지를 전송합니다."
-  },
-  "zpvmkx": {
-    "message": "저장 실패"
+    "message": "활성화하면 AI 채팅 입력창에서 Enter를 한 번 누르면 줄바꿈, 빠르게 두 번 누르면 메시지가 전송됩니다."
   },
   "xvpmkz": {
     "message": "즐겨찾기 목록 보기"
   },
   "qoytxz": {
-    "message": "이 기능은 항상 활성화되어 있으며 끌 수 없습니다"
-  }
-,
+    "message": "이 기능은 기본 활성화되어 있으며 끌 수 없습니다"
+  },
   "hosegod": {
     "message": "프롬프트 라이브러리"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "프롬프트 버튼"
   },
   "hobsidbg": {
-    "message": "활성화 시 채팅창 왼쪽에 프롬프트 바로가기 버튼 표시"
+    "message": "활성화하면 채팅 상자 왼쪽에 프롬프트 바로가기 버튼이 표시됩니다"
+  },
+  "biwhckdj": {
+    "message": "프롬프트 목록"
+  },
+  "byaskjndg": {
+    "message": "프롬프트 추가"
+  },
+  "hsksuywm": {
+    "message": "프롬프트 편집"
+  },
+  "hsuywkw": {
+    "message": "프롬프트 이름"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "프롬프트 이름을 입력하세요"
+  },
+  "promptContent": {
+    "message": "내용"
+  },
+  "uwkjwjw": {
+    "message": "프롬프트 내용을 입력하세요"
+  },
+  "hsiwhwl": {
+    "message": "프롬프트가 없습니다"
+  },
+  "shwsuwk": {
+    "message": "프롬프트가 추가되었습니다"
+  },
+  "hwkwbhwk": {
+    "message": "프롬프트가 업데이트되었습니다"
+  },
+  "qrtypd": {
+    "message": "프롬프트가 삭제되었습니다"
+  },
+  "dcnfmq": {
+    "message": "이 프롬프트를 삭제하시겠습니까?"
+  },
+  "pbtdsq": {
+    "message": "프롬프트 버튼"
+  },
+  "svkbtn": {
+    "message": "저장"
+  },
+  "pmpknd": {
+    "message": "고정됨"
+  },
+  "pmuknp": {
+    "message": "고정 해제됨"
+  },
+  "addkbt": {
+    "message": "추가"
+  },
+  "ptfmsl": {
+    "message": "적용 대상"
+  },
+  "allptfm": {
+    "message": "모든 AI 플랫폼"
   }
 }
-

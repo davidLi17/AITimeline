@@ -286,7 +286,7 @@ class PromptTab extends BaseTab {
      */
     _getSmartInputPlatforms() {
         // id 为空表示全部平台
-        const platforms = [{ id: '', name: chrome.i18n.getMessage('allptfm') || '全部AI平台' }];
+        const platforms = [{ id: '', name: chrome.i18n.getMessage('allptfm') }];
         if (typeof SITE_INFO !== 'undefined') {
             SITE_INFO.forEach(site => {
                 if (site.features?.smartInput === true) {
@@ -330,19 +330,19 @@ class PromptTab extends BaseTab {
             </div>
             <div class="prompt-modal-body">
                 <div class="prompt-modal-field">
-                    <label>提示词名称<span class="required-mark">*</span></label>
+                    <label>${chrome.i18n.getMessage('hsuywkw')}<span class="required-mark">*</span></label>
                     <input type="text" class="prompt-modal-input" id="prompt-name-input"
-                        placeholder="输入提示词名称"
+                        placeholder="${chrome.i18n.getMessage('hsuywkwPlaceholder')}"
                         maxlength="12" value="${this._escapeHtml(prompt?.name || '')}">
                 </div>
                 <div class="prompt-modal-field">
-                    <label>提示词内容<span class="required-mark">*</span></label>
+                    <label>${chrome.i18n.getMessage('promptContent')}<span class="required-mark">*</span></label>
                     <textarea class="prompt-modal-textarea" id="prompt-content-input"
                         placeholder="${chrome.i18n.getMessage('uwkjwjw')}"
                         rows="4" maxlength="1000">${this._escapeHtml(prompt?.content || '')}</textarea>
                     <div class="prompt-char-counter">
                         <div class="prompt-platform-select" id="prompt-platform-select">
-                            <span class="prompt-platform-label">${chrome.i18n.getMessage('ptfmsl') || '适用于'}：</span>
+                            <span class="prompt-platform-label">${chrome.i18n.getMessage('ptfmsl')}：</span>
                             <span class="prompt-platform-select-text">${currentPlatform.name}</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"/>

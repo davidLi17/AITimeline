@@ -1,30 +1,30 @@
 {
   "extName": {
-    "message": "AI Timeline: Najpotężniejszy asystent wydajności AI: ChatGPT, Gemini"
+    "message": "AI Timeline: Najpotężniejszy asystent efektywności AI dla ChatGPT, Gemini, DeepSeek"
   },
   "extDescription": {
-    "message": "Kopiowanie formuł LaTeX, oś czasu, Enter dla nowej linii, wsparcie Prompt. Podwój swoją efektywność AI!"
+    "message": "Kopiowanie formuł LaTeX, interaktywna oś czasu rozmów, nowa linia klawiszem Enter, biblioteka promptów. Podwój swoją efektywność z AI."
   },
   "qwxpzm": {
-    "message": "Zapisz"
+    "message": "Ulubione"
   },
   "hkjvnr": {
-    "message": "Zobacz zapisane"
+    "message": "Zobacz ulubione"
   },
   "zmvkpx": {
-    "message": "Zapisz rozmowę"
+    "message": "Dodaj rozmowę do ulubionych"
   },
   "bpxjkw": {
-    "message": "Usuń z zapisanych"
+    "message": "Usuń z ulubionych"
   },
   "vnkxpm": {
-    "message": "Lista zapisanych"
+    "message": "Lista ulubionych"
   },
   "kxpmzv": {
-    "message": "Pomyślnie zapisano"
+    "message": "Dodano do ulubionych"
   },
   "pzmvkx": {
-    "message": "Usunięto z zapisanych"
+    "message": "Usunięto z ulubionych"
   },
   "jwvnkp": {
     "message": "Brak danych"
@@ -51,7 +51,7 @@
     "message": "Potwierdź"
   },
   "mzpxvk": {
-    "message": "Temat nie może być pusty"
+    "message": "Tytuł nie może być pusty"
   },
   "xvkpmz": {
     "message": "Zmień nazwę"
@@ -60,13 +60,13 @@
     "message": "Treść nie może być pusta"
   },
   "kmvxpz": {
-    "message": "Wszystkie dane są przechowywane lokalnie w Twojej przeglądarce"
+    "message": "Wszystkie dane są przechowywane lokalnie w przeglądarce"
   },
   "vxpzmk": {
-    "message": "Open source"
+    "message": "Open Source"
   },
   "mkvxpz": {
-    "message": "Gwiazdka na GitHub"
+    "message": "Daj gwiazdkę na GitHub"
   },
   "xpzmkv": {
     "message": "Witamy"
@@ -90,31 +90,31 @@
     "message": "Usuń"
   },
   "pkxvmz": {
-    "message": "Domyślny folder"
+    "message": "Folder domyślny"
   },
   "xmkvpz": {
-    "message": "Utwórz podfolder w「{folderName}」"
+    "message": "Utwórz podfolder w \"{folderName}\""
   },
   "vzkpmx": {
-    "message": "Proszę wprowadzić nazwę folderu"
+    "message": "Wprowadź nazwę folderu"
   },
   "kmxpvz": {
-    "message": "Nazwa folderu jest wymagana"
+    "message": "Nazwa folderu nie może być pusta"
   },
   "pxmzvk": {
     "message": "Zmień nazwę folderu"
   },
   "mvzxkp": {
-    "message": "Proszę wprowadzić nową nazwę"
+    "message": "Wprowadź nową nazwę"
   },
   "kpvzmx": {
     "message": "Nazwa folderu już istnieje"
   },
   "xzvkpm": {
-    "message": "Pomyślnie utworzono"
+    "message": "Utworzono pomyślnie"
   },
   "vmkxpz": {
-    "message": "Pomyślnie zaktualizowano"
+    "message": "Zaktualizowano pomyślnie"
   },
   "zpxmkv": {
     "message": "Folder nie znaleziony"
@@ -126,25 +126,25 @@
     "message": "Usuwanie nie powiodło się"
   },
   "pzvkmx": {
-    "message": "Pomyślnie przeniesiono"
+    "message": "Przeniesiono pomyślnie"
   },
   "vxkpmz": {
     "message": "Przenieś do"
   },
   "wjxnkp": {
-    "message": "Usunąć folder「{folderName}」?\n\nTen folder i jego podfoldery zawierają {count} zapisanych elementów. Zostaną przeniesione do domyślnego folderu."
+    "message": "Czy na pewno chcesz usunąć folder \"{folderName}\"?\n\nTen folder i jego podfoldery zawierają {count} ulubionych elementów. Po usunięciu te elementy zostaną przeniesione do folderu domyślnego."
   },
   "qzmvkx": {
-    "message": "Czy na pewno chcesz usunąć folder「{folderName}」?"
+    "message": "Czy na pewno chcesz usunąć folder \"{folderName}\"?"
   },
   "mvkzpx": {
-    "message": "Szukaj w zapisanych..."
+    "message": "Szukaj w ulubionych..."
   },
   "kxzpmv": {
     "message": "Zapisz w"
   },
   "vmzpkx": {
-    "message": "Domyślny folder"
+    "message": "Folder domyślny"
   },
   "pkmvxz": {
     "message": "Tytuł"
@@ -153,28 +153,25 @@
     "message": "Oś czasu"
   },
   "mzkvxp": {
-    "message": "Po włączeniu interaktywna oś czasu pojawi się po prawej stronie strony rozmowy AI."
+    "message": "Po włączeniu, interaktywna oś czasu będzie wyświetlana po prawej stronie strony rozmowy AI."
   },
   "vkpmzx": {
-    "message": "Klawisze ↑ / ↓ na klawiaturze, aby nawigować między węzłami rozmów"
+    "message": "Użyj klawiszy ↑ / ↓ do nawigacji między węzłami rozmowy"
   },
   "xpvmkz": {
-    "message": "Po włączeniu użyj klawiszy ↑ / ↓ na klawiaturze, aby szybko przeskakiwać między węzłami rozmów."
+    "message": "Po włączeniu, użyj klawiszy ↑ / ↓ do szybkiego przeskakiwania między węzłami rozmowy."
   },
   "pxmzkv": {
-    "message": "📌 Oznacz kluczowe rozmowy"
+    "message": "📌 Oznacz ważne rozmowy"
   },
   "kzxvpm": {
-    "message": "Długo naciśnij węzeł rozmowy na osi czasu, aby oznaczyć go jako ważny."
+    "message": "Przytrzymaj węzeł rozmowy na osi czasu, aby oznaczyć go jako ważny."
   },
   "xmvkpz": {
     "message": "Pole czatu"
   },
   "kvzmxp": {
-    "message": "Użyj klawisza Enter klawiatury dla nowej linii"
-  },
-  "mxpzvk": {
-    "message": "Po włączeniu, w polu wprowadzania rozmowy AI, naciśnij klawisz Enter raz dla nowej linii, dwa razy szybko, aby wysłać wiadomość."
+    "message": "Użyj klawisza Enter do nowej linii"
   },
   "kpxvmz": {
     "message": "Kopiuj formułę"
@@ -183,39 +180,85 @@
     "message": "Kopiuj formułę LaTeX"
   },
   "vxkpzm": {
-    "message": "Po włączeniu automatycznie identyfikuj formuły na stronie i kliknij, aby skopiować w formacie LaTeX."
+    "message": "Po włączeniu automatycznie wykrywa formuły na stronie i kliknij, aby skopiować w formacie LaTeX."
   },
   "mkvzpx": {
     "message": "Obsługiwane platformy"
   },
-  "zpkmvx": {
-    "message": "Enter dla nowej linii"
-  },
   "vxmkpz": {
-    "message": "Klawisz Enter: Raz dla nowej linii, podwójnie aby wysłać"
+    "message": "Klawisz Enter: naciśnij raz dla nowej linii, dwa razy dla wysłania"
   },
   "mkpxvz": {
-    "message": "Po włączeniu, w polu wprowadzania rozmowy AI, naciśnij klawisz Enter raz dla nowej linii, dwa razy szybko, aby wysłać wiadomość."
-  },
-  "zpvmkx": {
-    "message": "Zapisywanie nie powiodło się"
+    "message": "Po włączeniu, w polu wprowadzania czatu AI, naciśnij Enter raz dla nowej linii, naciśnij szybko dwa razy, aby wysłać wiadomość."
   },
   "xvpmkz": {
-    "message": "Wyświetl listę ulubionych"
+    "message": "Zobacz listę ulubionych"
   },
   "qoytxz": {
-    "message": "Ta funkcja jest zawsze włączona i nie można jej wyłączyć"
-  }
-,
+    "message": "Ta funkcja jest domyślnie włączona i nie może być wyłączona"
+  },
   "hosegod": {
     "message": "Biblioteka promptów"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "Przycisk Prompty"
   },
   "hobsidbg": {
-    "message": "Po włączeniu pokaż przycisk skrótu prompty po lewej stronie pola czatu"
+    "message": "Po włączeniu, wyświetla przycisk szybkiego dostępu do promptów po lewej stronie pola czatu"
+  },
+  "biwhckdj": {
+    "message": "Lista promptów"
+  },
+  "byaskjndg": {
+    "message": "Dodaj prompt"
+  },
+  "hsksuywm": {
+    "message": "Edytuj prompt"
+  },
+  "hsuywkw": {
+    "message": "Nazwa promptu"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "Wprowadź nazwę promptu"
+  },
+  "promptContent": {
+    "message": "Treść"
+  },
+  "uwkjwjw": {
+    "message": "Wprowadź treść promptu"
+  },
+  "hsiwhwl": {
+    "message": "Brak promptów"
+  },
+  "shwsuwk": {
+    "message": "Prompt dodany"
+  },
+  "hwkwbhwk": {
+    "message": "Prompt zaktualizowany"
+  },
+  "qrtypd": {
+    "message": "Prompt usunięty"
+  },
+  "dcnfmq": {
+    "message": "Czy na pewno chcesz usunąć ten prompt?"
+  },
+  "pbtdsq": {
+    "message": "Przycisk promptu"
+  },
+  "svkbtn": {
+    "message": "Zapisz"
+  },
+  "pmpknd": {
+    "message": "Przypięty"
+  },
+  "pmuknp": {
+    "message": "Odpięty"
+  },
+  "addkbt": {
+    "message": "Dodaj"
+  },
+  "ptfmsl": {
+    "message": "Dotyczy"
+  },
+  "allptfm": {
+    "message": "Wszystkie platformy AI"
   }
 }
 

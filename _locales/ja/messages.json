@@ -1,33 +1,33 @@
 {
   "extName": {
-    "message": "AI Timeline：最強AIアシスタント：ChatGPT、Gemini、DeepSeek"
+    "message": "AI Timeline：最強のAI効率化アシスタント：ChatGPT、Gemini、DeepSeek"
   },
   "extDescription": {
-    "message": "機能：LaTeXコピー、タイムライン、Enter改行、Promptメモ。全AIプラットフォーム対応。AI効率を倍増！"
+    "message": "LaTeX数式のコピー、対話タイムライン、Enterキーで改行、プロンプトライブラリ。AIの使用効率を倍増させます。"
   },
   "qwxpzm": {
-    "message": "保存"
+    "message": "お気に入り"
   },
   "hkjvnr": {
-    "message": "保存済みを表示"
+    "message": "お気に入りを見る"
   },
   "zmvkpx": {
-    "message": "会話を保存"
+    "message": "会話をお気に入りに追加"
   },
   "bpxjkw": {
-    "message": "保存を解除"
+    "message": "お気に入りから削除"
   },
   "vnkxpm": {
-    "message": "保存済みリスト"
+    "message": "お気に入りリスト"
   },
   "kxpmzv": {
-    "message": "保存しました"
+    "message": "お気に入りに追加しました"
   },
   "pzmvkx": {
-    "message": "保存を解除しました"
+    "message": "お気に入りから削除しました"
   },
   "jwvnkp": {
-    "message": "データなし"
+    "message": "データがありません"
   },
   "mvkxpz": {
     "message": "コピー"
@@ -48,16 +48,16 @@
     "message": "キャンセル"
   },
   "vkmzpx": {
-    "message": "確認"
+    "message": "確定"
   },
   "mzpxvk": {
-    "message": "テーマを空にできません"
+    "message": "タイトルは空にできません"
   },
   "xvkpmz": {
     "message": "名前を変更"
   },
   "pzmkvx": {
-    "message": "コンテンツを空にできません"
+    "message": "内容は空にできません"
   },
   "kmvxpz": {
     "message": "すべてのデータはブラウザにローカル保存されます"
@@ -66,7 +66,7 @@
     "message": "オープンソース"
   },
   "mkvxpz": {
-    "message": "GitHubでスター"
+    "message": "GitHubでスターする"
   },
   "xpzmkv": {
     "message": "ようこそ"
@@ -81,10 +81,10 @@
     "message": "LaTeX数式をコピー"
   },
   "kxvpmz": {
-    "message": "新しいフォルダ"
+    "message": "新規フォルダ"
   },
   "vpmzkx": {
-    "message": "新しいサブフォルダ"
+    "message": "新規サブフォルダ"
   },
   "mzxvkp": {
     "message": "削除"
@@ -96,16 +96,16 @@
     "message": "「{folderName}」にサブフォルダを作成"
   },
   "vzkpmx": {
-    "message": "フォルダ名を入力してください"
+    "message": "フォルダ名を入力"
   },
   "kmxpvz": {
-    "message": "フォルダ名は必須です"
+    "message": "フォルダ名は空にできません"
   },
   "pxmzvk": {
     "message": "フォルダ名を変更"
   },
   "mvzxkp": {
-    "message": "新しい名前を入力してください"
+    "message": "新しい名前を入力"
   },
   "kpvzmx": {
     "message": "フォルダ名は既に存在します"
@@ -132,16 +132,16 @@
     "message": "移動先"
   },
   "wjxnkp": {
-    "message": "フォルダ「{folderName}」を削除しますか？\n\nこのフォルダとそのサブフォルダには{count}個の保存項目があります。これらはデフォルトフォルダに移動されます。"
+    "message": "フォルダ「{folderName}」を削除しますか？\n\nこのフォルダとサブフォルダには {count} 件のお気に入りがあります。削除後、これらはデフォルトフォルダに移動されます。"
   },
   "qzmvkx": {
-    "message": "フォルダ「{folderName}」を削除してもよろしいですか？"
+    "message": "フォルダ「{folderName}」を削除しますか？"
   },
   "mvkzpx": {
-    "message": "保存済みを検索..."
+    "message": "お気に入りを検索..."
   },
   "kxzpmv": {
-    "message": "保存先"
+    "message": "お気に入りに保存"
   },
   "vmzpkx": {
     "message": "デフォルトフォルダ"
@@ -156,10 +156,10 @@
     "message": "有効にすると、AI会話ページの右側にインタラクティブなタイムラインが表示されます。"
   },
   "vkpmzx": {
-    "message": "キーボード ↑ / ↓ キーで会話ノード間を移動"
+    "message": "↑ / ↓ キーで会話ノードを移動"
   },
   "xpvmkz": {
-    "message": "有効にすると、キーボードの ↑ / ↓ キーを使用して会話ノード間を素早く移動できます。"
+    "message": "有効にすると、↑ / ↓ キーで会話ノード間を素早く移動できます。"
   },
   "pxmzkv": {
     "message": "📌 重要な会話をマーク"
@@ -171,10 +171,7 @@
     "message": "チャットボックス"
   },
   "kvzmxp": {
-    "message": "キーボード Enter キーで改行"
-  },
-  "mxpzvk": {
-    "message": "有効にすると、AI会話入力ボックスで、Enter キーを1回押すと改行、素早く2回押すとメッセージを送信します。"
+    "message": "Enterキーで改行"
   },
   "kpxvmz": {
     "message": "数式をコピー"
@@ -183,39 +180,84 @@
     "message": "LaTeX数式をコピー"
   },
   "vxkpzm": {
-    "message": "有効にすると、ページ上の数式を自動的に識別し、クリックするとLaTeX形式でコピーできます。"
+    "message": "有効にすると、ページ上の数式を自動検出し、クリックでLaTeX形式でコピーできます。"
   },
   "mkvzpx": {
     "message": "対応プラットフォーム"
   },
-  "zpkmvx": {
-    "message": "Enterで改行"
-  },
   "vxmkpz": {
-    "message": "Enterキー：1回で改行、2回で送信"
+    "message": "Enterキー：1回押しで改行、2回連続で送信"
   },
   "mkpxvz": {
-    "message": "有効にすると、AI会話入力ボックスで、Enterキーを1回押すと改行、素早く2回押すとメッセージを送信します。"
-  },
-  "zpvmkx": {
-    "message": "保存に失敗しました"
+    "message": "有効にすると、AIチャット入力欄でEnterキーを1回押すと改行、素早く2回押すとメッセージを送信します。"
   },
   "xvpmkz": {
     "message": "お気に入りリストを表示"
   },
   "qoytxz": {
-    "message": "この機能は常に有効で、無効にできません"
-  }
-,
+    "message": "この機能はデフォルトで有効で、オフにできません"
+  },
   "hosegod": {
     "message": "プロンプトライブラリ"
-  }
-,
-  "promptButtonDisplay": {
-    "message": "プロンプトボタン"
   },
   "hobsidbg": {
-    "message": "有効にすると、チャットボックスの左側にプロンプトショートカットボタンを表示"
+    "message": "有効にすると、チャットボックスの左側にプロンプトショートカットボタンが表示されます"
+  },
+  "biwhckdj": {
+    "message": "プロンプト一覧"
+  },
+  "byaskjndg": {
+    "message": "プロンプトを追加"
+  },
+  "hsksuywm": {
+    "message": "プロンプトを編集"
+  },
+  "hsuywkw": {
+    "message": "プロンプト名"
+  },
+  "hsuywkwPlaceholder": {
+    "message": "プロンプト名を入力"
+  },
+  "promptContent": {
+    "message": "内容"
+  },
+  "uwkjwjw": {
+    "message": "プロンプト内容を入力"
+  },
+  "hsiwhwl": {
+    "message": "プロンプトがありません"
+  },
+  "shwsuwk": {
+    "message": "プロンプトを追加しました"
+  },
+  "hwkwbhwk": {
+    "message": "プロンプトを更新しました"
+  },
+  "qrtypd": {
+    "message": "プロンプトを削除しました"
+  },
+  "dcnfmq": {
+    "message": "このプロンプトを削除しますか？"
+  },
+  "pbtdsq": {
+    "message": "プロンプトボタン"
+  },
+  "svkbtn": {
+    "message": "保存"
+  },
+  "pmpknd": {
+    "message": "ピン留めしました"
+  },
+  "pmuknp": {
+    "message": "ピン留めを解除しました"
+  },
+  "addkbt": {
+    "message": "追加"
+  },
+  "ptfmsl": {
+    "message": "対象"
+  },
+  "allptfm": {
+    "message": "すべてのAIプラットフォーム"
   }
 }
-
