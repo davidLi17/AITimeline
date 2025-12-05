@@ -167,13 +167,10 @@ function initializeTimeline() {
     // ============================================
     
     // 1. 清理时间轴主容器（包含整个时间轴 UI 和收藏按钮的包装器）
-    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper'));
+    TimelineUtils.removeElementSafe(document.querySelector('.ait-chat-timeline-wrapper'));
     
-    // 2. 清理收藏面板（右侧弹出的收藏列表面板）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-starred-panel'));
-    
-    // 3. 清理原生收藏按钮（正常文档流中的收藏按钮）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
+    // 2. 清理原生收藏按钮（正常文档流中的收藏按钮）
+    TimelineUtils.removeElementSafe(document.querySelector('.ait-timeline-star-chat-btn-native'));
     
     try {
         timelineManagerInstance = new TimelineManager(currentAdapter);
@@ -200,13 +197,10 @@ async function handleUrlChange() {
     // ============================================
     
     // 1. 清理时间轴主容器（包含整个时间轴 UI 和收藏按钮的包装器）
-    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper'));
+    TimelineUtils.removeElementSafe(document.querySelector('.ait-chat-timeline-wrapper'));
     
-    // 2. 清理收藏面板（右侧弹出的收藏列表面板）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-starred-panel'));
-    
-    // 3. 清理原生收藏按钮（正常文档流中的收藏按钮）
-    TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
+    // 2. 清理原生收藏按钮（正常文档流中的收藏按钮）
+    TimelineUtils.removeElementSafe(document.querySelector('.ait-timeline-star-chat-btn-native'));
     
     cleanupGlobalObservers();
 
@@ -256,9 +250,8 @@ function setupPlatformSettingsListener() {
                     }
                     
                     // 清理 UI 元素
-                    TimelineUtils.removeElementSafe(document.querySelector('.chat-timeline-wrapper'));
-                    TimelineUtils.removeElementSafe(document.querySelector('.timeline-starred-panel'));
-                    TimelineUtils.removeElementSafe(document.querySelector('.timeline-star-chat-btn-native'));
+                    TimelineUtils.removeElementSafe(document.querySelector('.ait-chat-timeline-wrapper'));
+                    TimelineUtils.removeElementSafe(document.querySelector('.ait-timeline-star-chat-btn-native'));
                 }
             }
         }

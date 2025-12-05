@@ -220,19 +220,19 @@ class TimelineManager {
     
     injectTimelineUI() {
         // ✅ 创建或获取包装容器
-        let wrapper = document.querySelector('.chat-timeline-wrapper');
+        let wrapper = document.querySelector('.ait-chat-timeline-wrapper');
         if (!wrapper) {
             wrapper = document.createElement('div');
-            wrapper.className = 'chat-timeline-wrapper';
+            wrapper.className = 'ait-chat-timeline-wrapper';
             document.body.appendChild(wrapper);
         }
         this.ui.wrapper = wrapper;
         
         // Idempotent: ensure bar exists, then ensure track + content exist
-        let timelineBar = wrapper.querySelector('.chat-timeline-bar');
+        let timelineBar = wrapper.querySelector('.ait-chat-timeline-bar');
         if (!timelineBar) {
             timelineBar = document.createElement('div');
-            timelineBar.className = 'chat-timeline-bar';
+            timelineBar.className = 'ait-chat-timeline-bar';
             wrapper.appendChild(timelineBar);
         }
         this.ui.timelineBar = timelineBar;
@@ -258,16 +258,16 @@ class TimelineManager {
             }
         }
         // Track + content
-        let track = this.ui.timelineBar.querySelector('.timeline-track');
+        let track = this.ui.timelineBar.querySelector('.ait-timeline-track');
         if (!track) {
             track = document.createElement('div');
-            track.className = 'timeline-track';
+            track.className = 'ait-timeline-track';
             this.ui.timelineBar.appendChild(track);
         }
-        let trackContent = track.querySelector('.timeline-track-content');
+        let trackContent = track.querySelector('.ait-timeline-track-content');
         if (!trackContent) {
             trackContent = document.createElement('div');
-            trackContent.className = 'timeline-track-content';
+            trackContent.className = 'ait-timeline-track-content';
             track.appendChild(trackContent);
         }
         this.ui.track = track;
@@ -360,7 +360,7 @@ class TimelineManager {
         }
         
         // 2. 检查是否已存在按钮
-        let starChatBtn = document.querySelector('.timeline-star-chat-btn-native');
+        let starChatBtn = document.querySelector('.ait-timeline-star-chat-btn-native');
         
         if (starChatBtn) {
             // ✅ 按钮已存在，只更新状态，不重建（避免事件监听器丢失）
@@ -377,7 +377,7 @@ class TimelineManager {
         
         // 3. 创建新按钮
         starChatBtn = document.createElement('button');
-        starChatBtn.className = 'timeline-star-chat-btn-native';
+        starChatBtn.className = 'ait-timeline-star-chat-btn-native';
         
         // 4. 检查收藏状态并设置图标
         const isStarred = await this.isChatStarred();
@@ -686,7 +686,7 @@ class TimelineManager {
         this.lastNodeIds = currentNodeIds;
         
         // 节点发生变化，清除旧的 dots，准备重新计算和渲染
-        (this.ui.trackContent || this.ui.timelineBar).querySelectorAll('.timeline-dot').forEach(n => n.remove());
+        (this.ui.trackContent || this.ui.timelineBar).querySelectorAll('.ait-timeline-dot').forEach(n => n.remove());
         
         /**
          * ✅ 计算元素相对于容器顶部的距离（使用 offsetTop）
@@ -1086,7 +1086,7 @@ class TimelineManager {
                 return;
             }
             
-            const dot = e.target.closest('.timeline-dot');
+            const dot = e.target.closest('.ait-timeline-dot');
             if (dot) {
                 const targetId = dot.dataset.targetTurnId;
                 // Find target element by matching marker ID
@@ -1187,7 +1187,7 @@ class TimelineManager {
         
         // ✅ 保存为实例方法以便在 destroy 中清理
         this.startLongPress = (e) => {
-            const dot = e.target.closest('.timeline-dot');
+            const dot = e.target.closest('.ait-timeline-dot');
             if (!dot) return;
             
             longPressTarget = dot;
@@ -1253,14 +1253,14 @@ class TimelineManager {
 
         // Tooltip interactions (delegated)
         this.onTimelineBarOver = (e) => {
-            const dot = e.target.closest('.timeline-dot');
+            const dot = e.target.closest('.ait-timeline-dot');
             if (dot) this.showTooltipForDot(dot);
         };
         
         // ✅ 需求2：修改逻辑 - 只在鼠标不是移到 tooltip 时才隐藏
         this.onTimelineBarOut = (e) => {
-            const fromDot = e.target.closest('.timeline-dot');
-            const toDot = e.relatedTarget?.closest?.('.timeline-dot');
+            const fromDot = e.target.closest('.ait-timeline-dot');
+            const toDot = e.relatedTarget?.closest?.('.ait-timeline-dot');
             const toTooltip = e.relatedTarget?.closest?.('.timeline-tooltip');
             
             // 如果从圆点移出，且不是移到另一个圆点或 tooltip，才隐藏
@@ -1270,11 +1270,11 @@ class TimelineManager {
         };
         
         this.onTimelineBarFocusIn = (e) => {
-            const dot = e.target.closest('.timeline-dot');
+            const dot = e.target.closest('.ait-timeline-dot');
             if (dot) this.showTooltipForDot(dot);
         };
         this.onTimelineBarFocusOut = (e) => {
-            const dot = e.target.closest('.timeline-dot');
+            const dot = e.target.closest('.ait-timeline-dot');
             if (dot) this.hideTooltip();
         };
         
@@ -1611,7 +1611,7 @@ class TimelineManager {
 
     getTrackPadding() {
         if (!this.ui.timelineBar) return 12;
-        return this.getCSSVarNumber(this.ui.timelineBar, '--timeline-track-padding', 12);
+        return this.getCSSVarNumber(this.ui.timelineBar, '--ait-timeline-track-padding', 12);
     }
 
     getMinGap() {
@@ -1656,7 +1656,7 @@ class TimelineManager {
         if (shouldBeCompact !== this.isCompactMode) {
             this.isCompactMode = shouldBeCompact;
             if (this.ui.timelineBar) {
-                this.ui.timelineBar.classList.toggle('compact-mode', this.isCompactMode);
+                this.ui.timelineBar.classList.toggle('ait-compact-mode', this.isCompactMode);
             }
         }
     }
@@ -2050,7 +2050,7 @@ class TimelineManager {
         try {
             if (!this.ui.trackContent) return false;
             const test = document.createElement('button');
-            test.className = 'timeline-dot';
+            test.className = 'ait-timeline-dot';
             test.style.visibility = 'hidden';
             test.style.pointerEvents = 'none';
             test.setAttribute('aria-hidden', 'true');
@@ -2110,7 +2110,7 @@ class TimelineManager {
                 if (m && m.dotElement) { try { m.dotElement.remove(); } catch {} m.dotElement = null; }
             }
         } else {
-            (this.ui.trackContent || this.ui.timelineBar).querySelectorAll('.timeline-dot').forEach(n => n.remove());
+            (this.ui.trackContent || this.ui.timelineBar).querySelectorAll('.ait-timeline-dot').forEach(n => n.remove());
             this.markers.forEach(m => { m.dotElement = null; });
         }
 
@@ -2120,7 +2120,7 @@ class TimelineManager {
             if (!marker) continue;
             if (!marker.dotElement) {
                 const dot = document.createElement('button');
-                dot.className = 'timeline-dot';
+                dot.className = 'ait-timeline-dot';
                 dot.dataset.targetTurnId = marker.id;
                 dot.setAttribute('aria-label', marker.summary);
                 dot.setAttribute('tabindex', '0');

@@ -79,7 +79,7 @@ const title = await window.globalInputModal.show({ title: '请输入标题' });
 
 ### 时间轴核心 UI（5个元素）
 
-#### 1. `.chat-timeline-wrapper`
+#### 1. `.ait-chat-timeline-wrapper`
 **功能**：时间轴主容器  
 **包含内容**：
 - 整个时间轴 UI
@@ -103,20 +103,7 @@ const title = await window.globalInputModal.show({ title: '请输入标题' });
 
 ---
 
-#### 3. `.timeline-starred-panel`
-**功能**：收藏面板  
-**显示内容**：
-- 右侧弹出的收藏列表
-- 所有已收藏的对话
-- 编辑/删除按钮
-
-**为什么要清理**：
-- 面板可能处于打开状态
-- 避免在新页面显示旧的收藏面板
-
----
-
-#### 4. `.timeline-star-chat-btn-native`
+#### 3. `.ait-timeline-star-chat-btn-native`
 **功能**：原生收藏按钮  
 **位置**：正常文档流中（跟随页面滚动）  
 **作用**：点击后弹出输入对话框，收藏当前对话

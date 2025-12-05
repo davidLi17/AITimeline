@@ -5,8 +5,8 @@
 
 /* Use CSS variables for easy theme management. We sample chat's own colors. */
 :root {
-    --timeline-dot-color: #D1D5DB; /* Light mode gray */
-    --timeline-dot-active-color: #6128FF; /* 紫色 rgb(97, 40, 255) */
+    --ait-timeline-dot-color: #D1D5DB; /* Light mode gray */
+    --ait-timeline-dot-active-color: #6128FF; /* 紫色 rgb(97, 40, 255) */
     --timeline-star-color: #FF7D03; /* 收藏橙色 rgb(255, 125, 3) */
 
     /* AI Studio-like tooltip tokens (light) */
@@ -26,11 +26,11 @@
     --timeline-tooltip-anim-out: 100ms linear;
 
     --timeline-bar-bg: rgba(246, 246, 248, 0.8);
-    --timeline-dot-size: 14px;
+    --ait-timeline-dot-size: 14px;
     --timeline-star-size: 17px; /* 五角星盒子尺寸（增加1px） */
     --timeline-active-ring: 3px;
     --timeline-star-ring: 5px; /* 五角星边框环宽度（增加1px，使边框更明显） */
-    --timeline-track-padding: 16px;
+    --ait-timeline-track-padding: 16px;
     --timeline-tooltip-max: 288px;
     --timeline-min-gap: 25px;
     /* enlarged hit area for easier clicking */
@@ -49,8 +49,8 @@
 
 /* Override variables when chat's dark mode is active */
 html[data-timeline-theme="dark"] {
-    --timeline-dot-color: #A0A0A0; /* ✅✅ 进一步提升亮度：#888 → #A0A0A0，深色主题下更清晰 */
-    --timeline-dot-active-color: #8B5CF6; /* ✅✅ 更明亮的紫色：#7C3AED → #8B5CF6 (violet-500)，对比度更强 */
+    --ait-timeline-dot-color: #A0A0A0; /* ✅✅ 进一步提升亮度：#888 → #A0A0A0，深色主题下更清晰 */
+    --ait-timeline-dot-active-color: #8B5CF6; /* ✅✅ 更明亮的紫色：#7C3AED → #8B5CF6 (violet-500)，对比度更强 */
     --timeline-star-color: #FB923C; /* 橙色保持不变，已经很好 */
     --timeline-active-ring: 4px; /* ✅✅ 加粗激活环：3px → 4px，深色主题下更醒目 */
     /* Dark tooltip palette */
