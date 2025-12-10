@@ -67,6 +67,10 @@ class PanelModal {
         const sidebar = document.createElement('div');
         sidebar.className = 'panel-modal-sidebar';
         
+        // 顶部区域（关闭按钮 + 标题）
+        const sidebarHeader = document.createElement('div');
+        sidebarHeader.className = 'panel-modal-sidebar-header';
+        
         // 关闭按钮（左侧顶部）
         this.closeBtn = document.createElement('button');
         this.closeBtn.className = 'panel-modal-close';
@@ -76,6 +80,14 @@ class PanelModal {
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         `;
+        
+        // 标题（关闭按钮右侧）
+        const sidebarTitle = document.createElement('span');
+        sidebarTitle.className = 'panel-modal-sidebar-title';
+        sidebarTitle.textContent = 'AI Timeline';
+        
+        sidebarHeader.appendChild(this.closeBtn);
+        sidebarHeader.appendChild(sidebarTitle);
         
         // Tab 栏（可滚动区域）
         this.tabsContainer = document.createElement('div');
@@ -90,7 +102,7 @@ class PanelModal {
             <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>${chrome.i18n.getMessage('vxpzmk')}</span><a href="https://github.com/houyanchao/AITimeline" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('mkvxpz')} ⭐</a></div>
         `;
         
-        sidebar.appendChild(this.closeBtn);
+        sidebar.appendChild(sidebarHeader);
         sidebar.appendChild(this.tabsContainer);
         sidebar.appendChild(footer);
         
@@ -132,14 +144,11 @@ class PanelModal {
             this.hide();
         });
         
-        // 点击关闭按钮（只有 SVG 图标可点击）
-        const closeSvg = this.closeBtn.querySelector('svg');
-        if (closeSvg) {
-            closeSvg.addEventListener('click', (e) => {
-                e.stopPropagation(); // 阻止事件冒泡
-                this.hide();
-            });
-        }
+        // 点击关闭按钮
+        this.closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.hide();
+        });
     }
     
     /**
