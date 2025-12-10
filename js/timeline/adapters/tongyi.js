@@ -1,7 +1,7 @@
 /**
  * Tongyi (通义千问) Adapter
  * 
- * Supports: tongyi.com
+ * Supports: qianwen.com
  * Features: 使用 class 前缀识别用户消息和文本内容
  */
 
@@ -31,15 +31,26 @@ class TongyiAdapter extends SiteAdapter {
     }
 
     isConversationRoute(pathname) {
-        // 通义千问对话 URL: /?sessionId={id}
-        return location.search.includes('sessionId=');
+        // 通义千问对话 URL:
+        // 对话: /chat/{id}
+        // 分享: /share?shareId={id}
+        return pathname.startsWith('/chat/') || 
+               (pathname.startsWith('/share') && location.search.includes('shareId='));
     }
 
     extractConversationId(pathname) {
         try {
-            // 从 URL 参数中提取 sessionId
-            const params = new URLSearchParams(location.search);
-            return params.get('sessionId');
+            // 对话 URL: /chat/{id}
+            if (pathname.startsWith('/chat/')) {
+                const id = pathname.replace('/chat/', '').split('/')[0];
+                if (id) return id;
+            }
+            // 分享 URL: /share?shareId={id}
+            if (pathname.startsWith('/share')) {
+                const params = new URLSearchParams(location.search);
+                return params.get('shareId');
+            }
+            return null;
         } catch {
             return null;
         }
@@ -62,13 +73,27 @@ class TongyiAdapter extends SiteAdapter {
     }
     
     getStarChatButtonTarget() {
-        // 返回 notifyContent 元素，收藏按钮将插入到它前面（左边）
-        return document.querySelector('[class*="notifyContent"]');
+        // 找到分享图标（通过 data-icon-type 属性），然后找到它的祖先 button 元素，收藏按钮插入到它前面（左边）
+        const shareIcon = document.querySelector('[data-icon-type="pcicon-transmission-line"]');
+        if (shareIcon) {
+            const button = shareIcon.closest('button');
+            return button;
+        }
+        return null;
     }
     
     getDefaultChatTheme() {
-        // 通义千问默认主题为空
-        return '';
+        // 从 text-primary text-title-attachment 元素中获取对话标题
+        try {
+            const titleElement = document.querySelector('.text-primary.text-title-attachment');
+            if (titleElement) {
+                const title = titleElement.textContent?.trim() || '';
+                return title;
+            }
+            return '';
+        } catch {
+            return '';
+        }
     }
     
 }

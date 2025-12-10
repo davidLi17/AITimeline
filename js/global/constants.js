@@ -77,7 +77,7 @@ const SITE_INFO = [
     },
     {
         id: 'tongyi',
-        sites: ['tongyi.com', 'qianwen.com'],
+        sites: ['qianwen.com'],
         name: '千问 Qwen',
         logoPath: 'images/logo/tongyi.webp',
         features: {

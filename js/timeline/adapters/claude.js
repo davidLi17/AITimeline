@@ -2,7 +2,7 @@
  * Claude Adapter
  * 
  * Supports: claude.ai/chat/{conversation_id}
- * 用户消息选择器: [data-testid="user-message"]
+ * 用户消息选择器: [data-test-render-count] 元素（包含 [data-testid="user-message"] 的）
  * 文本位置: p 标签内
  */
 
@@ -16,7 +16,8 @@ class ClaudeAdapter extends SiteAdapter {
     }
 
     getUserMessageSelector() {
-        return '[data-testid="user-message"]';
+        // 选中包含 [data-testid="user-message"] 的最近 [data-test-render-count] 祖先元素
+        return '[data-test-render-count]:has([data-testid="user-message"])';
     }
 
     generateTurnId(element, index) {
@@ -67,8 +68,8 @@ class ClaudeAdapter extends SiteAdapter {
     }
     
     getStarChatButtonTarget() {
-        // Claude: 暂时返回 null，后续可以根据实际 DOM 结构添加
-        return null;
+        // 收藏按钮插入到 chat-actions 的左边
+        return document.querySelector('[data-testid="chat-actions"]');
     }
     
     getDefaultChatTheme() {
