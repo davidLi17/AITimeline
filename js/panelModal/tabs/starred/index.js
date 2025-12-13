@@ -238,16 +238,16 @@ class StarredTab extends BaseTab {
             : (folderStates[folder.id] === true); // 否则使用保存的状态
         
         const folderElement = document.createElement('div');
-        folderElement.className = `folder-item folder-level-${level}`;
+        folderElement.className = `ait-folder-item ait-folder-level-${level}`;
         folderElement.dataset.folderId = folder.id;
         
         // 文件夹头部
         const folderHeader = document.createElement('div');
-        folderHeader.className = 'folder-header';
+        folderHeader.className = 'ait-folder-header';
         
         // 展开/折叠图标
         const toggleIcon = document.createElement('span');
-        toggleIcon.className = `folder-toggle ${isExpanded ? 'expanded' : ''}`;
+        toggleIcon.className = `ait-folder-toggle ${isExpanded ? 'expanded' : ''}`;
         toggleIcon.innerHTML = `
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 6 15 12 9 18"></polyline>
@@ -257,7 +257,7 @@ class StarredTab extends BaseTab {
         
         // 文件夹图标和名称
         const folderInfo = document.createElement('div');
-        folderInfo.className = 'folder-info';
+        folderInfo.className = 'ait-folder-info';
         
         // 根据展开状态选择不同的图标（对比度强的设计）
         const folderIconSvg = isExpanded 
@@ -272,11 +272,11 @@ class StarredTab extends BaseTab {
         const totalItems = this._countAllItems(folder);
         
         folderInfo.innerHTML = `
-            <span class="folder-icon">
+            <span class="ait-folder-icon">
                 ${folderIconSvg}
             </span>
-            <span class="folder-name">${this.escapeHtml(folder.name)}</span>
-            <span class="folder-count">(${totalItems})</span>
+            <span class="ait-folder-name">${this.escapeHtml(folder.name)}</span>
+            <span class="ait-folder-count">(${totalItems})</span>
         `;
         // 点击文件夹名称也可以展开/收起
         folderInfo.style.cursor = 'pointer';
@@ -284,11 +284,11 @@ class StarredTab extends BaseTab {
         
         // 操作按钮（使用 Dropdown）
         const folderActions = document.createElement('div');
-        folderActions.className = 'folder-actions';
+        folderActions.className = 'ait-folder-actions';
         
         // 操作按钮（三个横向的点）
         const actionsBtn = document.createElement('button');
-        actionsBtn.className = 'folder-action-btn';
+        actionsBtn.className = 'ait-folder-action-btn';
         actionsBtn.innerHTML = `
             <svg viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="5" cy="12" r="2"/>
@@ -373,7 +373,7 @@ class StarredTab extends BaseTab {
         
         // 文件夹内容（可折叠）
         const folderContent = document.createElement('div');
-        folderContent.className = `folder-content ${isExpanded ? 'expanded' : ''}`;
+        folderContent.className = `ait-folder-content ${isExpanded ? 'expanded' : ''}`;
         
         // ✨ 渲染过滤后的收藏项
         for (const item of filteredItems) {
@@ -420,16 +420,16 @@ class StarredTab extends BaseTab {
             : (shouldAutoExpand || folderStates['default'] === true);
         
         const defaultFolder = document.createElement('div');
-        defaultFolder.className = 'folder-item default-folder';
+        defaultFolder.className = 'ait-folder-item default-folder';
         defaultFolder.dataset.folderId = 'default';
         
         // 文件夹头部
         const header = document.createElement('div');
-        header.className = 'folder-header';
+        header.className = 'ait-folder-header';
         
         // 展开/折叠图标
         const toggleIcon = document.createElement('span');
-        toggleIcon.className = `folder-toggle ${isExpanded ? 'expanded' : ''}`;
+        toggleIcon.className = `ait-folder-toggle ${isExpanded ? 'expanded' : ''}`;
         toggleIcon.innerHTML = `
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 6 15 12 9 18"></polyline>
@@ -439,7 +439,7 @@ class StarredTab extends BaseTab {
         
         // 文件夹信息
         const folderInfo = document.createElement('div');
-        folderInfo.className = 'folder-info';
+        folderInfo.className = 'ait-folder-info';
         
         // 根据展开状态选择不同的图标
         const folderIconSvg = isExpanded 
@@ -451,11 +451,11 @@ class StarredTab extends BaseTab {
             </svg>`;  // 关闭的文件夹
         
         folderInfo.innerHTML = `
-            <span class="folder-icon">
+            <span class="ait-folder-icon">
                 ${folderIconSvg}
             </span>
-            <span class="folder-name">${chrome.i18n.getMessage('pkxvmz')}</span>
-            <span class="folder-count">(${filteredItems.length})</span>
+            <span class="ait-folder-name">${chrome.i18n.getMessage('pkxvmz')}</span>
+            <span class="ait-folder-count">(${filteredItems.length})</span>
         `;
         // 点击文件夹名称也可以展开/收起
         folderInfo.style.cursor = 'pointer';
@@ -467,7 +467,7 @@ class StarredTab extends BaseTab {
         
         // 文件夹内容
         const content = document.createElement('div');
-        content.className = `folder-content ${isExpanded ? 'expanded' : ''}`;
+        content.className = `ait-folder-content ${isExpanded ? 'expanded' : ''}`;
         
         // ✨ 渲染过滤后的收藏项
         for (const item of filteredItems) {
@@ -749,9 +749,9 @@ class StarredTab extends BaseTab {
         
         const folderElement = listContainer.querySelector(`[data-folder-id="${folderId}"]`);
         if (folderElement) {
-            const toggle = folderElement.querySelector('.folder-toggle');
-            const content = folderElement.querySelector('.folder-content');
-            const folderIcon = folderElement.querySelector('.folder-icon');
+            const toggle = folderElement.querySelector('.ait-folder-toggle');
+            const content = folderElement.querySelector('.ait-folder-content');
+            const folderIcon = folderElement.querySelector('.ait-folder-icon');
             
             if (toggle && content) {
                 const isExpanded = folderStates[folderId];
