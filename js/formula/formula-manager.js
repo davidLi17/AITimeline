@@ -19,19 +19,14 @@ class FormulaManager {
         this.tooltipTimer = null;
         this.feedbackTimer = null;
         this.mutationObserver = null;
-        this.periodicCheckInterval = null;
         this.debounceTimer = null;
         this.isEnabled = false;
         
-        // ✅ 监听状态变量（避免闭包问题）
-        this._mutationCount = 0;
+        // 最后扫描时间
         this._lastScanTime = 0;
         
         // ✅ URL 变化监听（组件自治）
         this._currentUrl = location.href;
-        
-        // ✅ 功能启用状态（默认开启）
-        this.featureEnabled = true;
         
         // ✅ Storage 监听器
         this.storageListener = null;
@@ -39,6 +34,7 @@ class FormulaManager {
         // 绑定事件处理器
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this._boundHandleUrlChange = this._handleUrlChange.bind(this);
         
@@ -82,26 +78,23 @@ class FormulaManager {
         try {
             const result = await chrome.storage.local.get('formulaEnabled');
             // 默认开启（!== false）
-            this.featureEnabled = result.formulaEnabled !== false;
-            return this.featureEnabled;
+            return result.formulaEnabled !== false;
         } catch (e) {
             console.error('[FormulaManager] Failed to check if enabled:', e);
             // 出错默认开启
-            this.featureEnabled = true;
             return true;
         }
     }
     
     /**
      * ✅ 监听 Storage 变化（功能开关）
+     * 注：功能禁用时会直接调用 destroy()，所以这里只做日志记录
      */
     attachStorageListener() {
         this.storageListener = (changes, areaName) => {
             if (areaName === 'local' && changes.formulaEnabled) {
                 const newValue = changes.formulaEnabled.newValue;
-                this.featureEnabled = newValue !== false;
-                
-                console.log('[FormulaManager] Feature enabled changed to:', this.featureEnabled);
+                console.log('[FormulaManager] Feature enabled changed to:', newValue !== false);
             }
         };
         
@@ -188,7 +181,10 @@ class FormulaManager {
         
         formulaElement.addEventListener('mouseenter', this.handleMouseEnter);
         formulaElement.addEventListener('mouseleave', this.handleMouseLeave);
-        formulaElement.addEventListener('click', this.handleClick);
+        // ✅ mousedown 捕获阶段拦截，防止 canvas 编辑模式
+        formulaElement.addEventListener('mousedown', this.handleMouseDown, true);
+        // ✅ click 捕获阶段处理复制逻辑
+        formulaElement.addEventListener('click', this.handleClick, true);
         
         // 添加样式类（用于 CSS 控制）
         formulaElement.classList.add('formula-interactive');
@@ -251,6 +247,14 @@ class FormulaManager {
         } else {
             this.hideTooltip();
         }
+    }
+
+    /**
+     * mousedown 事件处理 - 阻止 canvas 编辑模式
+     */
+    handleMouseDown(e) {
+        // 只需阻止默认行为，canvas 就不会进入编辑模式
+        e.preventDefault();
     }
 
     /**
@@ -432,48 +436,48 @@ class FormulaManager {
     }
 
     /**
-     * 监听新增的公式元素 - 智能防抖方案
+     * 监听新增的公式元素 - 防抖 + 时间检查机制
+     * - 每次 DOM 变化时立即检查距上次扫描时间，超过 2 秒就扫描
+     * - 同时设置 2 秒防抖，作为输出结束后的兜底
      */
     observeNewFormulas() {
         if (this.mutationObserver) return;
 
-        // ✅ 使用实例变量避免闭包混乱
-        this._mutationCount = 0;
         this._lastScanTime = Date.now();
 
         this.mutationObserver = new MutationObserver((mutations) => {
-            // ✅ 快速过滤：如果没有添加节点，直接跳过
+            // 快速过滤：如果没有添加节点，直接跳过
             const hasAddedNodes = mutations.some(m => m.addedNodes.length > 0);
             if (!hasAddedNodes) return;
             
-            // 累计变化次数
-            this._mutationCount += mutations.length;
+            // 立即检查距离上次扫描时间
+            const now = Date.now();
+            const timeSinceLastScan = now - this._lastScanTime;
             
-            // 清除旧的防抖定时器
-            if (this.debounceTimer) {
-                clearTimeout(this.debounceTimer);
-                this.debounceTimer = null;
+            if (timeSinceLastScan >= 2000) {
+                // 距上次扫描 >= 2秒，立即扫描
+                if (this.isEnabled) {
+                    this.scanAndAttachFormulas();
+                    this._lastScanTime = now;
+                }
             }
             
-            // 智能延迟：根据变化频率调整
-            let delay;
-            if (this._mutationCount < 20) {
-                delay = 400;
-            } else if (this._mutationCount < 50) {
-                delay = 600;
-            } else {
-                delay = 1000;
+            // 防抖：输出结束后 2 秒兜底扫描
+            if (this.debounceTimer) {
+                clearTimeout(this.debounceTimer);
             }
             
             this.debounceTimer = setTimeout(() => {
-                // ✅ 检查是否已被销毁
                 if (!this.isEnabled) return;
                 
-                this.scanAndAttachFormulas();
-                this._mutationCount = 0;
-                this._lastScanTime = Date.now();
-                this.debounceTimer = null;
-            }, delay);
+                // ✅ 杜绝无限扫描：检查距上次扫描时间，确保不超过每 2 秒一次
+                const timeSinceLastScan = Date.now() - this._lastScanTime;
+                if (timeSinceLastScan >= 2000) {
+                    this.scanAndAttachFormulas();
+                    this._lastScanTime = Date.now();
+                }
+                // 如果 < 2秒，说明刚扫描过（立即扫描已执行），跳过
+            }, 2000);
         });
 
         // 监听整个文档的变化
@@ -481,19 +485,6 @@ class FormulaManager {
             childList: true,
             subtree: true
         });
-        
-        // 轻量级兜底机制
-        this.periodicCheckInterval = setInterval(() => {
-            // ✅ 检查是否已被销毁
-            if (!this.isEnabled) return;
-            
-            const timeSinceLastScan = Date.now() - this._lastScanTime;
-            
-            if (timeSinceLastScan > 5000) {
-                this.scanAndAttachFormulas();
-                this._lastScanTime = Date.now();
-            }
-        }, 5000);
     }
 
     /**
@@ -552,12 +543,6 @@ class FormulaManager {
             this.mutationObserver = null;
         }
 
-        // 清除定期检查定时器
-        if (this.periodicCheckInterval) {
-            clearInterval(this.periodicCheckInterval);
-            this.periodicCheckInterval = null;
-        }
-
         // 清除防抖定时器
         if (this.debounceTimer) {
             clearTimeout(this.debounceTimer);
@@ -594,7 +579,6 @@ class FormulaManager {
 
         // 重置状态变量
         this.currentHoverElement = null;
-        this._mutationCount = 0;
         this._lastScanTime = 0;
     }
     
@@ -649,15 +633,9 @@ class FormulaManager {
         formulas.forEach(formula => {
             formula.removeEventListener('mouseenter', this.handleMouseEnter);
             formula.removeEventListener('mouseleave', this.handleMouseLeave);
-            formula.removeEventListener('click', this.handleClick);
+            formula.removeEventListener('mousedown', this.handleMouseDown, true);
+            formula.removeEventListener('click', this.handleClick, true);
             formula.removeAttribute('data-latex-source');
-            formula.classList.remove('formula-interactive', 'formula-hover');
-        });
-        
-        // 或者更简洁的方式：只清理标记，不移除事件监听器（因为元素可能被移除）
-        const allFormulas = document.querySelectorAll('[data-formula-interactive]');
-        allFormulas.forEach(formula => {
-            formula.removeAttribute('data-formula-interactive');
             formula.classList.remove('formula-interactive', 'formula-hover');
         });
     }

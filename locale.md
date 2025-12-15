@@ -1,6 +1,6 @@
 # AI Timeline 多语言翻译列表
 
-本文档列出了 AI Timeline 扩展程序在所有支持语言中的 Edge 商店名称翻译。
+本文档列出了 AI Timeline 扩展程序在所有支持语言中的 Edge、Chrome 商店名称翻译。
 
 ## 翻译对照表
 
