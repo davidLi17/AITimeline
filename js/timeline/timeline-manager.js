@@ -752,13 +752,11 @@ class TimelineManager {
          * 当 scrollProgress = 0.5 时，第一个 n > 0.5 的是节点2，激活节点2
          */
         
-        // 获取滚动容器的尺寸信息
-        const scrollHeight = this.scrollContainer.scrollHeight;
-        const clientHeight = this.scrollContainer.clientHeight;
-        const maxScrollTop = scrollHeight - clientHeight;
+        // ✅ 获取"干净"的滚动区域尺寸（不包含我们添加的 padding）
+        const { scrollHeight, clientHeight, maxScrollTop: cleanMaxScrollTop } = this._getCleanScrollMetrics();
         
         // 缓存用于后续计算
-        this.maxScrollTop = maxScrollTop > 0 ? maxScrollTop : 1;
+        this.maxScrollTop = cleanMaxScrollTop > 0 ? cleanMaxScrollTop : 1;
         
         // ✅ 统一使用 scrollContainer 计算所有位置
         const nodeOffsets = Array.from(userTurnElements).map(el => getOffsetTop(el, this.scrollContainer));
@@ -771,28 +769,20 @@ class TimelineManager {
             contentSpan = 1;
         }
         this.contentSpanPx = contentSpan;
+        
+        /**
+         * ✅ 底部 padding 管理
+         * 
+         * 问题：当最后几个节点距离很近时，点击某个节点后可能激活错误的节点
+         * 原因：原来的 activateAt 和 offsetTop 的映射关系不是 1:1
+         * 
+         * 解决方案：添加底部 padding，确保 maxScrollTop >= lastOffsetTop
+         * 这样可以直接用 offsetTop 判断激活，避免压缩问题
+         */
+        this._updateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
 
         // Build markers with normalized position along conversation
         this.markerMap.clear();
-        
-            /**
-         * ✅ 计算 activateAt 的基准值
-             * 
-         * 逻辑：
-         * - 如果最后一个节点底部距离滚动区域底部的距离 > 滚动窗口高度
-         *   - 用最后一个节点的 offsetTop
-         * - 否则
-         *   - 用 maxScrollTop (scrollHeight - clientHeight)
-         */
-        const distanceFromLastNodeToBottom = scrollHeight - lastOffsetTop;
-        let activateBase;
-        if (distanceFromLastNodeToBottom > clientHeight) {
-            // 最后一个节点后面内容很多，用最后一个节点的 offsetTop
-            activateBase = lastOffsetTop;
-        } else {
-            // 用 maxScrollTop
-            activateBase = maxScrollTop;
-        }
         
         this.markers = Array.from(userTurnElements).map((el, index, arr) => {
             /**
@@ -801,9 +791,9 @@ class TimelineManager {
              * - offsetTop: 节点顶部距离滚动区域顶部的距离（像素）
              * - offsetBottom: 节点结束位置 = offsetTop + 节点高度（像素）
              * - visualN: 用于时间轴圆点定位（0~1）
-             * - activateAt: 激活阈值（像素）= activateBase * visualN
              * 
-             * 激活逻辑：找最后一个 activateAt <= scrollTop 的节点
+             * 激活逻辑：直接使用 offsetTop，找最后一个 (offsetTop - 提前量) <= scrollTop 的节点
+             * 注意：需要配合底部空白元素使用，确保所有节点都能被滚动激活
              */
             
             // 节点顶部距离滚动区域的距离（像素）
@@ -818,30 +808,16 @@ class TimelineManager {
             let visualN = offsetFromStart / contentSpan;
             visualN = Math.round(Math.max(0, Math.min(1, visualN)) * 1000000) / 1000000;
             
-            /**
-             * ✅ activateAt: 激活阈值（像素）
-             * 
-             * 计算公式：activateAt = activateBase * visualN
-             * 
-             * activateBase 的选择：
-             * - 如果最后一个节点后内容 > 滚动窗口：用 lastOffsetTop
-             * - 否则：用 maxScrollTop
-             * 
-             * 当 scrollTop >= activateAt 时，激活该节点
-             */
-            const activateAt = activateBase * visualN;
-            
             const id = this.adapter.generateTurnId(el, index);
             
             const m = {
                 id: id,
                 element: el,
                 summary: this.adapter.extractText(el),
-                offsetTop,      // 节点顶部距离（像素）
+                offsetTop,      // 节点顶部距离（像素）- 用于激活判断
                 offsetBottom,   // 节点结束位置（像素）
-                visualN,        // 原始位置比例（0~1，用于激活判断）
+                visualN,        // 原始位置比例（0~1）
                 dotN: visualN,  // 圆点定位值（0~1，经过 minGap 调整，用于视觉渲染）
-                activateAt,     // 激活阈值（像素）= activateBase * visualN
                 dotElement: null,
                 starred: false,
                 pinned: false,
@@ -934,23 +910,25 @@ class TimelineManager {
             return null;
         };
         
-        // ✅ 检查是否有跨页面导航任务
+        // ✅ 检查是否有跨页面导航任务（同站跳转，如从收藏列表点击）
         this.getNavigateData('targetIndex').then(nodeKey => {
             const marker = findMarkerByNodeKey(nodeKey);
             if (marker && marker.element) {
-                requestAnimationFrame(() => {
+                // 延迟500ms，等待页面完全加载后再定位
+                setTimeout(() => {
                     this.smoothScrollTo(marker.element);
-                });
+                }, 500);
             }
         }).catch(() => {});
         
-        // ✅ 检查是否有跨网站导航任务
+        // ✅ 检查是否有跨网站导航任务（跨站跳转，如从收藏列表点击其他网站的记录）
         this.checkCrossSiteNavigate().then(nodeKey => {
             const marker = findMarkerByNodeKey(nodeKey);
             if (marker && marker.element) {
-                requestAnimationFrame(() => {
+                // 延迟500ms，等待页面完全加载后再定位
+                setTimeout(() => {
                     this.smoothScrollTo(marker.element);
-                });
+                }, 500);
             }
         }).catch(() => {});
         
@@ -1708,7 +1686,7 @@ class TimelineManager {
     smoothScrollTo(targetElement, duration = 600) {
         if (!targetElement || !this.scrollContainer) return;
         
-        const SCROLL_OFFSET = 50; // 滚动偏移量，滚动到 offsetTop - 50 的位置
+        const SCROLL_OFFSET = 30; // 滚动偏移量，滚动到 offsetTop - 30 的位置
         
         const containerRect = this.scrollContainer.getBoundingClientRect();
         const targetRect = targetElement.getBoundingClientRect();
@@ -2483,7 +2461,83 @@ class TimelineManager {
     }
 
     /**
-     * ✅ 仅重新计算已有节点的位置（offsetTop, visualN, activateAt）
+     * ✅ 管理底部空白元素，确保所有节点都能被滚动激活
+     * 
+     * 问题：当 maxScrollTop < lastOffsetTop 时，最后几个节点无法被滚动激活
+     * 解决：在对话容器内添加空白元素，使 maxScrollTop >= lastOffsetTop + 余量
+     * 
+     * 注意：
+     * - 不直接修改 scrollContainer 的 padding（可能影响某些网站的布局）
+     * - 在 conversationContainer 内部添加空白元素
+     * - 调用此方法前，需要先获取"干净"的 scrollHeight
+     * 
+     * @param {number} lastOffsetTop - 最后一个节点的 offsetTop
+     * @param {number} cleanMaxScrollTop - 不包含空白元素的最大可滚动距离
+     */
+    _updateScrollPadding(lastOffsetTop, cleanMaxScrollTop) {
+        if (!this.conversationContainer) return;
+        
+        // ✅ 只有1个节点时不需要 padding（第一个节点始终可以被激活）
+        if (this.markers.length <= 1) {
+            const existingPadding = this.conversationContainer.querySelector('.ait-scroll-padding');
+            if (existingPadding) existingPadding.remove();
+            this._currentPadding = 0;
+            return;
+        }
+        
+        const PADDING_MARGIN = 100; // 额外余量，确保最后一个节点可以舒适地被激活
+        
+        // 计算需要的空白高度（基于干净的 maxScrollTop）
+        // 目标：使新的 maxScrollTop >= lastOffsetTop + PADDING_MARGIN
+        const paddingNeeded = Math.max(0, lastOffsetTop + PADDING_MARGIN - cleanMaxScrollTop);
+        
+        // 查找或创建空白元素
+        let paddingEl = this.conversationContainer.querySelector('.ait-scroll-padding');
+        
+        if (paddingNeeded > 0) {
+            // 需要添加/更新空白元素
+            if (!paddingEl) {
+                paddingEl = document.createElement('div');
+                paddingEl.className = 'ait-scroll-padding';
+                // 不影响布局的样式（红色背景用于调试）
+                paddingEl.style.cssText = 'pointer-events: none; width: 100%; flex-shrink: 0;';
+            }
+            // 确保 padding 元素始终在容器最后（新对话内容可能被追加到它后面）
+            if (paddingEl.parentElement !== this.conversationContainer || 
+                paddingEl !== this.conversationContainer.lastElementChild) {
+                this.conversationContainer.appendChild(paddingEl);
+            }
+            paddingEl.style.height = paddingNeeded + 'px';
+            this._currentPadding = paddingNeeded;
+        } else {
+            // 不需要空白元素，移除
+            if (paddingEl) {
+                paddingEl.remove();
+            }
+            this._currentPadding = 0;
+        }
+    }
+    
+    /**
+     * ✅ 获取"干净"的滚动区域尺寸（不包含我们添加的空白元素）
+     * @returns {{ scrollHeight: number, clientHeight: number, maxScrollTop: number }}
+     */
+    _getCleanScrollMetrics() {
+        if (!this.scrollContainer) {
+            return { scrollHeight: 0, clientHeight: 0, maxScrollTop: 0 };
+        }
+        
+        const clientHeight = this.scrollContainer.clientHeight;
+        // scrollHeight 包含了我们添加的空白元素高度，需要减掉
+        const currentPadding = this._currentPadding || 0;
+        const cleanScrollHeight = this.scrollContainer.scrollHeight - currentPadding;
+        const cleanMaxScrollTop = Math.max(cleanScrollHeight - clientHeight, 0);
+        
+        return { scrollHeight: cleanScrollHeight, clientHeight, maxScrollTop: cleanMaxScrollTop };
+    }
+    
+    /**
+     * ✅ 仅重新计算已有节点的位置（offsetTop, visualN）
      * 不重建节点，保留收藏、标记等状态
      */
     _recalcMarkerPositions() {
@@ -2513,9 +2567,8 @@ class TimelineManager {
             return elemRect.top - contRect.top + contScrollTop;
         };
         
-        // 计算滚动区域信息
-        const scrollHeight = this.scrollContainer.scrollHeight;
-        const clientHeight = this.scrollContainer.clientHeight;
+        // ✅ 获取"干净"的滚动区域尺寸（不包含我们添加的 padding）
+        const { maxScrollTop: cleanMaxScrollTop } = this._getCleanScrollMetrics();
         
         // 收集所有节点的 offsetTop
         const nodeOffsets = this.markers.map(m => getOffsetTop(m.element, this.scrollContainer));
@@ -2524,24 +2577,9 @@ class TimelineManager {
         const firstOffsetTop = nodeOffsets[0];
         const lastOffsetTop = nodeOffsets[nodeOffsets.length - 1];
         const contentSpan = lastOffsetTop - firstOffsetTop || 1;
-        const maxScrollTop = Math.max(scrollHeight - clientHeight, 1);
         
-        /**
-         * ✅ 计算 activateAt 的基准值
-         * 
-         * 逻辑：
-         * - 如果最后一个节点底部距离滚动区域底部的距离 > 滚动窗口高度
-         *   - 用最后一个节点的 offsetTop
-         * - 否则
-         *   - 用 maxScrollTop (scrollHeight - clientHeight)
-         */
-        const distanceFromLastNodeToBottom = scrollHeight - lastOffsetTop;
-        let activateBase;
-        if (distanceFromLastNodeToBottom > clientHeight) {
-            activateBase = lastOffsetTop;
-        } else {
-            activateBase = maxScrollTop;
-        }
+        // ✅ 更新底部 padding
+        this._updateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
         
         // 更新每个节点的位置信息
         let visualNChanged = false;
@@ -2554,16 +2592,14 @@ class TimelineManager {
             
             // visualN: 原始位置比例（0~1，基于页面实际位置）
             const offsetFromStart = m.offsetTop - firstOffsetTop;
-            const newVisualN = Math.max(0, Math.min(1, offsetFromStart / contentSpan));
+            let newVisualN = offsetFromStart / contentSpan;
+            newVisualN = Math.round(Math.max(0, Math.min(1, newVisualN)) * 1000000) / 1000000;
             
-            // 检测 visualN 是否有显著变化（阈值 0.001）
-            if (Math.abs(newVisualN - (m.visualN || 0)) > 0.001) {
+            // 检测 visualN 是否有显著变化
+            if (Math.abs(newVisualN - (m.visualN || 0)) > 0.000001) {
                 visualNChanged = true;
             }
             m.visualN = newVisualN;
-            
-            // activateAt = activateBase * visualN（用于激活判断）
-            m.activateAt = activateBase * m.visualN;
         });
         
         // ✅ 只有 visualN 有变化时才更新 dotN（减少不必要的计算）
@@ -2576,21 +2612,25 @@ class TimelineManager {
         if (!this.scrollContainer || this.markers.length === 0) return;
         
         /**
-         * ✅ 基于 activateAt 的激活判断（提前激活）
+         * ✅ 基于 offsetTop 的激活判断（直接使用节点位置）
          * 
          * 核心逻辑：
          * 1. 获取当前 scrollTop（像素值）
-         * 2. 每个节点有 activateAt = activateBase * visualN
-         * 3. 激活最后一个 (activateAt - 提前量) <= scrollTop 的节点
+         * 2. 每个节点有 offsetTop（节点顶部距离滚动区域顶部的距离）
+         * 3. 激活最后一个 (offsetTop - 提前量) <= scrollTop 的节点
+         * 
+         * 注意：需要配合底部空白元素（_updateScrollPadding）使用
+         * 确保 maxScrollTop >= lastOffsetTop，这样所有节点都能被滚动激活
          * 
          * 示例：
-         * - scrollHeight = 4988
-         * - 节点0: visualN=0, activateAt=0
-         * - 节点1: visualN=0.64, activateAt=3192
-         * - 节点2: visualN=0.84, activateAt=4190
+         * - 节点0: offsetTop = 100
+         * - 节点1: offsetTop = 1500
+         * - 节点2: offsetTop = 2800
          * 
-         * 当 scrollTop = 3150px，提前量 = 50px 时：
-         * - 节点1 的 activateAt - 50 = 3142 <= 3150 ✓
+         * 当 scrollTop = 1450px，提前量 = 50px 时：
+         * - 节点0: (100 - 50) = 50 <= 1450 ✓
+         * - 节点1: (1500 - 50) = 1450 <= 1450 ✓
+         * - 节点2: (2800 - 50) = 2750 > 1450 ✗
          * - 激活节点1 ✓
          */
         
@@ -2606,17 +2646,17 @@ class TimelineManager {
             scrollTop = Math.abs(scrollTop);
         }
         
-        // ✅ 使用 activateAt 字段判断激活（提前激活）
-        // 当 scrollTop >= (activateAt - 提前量) 时激活该节点
+        // ✅ 使用 offsetTop 直接判断激活（配合底部空白元素）
+        // 当 scrollTop >= (offsetTop - 提前量) 时激活该节点
         let activeId = this.markers[0].id;  // 默认激活第一个
         
         for (let i = 0; i < this.markers.length; i++) {
             const m = this.markers[i];
-            // 当 scrollTop >= (activateAt - 提前量) 时激活该节点
-            if ((m.activateAt - ACTIVATE_AHEAD) <= scrollTop) {
+            // 当 scrollTop >= (offsetTop - 提前量) 时激活该节点
+            if ((m.offsetTop - ACTIVATE_AHEAD) <= scrollTop) {
                 activeId = m.id;  // 不断更新，最终得到最后一个满足条件的
             } else {
-                break;  // 后面的节点 activateAt 只会更大，可以提前退出
+                break;  // 后面的节点 offsetTop 只会更大，可以提前退出
             }
         }
         
@@ -2739,6 +2779,12 @@ class TimelineManager {
         
         // ✅ 修复：清理收藏按钮
         TimelineUtils.removeElementSafe(this.ui.starredBtn);
+        
+        // ✅ 清理底部空白元素
+        if (this.conversationContainer) {
+            const paddingEl = this.conversationContainer.querySelector('.ait-scroll-padding');
+            if (paddingEl) paddingEl.remove();
+        }
         
         // Clear references
         this.ui = { timelineBar: null, track: null, trackContent: null };
