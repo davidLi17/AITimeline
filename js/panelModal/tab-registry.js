@@ -15,7 +15,6 @@ function getTabClass(name) {
         case 'SmartInputBoxTab': return typeof SmartInputBoxTab !== 'undefined' ? SmartInputBoxTab : null;
         case 'FormulaTab': return typeof FormulaTab !== 'undefined' ? FormulaTab : null;
         case 'SettingsTab': return typeof SettingsTab !== 'undefined' ? SettingsTab : null;
-        // case 'CopyTab': return typeof CopyTab !== 'undefined' ? CopyTab : null;  // 暂时关闭
         default: return null;
     }
 }
@@ -32,7 +31,6 @@ const TAB_CONFIG = [
     { id: 'smart-input-box', className: 'SmartInputBoxTab' },
     { id: 'formula', className: 'FormulaTab' },
     { id: 'settings', className: 'SettingsTab' }
-    // { id: 'copy', className: 'CopyTab' }  // 暂时关闭
 ];
 
 /**
