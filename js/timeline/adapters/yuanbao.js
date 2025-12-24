@@ -75,5 +75,15 @@ class YuanbaoAdapter extends SiteAdapter {
         return document.title || '';
     }
     
+    /**
+     * 检测 AI 是否正在生成回答
+     * 元宝: 当 #yuanbao-send-btn 元素不存在时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const sendBtn = document.getElementById('yuanbao-send-btn');
+        return !sendBtn;
+    }
+    
 }
 

@@ -233,5 +233,15 @@ class GeminiAdapter extends SiteAdapter {
         return document.querySelector('.ng-trigger-immersivePanelTransitions') !== null ||
                document.querySelector('generative-ui-frame') !== null;
     }
+    
+    /**
+     * 检测 AI 是否正在生成回答
+     * Gemini: 当 .send-button 元素存在且包含 stop class 时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const sendButton = document.querySelector('.send-button');
+        return sendButton && sendButton.classList.contains('stop');
+    }
 }
 

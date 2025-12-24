@@ -78,5 +78,14 @@ class KimiAdapter extends SiteAdapter {
         return title.replace(/\s*-\s*Kimi\s*$/i, '').trim();
     }
     
+    /**
+     * 检测 AI 是否正在生成回答
+     * Kimi: 当 .send-button-container 元素包含 stop class 时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const sendButtonContainer = document.querySelector('.send-button-container');
+        return sendButtonContainer && sendButtonContainer.classList.contains('stop');
+    }
 }
 

@@ -115,4 +115,14 @@ class GrokAdapter extends SiteAdapter {
         return title.replace(/\s*-\s*Grok\s*$/i, '').trim();
     }
     
+    /**
+     * 检测 AI 是否正在生成回答
+     * Grok: 当存在停止按钮的 SVG path 时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const stopPath = document.querySelector('path[d="M4 9.2v5.6c0 1.116 0 1.673.11 2.134a4 4 0 0 0 2.956 2.956c.46.11 1.018.11 2.134.11h5.6c1.116 0 1.673 0 2.134-.11a4 4 0 0 0 2.956-2.956c.11-.46.11-1.018.11-2.134V9.2c0-1.116 0-1.673-.11-2.134a4 4 0 0 0-2.956-2.955C16.474 4 15.916 4 14.8 4H9.2c-1.116 0-1.673 0-2.134.11a4 4 0 0 0-2.955 2.956C4 7.526 4 8.084 4 9.2Z"]');
+        return !!stopPath;
+    }
+    
 }

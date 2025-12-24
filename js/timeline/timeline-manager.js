@@ -66,6 +66,15 @@ class TimelineManager {
         this.resizeIdleTimer = null;
         this.resizeIdleRICId = null;
         this.zeroTurnsTimer = null;
+        
+        // ✅ Padding 管理（基于 AI 生成状态实时控制）
+        // 通过 adapter.isAIGenerating() 检测 AI 是否正在生成
+        // AI 生成中：不添加 padding，避免影响平台自动滚动
+        // AI 生成完成：添加 padding，确保最后节点可激活
+        this._pendingPaddingUpdate = null;  // 待更新的 padding 参数
+        this.debouncedUpdateScrollPadding = this.debounce((lastOffsetTop, cleanMaxScrollTop) => {
+            this._updateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
+        }, 500);  // 500ms 防抖
 
         // Active state management
         this.lastActiveChangeTime = 0;
@@ -95,6 +104,10 @@ class TimelineManager {
 
         // ✅ 紧凑模式状态
         this.isCompactMode = false;
+        
+        // ✅ 节点激活配置
+        this.ACTIVATE_AHEAD = 120; // 提前激活距离（像素）：scrollTop >= offsetTop - 120 时激活
+        // 注：滚动偏移量已移至 adapter.getScrollOffset()，各平台可自定义
 
         // Markers and rendering
         this.markersVersion = 0;
@@ -725,10 +738,17 @@ class TimelineManager {
          * - 结果 = 元素相对于容器内容区域顶部的绝对距离
          */
         const getOffsetTop = (element, container) => {
-                    const elemRect = element.getBoundingClientRect();
-                    const contRect = container.getBoundingClientRect();
-                    const contScrollTop = container.scrollTop || 0;
-                    return elemRect.top - contRect.top + contScrollTop;
+            const elemRect = element.getBoundingClientRect();
+            const contRect = container.getBoundingClientRect();
+            let contScrollTop = container.scrollTop || 0;
+            
+            // ✅ 反向滚动时，scrollTop 是负数，取绝对值
+            const isReverseScroll = typeof this.adapter.isReverseScroll === 'function' && this.adapter.isReverseScroll();
+            if (isReverseScroll) {
+                contScrollTop = Math.abs(contScrollTop);
+            }
+            
+            return elemRect.top - contRect.top + contScrollTop;
         };
         
         /**
@@ -954,6 +974,9 @@ class TimelineManager {
             
             if (!hasRelevantChange) return;
             
+            // ✅ 注意：padding 恢复逻辑已移至 scheduleScrollSync()
+            // 当用户滚动时恢复 padding，而不是用定时器猜测 AI 回答是否结束
+            
             try { this.ensureContainersUpToDate(); } catch {}
             this.debouncedRecalculateAndRender();
             this.updateIntersectionObserverTargets();
@@ -1129,6 +1152,8 @@ class TimelineManager {
         // ✅ 重置节点跟踪状态，因为切换了对话
         this.lastNodeCount = 0;
         this.lastNodeIds = new Set();
+        
+        // ✅ Padding 状态由 adapter.isAIGenerating() 实时控制
 
         // Find (or re-find) scroll container
         let parent = newConv;
@@ -1400,8 +1425,7 @@ class TimelineManager {
          */
         this.onWindowResize = () => {
             // ✅ GlobalTooltipManager 会处理 tooltip 在 resize 时的行为
-            // ✅ 强制重新计算节点位置
-            // 重置状态，使优化逻辑认为"节点已变化"，从而触发位置重新计算
+            // ✅ 强制重新计算节点位置（包括 padding，由 isAIGenerating 实时控制）
             this.lastNodeCount = 0;
             this.lastNodeIds.clear();
             this.debouncedRecalculateAndRender();
@@ -1419,7 +1443,7 @@ class TimelineManager {
          */
         if (window.visualViewport) {
             this.onVisualViewportResize = () => {
-                // ✅ 强制重新计算节点位置
+                // ✅ 强制重新计算节点位置（包括 padding，由 isAIGenerating 实时控制）
                 this.lastNodeCount = 0;
                 this.lastNodeIds.clear();
                 this.debouncedRecalculateAndRender();
@@ -1686,11 +1710,14 @@ class TimelineManager {
     smoothScrollTo(targetElement, duration = 600) {
         if (!targetElement || !this.scrollContainer) return;
         
-        const SCROLL_OFFSET = 30; // 滚动偏移量，滚动到 offsetTop - 30 的位置
+        // ✅ 跳转前重新计算位置，确保 padding 高度正确（由 isAIGenerating 实时控制）
+        this._recalcMarkerPositions();
         
         const containerRect = this.scrollContainer.getBoundingClientRect();
         const targetRect = targetElement.getBoundingClientRect();
-        const targetPosition = targetRect.top - containerRect.top + this.scrollContainer.scrollTop - SCROLL_OFFSET;
+        // 使用 adapter 的平台特定偏移量，不同平台可能因顶部固定导航等原因需要不同偏移
+        const scrollOffset = this.adapter?.getScrollOffset?.() ?? 30;
+        const targetPosition = targetRect.top - containerRect.top + this.scrollContainer.scrollTop - scrollOffset;
         const startPosition = this.scrollContainer.scrollTop;
         const distance = targetPosition - startPosition;
         let startTime = null;
@@ -2449,8 +2476,7 @@ class TimelineManager {
         this.scrollRafId = requestAnimationFrame(() => {
             this.scrollRafId = null;
             
-            // ✅ 每次滚动时都重新计算节点位置
-            // 解决页面元素动态展开导致高度计算不准确的问题
+            // ✅ 每次滚动时都重新计算节点位置（包括 padding，由 isAIGenerating 实时控制）
             this._recalcMarkerPositions();
             
             // Sync long-canvas scroll and virtualized dots before computing active
@@ -2477,35 +2503,65 @@ class TimelineManager {
     _updateScrollPadding(lastOffsetTop, cleanMaxScrollTop) {
         if (!this.conversationContainer) return;
         
-        // ✅ 只有1个节点时不需要 padding（第一个节点始终可以被激活）
-        if (this.markers.length <= 1) {
-            const existingPadding = this.conversationContainer.querySelector('.ait-scroll-padding');
-            if (existingPadding) existingPadding.remove();
+        // 查找 padding 元素
+        let paddingEl = this.conversationContainer.querySelector('.ait-scroll-padding');
+        
+        /**
+         * ✅ 检测 AI 是否正在生成
+         * 
+         * isAIGenerating 返回值：
+         * - null: 未实现（平台未提供检测方法），不添加 padding
+         * - true: AI 正在生成，不添加 padding
+         * - false: AI 停止生成，可以添加 padding
+         */
+        const aiGeneratingState = this.adapter?.isAIGenerating?.();
+        
+        // ✅ 以下情况移除 padding：
+        // 1. 只有1个节点
+        // 2. isAIGenerating 返回 null（未实现）
+        // 3. isAIGenerating 返回 true（AI 正在生成）
+        const shouldRemovePadding = this.markers.length <= 1 || 
+                                    aiGeneratingState === null || 
+                                    aiGeneratingState === true;
+        
+        if (shouldRemovePadding) {
+            if (paddingEl) {
+                paddingEl.remove();
+            }
             this._currentPadding = 0;
             return;
         }
         
-        const PADDING_MARGIN = 100; // 额外余量，确保最后一个节点可以舒适地被激活
-        
         // 计算需要的空白高度（基于干净的 maxScrollTop）
-        // 目标：使新的 maxScrollTop >= lastOffsetTop + PADDING_MARGIN
-        const paddingNeeded = Math.max(0, lastOffsetTop + PADDING_MARGIN - cleanMaxScrollTop);
-        
-        // 查找或创建空白元素
-        let paddingEl = this.conversationContainer.querySelector('.ait-scroll-padding');
+        // 目标：使新的 maxScrollTop >= lastOffsetTop（确保能滚动到最后一个节点）
+        // 注：ACTIVATE_AHEAD = 120px 的提前激活量已足够保证激活
+        const paddingNeeded = Math.max(0, lastOffsetTop - cleanMaxScrollTop);
         
         if (paddingNeeded > 0) {
             // 需要添加/更新空白元素
             if (!paddingEl) {
                 paddingEl = document.createElement('div');
                 paddingEl.className = 'ait-scroll-padding';
-                // 不影响布局的样式（红色背景用于调试）
-                paddingEl.style.cssText = 'pointer-events: none; width: 100%; flex-shrink: 0;';
+                // 灰色背景便于识别
+                paddingEl.style.cssText = 'pointer-events: none; width: 100%; flex-shrink: 0; background: rgba(128, 128, 128, 0.1);';
             }
-            // 确保 padding 元素始终在容器最后（新对话内容可能被追加到它后面）
-            if (paddingEl.parentElement !== this.conversationContainer || 
-                paddingEl !== this.conversationContainer.lastElementChild) {
-                this.conversationContainer.appendChild(paddingEl);
+            
+            // 检测容器是否使用反向布局（如 flex-direction: column-reverse）
+            const containerStyle = window.getComputedStyle(this.conversationContainer);
+            const isReversed = containerStyle.flexDirection === 'column-reverse';
+            
+            if (isReversed) {
+                // 反向布局：padding 需要插入到容器开头
+                if (paddingEl.parentElement !== this.conversationContainer || 
+                    paddingEl !== this.conversationContainer.firstElementChild) {
+                    this.conversationContainer.prepend(paddingEl);
+                }
+            } else {
+                // 正常布局：padding 插入到容器末尾
+                if (paddingEl.parentElement !== this.conversationContainer || 
+                    paddingEl !== this.conversationContainer.lastElementChild) {
+                    this.conversationContainer.appendChild(paddingEl);
+                }
             }
             paddingEl.style.height = paddingNeeded + 'px';
             this._currentPadding = paddingNeeded;
@@ -2578,8 +2634,8 @@ class TimelineManager {
         const lastOffsetTop = nodeOffsets[nodeOffsets.length - 1];
         const contentSpan = lastOffsetTop - firstOffsetTop || 1;
         
-        // ✅ 更新底部 padding
-        this._updateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
+        // ✅ 更新底部 padding（使用防抖版本，避免滚动时频繁更新导致抖动）
+        this.debouncedUpdateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
         
         // 更新每个节点的位置信息
         let visualNChanged = false;
@@ -2634,29 +2690,40 @@ class TimelineManager {
          * - 激活节点1 ✓
          */
         
-        const ACTIVATE_AHEAD = 50; // 提前激活距离（像素）
-        
-        let scrollTop = this.scrollContainer.scrollTop;
-        
-        // ✅ 检测平台是否使用反向滚动（如豆包）
+        // ✅ 检测平台是否使用反向滚动（如豆包，flex-direction: column-reverse）
         const isReverseScroll = typeof this.adapter.isReverseScroll === 'function' && this.adapter.isReverseScroll();
         
-        if (isReverseScroll) {
-            // 反向滚动：scrollTop 是负数，取绝对值
-            scrollTop = Math.abs(scrollTop);
-        }
-        
-        // ✅ 使用 offsetTop 直接判断激活（配合底部空白元素）
-        // 当 scrollTop >= (offsetTop - 提前量) 时激活该节点
         let activeId = this.markers[0].id;  // 默认激活第一个
         
-        for (let i = 0; i < this.markers.length; i++) {
-            const m = this.markers[i];
-            // 当 scrollTop >= (offsetTop - 提前量) 时激活该节点
-            if ((m.offsetTop - ACTIVATE_AHEAD) <= scrollTop) {
-                activeId = m.id;  // 不断更新，最终得到最后一个满足条件的
-            } else {
-                break;  // 后面的节点 offsetTop 只会更大，可以提前退出
+        if (isReverseScroll) {
+            // ✅ 反向滚动：使用 getBoundingClientRect 实时判断
+            // 找到第一个顶部位置超过容器顶部 + 提前量的节点
+            const containerTop = this.scrollContainer.getBoundingClientRect().top;
+            const activateThreshold = containerTop + this.ACTIVATE_AHEAD;
+            
+            // 从后往前遍历（因为反向布局中，DOM 顺序和视觉顺序相反）
+            for (let i = this.markers.length - 1; i >= 0; i--) {
+                const m = this.markers[i];
+                if (!m.element) continue;
+                const elemTop = m.element.getBoundingClientRect().top;
+                // 当元素顶部在阈值之上时，激活该节点
+                if (elemTop <= activateThreshold) {
+                    activeId = m.id;
+                    break;
+                }
+            }
+        } else {
+            // ✅ 正常滚动：使用 offsetTop 判断激活
+            let scrollTop = this.scrollContainer.scrollTop;
+            
+            for (let i = 0; i < this.markers.length; i++) {
+                const m = this.markers[i];
+                // 当 scrollTop >= (offsetTop - 提前量) 时激活该节点
+                if ((m.offsetTop - this.ACTIVATE_AHEAD) <= scrollTop) {
+                    activeId = m.id;  // 不断更新，最终得到最后一个满足条件的
+                } else {
+                    break;  // 后面的节点 offsetTop 只会更大，可以提前退出
+                }
             }
         }
         

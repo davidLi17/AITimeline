@@ -78,6 +78,16 @@ class PerplexityAdapter extends SiteAdapter {
         const title = document.title || '';
         return title.replace(/\s*-\s*Perplexity\s*$/i, '').trim();
     }
+    
+    /**
+     * 检测 AI 是否正在生成回答
+     * Perplexity: 当存在 aria-label="Stop" 的元素时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const stopBtn = document.querySelector('[aria-label="Stop"]');
+        return !!stopBtn;
+    }
 }
 
 

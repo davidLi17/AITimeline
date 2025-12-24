@@ -84,5 +84,15 @@ class YiyanAdapter extends SiteAdapter {
     //         return '';
     //     }
     // }
+    
+    /**
+     * 检测 AI 是否正在生成回答
+     * 文心一言: 当存在 class 包含 "stopDealBtn" 的元素时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const stopBtn = document.querySelector('[class*="stopDealBtn"]');
+        return !!stopBtn;
+    }
 }
 

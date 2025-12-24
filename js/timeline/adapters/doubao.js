@@ -8,6 +8,8 @@
 class DoubaoAdapter extends SiteAdapter {
     constructor() {
         super();
+        // ✅ 缓存 nodeId，避免重复 DOM 查询
+        this._nodeIdCache = new WeakMap();
     }
 
     matches(url) {
@@ -18,8 +20,85 @@ class DoubaoAdapter extends SiteAdapter {
         return '[data-testid="send_message"]';
     }
 
+    /**
+     * 从 DOM 元素中提取 nodeId
+     * 豆包的 nodeId 来自子元素的 data-message-id 属性
+     */
+    _extractNodeIdFromDom(element) {
+        // 检查缓存
+        if (this._nodeIdCache.has(element)) {
+            return this._nodeIdCache.get(element);
+        }
+        
+        // 查找子元素的 data-message-id
+        const messageEl = element.querySelector('[data-message-id]');
+        const nodeId = messageEl?.getAttribute('data-message-id') || null;
+        
+        if (nodeId) {
+            this._nodeIdCache.set(element, nodeId);
+        }
+        
+        return nodeId;
+    }
+    
+    /**
+     * 生成节点的唯一标识 turnId
+     * 优先使用 data-message-id（稳定），回退到数组索引（兼容）
+     */
     generateTurnId(element, index) {
+        const nodeId = this._extractNodeIdFromDom(element);
+        if (nodeId) {
+            return `doubao-${nodeId}`;
+        }
+        // 回退到数组索引（兼容旧逻辑）
         return `doubao-${index}`;
+    }
+    
+    /**
+     * 从存储的 nodeId 生成 turnId（用于收藏跳转）
+     * @param {string|number} identifier - nodeId（字符串）或 index（数字）
+     * @returns {string}
+     */
+    generateTurnIdFromIndex(identifier) {
+        return `doubao-${identifier}`;
+    }
+    
+    /**
+     * 从 turnId 中提取 nodeId
+     * @param {string} turnId - 格式为 doubao-{nodeId}
+     * @returns {string|null} - nodeId（始终返回字符串）
+     */
+    extractIndexFromTurnId(turnId) {
+        if (!turnId) return null;
+        if (turnId.startsWith('doubao-')) {
+            // ✅ 豆包统一使用 nodeId，始终返回字符串
+            return turnId.substring(7); // 'doubao-'.length = 7
+        }
+        return null;
+    }
+    
+    /**
+     * 根据存储的 nodeId/index 查找 marker
+     * 支持新数据（nodeId 字符串）和旧数据（index 数字）
+     * @param {string|number} storedKey - 存储的 nodeId 或 index
+     * @param {Array} markers - marker 数组
+     * @param {Map} markerMap - markerMap
+     * @returns {Object|null} - 匹配的 marker
+     */
+    findMarkerByStoredIndex(storedKey, markers, markerMap) {
+        if (storedKey === null || storedKey === undefined) return null;
+        
+        // 1. 先尝试用 nodeId/index 构建 turnId 查找
+        const turnId = `doubao-${storedKey}`;
+        const marker = markerMap.get(turnId);
+        if (marker) return marker;
+        
+        // 2. Fallback：如果是数字，尝试用数组索引（兼容旧数据）
+        if (typeof storedKey === 'number' && storedKey >= 0 && storedKey < markers.length) {
+            return markers[storedKey];
+        }
+        
+        return null;
     }
 
     extractText(element) {

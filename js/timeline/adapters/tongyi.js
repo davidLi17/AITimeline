@@ -96,5 +96,15 @@ class TongyiAdapter extends SiteAdapter {
         }
     }
     
+    /**
+     * 检测 AI 是否正在生成回答
+     * 通义千问: 当存在 class 包含 "stop-" 的元素时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const stopElement = document.querySelector('[class*="stop-"]');
+        return !!stopElement;
+    }
+    
 }
 

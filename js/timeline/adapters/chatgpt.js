@@ -144,5 +144,24 @@ class ChatGPTAdapter extends SiteAdapter {
     shouldHideTimeline() {
         return document.querySelector('.text-token-primary') !== null;
     }
+    
+    /**
+     * 获取滚动偏移量
+     * ChatGPT 顶部有固定导航栏遮挡，需要额外偏移
+     * @returns {number} - 滚动偏移量（像素）
+     */
+    getScrollOffset() {
+        return 100; // 基础 30 + 额外 80 (顶部遮挡)
+    }
+    
+    /**
+     * 检测 AI 是否正在生成回答
+     * ChatGPT: 当 #composer-submit-button 元素的 data-testid="stop-button" 时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const submitButton = document.getElementById('composer-submit-button');
+        return submitButton && submitButton.getAttribute('data-testid') === 'stop-button';
+    }
 }
 

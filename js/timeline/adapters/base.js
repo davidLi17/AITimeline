@@ -121,5 +121,23 @@ class SiteAdapter {
         return false; // 默认不隐藏
     }
     
+    /**
+     * Get scroll offset for this site when clicking timeline nodes
+     * Different sites may need different offsets due to fixed headers etc.
+     * @returns {number} - Scroll offset in pixels
+     */
+    getScrollOffset() {
+        return 30; // 默认偏移量
+    }
+    
+    /**
+     * Check if AI is currently generating a response
+     * Used to control padding visibility during AI response
+     * @returns {boolean|null} - true: AI generating, false: AI stopped, null: not implemented
+     */
+    isAIGenerating() {
+        return null; // 默认返回 null 表示未实现，子类需覆盖才能启用 padding 功能
+    }
+    
 }
 
