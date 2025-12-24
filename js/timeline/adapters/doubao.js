@@ -23,11 +23,16 @@ class DoubaoAdapter extends SiteAdapter {
     /**
      * 从 DOM 元素中提取 nodeId
      * 豆包的 nodeId 来自子元素的 data-message-id 属性
+     * 
+     * ✅ 降级方案：返回 null 时，generateTurnId 会降级使用 index（数字类型）
+     * @returns {string|null} - nodeId（字符串），失败返回 null
      */
     _extractNodeIdFromDom(element) {
+        if (!element) return null;
+        
         // 检查缓存
         if (this._nodeIdCache.has(element)) {
-            return this._nodeIdCache.get(element);
+            return String(this._nodeIdCache.get(element));
         }
         
         // 查找子元素的 data-message-id
@@ -36,9 +41,10 @@ class DoubaoAdapter extends SiteAdapter {
         
         if (nodeId) {
             this._nodeIdCache.set(element, nodeId);
+            return String(nodeId);  // ✅ 确保返回字符串类型
         }
         
-        return nodeId;
+        return null;  // ✅ 获取失败返回 null，触发降级到 index
     }
     
     /**
@@ -64,15 +70,18 @@ class DoubaoAdapter extends SiteAdapter {
     }
     
     /**
-     * 从 turnId 中提取 nodeId
-     * @param {string} turnId - 格式为 doubao-{nodeId}
-     * @returns {string|null} - nodeId（始终返回字符串）
+     * 从 turnId 中提取 nodeId/index
+     * @param {string} turnId - 格式为 doubao-{nodeId} 或 doubao-{index}
+     * @returns {string|number|null} - nodeId（字符串）或 index（数字）
      */
     extractIndexFromTurnId(turnId) {
         if (!turnId) return null;
         if (turnId.startsWith('doubao-')) {
-            // ✅ 豆包统一使用 nodeId，始终返回字符串
-            return turnId.substring(7); // 'doubao-'.length = 7
+            const part = turnId.substring(7); // 'doubao-'.length = 7
+            // ✅ 尝试解析为数字（降级到 index 时的数据）
+            const parsed = parseInt(part, 10);
+            // 如果是纯数字字符串，返回数字；否则返回字符串
+            return (String(parsed) === part) ? parsed : part;
         }
         return null;
     }

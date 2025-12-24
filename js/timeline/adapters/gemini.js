@@ -36,15 +36,16 @@ class GeminiAdapter extends SiteAdapter {
      * 使用 user-query 父元素的 id 作为稳定标识
      * 
      * ✅ 性能优化：使用 WeakMap 缓存结果
+     * ✅ 降级方案：返回 null 时，generateTurnId 会降级使用 index（数字类型）
      * @param {Element} element - user-query 元素
-     * @returns {string|null} - 父元素的 id，失败返回 null
+     * @returns {string|null} - 父元素的 id（字符串），失败返回 null
      */
     _extractNodeIdFromDom(element) {
         if (!element) return null;
         
         // ✅ 缓存命中检查
         if (this._nodeIdCache.has(element)) {
-            return this._nodeIdCache.get(element);
+            return String(this._nodeIdCache.get(element));
         }
         
         // 获取 user-query 父元素的 id
@@ -54,9 +55,10 @@ class GeminiAdapter extends SiteAdapter {
         // ✅ 存入缓存（只缓存有效的 nodeId）
         if (nodeId) {
             this._nodeIdCache.set(element, nodeId);
+            return String(nodeId);  // ✅ 确保返回字符串类型
         }
         
-        return nodeId;
+        return null;  // ✅ 获取失败返回 null，触发降级到 index
     }
     
     /**
