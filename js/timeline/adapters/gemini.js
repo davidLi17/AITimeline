@@ -11,15 +11,6 @@
 class GeminiAdapter extends SiteAdapter {
     constructor() {
         super();
-        /**
-         * ✅ 性能优化：使用 WeakMap 缓存 nodeId
-         * 
-         * 为什么使用 WeakMap：
-         * - 元素作为 key，元素被 GC 时缓存自动清理
-         * - 避免内存泄漏
-         * - Gemini 虚拟滚动销毁元素后，缓存自动失效
-         */
-        this._nodeIdCache = new WeakMap();
     }
 
     matches(url) {
@@ -35,7 +26,6 @@ class GeminiAdapter extends SiteAdapter {
      * Gemini 的虚拟滚动会隐藏/重建节点，导致数组索引不可靠
      * 使用 user-query 父元素的 id 作为稳定标识
      * 
-     * ✅ 性能优化：使用 WeakMap 缓存结果
      * ✅ 降级方案：返回 null 时，generateTurnId 会降级使用 index（数字类型）
      * @param {Element} element - user-query 元素
      * @returns {string|null} - 父元素的 id（字符串），失败返回 null
@@ -43,22 +33,9 @@ class GeminiAdapter extends SiteAdapter {
     _extractNodeIdFromDom(element) {
         if (!element) return null;
         
-        // ✅ 缓存命中检查
-        if (this._nodeIdCache.has(element)) {
-            return String(this._nodeIdCache.get(element));
-        }
-        
-        // 获取 user-query 父元素的 id
         const parent = element.parentElement;
         const nodeId = (parent && parent.id) ? parent.id : null;
-        
-        // ✅ 存入缓存（只缓存有效的 nodeId）
-        if (nodeId) {
-            this._nodeIdCache.set(element, nodeId);
-            return String(nodeId);  // ✅ 确保返回字符串类型
-        }
-        
-        return null;  // ✅ 获取失败返回 null，触发降级到 index
+        return nodeId ? String(nodeId) : null;
     }
     
     /**
@@ -66,13 +43,9 @@ class GeminiAdapter extends SiteAdapter {
      * 优先使用父元素 id（稳定），回退到数组索引（兼容）
      */
     generateTurnId(element, index) {
-        // 优先使用父元素的 id（稳定标识）
+        // 优先使用父元素 id（稳定标识），回退到数组索引
         const nodeId = this._extractNodeIdFromDom(element);
-        if (nodeId) {
-            return `gemini-${nodeId}`;
-        }
-        // 回退到数组索引（兼容旧逻辑）
-        return `gemini-${index}`;
+        return nodeId ? `gemini-${nodeId}` : `gemini-${index}`;
     }
     
     /**

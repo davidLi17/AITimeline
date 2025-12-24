@@ -21,9 +21,79 @@ class ChatGPTAdapter extends SiteAdapter {
         return '[data-message-author-role="user"]';
     }
 
+    /**
+     * 从 DOM 元素中提取 nodeId
+     * ChatGPT 的 nodeId 来自元素的 data-message-id 属性
+     * 
+     * ✅ 降级方案：返回 null 时，generateTurnId 会降级使用 index（数字类型）
+     * @param {Element} element - 用户消息元素
+     * @returns {string|null} - nodeId（字符串），失败返回 null
+     */
+    _extractNodeIdFromDom(element) {
+        if (!element) return null;
+        
+        const nodeId = element.getAttribute('data-message-id') || null;
+        return nodeId ? String(nodeId) : null;
+    }
+
+    /**
+     * 生成节点的唯一标识 turnId
+     * 优先使用 data-message-id（稳定），回退到数组索引（兼容）
+     */
     generateTurnId(element, index) {
-        // 使用 index 作为唯一标识，与其他 AI 平台保持一致
-        return `chatgpt-${index}`;
+        // 优先使用 data-message-id（稳定标识），回退到数组索引
+        const nodeId = this._extractNodeIdFromDom(element);
+        return nodeId ? `chatgpt-${nodeId}` : `chatgpt-${index}`;
+    }
+    
+    /**
+     * 从存储的 nodeId 生成 turnId（用于收藏跳转）
+     * @param {string|number} identifier - nodeId（字符串）或 index（数字）
+     * @returns {string}
+     */
+    generateTurnIdFromIndex(identifier) {
+        return `chatgpt-${identifier}`;
+    }
+    
+    /**
+     * 从 turnId 中提取 nodeId/index
+     * @param {string} turnId - 格式为 chatgpt-{nodeId} 或 chatgpt-{index}
+     * @returns {string|number|null} - nodeId（字符串）或 index（数字）
+     */
+    extractIndexFromTurnId(turnId) {
+        if (!turnId) return null;
+        if (turnId.startsWith('chatgpt-')) {
+            const part = turnId.substring(8); // 'chatgpt-'.length = 8
+            // ✅ 尝试解析为数字（降级到 index 时的数据）
+            const parsed = parseInt(part, 10);
+            // 如果是纯数字字符串，返回数字；否则返回字符串
+            return (String(parsed) === part) ? parsed : part;
+        }
+        return null;
+    }
+    
+    /**
+     * 根据存储的 nodeId/index 查找 marker
+     * 支持新数据（nodeId 字符串）和旧数据（index 数字）
+     * @param {string|number} storedKey - 存储的 nodeId 或 index
+     * @param {Array} markers - marker 数组
+     * @param {Map} markerMap - markerMap
+     * @returns {Object|null} - 匹配的 marker
+     */
+    findMarkerByStoredIndex(storedKey, markers, markerMap) {
+        if (storedKey === null || storedKey === undefined) return null;
+        
+        // 1. 先尝试用 nodeId/index 构建 turnId 查找
+        const turnId = `chatgpt-${storedKey}`;
+        const marker = markerMap.get(turnId);
+        if (marker) return marker;
+        
+        // 2. Fallback：如果是数字，尝试用数组索引（兼容旧数据）
+        if (typeof storedKey === 'number' && storedKey >= 0 && storedKey < markers.length) {
+            return markers[storedKey];
+        }
+        
+        return null;
     }
 
     extractText(element) {

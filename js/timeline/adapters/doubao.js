@@ -8,8 +8,6 @@
 class DoubaoAdapter extends SiteAdapter {
     constructor() {
         super();
-        // ✅ 缓存 nodeId，避免重复 DOM 查询
-        this._nodeIdCache = new WeakMap();
     }
 
     matches(url) {
@@ -25,26 +23,15 @@ class DoubaoAdapter extends SiteAdapter {
      * 豆包的 nodeId 来自子元素的 data-message-id 属性
      * 
      * ✅ 降级方案：返回 null 时，generateTurnId 会降级使用 index（数字类型）
+     * @param {Element} element - 用户消息元素
      * @returns {string|null} - nodeId（字符串），失败返回 null
      */
     _extractNodeIdFromDom(element) {
         if (!element) return null;
         
-        // 检查缓存
-        if (this._nodeIdCache.has(element)) {
-            return String(this._nodeIdCache.get(element));
-        }
-        
-        // 查找子元素的 data-message-id
         const messageEl = element.querySelector('[data-message-id]');
         const nodeId = messageEl?.getAttribute('data-message-id') || null;
-        
-        if (nodeId) {
-            this._nodeIdCache.set(element, nodeId);
-            return String(nodeId);  // ✅ 确保返回字符串类型
-        }
-        
-        return null;  // ✅ 获取失败返回 null，触发降级到 index
+        return nodeId ? String(nodeId) : null;
     }
     
     /**
@@ -52,12 +39,9 @@ class DoubaoAdapter extends SiteAdapter {
      * 优先使用 data-message-id（稳定），回退到数组索引（兼容）
      */
     generateTurnId(element, index) {
+        // 优先使用 data-message-id（稳定标识），回退到数组索引
         const nodeId = this._extractNodeIdFromDom(element);
-        if (nodeId) {
-            return `doubao-${nodeId}`;
-        }
-        // 回退到数组索引（兼容旧逻辑）
-        return `doubao-${index}`;
+        return nodeId ? `doubao-${nodeId}` : `doubao-${index}`;
     }
     
     /**
