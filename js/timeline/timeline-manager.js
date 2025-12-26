@@ -67,14 +67,11 @@ class TimelineManager {
         this.resizeIdleRICId = null;
         this.zeroTurnsTimer = null;
         
-        // ✅ Padding 管理（基于 AI 生成状态实时控制）
-        // 通过 adapter.isAIGenerating() 检测 AI 是否正在生成
-        // AI 生成中：不添加 padding，避免影响平台自动滚动
-        // AI 生成完成：添加 padding，确保最后节点可激活
-        this._pendingPaddingUpdate = null;  // 待更新的 padding 参数
+        // Padding 管理：AI 生成中不更新，生成结束后更新
+        this._pendingPaddingUpdate = null;
         this.debouncedUpdateScrollPadding = this.debounce((lastOffsetTop, cleanMaxScrollTop) => {
             this._updateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
-        }, 500);  // 500ms 防抖
+        }, 500);
 
         // Active state management
         this.lastActiveChangeTime = 0;
@@ -2476,7 +2473,7 @@ class TimelineManager {
         this.scrollRafId = requestAnimationFrame(() => {
             this.scrollRafId = null;
             
-            // ✅ 每次滚动时都重新计算节点位置（包括 padding，由 isAIGenerating 实时控制）
+            // 重新计算节点位置和 padding
             this._recalcMarkerPositions();
             
             // Sync long-canvas scroll and virtualized dots before computing active
@@ -2487,18 +2484,9 @@ class TimelineManager {
     }
 
     /**
-     * ✅ 管理底部空白元素，确保所有节点都能被滚动激活
-     * 
-     * 问题：当 maxScrollTop < lastOffsetTop 时，最后几个节点无法被滚动激活
-     * 解决：在对话容器内添加空白元素，使 maxScrollTop >= lastOffsetTop + 余量
-     * 
-     * 注意：
-     * - 不直接修改 scrollContainer 的 padding（可能影响某些网站的布局）
-     * - 在 conversationContainer 内部添加空白元素
-     * - 调用此方法前，需要先获取"干净"的 scrollHeight
-     * 
-     * @param {number} lastOffsetTop - 最后一个节点的 offsetTop
-     * @param {number} cleanMaxScrollTop - 不包含空白元素的最大可滚动距离
+     * 管理底部空白元素，确保最后节点可滚动激活
+     * @param {number} lastOffsetTop - 最后节点的 offsetTop
+     * @param {number} cleanMaxScrollTop - 不含空白元素的最大滚动距离
      */
     _updateScrollPadding(lastOffsetTop, cleanMaxScrollTop) {
         if (!this.conversationContainer) return;
@@ -2506,34 +2494,21 @@ class TimelineManager {
         // 查找 padding 元素
         let paddingEl = this.conversationContainer.querySelector('.ait-scroll-padding');
         
-        /**
-         * ✅ 检测 AI 是否正在生成
-         * 
-         * isAIGenerating 返回值：
-         * - null: 未实现（平台未提供检测方法），不添加 padding
-         * - true: AI 正在生成，保持 padding 高度不变
-         * - false: AI 停止生成，更新 padding 高度
-         */
+        // isAIGenerating: null=未实现, true=生成中, false=生成结束
         const aiGeneratingState = this.adapter?.isAIGenerating?.();
         
-        // ✅ 确保 padding 元素存在且始终在滚动区域最底部
         const containerStyle = window.getComputedStyle(this.conversationContainer);
         const isReversed = containerStyle.flexDirection === 'column-reverse';
         
+        // 创建 padding 元素（order:9999 确保视觉在底部）
         if (!paddingEl) {
-            // 初始化：创建高度为 0 的 padding 元素，带 CSS 过渡动画
             paddingEl = document.createElement('div');
             paddingEl.className = 'ait-scroll-padding';
-            // 通用：使用 order 保证在 flex 容器里视觉上始终位于底部（即使 DOM 不是 lastChild）
             paddingEl.style.cssText = 'pointer-events: none; width: 100%; flex-shrink: 0; order: 9999; height: 0; transition: height 0.3s ease-out; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;';
             this._currentPadding = 0;
         }
         
-        // 确保 padding 始终在最底部（或反向布局时在最顶部）
-        // 通用处理：
-        // 一些平台的“自动滚动/自动跟随到底部”依赖其尾部哨兵节点（通常要求它保持为 lastChild）。
-        // 若我们把 padding 作为 lastChild，可能会打断平台自身逻辑，出现“新增提问不自动滚动”。
-        // 解决：在非反向布局下，若容器为 flex，则让 padding 处于 DOM 的倒数第二（tail 之前），同时用 order:9999 保证视觉仍在底部。
+        // 定位 padding：避免成为 lastChild 以免干扰平台的自动滚动逻辑
         if (isReversed) {
             if (paddingEl !== this.conversationContainer.firstElementChild) {
                 this.conversationContainer.prepend(paddingEl);
@@ -2542,11 +2517,9 @@ class TimelineManager {
             const isFlexContainer = /flex/.test(containerStyle.display || '');
             if (isFlexContainer) {
                 const tailEl = this.conversationContainer.lastElementChild;
-                // 目标：让 padding 尽量不要成为 lastChild，给平台尾部逻辑留出空间
                 if (!tailEl) {
                     this.conversationContainer.appendChild(paddingEl);
                 } else if (tailEl === paddingEl) {
-                    // padding 已经是 lastChild：把它往前挪一位，让“原本的前一个元素”成为 lastChild
                     let anchor = paddingEl.previousElementSibling;
                     while (anchor && anchor.classList?.contains('ait-scroll-padding')) {
                         anchor = anchor.previousElementSibling;
@@ -2555,24 +2528,19 @@ class TimelineManager {
                         this.conversationContainer.insertBefore(paddingEl, anchor);
                     }
                 } else {
-                    // 正常情况：把 padding 放到 tailEl 之前（保持 tailEl 仍为 lastChild）
                     if (paddingEl.parentElement !== this.conversationContainer || paddingEl.nextElementSibling !== tailEl) {
                         this.conversationContainer.insertBefore(paddingEl, tailEl);
                     }
                 }
             } else {
-                // 非 flex：order 不生效，维持 padding 作为 lastChild，保证视觉上始终在底部
                 if (paddingEl !== this.conversationContainer.lastElementChild) {
                     this.conversationContainer.appendChild(paddingEl);
                 }
             }
         }
         
-        // ✅ 以下情况设置高度为 0（不移除元素）：
-        // 1. 只有1个节点
-        // 2. isAIGenerating 返回 null（未实现）
+        // 只有1个节点或未实现检测时，高度设为0
         const shouldSetZeroHeight = this.markers.length <= 1 || aiGeneratingState === null;
-        
         if (shouldSetZeroHeight) {
             if (this._currentPadding !== 0) {
                 paddingEl.style.height = '0px';
@@ -2582,15 +2550,12 @@ class TimelineManager {
             return;
         }
         
-        // ✅ AI 正在生成时：保持 padding 高度不变，只确保位置正确
+        // AI 生成中：保持高度不变
         if (aiGeneratingState === true) {
             return;
         }
         
-        // ✅ AI 生成结束：计算并更新 padding 高度
-        // 公式：lastOffsetTop - ACTIVATE_AHEAD + 20 - cleanMaxScrollTop
-        // 确保最后节点能在 ACTIVATE_AHEAD 提前量下被激活，额外 20px 余量避免压线
-        // 取整避免小数点波动导致的频繁更新
+        // AI 生成结束：计算 padding = lastOffsetTop - ACTIVATE_AHEAD + 20 - cleanMaxScrollTop
         const paddingNeeded = Math.round(Math.max(0, lastOffsetTop - this.ACTIVATE_AHEAD + 20 - cleanMaxScrollTop));
         
         // 只有高度变化时才更新（触发 CSS 过渡动画）
@@ -2611,8 +2576,7 @@ class TimelineManager {
         }
         
         const clientHeight = this.scrollContainer.clientHeight;
-        // scrollHeight 包含了我们添加的空白元素高度，需要减掉
-        // 使用 padding 元素的实际高度（考虑 CSS transition 渐变过程）
+        // 减去 padding 元素高度
         const paddingEl = this.conversationContainer?.querySelector('.ait-scroll-padding');
         const actualPadding = paddingEl ? paddingEl.offsetHeight : 0;
         const cleanScrollHeight = this.scrollContainer.scrollHeight - actualPadding;
@@ -2622,20 +2586,16 @@ class TimelineManager {
     }
     
     /**
-     * ✅ 仅重新计算已有节点的位置（offsetTop, visualN）
-     * 不重建节点，保留收藏、标记等状态
+     * 重新计算节点位置（offsetTop, visualN），不重建节点
      */
     _recalcMarkerPositions() {
         if (!this.scrollContainer || this.markers.length === 0) return;
         
-        // ✅ 检查是否有 DOM 引用失效的节点
+        // DOM 引用失效时触发完整重算
         const hasInvalidElement = this.markers.some(m => !m.element?.isConnected);
         if (hasInvalidElement) {
-            // DOM 引用失效，需要完整重新计算
-            // 使用标记避免重复触发
             if (!this._pendingDomRefresh) {
                 this._pendingDomRefresh = true;
-                // 使用 requestAnimationFrame 立即执行，避免防抖导致的延迟
                 requestAnimationFrame(() => {
                     this._pendingDomRefresh = false;
                     this.recalculateAndRenderMarkers();
@@ -2644,124 +2604,85 @@ class TimelineManager {
             return;
         }
         
-        // 获取节点位置计算工具函数
         const getOffsetTop = (element, container) => {
             const elemRect = element.getBoundingClientRect();
             const contRect = container.getBoundingClientRect();
-            const contScrollTop = container.scrollTop || 0;
-            return elemRect.top - contRect.top + contScrollTop;
+            return elemRect.top - contRect.top + (container.scrollTop || 0);
         };
         
-        // ✅ 获取"干净"的滚动区域尺寸（不包含我们添加的 padding）
         const { maxScrollTop: cleanMaxScrollTop } = this._getCleanScrollMetrics();
-        
-        // 收集所有节点的 offsetTop
         const nodeOffsets = this.markers.map(m => getOffsetTop(m.element, this.scrollContainer));
-        
-        // 计算内容跨度
         const firstOffsetTop = nodeOffsets[0];
         const lastOffsetTop = nodeOffsets[nodeOffsets.length - 1];
         const contentSpan = lastOffsetTop - firstOffsetTop || 1;
         
-        // ✅ 更新底部 padding（使用防抖版本，避免滚动时频繁更新导致抖动）
         this.debouncedUpdateScrollPadding(lastOffsetTop, cleanMaxScrollTop);
         
-        // 更新每个节点的位置信息
         let visualNChanged = false;
         this.markers.forEach((m, index) => {
             m.offsetTop = nodeOffsets[index];
             
-            // offsetBottom: 节点结束位置 = offsetTop + 节点高度
             const nodeHeight = m.element.offsetHeight || 0;
             m.offsetBottom = m.offsetTop + nodeHeight;
             
-            // visualN: 原始位置比例（0~1，基于页面实际位置）
+            // visualN: 位置比例 0~1
             const offsetFromStart = m.offsetTop - firstOffsetTop;
             let newVisualN = offsetFromStart / contentSpan;
             newVisualN = Math.round(Math.max(0, Math.min(1, newVisualN)) * 1000000) / 1000000;
             
-            // 检测 visualN 是否有显著变化
             if (Math.abs(newVisualN - (m.visualN || 0)) > 0.000001) {
                 visualNChanged = true;
             }
             m.visualN = newVisualN;
         });
         
-        // ✅ 只有 visualN 有变化时才更新 dotN（减少不必要的计算）
         if (visualNChanged) {
             this.updateTimelineGeometry();
         }
     }
 
+    /**
+     * 根据滚动位置计算当前激活节点
+     * 激活最后一个 (offsetTop - 提前量) <= scrollTop 的节点
+     */
     computeActiveByScroll() {
         if (!this.scrollContainer || this.markers.length === 0) return;
         
-        /**
-         * ✅ 基于 offsetTop 的激活判断（直接使用节点位置）
-         * 
-         * 核心逻辑：
-         * 1. 获取当前 scrollTop（像素值）
-         * 2. 每个节点有 offsetTop（节点顶部距离滚动区域顶部的距离）
-         * 3. 激活最后一个 (offsetTop - 提前量) <= scrollTop 的节点
-         * 
-         * 注意：需要配合底部空白元素（_updateScrollPadding）使用
-         * 确保 maxScrollTop >= lastOffsetTop，这样所有节点都能被滚动激活
-         * 
-         * 示例：
-         * - 节点0: offsetTop = 100
-         * - 节点1: offsetTop = 1500
-         * - 节点2: offsetTop = 2800
-         * 
-         * 当 scrollTop = 1450px，提前量 = 50px 时：
-         * - 节点0: (100 - 50) = 50 <= 1450 ✓
-         * - 节点1: (1500 - 50) = 1450 <= 1450 ✓
-         * - 节点2: (2800 - 50) = 2750 > 1450 ✗
-         * - 激活节点1 ✓
-         */
-        
-        // ✅ 检测平台是否使用反向滚动（如豆包，flex-direction: column-reverse）
         const isReverseScroll = typeof this.adapter.isReverseScroll === 'function' && this.adapter.isReverseScroll();
         
-        let activeId = this.markers[0].id;  // 默认激活第一个
+        let activeId = this.markers[0].id;
         
         if (isReverseScroll) {
-            // ✅ 反向滚动：使用 getBoundingClientRect 实时判断
-            // 找到第一个顶部位置超过容器顶部 + 提前量的节点
+            // 反向滚动：实时计算位置
             const containerTop = this.scrollContainer.getBoundingClientRect().top;
             const activateThreshold = containerTop + this.ACTIVATE_AHEAD;
             
-            // 从后往前遍历（因为反向布局中，DOM 顺序和视觉顺序相反）
             for (let i = this.markers.length - 1; i >= 0; i--) {
                 const m = this.markers[i];
                 if (!m.element) continue;
-                const elemTop = m.element.getBoundingClientRect().top;
-                // 当元素顶部在阈值之上时，激活该节点
-                if (elemTop <= activateThreshold) {
+                if (m.element.getBoundingClientRect().top <= activateThreshold) {
                     activeId = m.id;
                     break;
                 }
             }
         } else {
-            // ✅ 正常滚动：使用 offsetTop 判断激活
-            let scrollTop = this.scrollContainer.scrollTop;
-            
+            // 正常滚动：使用缓存的 offsetTop
+            const scrollTop = this.scrollContainer.scrollTop;
             for (let i = 0; i < this.markers.length; i++) {
                 const m = this.markers[i];
-                // 当 scrollTop >= (offsetTop - 提前量) 时激活该节点
                 if ((m.offsetTop - this.ACTIVATE_AHEAD) <= scrollTop) {
-                    activeId = m.id;  // 不断更新，最终得到最后一个满足条件的
+                    activeId = m.id;
                 } else {
-                    break;  // 后面的节点 offsetTop 只会更大，可以提前退出
+                    break;
                 }
             }
         }
         
-        // 更新激活状态（带防抖）
+        // 更新激活状态（防抖）
         if (this.activeTurnId !== activeId) {
             const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
             const since = now - this.lastActiveChangeTime;
             if (since < TIMELINE_CONFIG.MIN_ACTIVE_CHANGE_INTERVAL) {
-                // 快速滚动时合并更新
                 this.pendingActiveId = activeId;
                 if (!this.activeChangeTimer) {
                     const delay = Math.max(TIMELINE_CONFIG.MIN_ACTIVE_CHANGE_INTERVAL - since, 0);
