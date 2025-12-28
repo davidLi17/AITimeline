@@ -15,8 +15,9 @@ class KimiAdapter extends SiteAdapter {
     }
 
     getUserMessageSelector() {
-        // Kimi 使用固定的 class 名
-        return '.user-content';
+        // Kimi 使用消息项级别的选择器，匹配包含 .user-content 的消息项
+        // 这样选择器匹配的元素就是消息项本身，与其他平台一致
+        return '.chat-content-item:has(.user-content)';
     }
 
     generateTurnId(element, index) {
@@ -24,8 +25,9 @@ class KimiAdapter extends SiteAdapter {
     }
 
     extractText(element) {
-        // 文本直接在元素中
-        const text = (element.textContent || '').trim();
+        // 从消息项中查找 .user-content 元素获取文本
+        const userContent = element.querySelector('.user-content');
+        const text = (userContent?.textContent || element.textContent || '').trim();
         return text || '[图片或文件]';
     }
 
@@ -50,7 +52,7 @@ class KimiAdapter extends SiteAdapter {
     }
 
     findConversationContainer(firstMessage) {
-        // 查找对话容器 - 使用 LCA（最近共同祖先）算法
+        // 选择器现在匹配的是消息项 .chat-content-item，使用标准 LCA 算法即可
         return ContainerFinder.findConversationContainer(firstMessage, {
             messageSelector: this.getUserMessageSelector()
         });

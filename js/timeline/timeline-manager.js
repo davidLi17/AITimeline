@@ -187,6 +187,9 @@ class TimelineManager {
             // 初始化后手动触发一次滚动同步，确保激活状态正确
             this.scheduleScrollSync();
             
+            // ✅ 延迟二次计算：页面初始化后某些元素可能还没展开
+            setTimeout(() => this.recalculateAndRenderMarkers(), 500);
+            
             // ✅ 等待时间轴渲染完成后，再显示收藏按钮
             // 使用双重 requestAnimationFrame 确保浏览器完成绘制
             requestAnimationFrame(() => {
@@ -2556,7 +2559,8 @@ class TimelineManager {
         }
         
         // AI 生成结束：计算 padding = lastOffsetTop - ACTIVATE_AHEAD + 20 - cleanMaxScrollTop
-        const paddingNeeded = Math.round(Math.max(0, lastOffsetTop - this.ACTIVATE_AHEAD + 20 - cleanMaxScrollTop));
+        // 向上取整，确保 padding 足够激活最后节点
+        const paddingNeeded = Math.ceil(Math.max(0, lastOffsetTop - this.ACTIVATE_AHEAD + 20 - cleanMaxScrollTop));
         
         // 只有高度变化时才更新（触发 CSS 过渡动画）
         if (this._currentPadding !== paddingNeeded) {
