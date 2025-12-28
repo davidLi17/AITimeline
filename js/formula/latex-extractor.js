@@ -83,12 +83,17 @@ class LatexExtractor {
             }
         }
 
-        // 方法9: MathJax 格式 - 从兄弟 script[type="math/tex"] 提取
-        // 查找父元素中的 script[type^="math/tex"] 标签
+        // 方法9: MathJax 格式 - 从兄弟 script 提取
+        // 先查 MathJax 自己的下一个兄弟: <MathJax/><script>
+        let nextSibling = formulaElement.nextElementSibling;
+        if (nextSibling?.tagName === 'SCRIPT' && nextSibling.type?.startsWith('math/tex')) {
+            return nextSibling.textContent.trim();
+        }
+        // 再查父元素的下一个兄弟: <wrapper><MathJax/></wrapper><script>
         if (formulaElement.parentElement) {
-            const script = formulaElement.parentElement.querySelector('script[type^="math/tex"]');
-            if (script) {
-                return script.textContent.trim();
+            nextSibling = formulaElement.parentElement.nextElementSibling;
+            if (nextSibling?.tagName === 'SCRIPT' && nextSibling.type?.startsWith('math/tex')) {
+                return nextSibling.textContent.trim();
             }
         }
 
