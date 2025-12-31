@@ -104,18 +104,14 @@ class FolderManager {
         
         // 3. 处理该文件夹及子文件夹中的收藏项（移到目标文件夹或默认文件夹）
         const allDeletedFolderIds = [folderId, ...childFolderIds];
-        const stars = await StarPinStorage.getAllStars();
+        const starredItems = await this.storage.getAllByPrefix('chatTimelineStar:');
         
-        let modified = false;
-        stars.forEach(item => {
+        for (const key in starredItems) {
+            const item = starredItems[key];
             if (allDeletedFolderIds.includes(item.folderId)) {
                 item.folderId = moveToFolderId;
-                modified = true;
+                await this.storage.set(key, item);
             }
-        });
-        
-        if (modified) {
-            await this.storage.set(StarPinStorage.STARS_KEY, stars);
         }
         
         console.log('[FolderManager] Deleted folder:', folderId, 'and', childFolderIds.length, 'children');
@@ -123,35 +119,21 @@ class FolderManager {
     
     /**
      * 移动收藏项到文件夹
-     * @param {string} turnId - 收藏项 ID（格式：urlWithoutProtocol:nodeKey）
+     * @param {string} turnId - 收藏项 ID（格式：url:index）
      * @param {string|null} targetFolderId - 目标文件夹 ID（null = 未分类）
      */
     async moveStarredToFolder(turnId, targetFolderId) {
-        // 解析 turnId
-        const lastColonIndex = turnId.lastIndexOf(':');
-        if (lastColonIndex === -1) {
-            throw new Error('无效的收藏项 ID');
-        }
+        // 构建原始的 storage key: chatTimelineStar:url:index
+        const key = `chatTimelineStar:${turnId}`;
+        const item = await this.storage.get(key);
         
-        const urlWithoutProtocol = turnId.substring(0, lastColonIndex);
-        const nodeKeyStr = turnId.substring(lastColonIndex + 1);
-        const parsed = parseInt(nodeKeyStr, 10);
-        const nodeKey = (String(parsed) === nodeKeyStr) ? parsed : nodeKeyStr;
-        
-        // 获取所有收藏，找到并更新
-        const stars = await StarPinStorage.getAllStars();
-        const starIndex = stars.findIndex(s => 
-            s.urlWithoutProtocol === urlWithoutProtocol && 
-            (s.nodeId ?? s.index) === nodeKey
-        );
-        
-        if (starIndex === -1) {
+        if (!item) {
             throw new Error('收藏项不存在');
         }
         
         // 更新 folderId 字段
-        stars[starIndex].folderId = targetFolderId;
-        await this.storage.set(StarPinStorage.STARS_KEY, stars);
+        item.folderId = targetFolderId;
+        await this.storage.set(key, item);
         
         console.log('[FolderManager] Moved starred:', turnId, 'to folder:', targetFolderId);
     }
@@ -163,13 +145,41 @@ class FolderManager {
     async getStarredByFolder() {
         const folders = await this.getFolders();
         
-        // 使用 StarPinStorage 获取所有收藏项
-        const starredItems = await StarPinStorage.getAllStars();
+        // 使用原有方式获取所有收藏项（chatTimelineStar: 格式）
+        const starredItems = await this.storage.getAllByPrefix('chatTimelineStar:');
         
-        // ✅ 辅助函数：从 item 中提取 turnId
-        const extractTurnId = (item) => {
-            const nodeKey = item.nodeId ?? item.index;
-            return `${item.urlWithoutProtocol}:${nodeKey}`;
+        // ✅ 辅助函数：解析 nodeKey（支持字符串和数字）
+        const parseNodeKey = (keyPart) => {
+            if (keyPart === undefined || keyPart === '') return null;
+            const parsed = parseInt(keyPart, 10);
+            // 如果是纯数字字符串，返回数字；否则返回原字符串（如 Gemini nodeId）
+            return (String(parsed) === keyPart) ? parsed : keyPart;
+        };
+        
+        // ✅ 辅助函数：从 key 中提取 item 信息
+        // ⚠️ 重要：turnId 必须完全从 Storage Key 中解析，确保 handleUnstar 时能正确删除
+        const extractItemInfo = (key, item) => {
+            // key 格式：chatTimelineStar:{urlWithoutProtocol}:{nodeKey}
+            // 必须从 Key 中解析 nodeKey，不能用 item 中的字段，否则可能因类型差异导致 key 不匹配
+            const keyWithoutPrefix = key.replace('chatTimelineStar:', '');
+            const lastColonIndex = keyWithoutPrefix.lastIndexOf(':');
+            
+            let urlWithoutProtocol, nodeKeyStr;
+            if (lastColonIndex === -1) {
+                // 异常情况：没有冒号分隔
+                urlWithoutProtocol = keyWithoutPrefix;
+                nodeKeyStr = '';
+            } else {
+                urlWithoutProtocol = keyWithoutPrefix.substring(0, lastColonIndex);
+                nodeKeyStr = keyWithoutPrefix.substring(lastColonIndex + 1);
+            }
+            
+            // 解析 nodeKey 类型（数字或字符串）
+            const nodeKey = parseNodeKey(nodeKeyStr);
+            
+            // ⚠️ turnId 必须用 nodeKeyStr（原始字符串），确保和 Storage Key 完全一致
+            const turnId = `${urlWithoutProtocol}:${nodeKeyStr}`;
+            return { urlWithoutProtocol, nodeKey, turnId };
         };
         
         // 构建树状结构
@@ -206,16 +216,16 @@ class FolderManager {
                 };
                 
                 // 添加子文件夹的收藏项
-                starredItems.forEach(item => {
-                    const nodeKey = item.nodeId ?? item.index;
-                    const turnId = extractTurnId(item);
+                for (const key in starredItems) {
+                    const item = starredItems[key];
+                    const { urlWithoutProtocol, nodeKey, turnId } = extractItemInfo(key, item);
                     
                     // 检查是否属于该子文件夹
                     if (item.folderId === childFolder.id) {
                         childNode.items.push({ 
                             turnId,
-                            url: item.url || `https://${item.urlWithoutProtocol}`,
-                            urlWithoutProtocol: item.urlWithoutProtocol,
+                            url: item.url || `https://${urlWithoutProtocol}`,
+                            urlWithoutProtocol,
                             index: nodeKey,   // 兼容旧代码
                             nodeId: nodeKey,  // 新字段
                             theme: item.question || '整个对话',
@@ -224,7 +234,7 @@ class FolderManager {
                         });
                         assignedTurnIds.add(turnId);
                     }
-                });
+                }
                 
                 // 按时间排序
                 childNode.items.sort((a, b) => b.timestamp - a.timestamp);
@@ -233,16 +243,16 @@ class FolderManager {
             }
             
             // 添加根文件夹的收藏项
-            starredItems.forEach(item => {
-                const nodeKey = item.nodeId ?? item.index;
-                const turnId = extractTurnId(item);
+            for (const key in starredItems) {
+                const item = starredItems[key];
+                const { urlWithoutProtocol, nodeKey, turnId } = extractItemInfo(key, item);
                 
                 // 检查是否属于该根文件夹
                 if (item.folderId === rootFolder.id) {
                     folderNode.items.push({ 
                         turnId,
-                        url: item.url || `https://${item.urlWithoutProtocol}`,
-                        urlWithoutProtocol: item.urlWithoutProtocol,
+                        url: item.url || `https://${urlWithoutProtocol}`,
+                        urlWithoutProtocol,
                         index: nodeKey,   // 兼容旧代码
                         nodeId: nodeKey,  // 新字段
                         theme: item.question || '整个对话',
@@ -251,7 +261,7 @@ class FolderManager {
                     });
                     assignedTurnIds.add(turnId);
                 }
-            });
+            }
             
             // 按时间排序
             folderNode.items.sort((a, b) => b.timestamp - a.timestamp);
@@ -260,17 +270,18 @@ class FolderManager {
         }
         
         // 3. 添加未分类收藏项（没有 folderId 或 folderId 指向已删除文件夹的收藏项）
-        starredItems.forEach(item => {
-            const nodeKey = item.nodeId ?? item.index;
-            const turnId = extractTurnId(item);
+        
+        for (const key in starredItems) {
+            const item = starredItems[key];
+            const { urlWithoutProtocol, nodeKey, turnId } = extractItemInfo(key, item);
             
             // 如果该收藏项还没有被分配到任何文件夹，则归为未分类（默认文件夹）
             // 这包括：folderId 为 null/undefined 或 folderId 指向已删除的文件夹
             if (!assignedTurnIds.has(turnId)) {
                 tree.uncategorized.push({ 
                     turnId,
-                    url: item.url || `https://${item.urlWithoutProtocol}`,
-                    urlWithoutProtocol: item.urlWithoutProtocol,
+                    url: item.url || `https://${urlWithoutProtocol}`,
+                    urlWithoutProtocol,
                     index: nodeKey,   // 兼容旧代码
                     nodeId: nodeKey,  // 新字段
                     theme: item.question || '整个对话',
@@ -278,7 +289,7 @@ class FolderManager {
                     folderId: item.folderId
                 });
             }
-        });
+        }
         
         // 按时间排序未分类项
         tree.uncategorized.sort((a, b) => b.timestamp - a.timestamp);

@@ -1022,26 +1022,14 @@ class StarredTab extends BaseTab {
                 return;
             }
             
-            // turnId 格式：urlWithoutProtocol:nodeKey
-            const lastColonIndex = turnId.lastIndexOf(':');
-            if (lastColonIndex === -1) return;
+            // turnId 格式：url:index
+            const key = `chatTimelineStar:${turnId}`;
+            const item = await StorageAdapter.get(key);
             
-            const urlWithoutProtocol = turnId.substring(0, lastColonIndex);
-            const nodeKeyStr = turnId.substring(lastColonIndex + 1);
-            const parsed = parseInt(nodeKeyStr, 10);
-            const nodeKey = (String(parsed) === nodeKeyStr) ? parsed : nodeKeyStr;
-            
-            // 获取所有收藏，找到并更新对应项
-            const stars = await StarPinStorage.getAllStars();
-            const starIndex = stars.findIndex(s => 
-                s.urlWithoutProtocol === urlWithoutProtocol && 
-                (s.nodeId ?? s.index) === nodeKey
-            );
-            
-            if (starIndex >= 0) {
-                // 更新 question 字段
-                stars[starIndex].question = newTheme.trim();
-                await StorageAdapter.set(StarPinStorage.STARS_KEY, stars);
+            if (item) {
+                // 更新 question 字段（原有字段名）
+                item.question = newTheme.trim();
+                await StorageAdapter.set(key, item);
                 
                 window.globalToastManager.success(chrome.i18n.getMessage('vmkxpz'), null, { color: this.toastColor });
                 
@@ -1086,16 +1074,9 @@ class StarredTab extends BaseTab {
      */
     async handleUnstar(turnId, url) {
         try {
-            // turnId 格式：urlWithoutProtocol:nodeKey
-            const lastColonIndex = turnId.lastIndexOf(':');
-            if (lastColonIndex === -1) return;
-            
-            const urlWithoutProtocol = turnId.substring(0, lastColonIndex);
-            const nodeKeyStr = turnId.substring(lastColonIndex + 1);
-            const parsed = parseInt(nodeKeyStr, 10);
-            const nodeKey = (String(parsed) === nodeKeyStr) ? parsed : nodeKeyStr;
-            
-            await StarPinStorage.removeStar(urlWithoutProtocol, nodeKey);
+            // turnId 格式：urlWithoutProtocol:nodeKey（由 extractItemInfo 从 Storage Key 解析）
+            const key = `chatTimelineStar:${turnId}`;
+            await StorageAdapter.remove(key);
             
             // 显示成功提示
             window.globalToastManager.success(chrome.i18n.getMessage('pzmvkx'), null, { color: this.toastColor });
