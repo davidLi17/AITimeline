@@ -204,6 +204,18 @@ function initializePanelModalTabs(timelineManager) {
 **参数**:
 - `tab`: BaseTab 实例
 
+## 💬 反馈弹窗
+
+左下角 Footer 区域包含反馈入口，点击后会弹出反馈选择弹窗，提供两种反馈方式：
+
+### 反馈方式
+1. **邮箱**: houyanchao@outlook.com（点击后打开邮件客户端）
+2. **飞书表单**: 在线提交反馈（点击后在新标签页打开）
+
+### 相关方法
+- `_showFeedbackModal()`: 显示反馈弹窗
+- `_hideFeedbackModal()`: 隐藏反馈弹窗
+
 ### BaseTab
 
 #### 属性
