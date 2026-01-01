@@ -1,10 +1,10 @@
 /**
- * URL Button Manager - URL 快捷跳转按钮
+ * URL Auto Link Manager - URL 自动链接
  * 
- * 识别页面上的纯文本 URL，在其后添加"前往"按钮
+ * 识别页面上的纯文本 URL，自动转换为可点击的 <a> 标签
  */
 
-class UrlButtonManager {
+class UrlAutoLinkManager {
     constructor(options = {}) {
         this.config = {
             debug: options.debug || false
@@ -24,12 +24,12 @@ class UrlButtonManager {
         this._pendingRoots = new Set();
         
         this._init();
-        this._log('URL Button Manager initialized');
+        this._log('URL Auto Link Manager initialized');
     }
     
     /**
      * 将 URL 末尾常见的标点从链接中剥离出来，避免打开错误 URL。
-     * 注意：不会改变页面原文本——剥离出来的标点会以普通文本形式保留在按钮后面。
+     * 注意：不会改变页面原文本——剥离出来的标点会以普通文本形式保留在链接后面。
      */
     _splitTrailingPunctuation(rawUrl) {
         if (!rawUrl) return { url: rawUrl, tail: '' };
@@ -58,38 +58,19 @@ class UrlButtonManager {
         return { url, tail };
     }
 
-    _openUrl(rawUrl) {
-        // 不带协议的（包括 www. 和裸域名）默认使用 http://（与用户约定）
-        const finalUrl = /^https?:\/\//i.test(rawUrl) ? rawUrl : 'http://' + rawUrl;
-        // 安全加固：防止新窗口通过 window.opener 反向控制当前页面
-        const w = window.open(finalUrl, '_blank', 'noopener,noreferrer');
-        if (w) w.opener = null;
-    }
-
-    _createUrlWrapper(url) {
-        const wrapper = document.createElement('span');
-        wrapper.className = 'url-btn-wrapper';
-        wrapper.dataset.urlProcessed = 'true';
-
-        const urlSpan = document.createElement('span');
-        urlSpan.className = 'url-btn-text';
-        urlSpan.textContent = url;
-        wrapper.appendChild(urlSpan);
-
-        const button = document.createElement('button');
-        button.className = 'url-btn-goto';
-        button.type = 'button';
-        // 仅 icon：用 aria-label/title 保证可访问性与可理解性
-        button.setAttribute('aria-label', `打开链接: ${url}`);
-        button.title = `在新标签页打开: ${url}`;
-        button.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this._openUrl(url);
-        };
-        wrapper.appendChild(button);
-
-        return wrapper;
+    _createUrlLink(url) {
+        // 不带协议的（包括 www. 和裸域名）默认使用 http://
+        const finalUrl = /^https?:\/\//i.test(url) ? url : 'http://' + url;
+        
+        const link = document.createElement('a');
+        link.href = finalUrl;
+        link.textContent = url;
+        link.className = 'url-auto-link';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.dataset.urlProcessed = 'true';
+        
+        return link;
     }
 
     _isBareDomain(raw) {
@@ -268,7 +249,7 @@ class UrlButtonManager {
                 if (this._isBareDomainContextValid(text, index, rawUrl) && this._isBareDomainStrictValid(rawUrl)) {
                     const { url, tail } = this._splitTrailingPunctuation(rawUrl);
                     if (url) {
-                        fragment.appendChild(this._createUrlWrapper(url));
+                        fragment.appendChild(this._createUrlLink(url));
                         if (tail) fragment.appendChild(document.createTextNode(tail));
                         didLinkify = true;
                     }
@@ -277,7 +258,7 @@ class UrlButtonManager {
                 // 非裸域名（http/https/www）：只做末尾标点剥离
                 const { url, tail } = this._splitTrailingPunctuation(rawUrl);
                 if (url) {
-                    fragment.appendChild(this._createUrlWrapper(url));
+                    fragment.appendChild(this._createUrlLink(url));
                     if (tail) fragment.appendChild(document.createTextNode(tail));
                     didLinkify = true;
                 }
@@ -316,8 +297,7 @@ class UrlButtonManager {
                     mutation.addedNodes.forEach(node => {
                         if (node.nodeType !== Node.ELEMENT_NODE) return;
                         if (node.dataset?.urlProcessed === 'true') return;
-                        if (node.classList?.contains('url-btn-wrapper')) return;
-                        if (node.classList?.contains('url-btn-goto')) return;
+                        if (node.classList?.contains('url-auto-link')) return;
                         rootsToProcess.add(node);
                     });
                 } else if (mutation.type === 'characterData') {
@@ -352,31 +332,41 @@ class UrlButtonManager {
     }
     
     destroy() {
+        // 清理 debounce timer
+        if (this.processingDebounceTimer) {
+            clearTimeout(this.processingDebounceTimer);
+            this.processingDebounceTimer = null;
+        }
+        
+        // 清理 observer
         if (this.observer) {
             this.observer.disconnect();
             this.observer = null;
         }
+        
+        // 清理待处理列表
+        this._pendingRoots.clear();
     }
     
     _log(...args) {
         if (this.config.debug) {
-            console.log('[UrlButton]', ...args);
+            console.log('[UrlAutoLink]', ...args);
         }
     }
     
     // 调试方法
     reprocess() {
-        console.log('[UrlButton] 重新处理页面...');
+        console.log('[UrlAutoLink] 重新处理页面...');
         this._processDocument();
     }
 }
 
 // 自动初始化
 if (typeof window !== 'undefined') {
-    window.UrlButtonManager = UrlButtonManager;
+    window.UrlAutoLinkManager = UrlAutoLinkManager;
     
     const init = async () => {
-        if (window.urlButtonManager) return;
+        if (window.urlAutoLinkManager) return;
         
         // 检查功能是否启用（默认开启）
         let enabled = true;
@@ -387,17 +377,17 @@ if (typeof window !== 'undefined') {
             }
         } catch (e) {
             // 读取失败，默认开启
-            console.log('[UrlButton] Failed to read config, using default (enabled)');
+            console.log('[UrlAutoLink] Failed to read config, using default (enabled)');
         }
         
         if (!enabled) {
-            console.log('[UrlButton] Feature disabled by user config');
+            console.log('[UrlAutoLink] Feature disabled by user config');
             return;
         }
         
         // 默认关闭 debug，避免污染控制台；需要排查时可在控制台手动开启：
-        // window.urlButtonManager.config.debug = true
-        window.urlButtonManager = new UrlButtonManager({ debug: false });
+        // window.urlAutoLinkManager.config.debug = true
+        window.urlAutoLinkManager = new UrlAutoLinkManager({ debug: false });
     };
     
     if (document.readyState === 'loading') {

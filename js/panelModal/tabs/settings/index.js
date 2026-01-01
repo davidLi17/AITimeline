@@ -77,21 +77,21 @@ class SettingsTab extends BaseTab {
                     
                     if (enabled) {
                         // 开启功能
-                        if (window.urlButtonManager) {
+                        if (window.urlAutoLinkManager) {
                             // 已有实例，重新扫描页面
-                            window.urlButtonManager.reprocess();
-                        } else if (window.UrlButtonManager) {
+                            window.urlAutoLinkManager.reprocess();
+                        } else if (window.UrlAutoLinkManager) {
                             // 没有实例但有类，创建新实例
-                            window.urlButtonManager = new window.UrlButtonManager({ debug: false });
+                            window.urlAutoLinkManager = new window.UrlAutoLinkManager({ debug: false });
                         }
                     } else {
-                        // 关闭功能：移除所有已添加的按钮
-                        this._removeAllUrlButtons();
+                        // 关闭功能：移除所有已添加的链接
+                        this._removeAllUrlLinks();
                         
                         // 销毁实例（停止监听 DOM 变化）
-                        if (window.urlButtonManager) {
-                            window.urlButtonManager.destroy();
-                            window.urlButtonManager = null;
+                        if (window.urlAutoLinkManager) {
+                            window.urlAutoLinkManager.destroy();
+                            window.urlAutoLinkManager = null;
                         }
                     }
                     
@@ -107,20 +107,18 @@ class SettingsTab extends BaseTab {
     }
     
     /**
-     * 移除页面上所有 URL 按钮（关闭功能时调用）
+     * 移除页面上所有 URL 链接（关闭功能时调用）
      */
-    _removeAllUrlButtons() {
-        const wrappers = document.querySelectorAll('.url-btn-wrapper');
-        wrappers.forEach(wrapper => {
-            // 获取原始 URL 文本
-            const urlText = wrapper.querySelector('.url-btn-text');
-            if (urlText && wrapper.parentNode) {
-                // 用纯文本节点替换 wrapper
-                const textNode = document.createTextNode(urlText.textContent);
-                wrapper.parentNode.replaceChild(textNode, wrapper);
+    _removeAllUrlLinks() {
+        const links = document.querySelectorAll('a.url-auto-link');
+        links.forEach(link => {
+            if (link.parentNode) {
+                // 用纯文本节点替换链接
+                const textNode = document.createTextNode(link.textContent);
+                link.parentNode.replaceChild(textNode, link);
             }
         });
-        console.log('[SettingsTab] Removed all URL buttons');
+        console.log('[SettingsTab] Removed all URL links');
     }
     
     /**
