@@ -44,12 +44,15 @@
         "js/runner/highlight/highlight.core.min.js",
         "js/runner/highlight/javascript.min.js",
         "js/runner/highlight/python.min.js",
+        "js/runner/highlight/typescript.min.js",
         "js/runner/highlight/language-detector.js",
         "js/runner/core/base-runner.js",
         "js/runner/languages/javascript/sandbox-manager.js",
         "js/runner/languages/javascript/index.js",
         "js/runner/languages/python/sandbox-manager.js",
         "js/runner/languages/python/index.js",
+        "js/runner/languages/typescript/sandbox-manager.js",
+        "js/runner/languages/typescript/index.js",
         "js/runner/languages/registry.js",
         "js/runner/runner-manager.js",
         "js/runner/index.js",
@@ -127,7 +130,9 @@
         "js/runner/languages/javascript/sandbox.html",
         "js/runner/languages/javascript/sandbox-script.js",
         "js/runner/languages/python/sandbox.html",
-        "js/runner/languages/python/sandbox-script.js"
+        "js/runner/languages/python/sandbox-script.js",
+        "js/runner/languages/typescript/sandbox.html",
+        "js/runner/languages/typescript/sandbox-script.js"
       ],
       "matches": [
         "<all_urls>"
@@ -142,7 +147,8 @@
   "sandbox": {
     "pages": [
       "js/runner/languages/javascript/sandbox.html",
-      "js/runner/languages/python/sandbox.html"
+      "js/runner/languages/python/sandbox.html",
+      "js/runner/languages/typescript/sandbox.html"
     ]
   },
   

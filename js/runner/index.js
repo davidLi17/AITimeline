@@ -78,7 +78,7 @@
     /**
      * 检测代码语言类型（使用 Highlight.js）
      * @param {string} code - 代码文本
-     * @returns {string|null} 'javascript' | 'python' | null
+     * @returns {string|null} 'javascript' | 'python' | 'typescript' | null
      */
     function detectLanguage(code) {
         if (!window.LanguageDetector) {
@@ -156,13 +156,21 @@
         return button;
     }
 
+    // 语言显示名称映射
+    const LANGUAGE_DISPLAY_NAMES = {
+        'javascript': 'JavaScript',
+        'python': 'Python',
+        'typescript': 'TypeScript'
+    };
+
     /**
      * 创建 Runner 容器（包含 CodeMirror 编辑器和结果面板）
      * @param {HTMLElement} layoutContainer - 布局容器
      * @param {HTMLElement} runButton - 运行按钮
+     * @param {string} language - 语言类型
      * @returns {Object} { container, cmEditor, contentEl }
      */
-    function createRunnerContainer(layoutContainer, runButton) {
+    function createRunnerContainer(layoutContainer, runButton, language = 'javascript') {
         // 创建容器
         const container = document.createElement('div');
         container.className = 'runner-container';
@@ -170,6 +178,9 @@
         // 动态计算 z-index，确保在其他同级元素之上
         const maxZ = getMaxChildZIndex(layoutContainer);
         container.style.zIndex = maxZ + 1;
+
+        // 获取语言显示名称
+        const langDisplayName = LANGUAGE_DISPLAY_NAMES[language] || language;
 
         // 创建编辑器区域
         const editorSection = document.createElement('div');
@@ -179,7 +190,7 @@
         const editorHeader = document.createElement('div');
         editorHeader.className = 'runner-section-header';
         editorHeader.style.height = CONFIG.headerHeight + 'px';
-        editorHeader.innerHTML = `<span class="runner-section-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>Code</span></span><div class="runner-section-actions"><button class="runner-action-settings" title="${chrome.i18n.getMessage('vkmzpx') || '设置'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button><button class="runner-action-copy" title="${chrome.i18n.getMessage('mvkxpz') || '复制'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button><button class="runner-action-close" title="${chrome.i18n.getMessage('pxvkmz') || '关闭'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>`;
+        editorHeader.innerHTML = `<span class="runner-section-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>${langDisplayName}</span></span><div class="runner-section-actions"><button class="runner-action-settings" title="${chrome.i18n.getMessage('vkmzpx') || '设置'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button><button class="runner-action-copy" title="${chrome.i18n.getMessage('mvkxpz') || '复制'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button><button class="runner-action-close" title="${chrome.i18n.getMessage('pxvkmz') || '关闭'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>`;
 
         // 创建 CodeMirror 容器
         const editorWrapper = document.createElement('div');
@@ -398,12 +409,14 @@
         let cmEditor, contentEl;
 
         if (!container) {
-            const result = createRunnerContainer(layoutContainer, runButton);
+            const result = createRunnerContainer(layoutContainer, runButton, language);
             container = result.container;
             cmEditor = result.cmEditor;
             contentEl = result.contentEl;
             // 存储 runButton 引用，用于关闭时恢复显示
             container._runButton = runButton;
+            // 存储语言类型
+            container._language = language;
             // 插入到布局容器内部
             layoutContainer.appendChild(container);
         } else {
@@ -542,6 +555,21 @@
     }
 
     /**
+     * 检查 TypeScript Runner 是否启用
+     * @returns {Promise<boolean>}
+     */
+    async function isTypeScriptRunnerEnabled() {
+        try {
+            const result = await chrome.storage.local.get('runnerTypeScriptEnabled');
+            // 默认值为 true（开启）
+            return result.runnerTypeScriptEnabled !== false;
+        } catch (e) {
+            console.error('[Runner] Failed to check TypeScript enabled state:', e);
+            return true; // 默认开启
+        }
+    }
+
+    /**
      * 检查指定语言是否启用
      * @param {string} language - 语言类型
      * @returns {Promise<boolean>}
@@ -549,6 +577,7 @@
     async function isLanguageEnabled(language) {
         if (language === 'javascript') return isJavaScriptRunnerEnabled();
         if (language === 'python') return isPythonRunnerEnabled();
+        if (language === 'typescript') return isTypeScriptRunnerEnabled();
         return false;
     }
 
@@ -557,19 +586,21 @@
      */
     async function scanCodeBlocks() {
         // 检查各语言是否启用
-        const [jsEnabled, pyEnabled] = await Promise.all([
+        const [jsEnabled, pyEnabled, tsEnabled] = await Promise.all([
             isJavaScriptRunnerEnabled(),
-            isPythonRunnerEnabled()
+            isPythonRunnerEnabled(),
+            isTypeScriptRunnerEnabled()
         ]);
         
         // 如果所有语言都禁用，不扫描
-        if (!jsEnabled && !pyEnabled) {
+        if (!jsEnabled && !pyEnabled && !tsEnabled) {
             return;
         }
         
         const enabledLanguages = {
             javascript: jsEnabled,
-            python: pyEnabled
+            python: pyEnabled,
+            typescript: tsEnabled
         };
         
         // 遍历配置，按优先级匹配代码块
@@ -593,12 +624,13 @@
      */
     async function initialize() {
         // 检查是否有任何语言启用
-        const [jsEnabled, pyEnabled] = await Promise.all([
+        const [jsEnabled, pyEnabled, tsEnabled] = await Promise.all([
             isJavaScriptRunnerEnabled(),
-            isPythonRunnerEnabled()
+            isPythonRunnerEnabled(),
+            isTypeScriptRunnerEnabled()
         ]);
         
-        if (!jsEnabled && !pyEnabled) {
+        if (!jsEnabled && !pyEnabled && !tsEnabled) {
             console.log('[Runner] All runners are disabled, skipping initialization');
             return;
         }

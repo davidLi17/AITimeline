@@ -21,6 +21,13 @@ class LanguageRegistry {
                 enabled: true,
                 icon: '🐍',
                 runnerClass: 'PythonRunner'
+            },
+            {
+                id: 'typescript',
+                name: 'TypeScript',
+                enabled: true,
+                icon: '🔷',
+                runnerClass: 'TypeScriptRunner'
             }
         ];
         this.initialize();
@@ -38,6 +45,11 @@ class LanguageRegistry {
         // 注册 Python
         if (window.PythonRunner) {
             this.register('python', new window.PythonRunner());
+        }
+        
+        // 注册 TypeScript
+        if (window.TypeScriptRunner) {
+            this.register('typescript', new window.TypeScriptRunner());
         }
     }
 

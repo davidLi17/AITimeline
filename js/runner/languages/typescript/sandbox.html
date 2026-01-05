@@ -2,30 +2,29 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Python Sandbox</title>
+    <title>TypeScript Sandbox</title>
 </head>
 <body>
     <script>
-        // 动态加载 Pyodide
+        // 动态加载 TypeScript 编译器
         const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+        script.src = 'https://cdn.jsdelivr.net/npm/typescript@5.3.3/lib/typescript.min.js';
         script.onload = function() {
-            // Pyodide 加载完成后，加载 sandbox-script.js
+            // TypeScript 加载完成后，加载 sandbox-script.js
             const sandboxScript = document.createElement('script');
             sandboxScript.src = 'sandbox-script.js';
             document.body.appendChild(sandboxScript);
         };
         script.onerror = function() {
-            // CDN 加载失败时通知父窗口
             if (window.parent && window.parent !== window) {
                 window.parent.postMessage({
-                    type: 'PYTHON_ERROR',
-                    data: { message: '无法加载 Pyodide CDN，请检查网络连接' }
+                    type: 'TS_ERROR',
+                    data: { message: '无法加载 TypeScript 编译器，请检查网络连接' }
                 }, '*');
                 // 发送完成消息，避免超时等待
                 window.parent.postMessage({
-                    type: 'PYTHON_COMPLETE',
-                    data: { success: false, duration: 0, error: '无法加载 Pyodide CDN' }
+                    type: 'TS_COMPLETE',
+                    data: { success: false, duration: 0, error: '无法加载 TypeScript 编译器' }
                 }, '*');
             }
         };

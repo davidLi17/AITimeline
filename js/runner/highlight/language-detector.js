@@ -8,15 +8,15 @@
     'use strict';
 
     // 支持的语言列表（限定检测范围，提高准确率和性能）
-    const SUPPORTED_LANGUAGES = ['javascript', 'python'];
+    const SUPPORTED_LANGUAGES = ['javascript', 'python', 'typescript'];
     
-    // 最低置信度阈值（值越高越严格，建议 8-15）
+    // 最低置信度阈值
     const MIN_RELEVANCE = 10;
 
     /**
      * 检测代码语言
      * @param {string} code - 代码文本
-     * @returns {string|null} 'javascript' | 'python' | null
+     * @returns {string|null} 'javascript' | 'python' | 'typescript' | null
      */
     function detectLanguage(code) {
         if (!code || typeof code !== 'string' || !code.trim()) {
@@ -86,4 +86,3 @@
     }
 
 })();
-
