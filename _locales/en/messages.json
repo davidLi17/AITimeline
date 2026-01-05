@@ -277,5 +277,14 @@
   },
   "runnerHint": {
     "message": "Enter your code here, async/await supported"
+  },
+  "runnerTabName": {
+    "message": "Code Runner"
+  },
+  "runnerSettingsTitle": {
+    "message": "Supported Languages"
+  },
+  "runnerSettingsHint": {
+    "message": "When enabled, a Run button will appear on code blocks to execute code directly"
   }
 }

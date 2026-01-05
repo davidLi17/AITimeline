@@ -1,297 +1,169 @@
 /**
- * Runner Tab - 代码运行器 UI 组件
+ * Runner Tab - 代码运行器设置
+ * 
+ * 功能：
+ * - 管理各语言代码块运行功能的开关（JS、Python 等）
+ * - 默认开启
  */
 
 class RunnerTab extends BaseTab {
     constructor() {
-        super('runner');
-        this.runnerManager = null;
-        this.currentLanguage = 'javascript';
-        this.isRunning = false;
-        this.outputLines = [];
-    }
-
-    async initialize() {
-        await super.initialize();
-        this.runnerManager = window.Runner.getManager();
-        this.render();
-        this.attachEventListeners();
-    }
-
-    render() {
-        const languages = this.runnerManager.getAllLanguages();
+        super();
+        this.id = 'runner';
+        this.name = chrome.i18n.getMessage('runnerTabName') || '代码运行';
+        this.icon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>`;
         
-        this.container.innerHTML = `
-            <div class="runner-container">
-                <!-- 头部：语言切换和操作按钮 -->
-                <div class="runner-header">
-                    <div class="runner-language-tabs">
-                        ${languages.map(lang => `
-                            <button 
-                                class="runner-tab ${lang.id === this.currentLanguage ? 'active' : ''} ${!lang.enabled ? 'disabled' : ''}"
-                                data-language="${lang.id}"
-                                ${!lang.enabled ? 'disabled' : ''}
-                                title="${lang.comingSoon ? '即将推出' : lang.name}">
-                                <span class="runner-tab-icon">${lang.icon || ''}</span>
-                                <span class="runner-tab-name">${lang.name}</span>
-                                ${lang.comingSoon ? '<span class="runner-tab-badge">Soon</span>' : ''}
-                            </button>
-                        `).join('')}
-                    </div>
-                    <div class="runner-actions">
-                        <button class="runner-btn runner-btn-primary" data-action="run">
-                            <span class="runner-btn-icon">▶</span>
-                            <span class="runner-btn-text">${chrome.i18n.getMessage('runnerExecute') || '运行'}</span>
-                        </button>
-                        <button class="runner-btn runner-btn-secondary" data-action="clear">
-                            <span class="runner-btn-icon">🗑</span>
-                            <span class="runner-btn-text">${chrome.i18n.getMessage('runnerClear') || '清空'}</span>
-                        </button>
-                    </div>
+        // 语言配置
+        this.languages = [
+            {
+                id: 'javascript',
+                name: 'JavaScript',
+                storageKey: 'runnerJsEnabled'
+            }
+            // 后续可添加更多语言
+            // {
+            //     id: 'python',
+            //     name: 'Python',
+            //     storageKey: 'runnerPythonEnabled'
+            // }
+        ];
+    }
+    
+    /**
+     * 渲染设置内容
+     */
+    render() {
+        const container = document.createElement('div');
+        container.className = 'runner-settings-tab';
+        
+        // 生成各语言的开关项
+        const languageItems = this.languages.map(lang => `
+            <div class="platform-item" data-lang="${lang.id}">
+                <div class="platform-info-left">
+                    <span class="platform-name">${lang.name}</span>
                 </div>
-
-                <!-- 代码编辑区 -->
-                <div class="runner-editor-wrapper">
-                    <div class="runner-editor-header">
-                        <span class="runner-editor-label">${chrome.i18n.getMessage('runnerCodeEditor') || '代码编辑器'}</span>
-                        <span class="runner-editor-hint">${chrome.i18n.getMessage('runnerHint') || '在这里输入代码，支持 async/await'}</span>
-                    </div>
-                    <textarea 
-                        class="runner-editor" 
-                        placeholder="${this.getPlaceholder()}"
-                        spellcheck="false"></textarea>
-                </div>
-
-                <!-- 输出区域 -->
-                <div class="runner-output-wrapper">
-                    <div class="runner-output-header">
-                        <span class="runner-output-label">
-                            <span class="runner-output-icon">📤</span>
-                            ${chrome.i18n.getMessage('runnerOutput') || '输出'}
-                        </span>
-                        <span class="runner-status"></span>
-                    </div>
-                    <div class="runner-output"></div>
+                <label class="ait-toggle-switch">
+                    <input type="checkbox" id="runner-${lang.id}-toggle">
+                    <span class="ait-toggle-slider"></span>
+                </label>
+            </div>
+        `).join('');
+        
+        container.innerHTML = `
+            <div class="platform-list">
+                <div class="platform-list-title">${chrome.i18n.getMessage('runnerSettingsTitle') || '代码运行功能'}</div>
+                <div class="platform-list-hint">${chrome.i18n.getMessage('runnerSettingsHint') || '控制是否在代码块上显示运行按钮'}</div>
+                <div class="platform-list-container">
+                    ${languageItems}
                 </div>
             </div>
         `;
+        
+        return container;
     }
-
-    attachEventListeners() {
-        // 语言切换
-        this.container.querySelectorAll('.runner-tab:not(.disabled)').forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                const language = e.currentTarget.dataset.language;
-                this.switchLanguage(language);
-            });
-        });
-
-        // 运行按钮
-        const runBtn = this.container.querySelector('[data-action="run"]');
-        runBtn.addEventListener('click', () => this.runCode());
-
-        // 清空按钮
-        const clearBtn = this.container.querySelector('[data-action="clear"]');
-        clearBtn.addEventListener('click', () => this.clearAll());
-
-        // 代码编辑器快捷键
-        const editor = this.container.querySelector('.runner-editor');
-        editor.addEventListener('keydown', (e) => {
-            // Ctrl/Cmd + Enter 运行代码
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                e.preventDefault();
-                this.runCode();
+    
+    /**
+     * Tab 激活时加载状态
+     */
+    async mounted() {
+        super.mounted();
+        
+        // 为每个语言设置开关状态和事件
+        for (const lang of this.languages) {
+            const toggle = document.getElementById(`runner-${lang.id}-toggle`);
+            if (!toggle) continue;
+            
+            // 读取当前状态（默认开启）
+            try {
+                const result = await chrome.storage.local.get(lang.storageKey);
+                // 默认值为 true（开启）
+                toggle.checked = result[lang.storageKey] !== false;
+            } catch (e) {
+                console.error(`[RunnerTab] Failed to load ${lang.id} state:`, e);
+                toggle.checked = true;
             }
             
-            // Tab 键插入空格
-            if (e.key === 'Tab') {
-                e.preventDefault();
-                const start = editor.selectionStart;
-                const end = editor.selectionEnd;
-                const value = editor.value;
-                editor.value = value.substring(0, start) + '  ' + value.substring(end);
-                editor.selectionStart = editor.selectionEnd = start + 2;
-            }
-        });
-    }
-
-    switchLanguage(language) {
-        if (this.isRunning) {
-            this.showToast('代码正在运行中，请稍候...', 'warning');
-            return;
-        }
-
-        this.currentLanguage = language;
-        this.runnerManager.setCurrentLanguage(language);
-
-        // 更新 UI
-        this.container.querySelectorAll('.runner-tab').forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.language === language);
-        });
-
-        // 更新占位符
-        const editor = this.container.querySelector('.runner-editor');
-        editor.placeholder = this.getPlaceholder();
-
-        // 清空编辑器和输出
-        this.clearAll();
-    }
-
-    async runCode() {
-        if (this.isRunning) {
-            this.showToast('代码正在运行中...', 'warning');
-            return;
-        }
-
-        const editor = this.container.querySelector('.runner-editor');
-        const code = editor.value.trim();
-
-        if (!code) {
-            this.showToast('请输入代码', 'warning');
-            return;
-        }
-
-        // 清空输出
-        this.clearOutput();
-        this.outputLines = [];
-
-        // 更新状态
-        this.setRunning(true);
-        this.updateStatus('运行中...', 'running');
-
-        try {
-            const result = await this.runnerManager.run(code, this.currentLanguage, {
-                onStart: () => {
-                    this.setRunning(true);
-                },
-                onOutput: (output) => {
-                    this.appendOutput(output);
-                },
-                onComplete: (result) => {
-                    this.setRunning(false);
-                    if (result.success) {
-                        this.updateStatus(`✓ 执行成功 (${result.duration}ms)`, 'success');
-                    } else {
-                        this.updateStatus(`✗ 执行失败`, 'error');
-                    }
-                },
-                onError: (error) => {
-                    this.setRunning(false);
-                    this.updateStatus(`✗ ${error.message || '执行错误'}`, 'error');
-                }
+            // 监听开关变化
+            this.addEventListener(toggle, 'change', async (e) => {
+                await this._handleToggleChange(lang, e.target.checked, toggle);
             });
-        } catch (error) {
-            this.setRunning(false);
-            this.updateStatus(`✗ ${error.message}`, 'error');
         }
     }
-
-    appendOutput(output) {
-        const outputContainer = this.container.querySelector('.runner-output');
-        
-        if (output.level === 'clear') {
-            this.clearOutput();
-            return;
+    
+    /**
+     * 处理开关变化
+     */
+    async _handleToggleChange(lang, enabled, toggle) {
+        try {
+            // 保存到 Storage
+            await chrome.storage.local.set({ [lang.storageKey]: enabled });
+            
+            if (lang.id === 'javascript') {
+                this._handleJavaScriptToggle(enabled);
+            }
+            
+            console.log(`[RunnerTab] ${lang.id} runner enabled:`, enabled);
+        } catch (e) {
+            console.error(`[RunnerTab] Failed to save ${lang.id} state:`, e);
+            // 保存失败，恢复 checkbox 状态
+            toggle.checked = !toggle.checked;
         }
-
-        const line = document.createElement('div');
-        line.className = `runner-output-line runner-output-${output.level}`;
-        
-        const prefix = this.getOutputPrefix(output.level);
-        const content = output.data ? output.data.join(' ') : '';
-        
-        line.innerHTML = `
-            <span class="runner-output-prefix">${prefix}</span>
-            <span class="runner-output-content">${this.escapeHtml(content)}</span>
-        `;
-        
-        outputContainer.appendChild(line);
-        
-        // 自动滚动到底部
-        outputContainer.scrollTop = outputContainer.scrollHeight;
-        
-        this.outputLines.push(output);
     }
-
-    getOutputPrefix(level) {
-        const prefixes = {
-            log: '>',
-            error: '✗',
-            warn: '⚠',
-            info: 'ℹ'
-        };
-        return prefixes[level] || '>';
-    }
-
-    clearOutput() {
-        const outputContainer = this.container.querySelector('.runner-output');
-        outputContainer.innerHTML = '';
-        this.outputLines = [];
-    }
-
-    clearAll() {
-        // 清空编辑器
-        const editor = this.container.querySelector('.runner-editor');
-        editor.value = '';
-        
-        // 清空输出
-        this.clearOutput();
-        
-        // 重置状态
-        this.updateStatus('', '');
-    }
-
-    setRunning(running) {
-        this.isRunning = running;
-        
-        const runBtn = this.container.querySelector('[data-action="run"]');
-        const editor = this.container.querySelector('.runner-editor');
-        
-        if (running) {
-            runBtn.disabled = true;
-            runBtn.classList.add('running');
-            runBtn.querySelector('.runner-btn-text').textContent = '运行中...';
-            editor.disabled = true;
+    
+    /**
+     * 处理 JavaScript 运行器开关
+     */
+    _handleJavaScriptToggle(enabled) {
+        if (enabled) {
+            // 开启功能
+            if (window.Runner) {
+                // 重新扫描页面，添加 Run 按钮
+                window.Runner.scan();
+            }
         } else {
-            runBtn.disabled = false;
-            runBtn.classList.remove('running');
-            runBtn.querySelector('.runner-btn-text').textContent = chrome.i18n.getMessage('runnerExecute') || '运行';
-            editor.disabled = false;
+            // 关闭功能：移除所有 Run 按钮和 Runner 容器
+            this._removeAllRunButtons();
         }
     }
-
-    updateStatus(message, type) {
-        const statusEl = this.container.querySelector('.runner-status');
-        statusEl.textContent = message;
-        statusEl.className = `runner-status runner-status-${type}`;
+    
+    /**
+     * 移除页面上所有 Run 按钮（关闭功能时调用）
+     */
+    _removeAllRunButtons() {
+        // 移除所有 Run 按钮
+        const runButtons = document.querySelectorAll('.runner-code-run-btn');
+        runButtons.forEach(btn => btn.remove());
+        
+        // 移除所有 Runner 容器
+        const runnerContainers = document.querySelectorAll('.runner-container');
+        runnerContainers.forEach(container => {
+            // 恢复 layoutContainer 的原始样式
+            const layoutContainer = container.parentElement;
+            if (layoutContainer && layoutContainer.dataset.originalHeight) {
+                layoutContainer.style.removeProperty('display');
+                layoutContainer.style.removeProperty('min-height');
+                layoutContainer.style.removeProperty('height');
+                layoutContainer.style.removeProperty('max-height');
+                layoutContainer.style.removeProperty('overflow');
+                delete layoutContainer.dataset.originalHeight;
+            }
+            container.remove();
+        });
+        
+        // 移除已处理标记，下次开启时可重新添加
+        const processedElements = document.querySelectorAll('[data-runner-initialized]');
+        processedElements.forEach(el => el.removeAttribute('data-runner-initialized'));
+        
+        console.log('[RunnerTab] Removed all Run buttons and containers');
     }
-
-    getPlaceholder() {
-        const placeholders = {
-            javascript: '// 输入 JavaScript 代码\nconsole.log("Hello, World!");',
-            python: '# 输入 Python 代码\nprint("Hello, World!")',
-            html: '<!-- 输入 HTML 代码 -->\n<h1>Hello, World!</h1>'
-        };
-        return placeholders[this.currentLanguage] || '';
-    }
-
-    escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    showToast(message, type = 'info') {
-        if (window.ToastManager) {
-            window.ToastManager.show(message, type);
-        }
-    }
-
-    async cleanup() {
-        if (this.runnerManager) {
-            this.runnerManager.stop();
-        }
-        await super.cleanup();
+    
+    /**
+     * Tab 卸载时清理
+     */
+    unmounted() {
+        super.unmounted();
     }
 }
 
@@ -299,4 +171,3 @@ class RunnerTab extends BaseTab {
 if (typeof window !== 'undefined') {
     window.RunnerTab = RunnerTab;
 }
-

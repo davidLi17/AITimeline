@@ -259,6 +259,15 @@
   },
   "febhyejd": {
     "message": "Enviar feedback online"
+  },
+  "runnerTabName": {
+    "message": "Executor de código"
+  },
+  "runnerSettingsTitle": {
+    "message": "Linguagens suportadas"
+  },
+  "runnerSettingsHint": {
+    "message": "Quando ativado, um botão Run aparecerá nos blocos de código para executar código diretamente"
   }
 }
 

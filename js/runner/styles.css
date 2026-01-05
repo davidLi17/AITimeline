@@ -57,8 +57,8 @@
 
 .runner-code-run-btn svg {
     flex-shrink: 0;
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
 }
 
 /* ===== Runner 容器（整体，absolute 定位） ===== */
@@ -115,7 +115,8 @@
     gap: 6px;
 }
 
-/* Icon 按钮（复制、关闭） */
+/* Icon 按钮（设置、复制、关闭、清空） */
+.runner-action-settings,
 .runner-action-copy,
 .runner-action-close,
 .runner-action-clear {
@@ -131,6 +132,12 @@
     color: var(--runner-text-secondary);
     cursor: pointer;
     transition: all 0.15s ease;
+}
+
+.runner-action-settings:hover {
+    background: rgba(139, 148, 158, 0.15);
+    border-color: var(--runner-text-secondary);
+    color: var(--runner-text);
 }
 
 .runner-action-copy:hover {
@@ -151,6 +158,7 @@
     color: var(--runner-warn);
 }
 
+.runner-action-settings svg,
 .runner-action-copy svg,
 .runner-action-close svg,
 .runner-action-clear svg {
@@ -186,8 +194,8 @@
 }
 
 .runner-action-run svg {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     flex-shrink: 0;
 }
 

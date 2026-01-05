@@ -259,5 +259,14 @@
   },
   "febhyejd": {
     "message": "Soumettre un avis en ligne"
+  },
+  "runnerTabName": {
+    "message": "Exécuteur de code"
+  },
+  "runnerSettingsTitle": {
+    "message": "Langages pris en charge"
+  },
+  "runnerSettingsHint": {
+    "message": "Lorsqu'activé, un bouton Run apparaîtra sur les blocs de code pour exécuter le code directement"
   }
 }

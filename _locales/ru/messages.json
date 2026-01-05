@@ -259,6 +259,15 @@
   },
   "febhyejd": {
     "message": "Отправить отзыв онлайн"
+  },
+  "runnerTabName": {
+    "message": "Запуск кода"
+  },
+  "runnerSettingsTitle": {
+    "message": "Поддерживаемые языки"
+  },
+  "runnerSettingsHint": {
+    "message": "При включении на блоках кода появится кнопка Run для прямого выполнения кода"
   }
 }
 

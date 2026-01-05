@@ -14,8 +14,8 @@
     const CONFIG = {
         // JavaScript 关键词检测（包含这些关键词的代码块才显示运行按钮）
         jsKeywords: ['let ', 'var ', 'const ', 'console.'],
-        // DOM 稳定延迟（1秒内无 DOM 变化视为稳定，执行扫描）
-        stableDelay: 1000,
+        // DOM 稳定延迟（500ms 内无 DOM 变化视为稳定，执行扫描）
+        stableDelay: 500,
         // 已处理标记
         processedAttr: 'data-runner-initialized',
         
@@ -177,7 +177,7 @@
         const editorHeader = document.createElement('div');
         editorHeader.className = 'runner-section-header';
         editorHeader.style.height = CONFIG.headerHeight + 'px';
-        editorHeader.innerHTML = `<span class="runner-section-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>Code</span></span><div class="runner-section-actions"><button class="runner-action-copy" title="复制代码"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button><button class="runner-action-close" title="关闭"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>`;
+        editorHeader.innerHTML = `<span class="runner-section-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>Code</span></span><div class="runner-section-actions"><button class="runner-action-settings" title="${chrome.i18n.getMessage('vkmzpx') || '设置'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button><button class="runner-action-copy" title="${chrome.i18n.getMessage('mvkxpz') || '复制'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button><button class="runner-action-close" title="${chrome.i18n.getMessage('pxvkmz') || '关闭'}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>`;
 
         // 创建 CodeMirror 容器
         const editorWrapper = document.createElement('div');
@@ -268,20 +268,32 @@
         container._cmEditor = cmEditor;
 
         // 绑定事件
+        const settingsBtn = editorHeader.querySelector('.runner-action-settings');
+        settingsBtn.addEventListener('click', () => {
+            // 打开 panelModal 并切换到 runner tab
+            if (window.panelModal) {
+                window.panelModal.show('runner');
+            }
+        });
+
         const copyBtn = editorHeader.querySelector('.runner-action-copy');
         copyBtn.addEventListener('click', () => {
             const code = cmEditor ? cmEditor.getValue() : '';
             navigator.clipboard.writeText(code).then(() => {
                 if (window.globalToastManager) {
-                    window.globalToastManager.success('复制成功', copyBtn);
+                    window.globalToastManager.success(chrome.i18n.getMessage('xpzmvk'), copyBtn);
                 }
             });
         });
 
         editorHeader.querySelector('.runner-action-close').addEventListener('click', () => {
-            // 还原布局容器的原始高度
+            // 还原布局容器的原始样式（使用 removeProperty 移除 important 样式）
             if (layoutContainer.dataset.originalHeight) {
-                layoutContainer.style.minHeight = '';
+                layoutContainer.style.removeProperty('display');
+                layoutContainer.style.removeProperty('min-height');
+                layoutContainer.style.removeProperty('height');
+                layoutContainer.style.removeProperty('max-height');
+                layoutContainer.style.removeProperty('overflow');
                 delete layoutContainer.dataset.originalHeight;
             }
             // 显示 Run 按钮
@@ -292,7 +304,7 @@
         });
 
         resultHeader.querySelector('.runner-action-clear').addEventListener('click', () => {
-            resultContent.innerHTML = '';
+            resultContent.innerHTML = '<div class="runner-output-empty">（无输出）</div>';
         });
 
         resultHeader.querySelector('.runner-action-run').addEventListener('click', () => {
@@ -358,14 +370,20 @@
             layoutContainer.style.position = 'relative';
         }
 
-        // 检查并调整布局容器高度
+        // 检查并调整布局容器高度（只有高度不足时才调整）
         const currentHeight = layoutContainer.offsetHeight;
         if (currentHeight < CONFIG.minContainerHeight) {
             // 保存原始高度
             if (!layoutContainer.dataset.originalHeight) {
                 layoutContainer.dataset.originalHeight = currentHeight;
             }
-            layoutContainer.style.minHeight = CONFIG.minContainerHeight + 'px';
+            // 使用 setProperty 加 important 强制覆盖外部样式
+            // display: inline 会阻止 height 生效，需要改为 block
+            layoutContainer.style.setProperty('display', 'block', 'important');
+            layoutContainer.style.setProperty('min-height', CONFIG.minContainerHeight + 'px', 'important');
+            layoutContainer.style.setProperty('height', CONFIG.minContainerHeight + 'px', 'important');
+            layoutContainer.style.setProperty('max-height', 'none', 'important');
+            layoutContainer.style.setProperty('overflow', 'visible', 'important');
         }
 
         // 获取或创建 Runner 容器（在布局容器内部）
@@ -477,9 +495,30 @@
     }
 
     /**
+     * 检查 JavaScript Runner 是否启用
+     * @returns {Promise<boolean>}
+     */
+    async function isJavaScriptRunnerEnabled() {
+        try {
+            const result = await chrome.storage.local.get('runnerJsEnabled');
+            // 默认值为 true（开启）
+            return result.runnerJsEnabled !== false;
+        } catch (e) {
+            console.error('[Runner] Failed to check enabled state:', e);
+            return true; // 默认开启
+        }
+    }
+
+    /**
      * 扫描并处理所有代码块
      */
-    function scanCodeBlocks() {
+    async function scanCodeBlocks() {
+        // 检查是否启用了 JavaScript Runner
+        const enabled = await isJavaScriptRunnerEnabled();
+        if (!enabled) {
+            return;
+        }
+        
         // 遍历配置，按优先级匹配代码块
         for (const config of CODE_BLOCK_CONFIGS) {
             const codeElements = document.querySelectorAll(
@@ -499,16 +538,23 @@
     /**
      * 初始化 Runner 模块
      */
-    function initialize() {
+    async function initialize() {
+        // 检查是否启用了 JavaScript Runner
+        const enabled = await isJavaScriptRunnerEnabled();
+        if (!enabled) {
+            console.log('[Runner] JavaScript Runner is disabled, skipping initialization');
+            return;
+        }
+        
         // 初始扫描
-        scanCodeBlocks();
+        await scanCodeBlocks();
         
         // 使用 DOMObserverManager 监听 DOM 变化
-        // 防抖 1 秒：等代码块输出完整后再添加 Run 按钮
+        // 防抖 500ms：等代码块输出完整后再添加 Run 按钮
         unsubscribeObserver = window.DOMObserverManager.getInstance().subscribeBody('runner', {
             callback: () => scanCodeBlocks(),
             filter: { hasAddedNodes: true },
-            debounce: CONFIG.stableDelay  // 1秒防抖
+            debounce: CONFIG.stableDelay  // 500ms 防抖
         });
     }
 

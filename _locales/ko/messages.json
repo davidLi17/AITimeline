@@ -259,5 +259,14 @@
   },
   "febhyejd": {
     "message": "온라인으로 피드백 제출"
+  },
+  "runnerTabName": {
+    "message": "코드 실행기"
+  },
+  "runnerSettingsTitle": {
+    "message": "지원 언어"
+  },
+  "runnerSettingsHint": {
+    "message": "활성화하면 코드 블록에 Run 버튼이 표시되어 코드를 직접 실행할 수 있습니다"
   }
 }

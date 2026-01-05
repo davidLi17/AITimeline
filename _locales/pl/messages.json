@@ -259,6 +259,15 @@
   },
   "febhyejd": {
     "message": "Prześlij opinię online"
+  },
+  "runnerTabName": {
+    "message": "Uruchamianie kodu"
+  },
+  "runnerSettingsTitle": {
+    "message": "Obsługiwane języki"
+  },
+  "runnerSettingsHint": {
+    "message": "Po włączeniu na blokach kodu pojawi się przycisk Run do bezpośredniego uruchamiania kodu"
   }
 }
 

@@ -259,5 +259,14 @@
   },
   "febhyejd": {
     "message": "Feedback online einreichen"
+  },
+  "runnerTabName": {
+    "message": "Code-Runner"
+  },
+  "runnerSettingsTitle": {
+    "message": "Unterstützte Sprachen"
+  },
+  "runnerSettingsHint": {
+    "message": "Wenn aktiviert, erscheint ein Run-Button auf Codeblöcken, um Code direkt auszuführen"
   }
 }

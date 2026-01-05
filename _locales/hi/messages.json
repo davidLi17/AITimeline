@@ -259,5 +259,14 @@
   },
   "febhyejd": {
     "message": "ऑनलाइन फीडबैक सबमिट करें"
+  },
+  "runnerTabName": {
+    "message": "कोड रनर"
+  },
+  "runnerSettingsTitle": {
+    "message": "समर्थित भाषाएँ"
+  },
+  "runnerSettingsHint": {
+    "message": "सक्षम होने पर, कोड ब्लॉक पर एक Run बटन दिखाई देगा जिससे कोड को सीधे चलाया जा सकता है"
   }
 }

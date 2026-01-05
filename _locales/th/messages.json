@@ -259,6 +259,15 @@
   },
   "febhyejd": {
     "message": "ส่งความคิดเห็นออนไลน์"
+  },
+  "runnerTabName": {
+    "message": "ตัวรันโค้ด"
+  },
+  "runnerSettingsTitle": {
+    "message": "ภาษาที่รองรับ"
+  },
+  "runnerSettingsHint": {
+    "message": "เมื่อเปิดใช้งาน ปุ่ม Run จะปรากฏบนบล็อกโค้ดเพื่อรันโค้ดโดยตรง"
   }
 }
 

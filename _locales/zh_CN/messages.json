@@ -277,5 +277,14 @@
   },
   "runnerHint": {
     "message": "在这里输入代码，支持 async/await"
+  },
+  "runnerTabName": {
+    "message": "代码运行"
+  },
+  "runnerSettingsTitle": {
+    "message": "支持的编程语言"
+  },
+  "runnerSettingsHint": {
+    "message": "开启后，代码块右上角将显示 Run 按钮，点击可直接运行代码"
   }
 }

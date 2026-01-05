@@ -259,6 +259,15 @@
   },
   "febhyejd": {
     "message": "Gửi phản hồi trực tuyến"
+  },
+  "runnerTabName": {
+    "message": "Chạy mã"
+  },
+  "runnerSettingsTitle": {
+    "message": "Ngôn ngữ được hỗ trợ"
+  },
+  "runnerSettingsHint": {
+    "message": "Khi bật, nút Run sẽ xuất hiện trên các khối mã để chạy mã trực tiếp"
   }
 }
 

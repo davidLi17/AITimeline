@@ -259,5 +259,14 @@
   },
   "febhyejd": {
     "message": "オンラインでフィードバックを送信"
+  },
+  "runnerTabName": {
+    "message": "コードランナー"
+  },
+  "runnerSettingsTitle": {
+    "message": "対応言語"
+  },
+  "runnerSettingsHint": {
+    "message": "有効にすると、コードブロックにRunボタンが表示され、コードを直接実行できます"
   }
 }
