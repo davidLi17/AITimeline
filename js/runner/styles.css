@@ -1,0 +1,529 @@
+/**
+ * Runner Styles - 代码块运行器样式
+ */
+
+/* ===== 颜色变量 ===== */
+:root {
+    --runner-bg: #0d1117;
+    --runner-bg-secondary: #161b22;
+    --runner-border: #30363d;
+    --runner-text: #e6edf3;
+    --runner-text-secondary: #8b949e;
+    --runner-accent: #22c55e;
+    --runner-error: #f85149;
+    --runner-warn: #d29922;
+    --runner-info: #58a6ff;
+}
+
+/* ===== 运行按钮（absolute 定位） ===== */
+.runner-code-run-btn {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    /* z-index 由 JS 动态计算 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 55px;
+    height: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--runner-accent);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.runner-code-run-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    background: var(--runner-text-secondary);
+}
+
+.runner-code-run-btn.loading span::after {
+    content: '...';
+    animation: runner-dots 1s steps(4, end) infinite;
+}
+
+@keyframes runner-dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+.runner-code-run-btn svg {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+}
+
+/* ===== Runner 容器（整体，absolute 定位） ===== */
+.runner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index 由 JS 动态计算 */
+    display: flex;
+    flex-direction: column;
+    background: var(--runner-bg);
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+/* ===== 通用区域头部 ===== */
+.runner-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    /* height 由 JS CONFIG 控制 */
+    padding: 0 12px;
+    background: var(--runner-bg-secondary);
+    border-bottom: 1px solid var(--runner-border);
+}
+
+.runner-section-title {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--runner-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.runner-section-title svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--runner-accent);
+    opacity: 0.8;
+}
+
+.runner-section-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Icon 按钮（复制、关闭） */
+.runner-action-copy,
+.runner-action-close,
+.runner-action-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--runner-border);
+    border-radius: 6px;
+    color: var(--runner-text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.runner-action-copy:hover {
+    background: rgba(88, 166, 255, 0.1);
+    border-color: var(--runner-info);
+    color: var(--runner-info);
+}
+
+.runner-action-close:hover {
+    background: rgba(248, 81, 73, 0.1);
+    border-color: var(--runner-error);
+    color: var(--runner-error);
+}
+
+.runner-action-clear:hover {
+    background: rgba(210, 153, 34, 0.1);
+    border-color: var(--runner-warn);
+    color: var(--runner-warn);
+}
+
+.runner-action-copy svg,
+.runner-action-close svg,
+.runner-action-clear svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Run 按钮 */
+.runner-action-run {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    width: 48px;
+    height: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--runner-accent);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.runner-action-run:hover {
+    background: #1ea54b;
+}
+
+.runner-action-run:active {
+    transform: scale(0.97);
+}
+
+.runner-action-run svg {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+}
+
+/* ===== 编辑器区域 ===== */
+.runner-editor-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* min-height 由 JS CONFIG 控制 */
+}
+
+/* ===== 分隔条（可拖动） ===== */
+.runner-resizer {
+    height: 1px;
+    background: var(--runner-border);
+    cursor: row-resize;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+/* 增加隐形点击区域 */
+.runner-resizer::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    background: transparent;
+}
+
+/* Hover 状态：整体变色 */
+.runner-resizer:hover {
+    background: var(--runner-accent);
+}
+
+/* 拖动时的激活状态 */
+.runner-resizer:active {
+    background: var(--runner-accent);
+    height: 2px; /* 微微变粗反馈 */
+}
+
+.runner-code-editor {
+    flex: 1;
+    display: block;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--runner-bg);
+}
+
+/* CodeMirror 核心样式（防止外部 CSS 未加载） */
+.runner-code-editor .CodeMirror {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    font-family: ui-monospace, 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    background: var(--runner-bg);
+    color: var(--runner-text);
+    direction: ltr;
+}
+
+.runner-code-editor .CodeMirror-scroll {
+    overflow: scroll !important;
+    margin-bottom: -30px;
+    margin-right: -30px;
+    padding-bottom: 30px;
+    height: 100%;
+    outline: none;
+    position: relative;
+}
+
+.runner-code-editor .CodeMirror-sizer {
+    position: relative;
+    border-right: 30px solid transparent;
+}
+
+.runner-code-editor .CodeMirror-lines {
+    padding: 4px 0;
+    cursor: text;
+    min-height: 1px;
+}
+
+.runner-code-editor .CodeMirror pre.CodeMirror-line,
+.runner-code-editor .CodeMirror pre.CodeMirror-line-like {
+    padding: 0 4px;
+    border-radius: 0;
+    border-width: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    white-space: pre;
+    word-wrap: normal;
+    line-height: inherit;
+    color: inherit;
+    z-index: 2;
+    position: relative;
+    overflow: visible;
+}
+
+.runner-code-editor .CodeMirror-wrap pre.CodeMirror-line,
+.runner-code-editor .CodeMirror-wrap pre.CodeMirror-line-like {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
+.runner-code-editor .CodeMirror-code {
+    outline: none;
+}
+
+.runner-code-editor .CodeMirror-gutters {
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+    z-index: 3;
+    background: var(--runner-bg-secondary);
+    border-right: 1px solid var(--runner-border);
+    white-space: nowrap;
+}
+
+.runner-code-editor .CodeMirror-linenumber {
+    padding: 0 10px 0 5px;
+    min-width: 20px;
+    text-align: right;
+    color: var(--runner-text-secondary);
+    white-space: nowrap;
+}
+
+.runner-code-editor .CodeMirror-gutter-wrapper {
+    position: absolute;
+    z-index: 4;
+    background: none !important;
+    border: none !important;
+    left: 0 !important;
+}
+
+.runner-code-editor .CodeMirror-gutter-elt {
+    position: absolute;
+    cursor: default;
+    z-index: 4;
+}
+
+/* 确保行号区域正确显示 */
+.runner-code-editor .CodeMirror-gutter {
+    white-space: normal;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: -30px;
+}
+
+.runner-code-editor .CodeMirror-gutter-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 4;
+}
+
+/* 修复 lineWrapping 模式下的行号对齐 */
+.runner-code-editor .CodeMirror-wrap .CodeMirror-gutter-wrapper {
+    left: -40px !important;
+}
+
+.runner-code-editor .CodeMirror-wrap .CodeMirror-linewidget {
+    overflow: visible;
+}
+
+/* 确保代码区域正确偏移 */
+.runner-code-editor .CodeMirror-measure {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.runner-code-editor .CodeMirror-measure pre {
+    position: static;
+}
+
+.runner-code-editor .CodeMirror-cursor {
+    border-left: 2px solid var(--runner-accent);
+}
+
+.runner-code-editor .CodeMirror-selected {
+    background: rgba(88, 166, 255, 0.2) !important;
+}
+
+.runner-code-editor .CodeMirror-focused .CodeMirror-selected {
+    background: rgba(88, 166, 255, 0.3) !important;
+}
+
+.runner-code-editor .CodeMirror-matchingbracket {
+    color: var(--runner-success) !important;
+    font-weight: bold;
+}
+
+/* JavaScript 语法高亮 */
+.runner-code-editor .cm-keyword { color: #ff7b72; }
+.runner-code-editor .cm-def { color: #d2a8ff; }
+.runner-code-editor .cm-variable { color: #c9d1d9; }
+.runner-code-editor .cm-variable-2 { color: #79c0ff; }
+.runner-code-editor .cm-variable-3 { color: #7ee787; }
+.runner-code-editor .cm-property { color: #79c0ff; }
+.runner-code-editor .cm-operator { color: #ff7b72; }
+.runner-code-editor .cm-number { color: #79c0ff; }
+.runner-code-editor .cm-string { color: #a5d6ff; }
+.runner-code-editor .cm-string-2 { color: #a5d6ff; }
+.runner-code-editor .cm-comment { color: #8b949e; font-style: italic; }
+.runner-code-editor .cm-atom { color: #79c0ff; }
+.runner-code-editor .cm-meta { color: #8b949e; }
+.runner-code-editor .cm-tag { color: #7ee787; }
+.runner-code-editor .cm-attribute { color: #79c0ff; }
+.runner-code-editor .cm-builtin { color: #ffa657; }
+.runner-code-editor .cm-qualifier { color: #d2a8ff; }
+
+/* CodeMirror 滚动条 */
+.runner-code-editor .CodeMirror-vscrollbar::-webkit-scrollbar,
+.runner-code-editor .CodeMirror-hscrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.runner-code-editor .CodeMirror-vscrollbar::-webkit-scrollbar-track,
+.runner-code-editor .CodeMirror-hscrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.runner-code-editor .CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+.runner-code-editor .CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+    background: var(--runner-border);
+    border-radius: 4px;
+}
+
+.runner-code-editor .CodeMirror-vscrollbar::-webkit-scrollbar-thumb:hover,
+.runner-code-editor .CodeMirror-hscrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--runner-text-secondary);
+}
+
+/* ===== 结果区域 ===== */
+.runner-result-section {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    /* height/min-height/max-height 由 JS CONFIG 控制 */
+}
+
+.runner-result-section .runner-section-header {
+    flex-shrink: 0;
+    border-bottom: none;
+}
+
+.runner-result-content {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    /* min-height 由 JS CONFIG 控制 */
+    font-family: ui-monospace, 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--runner-text);
+    background: var(--runner-bg);
+}
+
+/* 加载状态 */
+.runner-result-loading {
+    color: var(--runner-text-secondary);
+}
+
+/* 空输出 */
+.runner-output-empty {
+    color: var(--runner-text-secondary);
+    font-style: italic;
+}
+
+/* 输出行样式 */
+.runner-output-log {
+    padding: 1px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.runner-output-info {
+    color: var(--runner-info);
+    padding: 1px 0;
+}
+
+.runner-output-warn {
+    color: var(--runner-warn);
+    padding: 4px 8px;
+    background: rgba(210, 153, 34, 0.1);
+    border-left: 2px solid var(--runner-warn);
+    margin: 2px 0;
+}
+
+.runner-output-error {
+    color: var(--runner-error);
+    padding: 4px 8px;
+    background: rgba(248, 81, 73, 0.1);
+    border-left: 2px solid var(--runner-error);
+    margin: 2px 0;
+}
+
+.runner-output-result {
+    color: var(--runner-accent);
+    padding: 1px 0;
+}
+
+/* 特殊值样式 */
+.runner-undefined,
+.runner-null {
+    color: var(--runner-text-secondary);
+    font-style: italic;
+}
+
+/* 结果区滚动条 */
+.runner-result-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.runner-result-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.runner-result-content::-webkit-scrollbar-thumb {
+    background: var(--runner-border);
+    border-radius: 4px;
+}
+
+.runner-result-content::-webkit-scrollbar-thumb:hover {
+    background: var(--runner-text-secondary);
+}

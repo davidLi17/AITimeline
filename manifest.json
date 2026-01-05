@@ -38,6 +38,14 @@
         "js/panelModal/tabs/prompt/index.js",
         "js/panelModal/tabs/smartInputBox/index.js",
         "js/panelModal/tabs/formula/index.js",
+        "js/runner/codemirror/codemirror.min.js",
+        "js/runner/codemirror/javascript.min.js",
+        "js/runner/core/base-runner.js",
+        "js/runner/languages/javascript/sandbox-manager.js",
+        "js/runner/languages/javascript/index.js",
+        "js/runner/languages/registry.js",
+        "js/runner/runner-manager.js",
+        "js/runner/index.js",
         "js/panelModal/tabs/settings/index.js",
         "js/panelModal/tab-registry.js",
         "js/panelModal/index.js",
@@ -90,6 +98,8 @@
         "js/panelModal/tabs/prompt/styles.css",
         "js/panelModal/tabs/smartInputBox/styles.css",
         "js/panelModal/tabs/formula/styles.css",
+        "js/runner/codemirror/codemirror.min.css",
+        "js/runner/styles.css",
         "js/panelModal/tabs/settings/styles.css",
         "js/timeline/star-input-modal/star-input-modal.css",
         "js/timeline/timeline.css",
@@ -104,7 +114,9 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "images/logo/*.webp"
+        "images/logo/*.webp",
+        "js/runner/languages/javascript/sandbox.html",
+        "js/runner/languages/javascript/sandbox-script.js"
       ],
       "matches": [
         "<all_urls>"
@@ -114,5 +126,11 @@
   
   "action": {
     "default_title": "__MSG_extName__"
+  },
+  
+  "sandbox": {
+    "pages": [
+      "js/runner/languages/javascript/sandbox.html"
+    ]
   }
 }

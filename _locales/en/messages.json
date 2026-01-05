@@ -259,5 +259,23 @@
   },
   "febhyejd": {
     "message": "Submit Feedback Online"
+  },
+  "runnerTabTitle": {
+    "message": "Code Runner"
+  },
+  "runnerExecute": {
+    "message": "Run"
+  },
+  "runnerClear": {
+    "message": "Clear"
+  },
+  "runnerCodeEditor": {
+    "message": "Code Editor"
+  },
+  "runnerOutput": {
+    "message": "Output"
+  },
+  "runnerHint": {
+    "message": "Enter your code here, async/await supported"
   }
 }

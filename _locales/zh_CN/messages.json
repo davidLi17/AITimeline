@@ -259,5 +259,23 @@
   },
   "febhyejd": {
     "message": "在线提交反馈"
+  },
+  "runnerTabTitle": {
+    "message": "代码运行器"
+  },
+  "runnerExecute": {
+    "message": "运行"
+  },
+  "runnerClear": {
+    "message": "清空"
+  },
+  "runnerCodeEditor": {
+    "message": "代码编辑器"
+  },
+  "runnerOutput": {
+    "message": "输出"
+  },
+  "runnerHint": {
+    "message": "在这里输入代码，支持 async/await"
   }
 }

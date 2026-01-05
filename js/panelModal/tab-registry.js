@@ -14,6 +14,7 @@ function getTabClass(name) {
         case 'PromptTab': return typeof PromptTab !== 'undefined' ? PromptTab : null;
         case 'SmartInputBoxTab': return typeof SmartInputBoxTab !== 'undefined' ? SmartInputBoxTab : null;
         case 'FormulaTab': return typeof FormulaTab !== 'undefined' ? FormulaTab : null;
+        case 'RunnerTab': return typeof RunnerTab !== 'undefined' ? RunnerTab : null;
         case 'SettingsTab': return typeof SettingsTab !== 'undefined' ? SettingsTab : null;
         default: return null;
     }
@@ -30,6 +31,7 @@ const TAB_CONFIG = [
     { id: 'prompt', className: 'PromptTab' },
     { id: 'smart-input-box', className: 'SmartInputBoxTab' },
     { id: 'formula', className: 'FormulaTab' },
+    { id: 'runner', className: 'RunnerTab' },
     { id: 'settings', className: 'SettingsTab' }
 ];
 
