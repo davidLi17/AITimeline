@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "Saat diaktifkan, tombol Run akan muncul di blok kode untuk menjalankan kode secara langsung"
+  },
+  "fiveStarReview": {
+    "message": "Suka?"
+  },
+  "goToReview": {
+    "message": "Beri kami bintang 5"
   }
 }

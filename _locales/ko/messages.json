@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "활성화하면 코드 블록에 Run 버튼이 표시되어 코드를 직접 실행할 수 있습니다"
+  },
+  "fiveStarReview": {
+    "message": "마음에 드시나요?"
+  },
+  "goToReview": {
+    "message": "별점 5점 부탁드려요"
   }
 }

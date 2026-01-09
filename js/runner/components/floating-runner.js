@@ -98,11 +98,11 @@
          * 绑定事件
          */
         bindEvents() {
-            // 拖动：绑定到 RunnerPanel 的 header 上
-            const panelHeader = this.container.querySelector('.runner-panel-header');
-            if (panelHeader) {
-                panelHeader.style.cursor = 'move';
-                panelHeader.addEventListener('mousedown', (e) => {
+            // 拖动：只绑定到编辑器区域的 header（标题栏），不包括 output 区域的 header
+            const editorHeader = this.container.querySelector('.runner-panel-editor-section .runner-panel-header');
+            if (editorHeader) {
+                editorHeader.style.cursor = 'move';
+                editorHeader.addEventListener('mousedown', (e) => {
                     if (e.target.closest('button')) return;
                     this.startDrag(e);
                 });

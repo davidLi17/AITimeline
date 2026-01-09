@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "有効にすると、コードブロックにRunボタンが表示され、コードを直接実行できます"
+  },
+  "fiveStarReview": {
+    "message": "気に入りましたか？"
+  },
+  "goToReview": {
+    "message": "5つ星評価をお願いします"
   }
 }

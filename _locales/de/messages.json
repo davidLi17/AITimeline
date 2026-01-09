@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "Wenn aktiviert, erscheint ein Run-Button auf Codeblöcken, um Code direkt auszuführen"
+  },
+  "fiveStarReview": {
+    "message": "Gefällt es Ihnen?"
+  },
+  "goToReview": {
+    "message": "Bewerten Sie uns mit 5 Sternen"
   }
 }

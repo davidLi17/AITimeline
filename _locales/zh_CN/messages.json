@@ -286,5 +286,11 @@
   },
   "runnerSettingsHint": {
     "message": "开启后，代码块右上角将显示 Run 按钮，点击可直接运行代码"
+  },
+  "fiveStarReview": {
+    "message": "觉得好用？"
+  },
+  "goToReview": {
+    "message": "给我们五星好评"
   }
 }

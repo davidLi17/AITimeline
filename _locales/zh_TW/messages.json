@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "開啟後，程式碼區塊右上角將顯示 Run 按鈕，點擊可直接執行程式碼"
+  },
+  "fiveStarReview": {
+    "message": "覺得好用？"
+  },
+  "goToReview": {
+    "message": "給我們五星好評"
   }
 }

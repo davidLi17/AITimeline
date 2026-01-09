@@ -66,6 +66,9 @@ html.dark .runner-panel,
 body.dark .runner-panel,
 body.dark-theme .runner-panel,
 html[data-theme*="dark"] .runner-panel,
+html[data-timeline-theme="dark"] .runner-panel,
+html[yb-theme-mode*="dark"] .runner-panel,
+body[yb-theme-mode*="dark"] .runner-panel,
 html[style*="color-scheme: dark"] .runner-panel {
     /* 背景色 */
     --runner-bg: #ffffff;

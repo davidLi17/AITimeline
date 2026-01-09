@@ -763,7 +763,7 @@ class GlobalDropdownManager {
             height: window.innerHeight
         };
         
-        const gap = 9; // 主菜单和子菜单之间的间隙
+        const gap = 7; // 主菜单和子菜单之间的间隙
         let left, top;
         
         // 水平定位：优先显示在右侧

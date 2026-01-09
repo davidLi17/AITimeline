@@ -19,6 +19,9 @@ html.dark .floating-runner-container,
 body.dark .floating-runner-container,
 body.dark-theme .floating-runner-container,
 html[data-theme*="dark"] .floating-runner-container,
+html[data-timeline-theme="dark"] .floating-runner-container,
+html[yb-theme-mode*="dark"] .floating-runner-container,
+body[yb-theme-mode*="dark"] .floating-runner-container,
 html[style*="color-scheme: dark"] .floating-runner-container {
     --floating-bg: #ffffff;
     --floating-border: #e7e7e7;
@@ -28,7 +31,7 @@ html[style*="color-scheme: dark"] .floating-runner-container {
 /* ===== 容器 ===== */
 .floating-runner-container {
     position: fixed;
-    z-index: 999999;
+    z-index: 9999;
     display: none;
     flex-direction: column;
     background: var(--floating-bg);
@@ -55,8 +58,8 @@ html[style*="color-scheme: dark"] .floating-runner-container {
     border-radius: 0;
 }
 
-/* 悬浮模式下第一个 header 可拖动 */
-.floating-runner-container .runner-panel-header:first-of-type {
+/* 悬浮模式下只有编辑器区域的 header 可拖动 */
+.floating-runner-container .runner-panel-editor-section .runner-panel-header {
     cursor: move;
 }
 

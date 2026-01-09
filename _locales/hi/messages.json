@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "सक्षम होने पर, कोड ब्लॉक पर एक Run बटन दिखाई देगा जिससे कोड को सीधे चलाया जा सकता है"
+  },
+  "fiveStarReview": {
+    "message": "पसंद आया?"
+  },
+  "goToReview": {
+    "message": "हमें 5 स्टार दें"
   }
 }

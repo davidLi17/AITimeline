@@ -268,5 +268,11 @@
   },
   "runnerSettingsHint": {
     "message": "Lorsqu'activé, un bouton Run apparaîtra sur les blocs de code pour exécuter le code directement"
+  },
+  "fiveStarReview": {
+    "message": "Vous aimez ?"
+  },
+  "goToReview": {
+    "message": "Donnez-nous 5 étoiles"
   }
 }

@@ -286,5 +286,11 @@
   },
   "runnerSettingsHint": {
     "message": "When enabled, a Run button will appear on code blocks to execute code directly"
+  },
+  "fiveStarReview": {
+    "message": "Like it?"
+  },
+  "goToReview": {
+    "message": "Rate us 5 stars"
   }
 }
