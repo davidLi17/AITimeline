@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline：最強大的AI提效助手：ChatGPT、Gemini、DeepSeek"
+    "message": "AI Timeline：全平台 AI 效率助手"
   },
   "extDescription": {
-    "message": "複製LaTeX公式、可互動對話時間軸、Enter鍵換行、提示詞庫輔助，助您使用AI的效率翻倍。"
+    "message": "AI 效率助手，支援 GPT、Gemini、DeepSeek 等所有 AI 平台：可互動對話時間軸、複製 LaTeX 公式、自訂提示詞庫、執行程式碼區塊等超多功能，助您使用 AI 效率翻倍。"
   },
   "qwxpzm": {
     "message": "收藏"
@@ -270,10 +270,13 @@
     "message": "開啟後，代碼塊右上角將顯示 Run 按鈕，點擊可直接運行代碼"
   },
   "fiveStarReview": {
-    "message": "覺得好用？"
+    "message": "覺得好用"
   },
   "goToReview": {
     "message": "俾我哋五星好評"
+  },
+  "urlButtonHint": {
+    "message": "將純文字網址轉為可點擊嘅連結，點擊可喺新分頁開啟"
   }
 }
 

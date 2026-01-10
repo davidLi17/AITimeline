@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: Najpotężniejszy asystent efektywności AI dla ChatGPT, Gemini"
+    "message": "AI Timeline: Wieloplatformowy asystent AI"
   },
   "extDescription": {
-    "message": "Kopiowanie formuł LaTeX, interaktywna oś czasu rozmów, nowa linia klawiszem Enter, biblioteka promptów. Podwój swoją efektywność z AI."
+    "message": "Asystent efektywności AI dla GPT, Gemini, DeepSeek i wszystkich platform AI: interaktywna oś czasu rozmów, kopiowanie formuł LaTeX, własna biblioteka promptów, uruchamianie bloków kodu i wiele innych funkcji podwajających efektywność z AI."
   },
   "qwxpzm": {
     "message": "Ulubione"
@@ -270,10 +270,13 @@
     "message": "Po włączeniu na blokach kodu pojawi się przycisk Run do bezpośredniego uruchamiania kodu"
   },
   "fiveStarReview": {
-    "message": "Podoba Ci się?"
+    "message": "Podoba Ci się"
   },
   "goToReview": {
     "message": "Oceń nas na 5 gwiazdek"
+  },
+  "urlButtonHint": {
+    "message": "Konwertuj zwykłe adresy URL na klikalne linki otwierające się w nowej karcie"
   }
 }
 

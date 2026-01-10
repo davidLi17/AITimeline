@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: Der leistungsstärkste KI-Effizienzassistent für ChatGPT"
+    "message": "AI Timeline: Plattformübergreifender KI-Effizienzassistent"
   },
   "extDescription": {
-    "message": "LaTeX-Formeln kopieren, interaktive Gesprächszeitleiste, Zeilenumbruch mit Enter, Prompt-Bibliothek. Verdoppeln Sie Ihre KI-Effizienz."
+    "message": "KI-Effizienzassistent für GPT, Gemini, DeepSeek und alle KI-Plattformen: interaktive Gesprächszeitleiste, LaTeX-Formeln kopieren, benutzerdefinierte Prompt-Bibliothek, Code-Blöcke ausführen und viele weitere Funktionen zur Verdopplung Ihrer KI-Effizienz."
   },
   "qwxpzm": {
     "message": "Favorisieren"
@@ -270,9 +270,12 @@
     "message": "Wenn aktiviert, erscheint ein Run-Button auf Codeblöcken, um Code direkt auszuführen"
   },
   "fiveStarReview": {
-    "message": "Gefällt es Ihnen?"
+    "message": "Gefällt es Ihnen"
   },
   "goToReview": {
     "message": "Bewerten Sie uns mit 5 Sternen"
+  },
+  "urlButtonHint": {
+    "message": "Klartext-URLs in anklickbare Links umwandeln, die in einem neuen Tab öffnen"
   }
 }

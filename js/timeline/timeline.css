@@ -215,7 +215,7 @@ html[data-timeline-theme="dark"] .ait-timeline-dot.active::after {
     padding: 14px 18px;
     border-radius: var(--timeline-tooltip-radius);
     border: var(--timeline-tooltip-border-w) solid var(--timeline-tooltip-border);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     box-shadow: var(--timeline-tooltip-shadow);

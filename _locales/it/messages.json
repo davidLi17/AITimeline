@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: L'assistente di efficienza IA più potente per ChatGPT, Gemini"
+    "message": "AI Timeline: Assistente AI multipiattaforma"
   },
   "extDescription": {
-    "message": "Copia formule LaTeX, cronologia conversazioni interattiva, a capo con Invio, libreria di prompt. Raddoppia la tua efficienza con l'IA."
+    "message": "Assistente efficienza IA per GPT, Gemini, DeepSeek e tutte le piattaforme IA: cronologia conversazioni interattiva, copia formule LaTeX, libreria prompt personalizzata, esecuzione blocchi di codice e molte altre funzionalità per raddoppiare la tua efficienza IA."
   },
   "qwxpzm": {
     "message": "Preferito"
@@ -270,10 +270,13 @@
     "message": "Quando attivato, apparirà un pulsante Run sui blocchi di codice per eseguire il codice direttamente"
   },
   "fiveStarReview": {
-    "message": "Ti piace?"
+    "message": "Ti piace"
   },
   "goToReview": {
     "message": "Dacci 5 stelle"
+  },
+  "urlButtonHint": {
+    "message": "Converti gli URL in testo semplice in link cliccabili che si aprono in una nuova scheda"
   }
 }
 

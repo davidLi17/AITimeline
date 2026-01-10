@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: El asistente de eficiencia de IA más potente para ChatGPT"
+    "message": "AI Timeline: Asistente AI multiplataforma"
   },
   "extDescription": {
-    "message": "Copiar fórmulas LaTeX, línea de tiempo de conversación interactiva, Enter para nueva línea, biblioteca de prompts. Duplica tu eficiencia con IA."
+    "message": "Asistente de eficiencia IA para GPT, Gemini, DeepSeek y todas las plataformas IA: línea de tiempo de conversación interactiva, copiar fórmulas LaTeX, biblioteca de prompts personalizada, ejecutar bloques de código y muchas más funciones para duplicar tu eficiencia con IA."
   },
   "qwxpzm": {
     "message": "Favorito"
@@ -270,9 +270,12 @@
     "message": "Cuando está activado, aparecerá un botón Run en los bloques de código para ejecutar código directamente"
   },
   "fiveStarReview": {
-    "message": "¿Te gusta?"
+    "message": "¿Te gusta"
   },
   "goToReview": {
     "message": "Danos 5 estrellas"
+  },
+  "urlButtonHint": {
+    "message": "Convertir URLs de texto plano en enlaces clicables que se abren en una nueva pestaña"
   }
 }

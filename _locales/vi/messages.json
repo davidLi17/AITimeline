@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: Trợ lý hiệu suất AI mạnh nhất cho ChatGPT, Gemini, DeepSeek"
+    "message": "AI Timeline: Trợ lý AI đa nền tảng"
   },
   "extDescription": {
-    "message": "Sao chép công thức LaTeX, dòng thời gian hội thoại tương tác, xuống dòng bằng Enter, thư viện prompt. Nhân đôi hiệu suất AI của bạn."
+    "message": "Trợ lý hiệu suất AI cho GPT, Gemini, DeepSeek và tất cả nền tảng AI: dòng thời gian hội thoại tương tác, sao chép công thức LaTeX, thư viện prompt tùy chỉnh, chạy khối mã và nhiều tính năng khác để nhân đôi hiệu suất AI của bạn."
   },
   "qwxpzm": {
     "message": "Yêu thích"
@@ -270,10 +270,13 @@
     "message": "Khi bật, nút Run sẽ xuất hiện trên các khối mã để chạy mã trực tiếp"
   },
   "fiveStarReview": {
-    "message": "Thích không?"
+    "message": "Thích không"
   },
   "goToReview": {
     "message": "Đánh giá 5 sao cho chúng tôi"
+  },
+  "urlButtonHint": {
+    "message": "Chuyển đổi URL văn bản thuần thành liên kết có thể nhấp, mở trong tab mới"
   }
 }
 

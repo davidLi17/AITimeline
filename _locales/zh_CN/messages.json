@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline：最强大的AI提效助手：ChatGPT、Gemini、DeepSeek"
+    "message": "AI Timeline：全平台 AI 效率助手"
   },
   "extDescription": {
-    "message": "复制LaTeX公式、可交互对话时间轴、Enter键换行、提示词库辅助，助您使用AI的效率翻倍。"
+    "message": "AI 效率助手，支持 GPT、Gemini、DeepSeek 等所有 AI 平台：可交互对话时间轴、复制 LaTex 公式、自定义提示词库、运行代码块等超多功能，助你使用 AI 效率翻倍。"
   },
   "qwxpzm": {
     "message": "收藏"
@@ -288,9 +288,12 @@
     "message": "开启后，代码块右上角将显示 Run 按钮，点击可直接运行代码"
   },
   "fiveStarReview": {
-    "message": "觉得好用？"
+    "message": "觉得好用"
   },
   "goToReview": {
     "message": "给我们五星好评"
+  },
+  "urlButtonHint": {
+    "message": "将纯文本网址转为可点击的链接，点击可在新标签页打开链接"
   }
 }

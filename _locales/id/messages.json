@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: Asisten Efisiensi AI Paling Kuat untuk ChatGPT, Gemini"
+    "message": "AI Timeline: Asisten AI lintas platform"
   },
   "extDescription": {
-    "message": "Salin rumus LaTeX, lini masa percakapan interaktif, baris baru dengan Enter, perpustakaan prompt. Gandakan efisiensi AI Anda."
+    "message": "Asisten efisiensi AI untuk GPT, Gemini, DeepSeek & semua platform AI: lini masa percakapan interaktif, salin rumus LaTeX, perpustakaan prompt kustom, jalankan blok kode, dan lebih banyak fitur untuk menggandakan efisiensi AI Anda."
   },
   "qwxpzm": {
     "message": "Favorit"
@@ -270,9 +270,12 @@
     "message": "Saat diaktifkan, tombol Run akan muncul di blok kode untuk menjalankan kode secara langsung"
   },
   "fiveStarReview": {
-    "message": "Suka?"
+    "message": "Suka"
   },
   "goToReview": {
     "message": "Beri kami bintang 5"
+  },
+  "urlButtonHint": {
+    "message": "Ubah URL teks biasa menjadi tautan yang dapat diklik, buka di tab baru"
   }
 }

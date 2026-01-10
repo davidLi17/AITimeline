@@ -160,8 +160,6 @@ function initializeTimeline() {
         return;
     }
     
-    // 2. 符合条件的 AI 平台，时间轴初始化之前
-    window.trackEvent?.('timeline');
 
     if (timelineManagerInstance) {
         try { timelineManagerInstance.destroy(); } catch {}

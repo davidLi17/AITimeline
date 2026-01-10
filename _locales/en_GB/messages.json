@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline: The Most Powerful AI Efficiency Assistant for ChatGPT, Gemini"
+    "message": "AI Timeline: All-Platform AI Efficiency Assistant"
   },
   "extDescription": {
-    "message": "Copy LaTeX formulas, interactive conversation timeline, Enter key for newline, prompt library assistance. Double your AI efficiency."
+    "message": "AI efficiency assistant for GPT, Gemini, DeepSeek & all AI platforms: interactive conversation timeline, copy LaTeX formulas, custom prompt library, run code blocks, and more features to double your AI efficiency."
   },
   "qwxpzm": {
     "message": "Star"
@@ -270,9 +270,12 @@
     "message": "When enabled, a Run button will appear on code blocks to execute code directly"
   },
   "fiveStarReview": {
-    "message": "Like it?"
+    "message": "Like it"
   },
   "goToReview": {
     "message": "Rate us 5 stars"
+  },
+  "urlButtonHint": {
+    "message": "Convert plain text URLs to clickable links that open in a new tab"
   }
 }

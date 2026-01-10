@@ -31,7 +31,7 @@ class SettingsTab extends BaseTab {
                     <div class="setting-info">
                         <div class="setting-label">${chrome.i18n.getMessage('urlButtonLabel') || 'URL 快捷跳转'}</div>
                         <div class="setting-hint">
-                            ${chrome.i18n.getMessage('urlButtonHint') || '识别页面上的纯文本 URL，在其后添加快捷跳转图标，点击可在新标签页打开链接'}
+                            ${chrome.i18n.getMessage('urlButtonHint')}
                         </div>
                     </div>
                     <label class="ait-toggle-switch">

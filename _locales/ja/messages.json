@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "AI Timeline：最強のAI効率化アシスタント：ChatGPT、Gemini、DeepSeek"
+    "message": "AI Timeline：全プラットフォーム AI 効率アシスタント"
   },
   "extDescription": {
-    "message": "LaTeX数式のコピー、対話タイムライン、Enterキーで改行、プロンプトライブラリ。AIの使用効率を倍増させます。"
+    "message": "AI効率アシスタント、GPT・Gemini・DeepSeek等すべてのAIプラットフォーム対応：インタラクティブな対話タイムライン、LaTeX数式コピー、カスタムプロンプトライブラリ、コードブロック実行など多彩な機能でAI使用効率を倍増。"
   },
   "qwxpzm": {
     "message": "お気に入り"
@@ -270,9 +270,12 @@
     "message": "有効にすると、コードブロックにRunボタンが表示され、コードを直接実行できます"
   },
   "fiveStarReview": {
-    "message": "気に入りましたか？"
+    "message": "気に入りましたか"
   },
   "goToReview": {
     "message": "5つ星評価をお願いします"
+  },
+  "urlButtonHint": {
+    "message": "テキストURLをクリック可能なリンクに変換し、新しいタブで開きます"
   }
 }
