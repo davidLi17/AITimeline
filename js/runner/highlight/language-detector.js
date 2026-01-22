@@ -25,7 +25,7 @@
     }
     
     // 最低置信度阈值
-    const MIN_RELEVANCE = 20;
+    const MIN_RELEVANCE = 15;
 
     /**
      * 检测代码语言

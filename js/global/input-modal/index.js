@@ -241,17 +241,6 @@ class GlobalInputModal {
             // 取消按钮
             cancelBtn.addEventListener('click', cancelInput);
             
-            // ESC 键取消，Enter 键确认
-            const handleKeyDown = (e) => {
-                if (e.key === 'Escape') {
-                    cancelInput();
-                    document.removeEventListener('keydown', handleKeyDown);
-                } else if (e.key === 'Enter' && document.activeElement === input) {
-                    submitInput();
-                }
-            };
-            document.addEventListener('keydown', handleKeyDown);
-            
             // 点击遮罩层取消
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) {

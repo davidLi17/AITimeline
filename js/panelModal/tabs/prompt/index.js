@@ -331,7 +331,7 @@ class PromptTab extends BaseTab {
                     <label>${chrome.i18n.getMessage('hsuywkw')}<span class="required-mark">*</span></label>
                     <input type="text" class="prompt-modal-input" id="prompt-name-input"
                         placeholder="${chrome.i18n.getMessage('hsuywkwPlaceholder')}"
-                        maxlength="12" value="${this._escapeHtml(prompt?.name || '')}">
+                        maxlength="16" value="${this._escapeHtml(prompt?.name || '')}">
                 </div>
                 <div class="prompt-modal-field">
                     <label>${chrome.i18n.getMessage('promptContent')}<span class="required-mark">*</span></label>
