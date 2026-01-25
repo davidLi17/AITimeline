@@ -179,8 +179,49 @@ function initializeTimeline() {
     try {
         timelineManagerInstance = new TimelineManager(currentAdapter);
         timelineManagerInstance.init().catch(err => {});
+        
+        // ✅ 初始化侧边栏收藏模块（目前只支持 Gemini）
+        initSidebarStarred();
     } catch (err) {
     }
+}
+
+/**
+ * 初始化侧边栏收藏模块（在时间轴初始化时调用）
+ * 在 AI 平台的左侧侧边栏中注入收藏分组
+ */
+function initSidebarStarred() {
+    // 获取当前平台
+    const platform = getCurrentPlatform();
+    if (!platform) return;
+    
+    // 检查平台是否支持侧边栏收藏功能（通过 features.sidebarStarred 配置）
+    if (platform.features?.sidebarStarred !== true) return;
+    
+    // 初始化侧边栏收藏管理器
+    if (window.sidebarStarredManager) {
+        window.sidebarStarredManager.init(platform.id);
+    }
+}
+
+/**
+ * 在站点级别初始化侧边栏收藏模块（不依赖对话页面）
+ * 用于在首页等非对话页面也显示收藏入口
+ */
+function initSidebarStarredForSite() {
+    // 获取当前平台
+    const platform = getCurrentPlatform();
+    if (!platform) return;
+    
+    // 检查平台是否支持侧边栏收藏功能（通过 features.sidebarStarred 配置）
+    if (platform.features?.sidebarStarred !== true) return;
+    
+    // 延迟初始化，确保页面 DOM 加载完成
+    setTimeout(() => {
+        if (window.sidebarStarredManager) {
+            window.sidebarStarredManager.init(platform.id);
+        }
+    }, 1000);
 }
 
 async function handleUrlChange() {
@@ -204,6 +245,11 @@ async function handleUrlChange() {
     
     // 2. 清理原生收藏按钮（正常文档流中的收藏按钮）
     TimelineUtils.removeElementSafe(document.querySelector('.ait-timeline-star-chat-btn-native'));
+    
+    // 3. 清理侧边栏收藏模块（URL 变化时需要重新注入，因为侧边栏可能被重建）
+    if (window.sidebarStarredManager) {
+        window.sidebarStarredManager.destroy();
+    }
     
     cleanupGlobalObservers();
 
@@ -268,6 +314,10 @@ if (!adapterRegistry.isSupportedSite()) {
     
     // ✅ 设置平台设置监听器（监听用户在设置中切换平台开关）
     setupPlatformSettingsListener();
+    
+    // ✅ 初始化侧边栏收藏模块（在所有页面都尝试初始化，不仅限于对话页）
+    // 因为用户可能在首页就想访问收藏列表
+    initSidebarStarredForSite();
     
     // ✅ 修复：先检查DOM中是否已存在用户消息（SPA路由切换场景）
     const checkAndInit = () => {

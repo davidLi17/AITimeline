@@ -32,7 +32,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/chatgpt.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            sidebarStarred: true  // 侧边栏收藏分组
         }
     },
     {
@@ -42,7 +43,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/gemini.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            sidebarStarred: true  // 侧边栏收藏分组
         }
     },
     {
@@ -62,7 +64,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/deepseek.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            sidebarStarred: true  // 侧边栏收藏分组
         }
     },
     {

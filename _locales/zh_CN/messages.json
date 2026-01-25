@@ -307,5 +307,11 @@
   },
   "watermarkTabName": {
     "message": "去除水印"
+  },
+  "zxvkpm": {
+    "message": "查看全部"
+  },
+  "qdyqxsc": {
+    "message": "确定要取消收藏吗？"
   }
 }
