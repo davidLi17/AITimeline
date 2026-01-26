@@ -25,6 +25,7 @@ class SidebarStarredManager {
         
         // DOM 观察器
         this.mutationObserver = null;
+        this.geminiSidebarObserver = null;  // Gemini 侧边栏专用观察器
         this.retryCount = 0;
         this.maxRetries = 40;  // 最多重试次数（增加到40次，总共20秒）
         this.retryInterval = 500;  // 重试间隔 ms
@@ -690,8 +691,36 @@ class SidebarStarredManager {
             if (needsScroll && window.timelineManager) {
                 await window.timelineManager.setNavigateDataForUrl(url, nodeKey);
             }
-            location.href = url;
+            // 如果是当前平台的 URL，使用 SPA 导航（不刷新页面）
+            this.navigateWithoutRefresh(url);
         }
+    }
+    
+    /**
+     * SPA 导航（不刷新页面）
+     * 使用 History API 改变 URL，并触发 popstate 事件让平台路由响应
+     * @param {string} url - 目标 URL
+     */
+    navigateWithoutRefresh(url) {
+        if (!url) return;
+        
+        try {
+            const urlObj = new URL(url);
+            // 只有当前域名才能使用 SPA 导航
+            if (urlObj.host === location.host) {
+                const targetPath = urlObj.pathname + urlObj.search + urlObj.hash;
+                // 使用 pushState 改变 URL
+                history.pushState(null, '', targetPath);
+                // 触发 popstate 事件，让平台的路由系统响应
+                window.dispatchEvent(new PopStateEvent('popstate', { state: null }));
+                return;
+            }
+        } catch (e) {
+            // URL 解析失败
+        }
+        
+        // 不同域名，使用传统跳转
+        location.href = url;
     }
     
     /**
@@ -765,11 +794,65 @@ class SidebarStarredManager {
             }
         });
         
-        // 观察 body 的子元素变化
+        // 观察 body 的子元素变化（用于检测容器是否被移除）
         this.mutationObserver.observe(document.body, {
             childList: true,
             subtree: true
         });
+        
+        // Gemini 特殊处理：监听容器宽度变化
+        if (this.platform === 'gemini') {
+            this.setupGeminiResizeObserver();
+        }
+    }
+    
+    /**
+     * 设置 Gemini 侧边栏宽度监听器（使用 ResizeObserver）
+     */
+    setupGeminiResizeObserver() {
+        if (this.geminiSidebarObserver) {
+            this.geminiSidebarObserver.disconnect();
+        }
+        
+        if (!this.container) return;
+        
+        // 监听 side-navigation-content 元素的宽度变化
+        const sideNavContent = document.querySelector('side-navigation-content');
+        if (!sideNavContent) {
+            // 如果暂时找不到，稍后重试
+            setTimeout(() => this.setupGeminiResizeObserver(), 500);
+            return;
+        }
+        
+        // 记录展开时的宽度（用于检测收起动作）
+        let expandedWidth = sideNavContent.offsetWidth;
+        let isCollapsed = expandedWidth < 100;
+        
+        this.geminiSidebarObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const width = entry.contentRect.width;
+                
+                if (width < 100) {
+                    // 收起状态
+                    isCollapsed = true;
+                    this.container.style.visibility = 'hidden';
+                } else if (isCollapsed && width >= 100) {
+                    // 从收起状态恢复到展开
+                    isCollapsed = false;
+                    expandedWidth = width;
+                    this.container.style.visibility = '';
+                } else if (!isCollapsed && width < expandedWidth - 10) {
+                    // 正在收起（宽度开始减小），立即隐藏
+                    this.container.style.visibility = 'hidden';
+                } else if (!isCollapsed) {
+                    // 展开状态，更新展开宽度
+                    expandedWidth = Math.max(expandedWidth, width);
+                    this.container.style.visibility = '';
+                }
+            }
+        });
+        
+        this.geminiSidebarObserver.observe(sideNavContent);
     }
     
     /**
@@ -808,6 +891,11 @@ class SidebarStarredManager {
         if (this.mutationObserver) {
             this.mutationObserver.disconnect();
             this.mutationObserver = null;
+        }
+        
+        if (this.geminiSidebarObserver) {
+            this.geminiSidebarObserver.disconnect();
+            this.geminiSidebarObserver = null;
         }
         
         if (this._storageListener) {

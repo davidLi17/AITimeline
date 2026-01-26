@@ -20,6 +20,14 @@
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Gemini 侧边栏收起时隐藏收藏列表 */
+side-nav.is-mini .ait-sidebar-starred,
+side-nav[mini] .ait-sidebar-starred,
+bard-sidenav-container[collapsed] .ait-sidebar-starred,
+.bard-sidenav-container.collapsed .ait-sidebar-starred {
+    visibility: hidden !important;
+}
+
 /* 深色模式 */
 html[data-timeline-theme="dark"] .ait-sidebar-starred,
 html.dark .ait-sidebar-starred,

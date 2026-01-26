@@ -33,7 +33,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            sidebarStarred: true  // 侧边栏收藏分组
+            sidebarStarred: false  // 侧边栏收藏分组
         }
     },
     {
@@ -44,7 +44,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            sidebarStarred: true  // 侧边栏收藏分组
+            sidebarStarred: false  // 侧边栏收藏分组
         }
     },
     {
@@ -65,7 +65,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            sidebarStarred: true  // 侧边栏收藏分组
+            sidebarStarred: false  // 侧边栏收藏分组
         }
     },
     {
