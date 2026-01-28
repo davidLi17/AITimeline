@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "Tanda Air"
+  },
+  "formulaFormatTitle": {
+    "message": "Pilih Format Salin"
   }
 }

@@ -360,6 +360,139 @@ class TimelineManager {
         this.injectStarChatButton();
     }
     
+    // ✅ 收起/展开按钮的 SVG 图标常量
+    static TOGGLE_ICON_COLLAPSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>'; // >> 收起
+    static TOGGLE_ICON_EXPAND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>'; // << 展开
+    
+    /**
+     * ✅ 注入时间轴收起/展开切换按钮
+     */
+    injectToggleButton() {
+        // 已存在则跳过
+        if (this.ui.toggleBtn) return;
+        
+        let toggleBtn = document.querySelector('.timeline-toggle-btn');
+        const isNewlyCreated = !toggleBtn;
+        
+        if (isNewlyCreated) {
+            toggleBtn = document.createElement('button');
+            toggleBtn.className = 'timeline-toggle-btn';
+            toggleBtn.innerHTML = TimelineManager.TOGGLE_ICON_COLLAPSE; // 默认展开状态，显示 >> 收起按钮
+            
+            toggleBtn.addEventListener('click', () => {
+                this.toggleTimelineVisibility();
+            });
+            
+            // hover 按钮时显示自己
+            toggleBtn.addEventListener('mouseenter', () => {
+                toggleBtn.classList.add('visible');
+            });
+            toggleBtn.addEventListener('mouseleave', () => {
+                toggleBtn.classList.remove('visible');
+            });
+            
+            document.body.appendChild(toggleBtn);
+        }
+        
+        this.ui.toggleBtn = toggleBtn;
+        
+        // 只在首次创建时恢复状态和绑定 wrapper hover 事件
+        if (isNewlyCreated) {
+            this.restoreTimelineVisibility();
+            this.setupToggleButtonHover();
+        }
+    }
+    
+    /**
+     * ✅ 设置 wrapper hover 时显示收起按钮
+     */
+    setupToggleButtonHover() {
+        if (!this.ui.wrapper || !this.ui.toggleBtn) return;
+        
+        this.ui.wrapper.addEventListener('mouseenter', () => {
+            // 只有时间轴展开时才需要通过 hover 显示按钮
+            if (!this.ui.wrapper.classList.contains('ait-collapsed')) {
+                // 额外条件：消息体右侧距离浏览器右边框 < 80px 时才显示
+                // if (this.shouldShowCollapseButton()) {
+                    this.ui.toggleBtn.classList.add('visible');
+                // }
+            }
+        });
+        
+        this.ui.wrapper.addEventListener('mouseleave', () => {
+            // 延迟移除，避免鼠标移到 toggleBtn 时闪烁
+            setTimeout(() => {
+                // 如果鼠标已经在 toggleBtn 上，不移除
+                if (!this.ui.toggleBtn.matches(':hover')) {
+                    this.ui.toggleBtn.classList.remove('visible');
+                }
+            }, 50);
+        });
+    }
+    
+    /**
+     * ✅ 判断是否应该显示收起按钮
+     * 条件：消息体右侧距离浏览器右边框 < 80px
+     */
+    shouldShowCollapseButton() {
+        try {
+            const selector = this.adapter.getUserMessageSelector();
+            if (!selector || !this.conversationContainer) return true;
+            
+            // 只查第一个消息体，所有消息布局一致
+            const firstMsg = this.conversationContainer.querySelector(selector);
+            if (!firstMsg) return true;
+            
+            const rect = firstMsg.getBoundingClientRect();
+            if (rect.width === 0) return true; // 不可见时默认显示
+            
+            // 计算距离浏览器右边框的距离
+            const distanceToRight = window.innerWidth - rect.right;
+            
+            // 距离小于 80px 时显示收起按钮
+            return distanceToRight < 80;
+        } catch (e) {
+            return true;
+        }
+    }
+    
+    /**
+     * ✅ 切换时间轴显示/隐藏（用户点击时调用）
+     */
+    toggleTimelineVisibility() {
+        if (!this.ui.wrapper || !this.ui.toggleBtn) return;
+        
+        const isCollapsed = this.ui.wrapper.classList.toggle('ait-collapsed');
+        this.updateToggleButtonIcon(isCollapsed);
+        
+        // 保存状态到 localStorage
+        try {
+            localStorage.setItem('ait-timeline-collapsed', isCollapsed ? '1' : '0');
+        } catch (e) {}
+    }
+    
+    /**
+     * ✅ 恢复时间轴显示状态（初始化时调用）
+     */
+    restoreTimelineVisibility() {
+        try {
+            const isCollapsed = localStorage.getItem('ait-timeline-collapsed') === '1';
+            if (isCollapsed && this.ui.wrapper && this.ui.toggleBtn) {
+                this.ui.wrapper.classList.add('ait-collapsed');
+                this.updateToggleButtonIcon(true);
+            }
+        } catch (e) {}
+    }
+    
+    /**
+     * ✅ 更新切换按钮图标
+     */
+    updateToggleButtonIcon(isCollapsed) {
+        if (!this.ui.toggleBtn) return;
+        this.ui.toggleBtn.innerHTML = isCollapsed ? TimelineManager.TOGGLE_ICON_EXPAND : TimelineManager.TOGGLE_ICON_COLLAPSE;
+        this.ui.toggleBtn.classList.toggle('collapsed', isCollapsed);
+    }
+    
     /**
      * ✅ 注入收藏聊天按钮（原生插入模式）
      */
@@ -637,6 +770,9 @@ class TimelineManager {
             return;
         }
         this.zeroTurnsTimer = TimelineUtils.clearTimerSafe(this.zeroTurnsTimer);
+        
+        // ✅ 确定有节点要渲染，注入收起/展开切换按钮（首次调用时创建，后续调用直接跳过）
+        this.injectToggleButton();
 
         /**
          * ✅ 按照元素在页面上的实际位置（从上往下）排序
@@ -1039,6 +1175,10 @@ class TimelineManager {
             const shouldHide = this.adapter.shouldHideTimeline();
             if (this.ui.wrapper) {
                 this.ui.wrapper.style.display = shouldHide ? 'none' : 'flex';
+            }
+            // ✅ 切换按钮跟随时间轴显示/隐藏
+            if (this.ui.toggleBtn) {
+                this.ui.toggleBtn.style.display = shouldHide ? 'none' : 'flex';
             }
         };
         
@@ -2727,6 +2867,9 @@ class TimelineManager {
         
         // ✅ 修复：清理收藏按钮
         TimelineUtils.removeElementSafe(this.ui.starredBtn);
+        
+        // ✅ 清理切换按钮
+        TimelineUtils.removeElementSafe(this.ui.toggleBtn);
         
         // ✅ 清理底部空白元素
         if (this.conversationContainer) {

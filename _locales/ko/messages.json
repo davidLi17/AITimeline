@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "워터마크 제거"
+  },
+  "formulaFormatTitle": {
+    "message": "복사 형식 선택"
   }
 }

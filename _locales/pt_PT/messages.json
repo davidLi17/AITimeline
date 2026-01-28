@@ -295,6 +295,9 @@
   },
   "watermarkTabName": {
     "message": "Marca d'água"
+  },
+  "formulaFormatTitle": {
+    "message": "Selecionar formato de cópia"
   }
 }
 

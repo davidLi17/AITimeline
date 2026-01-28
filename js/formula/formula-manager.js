@@ -11,6 +11,22 @@
  * - ✨ 组件自治：URL 变化时自动清理公式交互标记（无需外部管理）
  */
 
+// ==================== 公式格式辅助函数 ====================
+
+/**
+ * 应用公式格式模板
+ * @param {string} formula - 原始公式内容
+ * @param {string} formatId - 格式 ID
+ * @returns {string} 格式化后的公式
+ */
+function applyFormulaFormat(formula, formatId) {
+    const format = FORMULA_FORMATS.find(f => f.id === formatId);
+    const template = format ? format.template : '%s';
+    return template.replace('%s', formula);
+}
+
+// ==================== FormulaManager 类 ====================
+
 class FormulaManager {
     constructor() {
         this.tooltip = null;
@@ -256,7 +272,7 @@ class FormulaManager {
     }
 
     /**
-     * 点击公式复制（复制纯 LaTeX 源码，不包装 Markdown）
+     * 点击公式复制（根据用户设置的格式复制 LaTeX 源码）
      */
     async handleClick(e) {
         const formulaElement = e.currentTarget;
@@ -279,8 +295,15 @@ class FormulaManager {
         }
 
         try {
-            // 直接复制纯 LaTeX 源码，不包装任何格式
-            await navigator.clipboard.writeText(latexCode);
+            // 读取用户设置的格式
+            const result = await chrome.storage.local.get('formulaFormat');
+            const formatId = result.formulaFormat || 'none';
+            
+            // 应用格式模板
+            const formattedCode = applyFormulaFormat(latexCode, formatId);
+            
+            // 复制格式化后的 LaTeX 源码
+            await navigator.clipboard.writeText(formattedCode);
             
             // 显示成功反馈
             const successMsg = chrome.i18n.getMessage('xpzmvk');

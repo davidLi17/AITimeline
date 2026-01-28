@@ -4,6 +4,7 @@
  * 功能：
  * - 提供开关控制公式复制功能
  * - 点击公式即可复制为 LaTeX 格式
+ * - 支持选择复制格式（无特殊附加、$ ... $、$$ ... $$ 等）
  */
 
 class FormulaTab extends BaseTab {
@@ -24,6 +25,15 @@ class FormulaTab extends BaseTab {
         const container = document.createElement('div');
         container.className = 'formula-settings';
         
+        // 生成格式选项的 HTML
+        const formatOptionsHtml = FORMULA_FORMATS.map(format => `
+            <label class="format-option">
+                <input type="radio" name="formula-format" value="${format.id}">
+                <span class="format-radio"></span>
+                <span class="format-label">${format.label}</span>
+            </label>
+        `).join('');
+        
         container.innerHTML = `
             <div class="setting-section">
                 <div class="setting-item">
@@ -39,6 +49,13 @@ class FormulaTab extends BaseTab {
                     </label>
                 </div>
             </div>
+            
+            <div class="setting-section format-section" id="format-section" style="display: none;">
+                <div class="format-section-title">${chrome.i18n.getMessage('formulaFormatTitle') || '选择复制格式'}</div>
+                <div class="format-options">
+                    ${formatOptionsHtml}
+                </div>
+            </div>
         `;
         
         return container;
@@ -51,17 +68,35 @@ class FormulaTab extends BaseTab {
         super.mounted();
         
         const checkbox = document.getElementById('formula-toggle');
+        const formatSection = document.getElementById('format-section');
+        const formatRadios = document.querySelectorAll('input[name="formula-format"]');
+        
         if (!checkbox) return;
         
-        // 读取当前状态（默认开启）
+        // 读取当前状态
         try {
-            const result = await chrome.storage.local.get('formulaEnabled');
+            const result = await chrome.storage.local.get(['formulaEnabled', 'formulaFormat']);
+            
             // 默认值为 true（开启）
-            checkbox.checked = result.formulaEnabled !== false;
+            const isEnabled = result.formulaEnabled !== false;
+            checkbox.checked = isEnabled;
+            
+            // 显示/隐藏格式选择区域
+            if (formatSection) {
+                formatSection.style.display = isEnabled ? 'block' : 'none';
+            }
+            
+            // 设置格式选中状态（默认 'none'）
+            const currentFormat = result.formulaFormat || 'none';
+            formatRadios.forEach(radio => {
+                radio.checked = radio.value === currentFormat;
+            });
         } catch (e) {
             console.error('[FormulaTab] Failed to load state:', e);
-            // 读取失败，默认开启
             checkbox.checked = true;
+            if (formatSection) {
+                formatSection.style.display = 'block';
+            }
         }
         
         // 监听开关变化
@@ -71,12 +106,27 @@ class FormulaTab extends BaseTab {
                 
                 // 保存到 Storage
                 await chrome.storage.local.set({ formulaEnabled: enabled });
+                
+                // 显示/隐藏格式选择区域
+                if (formatSection) {
+                    formatSection.style.display = enabled ? 'block' : 'none';
+                }
             } catch (e) {
                 console.error('[FormulaTab] Failed to save state:', e);
-                
-                // 保存失败，恢复checkbox状态
                 checkbox.checked = !checkbox.checked;
             }
+        });
+        
+        // 监听格式选择变化
+        formatRadios.forEach(radio => {
+            this.addEventListener(radio, 'change', async (e) => {
+                try {
+                    const formatId = e.target.value;
+                    await chrome.storage.local.set({ formulaFormat: formatId });
+                } catch (e) {
+                    console.error('[FormulaTab] Failed to save format:', e);
+                }
+            });
         });
     }
     

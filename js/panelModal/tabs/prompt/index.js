@@ -461,20 +461,6 @@ class PromptTab extends BaseTab {
         closeBtn.addEventListener('click', closeModal);
         cancelBtn.addEventListener('click', closeModal);
         confirmBtn.addEventListener('click', savePrompt);
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                closeModal();
-            }
-        });
-        
-        // ESC 关闭
-        const handleKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-                document.removeEventListener('keydown', handleKeyDown);
-            }
-        };
-        document.addEventListener('keydown', handleKeyDown);
     }
     
     /**

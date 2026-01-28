@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "去除浮水印"
+  },
+  "formulaFormatTitle": {
+    "message": "選擇複製格式"
   }
 }

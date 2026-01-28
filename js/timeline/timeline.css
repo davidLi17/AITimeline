@@ -25,6 +25,80 @@
     flex-direction: column;
     align-items: center;
     gap: 10px; /* 时间轴和收藏按钮之间的间距 */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* ✅ 时间轴收起状态 */
+.ait-chat-timeline-wrapper.ait-collapsed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(20px);
+}
+
+/* ✅ 时间轴收起/展开切换按钮 */
+.timeline-toggle-btn {
+    position: fixed;
+    top: 50%; /* 垂直居中 */
+    right: 4px; /* 固定在屏幕右侧 */
+    z-index: 31; /* 高于时间轴 */
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 6px;
+    color: #999;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    transform: translateY(-50%);
+    opacity: 0; /* 默认隐藏 */
+    pointer-events: none; /* 默认不可点击 */
+}
+
+/* 时间轴收起时，展开按钮始终显示 */
+.timeline-toggle-btn.collapsed {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* hover 时间轴或按钮时，通过 JS 添加 .visible 类显示 */
+.timeline-toggle-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.timeline-toggle-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.timeline-toggle-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #666;
+}
+
+.timeline-toggle-btn:active {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #333;
+}
+
+/* 深色模式 */
+html[data-timeline-theme="dark"] .timeline-toggle-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: #666;
+}
+
+html[data-timeline-theme="dark"] .timeline-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #999;
+}
+
+html[data-timeline-theme="dark"] .timeline-toggle-btn:active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ccc;
 }
 
 .ait-chat-timeline-bar {

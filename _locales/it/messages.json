@@ -295,6 +295,9 @@
   },
   "watermarkTabName": {
     "message": "Filigrana"
+  },
+  "formulaFormatTitle": {
+    "message": "Seleziona formato di copia"
   }
 }
 

@@ -295,6 +295,9 @@
   },
   "watermarkTabName": {
     "message": "Водяной знак"
+  },
+  "formulaFormatTitle": {
+    "message": "Выберите формат копирования"
   }
 }
 

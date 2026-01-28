@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "透かし削除"
+  },
+  "formulaFormatTitle": {
+    "message": "コピー形式を選択"
   }
 }

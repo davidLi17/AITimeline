@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "Wasserzeichen"
+  },
+  "formulaFormatTitle": {
+    "message": "Kopierformat auswählen"
   }
 }

@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "वॉटरमार्क"
+  },
+  "formulaFormatTitle": {
+    "message": "कॉपी प्रारूप चुनें"
   }
 }

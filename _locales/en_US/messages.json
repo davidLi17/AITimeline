@@ -295,5 +295,8 @@
   },
   "watermarkTabName": {
     "message": "Watermark"
+  },
+  "formulaFormatTitle": {
+    "message": "Select Copy Format"
   }
 }

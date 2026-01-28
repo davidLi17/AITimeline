@@ -328,6 +328,28 @@ function getRunnerLanguageName(langId) {
     return lang ? lang.name : langId;
 }
 
+// ==================== LaTeX 公式格式配置 ====================
+
+/**
+ * LaTeX 公式复制格式配置
+ * 用于 Formula Tab 模块
+ * 
+ * @property {string} id - 格式标识符（用于存储）
+ * @property {string} label - 显示标签（LaTeX 格式本身是国际通用的，无需 i18n）
+ * @property {string} template - 格式模板（%s 为公式占位符）
+ */
+const FORMULA_FORMATS = [
+    { id: 'none', label: '无特殊附加', template: '%s' },
+    { id: 'dollar', label: '$ ... $', template: '$%s$' },
+    { id: 'doubleDollar', label: '$$ ... $$', template: '$$%s$$' },
+    { id: 'paren', label: '\\( ... \\)', template: '\\(%s\\)' },
+    { id: 'bracket', label: '\\[ ... \\]', template: '\\[%s\\]' },
+    { id: 'equation', label: '\\begin{equation} ... \\end{equation}', template: '\\begin{equation}%s\\end{equation}' },
+    { id: 'equationStar', label: '\\begin{equation*} ... \\end{equation*}', template: '\\begin{equation*}%s\\end{equation*}' },
+    { id: 'align', label: '\\begin{align} ... \\end{align}', template: '\\begin{align}%s\\end{align}' },
+    { id: 'alignStar', label: '\\begin{align*} ... \\end{align*}', template: '\\begin{align*}%s\\end{align*}' }
+];
+
 // ==================== 深色模式检测 ====================
 
 /**

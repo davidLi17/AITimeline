@@ -295,6 +295,9 @@
   },
   "watermarkTabName": {
     "message": "Hình mờ"
+  },
+  "formulaFormatTitle": {
+    "message": "Chọn định dạng sao chép"
   }
 }
 

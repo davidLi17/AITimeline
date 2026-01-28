@@ -295,6 +295,9 @@
   },
   "watermarkTabName": {
     "message": "Znak wodny"
+  },
+  "formulaFormatTitle": {
+    "message": "Wybierz format kopiowania"
   }
 }
 

@@ -295,6 +295,9 @@
   },
   "watermarkTabName": {
     "message": "ลายน้ำ"
+  },
+  "formulaFormatTitle": {
+    "message": "เลือกรูปแบบการคัดลอก"
   }
 }
 
