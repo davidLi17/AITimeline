@@ -154,7 +154,7 @@ const SITE_INFO = [
         id: 'notebooklm',
         sites: ['notebooklm.google.com'],
         name: 'NotebookLM',
-        logoPath: 'images/logo/gemini.webp',  // 复用 Gemini logo
+        logoPath: 'images/logo/notebooklm.svg',
         features: {
             timeline: false,
             smartInput: true,
