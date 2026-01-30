@@ -298,5 +298,47 @@
   },
   "formulaFormatTitle": {
     "message": "コピー形式を選択"
+  },
+  "dataSyncTabName": {
+    "message": "インポート/エクスポート"
+  },
+  "exportTitle": {
+    "message": "データをエクスポート"
+  },
+  "exportHint": {
+    "message": "すべての設定とお気に入りをJSONファイルにエクスポートして、バックアップや他のデバイスへの移行に使用できます。"
+  },
+  "exportBtn": {
+    "message": "エクスポート"
+  },
+  "importTitle": {
+    "message": "データをインポート"
+  },
+  "importHint": {
+    "message": "JSONファイルからデータをインポートします。上書きまたはマージモードをサポートしています。"
+  },
+  "importBtn": {
+    "message": "ファイルを選択"
+  },
+  "importModeMerge": {
+    "message": "マージ"
+  },
+  "importModeMergeDesc": {
+    "message": "既存のデータを保持し、インポートデータとマージ"
+  },
+  "importModeOverwrite": {
+    "message": "上書き"
+  },
+  "importModeOverwriteDesc": {
+    "message": "既存のデータを消去し、インポートデータで置き換え"
+  },
+  "exportSuccess": {
+    "message": "エクスポート成功"
+  },
+  "importSuccess": {
+    "message": "インポート成功、ページを更新して適用"
+  },
+  "quoteReply": {
+    "message": "追加質問"
   }
 }

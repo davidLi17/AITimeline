@@ -298,5 +298,8 @@
   },
   "formulaFormatTitle": {
     "message": "Seleccionar formato de copia"
+  },
+  "quoteReply": {
+    "message": "Preguntar más"
   }
 }

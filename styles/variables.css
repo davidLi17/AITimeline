@@ -45,6 +45,13 @@
     --timeline-compact-line-width-long: 20px;  /* 长横线宽度 */
     --timeline-compact-line-width-short: 14px; /* 短横线宽度 */
     --timeline-compact-line-height: 2px;       /* 横线高度 */
+    
+    /* ✅ 追问按钮变量 */
+    --ait-quote-btn-bg: #1a1a1a;
+    --ait-quote-btn-bg-hover: #333;
+    --ait-quote-btn-bg-active: #444;
+    --ait-quote-btn-text: #fff;
+    --ait-quote-btn-shadow: rgba(0, 0, 0, 0.2);
 }
 
 /* Override variables when chat's dark mode is active */
@@ -58,4 +65,11 @@ html[data-timeline-theme="dark"] {
     --timeline-tooltip-text: #F5F5F5;
     --timeline-tooltip-border: #404040; /* ✅✅ 更明显的边框：#2a2a2a → #404040 */
     --timeline-bar-bg: rgba(45, 45, 48, 0.95); /* ✅✅ 更高不透明度：0.92 → 0.95，背景更扎实 */
+    
+    /* ✅ 追问按钮 - 深色主题 */
+    --ait-quote-btn-bg: #f5f5f5;
+    --ait-quote-btn-bg-hover: #e5e5e5;
+    --ait-quote-btn-bg-active: #d4d4d4;
+    --ait-quote-btn-text: #1a1a1a;
+    --ait-quote-btn-shadow: rgba(0, 0, 0, 0.3);
 }

@@ -649,34 +649,82 @@ class PromptButtonManager {
         // 聚焦输入框
         this.inputElement.focus();
         
-        // 尝试使用 execCommand（适用于 contenteditable）
         if (this.inputElement.isContentEditable) {
-            // 获取当前内容
-            const currentText = this.inputElement.textContent || '';
-            // 如果内容不为空且不全是空格，则添加换行分隔
-            const separator = currentText.trim() ? '\n' : '';
+            // contenteditable 处理：使用 insertText 追加，避免替换整个内容
             
-            // 将光标移到末尾
+            // 移动光标到末尾
             const selection = window.getSelection();
             const range = document.createRange();
             range.selectNodeContents(this.inputElement);
-            range.collapse(false); // false = 折叠到末尾
+            range.collapse(false);
             selection.removeAllRanges();
             selection.addRange(range);
             
-            // 插入文本
-            document.execCommand('insertText', false, separator + text);
-        } else {
-            // textarea 或 input - 追加到末尾
-            const value = this.inputElement.value || '';
-            // 如果内容不为空且不全是空格，则添加换行分隔
-            const separator = value.trim() ? '\n' : '';
+            // 配置：空行数（1个空行 = 2个换行符）
+            const separatorBlankLines = 1;  // 新旧内容之间的空行数
+            const trailingBlankLines = 1;   // 追加内容末尾的空行数
             
-            this.inputElement.value = value + separator + text;
+            const existingText = this.inputElement.innerText || '';
+            const hasContent = existingText.trim().length > 0;
+            
+            let separator = '';
+            if (hasContent) {
+                // 检查末尾已有的空行数（换行符数 - 1 = 空行数）
+                const trailingMatch = existingText.match(/\n+$/);
+                const existingNewlines = trailingMatch ? trailingMatch[0].length : 0;
+                const existingBlankLines = Math.max(0, existingNewlines - 1);
+                
+                // 计算需要补充多少空行才能达到目标
+                const needBlankLines = Math.max(0, separatorBlankLines - existingBlankLines);
+                // 空行数 + 1 = 换行符数（至少需要 1 个换行符来换行）
+                separator = existingNewlines === 0 
+                    ? '\n'.repeat(separatorBlankLines + 1)  // 没有换行，加完整的
+                    : '\n'.repeat(needBlankLines);          // 有换行，补差值
+            }
+            
+            const trailing = '\n'.repeat(trailingBlankLines + 1);
+            const appendText = separator + text + trailing;
+            
+            // 使用 insertText 命令追加（execCommand 虽已弃用，但无替代方案能避免框架重格式化问题）
+            document.execCommand('insertText', false, appendText);
+            
+            // 延迟设置焦点、光标和滚动
+            setTimeout(() => {
+                this.inputElement.focus();
+                
+                // 设置光标到末尾（contenteditable 需要 selection 才能显示光标）
+                const selection = window.getSelection();
+                const range = document.createRange();
+                range.selectNodeContents(this.inputElement);
+                range.collapse(false);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                
+                this.inputElement.scrollTop = this.inputElement.scrollHeight;
+            }, 50);
+        } else {
+            // textarea 或 input 处理：内联文本追加逻辑
+            const existingText = this.inputElement.value || '';
+            let finalText;
+            if (!existingText.trim()) {
+                finalText = text + '\n\n';
+            } else {
+                // 清理末尾换行符，添加1个空行（2个换行符）作为分隔
+                const cleanedText = existingText.replace(/\n+$/, '');
+                finalText = cleanedText + '\n\n' + text + '\n\n';
+            }
+            this.inputElement.value = finalText;
             this.inputElement.selectionStart = this.inputElement.selectionEnd = this.inputElement.value.length;
             
             // 触发 input 事件
             this.inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+            
+            // 延迟设置焦点和滚动
+            setTimeout(() => {
+                this.inputElement.focus();
+                this.inputElement.selectionStart = this.inputElement.selectionEnd = this.inputElement.value.length;
+                this.inputElement.scrollTop = this.inputElement.scrollHeight;
+            }, 50);
         }
     }
     

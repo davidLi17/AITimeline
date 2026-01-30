@@ -298,6 +298,9 @@
   },
   "formulaFormatTitle": {
     "message": "Seleziona formato di copia"
+  },
+  "quoteReply": {
+    "message": "Approfondisci"
   }
 }
 

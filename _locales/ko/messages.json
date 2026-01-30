@@ -298,5 +298,47 @@
   },
   "formulaFormatTitle": {
     "message": "복사 형식 선택"
+  },
+  "dataSyncTabName": {
+    "message": "가져오기/내보내기"
+  },
+  "exportTitle": {
+    "message": "데이터 내보내기"
+  },
+  "exportHint": {
+    "message": "모든 설정과 즐겨찾기를 JSON 파일로 내보내 백업하거나 다른 기기로 마이그레이션할 수 있습니다."
+  },
+  "exportBtn": {
+    "message": "내보내기"
+  },
+  "importTitle": {
+    "message": "데이터 가져오기"
+  },
+  "importHint": {
+    "message": "JSON 파일에서 데이터를 가져옵니다. 덮어쓰기 또는 병합 모드를 지원합니다."
+  },
+  "importBtn": {
+    "message": "파일 선택"
+  },
+  "importModeMerge": {
+    "message": "병합"
+  },
+  "importModeMergeDesc": {
+    "message": "기존 데이터를 유지하고 가져온 데이터와 병합"
+  },
+  "importModeOverwrite": {
+    "message": "덮어쓰기"
+  },
+  "importModeOverwriteDesc": {
+    "message": "기존 데이터를 지우고 가져온 데이터로 교체"
+  },
+  "exportSuccess": {
+    "message": "내보내기 성공"
+  },
+  "importSuccess": {
+    "message": "가져오기 성공, 페이지 새로고침 후 적용"
+  },
+  "quoteReply": {
+    "message": "추가 질문"
   }
 }

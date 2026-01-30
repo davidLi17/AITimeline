@@ -298,6 +298,9 @@
   },
   "formulaFormatTitle": {
     "message": "Выберите формат копирования"
+  },
+  "quoteReply": {
+    "message": "Уточнить"
   }
 }
 

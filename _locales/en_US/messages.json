@@ -298,5 +298,8 @@
   },
   "formulaFormatTitle": {
     "message": "Select Copy Format"
+  },
+  "quoteReply": {
+    "message": "Follow Up"
   }
 }

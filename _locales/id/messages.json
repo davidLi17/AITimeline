@@ -298,5 +298,8 @@
   },
   "formulaFormatTitle": {
     "message": "Pilih Format Salin"
+  },
+  "quoteReply": {
+    "message": "Tanya Lanjutan"
   }
 }

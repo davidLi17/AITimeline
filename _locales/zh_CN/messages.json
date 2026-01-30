@@ -316,5 +316,74 @@
   },
   "formulaFormatTitle": {
     "message": "选择复制格式"
+  },
+  "dataSyncTabName": {
+    "message": "导入导出"
+  },
+  "exportTitle": {
+    "message": "导出数据"
+  },
+  "exportHint": {
+    "message": "将本插件在本浏览器的数据导出为 JSON 文件，用于备份或迁移到其他浏览器。"
+  },
+  "exportBtn": {
+    "message": "导出数据"
+  },
+  "importTitle": {
+    "message": "导入数据"
+  },
+  "importHint": {
+    "message": "从 JSON 文件导入数据，支持覆盖或合并两种模式。"
+  },
+  "importBtn": {
+    "message": "选择文件导入"
+  },
+  "importModeMerge": {
+    "message": "合并"
+  },
+  "importModeMergeDesc": {
+    "message": "保留现有数据，与导入数据合并"
+  },
+  "importModeOverwrite": {
+    "message": "覆盖"
+  },
+  "importModeOverwriteDesc": {
+    "message": "清空现有数据，使用导入数据替换"
+  },
+  "exportingData": {
+    "message": "正在导出..."
+  },
+  "exportSuccess": {
+    "message": "导出成功"
+  },
+  "exportFailed": {
+    "message": "导出失败"
+  },
+  "importingData": {
+    "message": "正在导入..."
+  },
+  "importSuccess": {
+    "message": "导入成功"
+  },
+  "importSuccessHint": {
+    "message": "数据已成功导入，需要刷新页面后生效"
+  },
+  "importFailed": {
+    "message": "导入失败"
+  },
+  "refreshPage": {
+    "message": "刷新页面"
+  },
+  "refreshLater": {
+    "message": "稍后刷新"
+  },
+  "quoteReply": {
+    "message": "追问"
+  },
+  "quoteReplyTitle": {
+    "message": "追问功能"
+  },
+  "quoteReplyHint": {
+    "message": "选中页面上的文字后，显示追问按钮，点击可快速引用到对话框中"
   }
 }

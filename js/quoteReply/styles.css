@@ -1,0 +1,48 @@
+/**
+ * Quote Reply Button Styles
+ * 引用回复按钮样式
+ */
+
+.ait-quote-reply-btn {
+    position: absolute;
+    z-index: 10000;
+    
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    
+    background: var(--ait-quote-btn-bg, #1a1a1a);
+    color: var(--ait-quote-btn-text, #fff);
+    border: none;
+    border-radius: 6px;
+    
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+    
+    box-shadow: 0 2px 8px var(--ait-quote-btn-shadow, rgba(0, 0, 0, 0.2));
+}
+
+.ait-quote-reply-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ait-quote-reply-btn:hover {
+    background: var(--ait-quote-btn-bg-hover, #333);
+}
+
+.ait-quote-reply-btn:active {
+    background: var(--ait-quote-btn-bg-active, #444);
+    transform: scale(0.98);
+}
+
+.ait-quote-reply-btn svg {
+    flex-shrink: 0;
+}

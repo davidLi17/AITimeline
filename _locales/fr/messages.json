@@ -298,5 +298,8 @@
   },
   "formulaFormatTitle": {
     "message": "Sélectionner le format de copie"
+  },
+  "quoteReply": {
+    "message": "Question de suivi"
   }
 }

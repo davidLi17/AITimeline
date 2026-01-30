@@ -298,5 +298,53 @@
   },
   "formulaFormatTitle": {
     "message": "選擇複製格式"
+  },
+  "dataSyncTabName": {
+    "message": "匯入匯出"
+  },
+  "exportTitle": {
+    "message": "匯出數據"
+  },
+  "exportHint": {
+    "message": "將本插件在本瀏覽器的數據匯出為 JSON 文件，用於備份或遷移到其他瀏覽器。"
+  },
+  "exportBtn": {
+    "message": "匯出數據"
+  },
+  "importTitle": {
+    "message": "匯入數據"
+  },
+  "importHint": {
+    "message": "從 JSON 文件匯入數據，支援覆蓋或合併兩種模式。"
+  },
+  "importBtn": {
+    "message": "選擇文件匯入"
+  },
+  "importModeMerge": {
+    "message": "合併"
+  },
+  "importModeMergeDesc": {
+    "message": "保留現有數據，與匯入數據合併"
+  },
+  "importModeOverwrite": {
+    "message": "覆蓋"
+  },
+  "importModeOverwriteDesc": {
+    "message": "清空現有數據，使用匯入數據替換"
+  },
+  "exportSuccess": {
+    "message": "匯出成功"
+  },
+  "importSuccess": {
+    "message": "匯入成功，重新整理頁面後生效"
+  },
+  "quoteReply": {
+    "message": "追問"
+  },
+  "quoteReplyTitle": {
+    "message": "追問功能"
+  },
+  "quoteReplyHint": {
+    "message": "選中頁面上的文字後，顯示追問按鈕，點擊可快速引用到對話框中"
   }
 }

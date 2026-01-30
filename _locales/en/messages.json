@@ -316,5 +316,74 @@
   },
   "formulaFormatTitle": {
     "message": "Select Copy Format"
+  },
+  "dataSyncTabName": {
+    "message": "Import/Export"
+  },
+  "exportTitle": {
+    "message": "Export Data"
+  },
+  "exportHint": {
+    "message": "Export all settings and favorites to a JSON file for backup or migration to other devices."
+  },
+  "exportBtn": {
+    "message": "Export Data"
+  },
+  "importTitle": {
+    "message": "Import Data"
+  },
+  "importHint": {
+    "message": "Import data from a JSON file, supports overwrite or merge modes."
+  },
+  "importBtn": {
+    "message": "Select File to Import"
+  },
+  "importModeMerge": {
+    "message": "Merge"
+  },
+  "importModeMergeDesc": {
+    "message": "Keep existing data and merge with imported data"
+  },
+  "importModeOverwrite": {
+    "message": "Overwrite"
+  },
+  "importModeOverwriteDesc": {
+    "message": "Clear existing data and replace with imported data"
+  },
+  "exportingData": {
+    "message": "Exporting..."
+  },
+  "exportSuccess": {
+    "message": "Export successful"
+  },
+  "exportFailed": {
+    "message": "Export failed"
+  },
+  "importingData": {
+    "message": "Importing..."
+  },
+  "importSuccess": {
+    "message": "Import Successful"
+  },
+  "importSuccessHint": {
+    "message": "Data imported successfully. Please refresh the page to apply changes."
+  },
+  "importFailed": {
+    "message": "Import failed"
+  },
+  "refreshPage": {
+    "message": "Refresh Page"
+  },
+  "refreshLater": {
+    "message": "Later"
+  },
+  "quoteReply": {
+    "message": "Follow Up"
+  },
+  "quoteReplyTitle": {
+    "message": "Follow Up"
+  },
+  "quoteReplyHint": {
+    "message": "After selecting text on the page, a follow-up button appears to quickly quote into the input box"
   }
 }

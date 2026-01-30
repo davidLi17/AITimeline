@@ -33,6 +33,8 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
+            quoteReply: true,
+            quoteReplyPosition: 'bottomLeft',  // 追问按钮位置
             sidebarStarred: false  // 侧边栏收藏分组
         }
     },
@@ -44,6 +46,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
+            quoteReply: true,
             sidebarStarred: false  // 侧边栏收藏分组
         }
     },
@@ -54,7 +57,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/doubao.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true
         }
     },
     {
@@ -65,6 +69,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
+            quoteReply: true,
             sidebarStarred: false  // 侧边栏收藏分组
         }
     },
@@ -75,7 +80,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/wenxin.webp',
         features: {
             timeline: true,
-            smartInput: false
+            smartInput: false,
+            quoteReply: true
         }
     },
     {
@@ -85,7 +91,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/tongyi.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true
         }
     },
     {
@@ -95,7 +102,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/kimi.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true
         }
     },
     {
@@ -105,7 +113,8 @@ const SITE_INFO = [
         logoPath: 'images/logo/yuanbao.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true
         }
     },
     {
@@ -115,7 +124,9 @@ const SITE_INFO = [
         logoPath: 'images/logo/grok.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true,
+            quoteReplyPosition: 'bottomLeft'
         }
     },
     {
@@ -125,7 +136,9 @@ const SITE_INFO = [
         logoPath: 'images/logo/perplexity.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true,
+            quoteReplyPosition: 'bottomLeft'
         }
     },
     {
@@ -135,7 +148,9 @@ const SITE_INFO = [
         logoPath: 'images/logo/claude.webp',
         features: {
             timeline: true,
-            smartInput: true
+            smartInput: true,
+            quoteReply: true,
+            quoteReplyPosition: 'bottomLeft'
         }
     }
 ];
@@ -406,4 +421,3 @@ function detectDarkMode() {
         return false;
     }
 }
-

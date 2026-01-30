@@ -383,13 +383,7 @@ class TimelineManager {
                 this.toggleTimelineVisibility();
             });
             
-            // hover 按钮时显示自己
-            toggleBtn.addEventListener('mouseenter', () => {
-                toggleBtn.classList.add('visible');
-            });
-            toggleBtn.addEventListener('mouseleave', () => {
-                toggleBtn.classList.remove('visible');
-            });
+            // hover 事件由 setupToggleButtonHover 统一管理
             
             document.body.appendChild(toggleBtn);
         }
@@ -405,34 +399,76 @@ class TimelineManager {
     
     /**
      * ✅ 设置 wrapper hover 时显示收起按钮
+     * 优化：显示后3秒内如果用户未 hover 到按钮上，自动隐藏
      */
     setupToggleButtonHover() {
         if (!this.ui.wrapper || !this.ui.toggleBtn) return;
         
+        let autoHideTimer = null;
+        
+        // 清除自动隐藏定时器
+        const clearAutoHideTimer = () => {
+            if (autoHideTimer) {
+                clearTimeout(autoHideTimer);
+                autoHideTimer = null;
+            }
+        };
+        
+        // 隐藏按钮
+        const hideButton = () => {
+            clearAutoHideTimer();
+            this.ui.toggleBtn.classList.remove('visible');
+        };
+        
+        // 鼠标进入时间轴：显示按钮，启动3秒自动隐藏
         this.ui.wrapper.addEventListener('mouseenter', () => {
-            // 只有时间轴展开时才需要通过 hover 显示按钮
-            if (!this.ui.wrapper.classList.contains('ait-collapsed')) {
-                // 额外条件：消息体右侧距离浏览器右边框 < 80px 时才显示
-                // if (this.shouldShowCollapseButton()) {
-                    this.ui.toggleBtn.classList.add('visible');
-                // }
+            // 只有时间轴展开时且应该显示按钮时才需要通过 hover 显示按钮
+            if (!this.ui.wrapper.classList.contains('ait-collapsed') && this.shouldShowCollapseButton()) {
+                clearAutoHideTimer();
+                this.ui.toggleBtn.classList.add('visible');
+                
+                // 3秒后自动隐藏（如果用户没有 hover 到按钮上）
+                autoHideTimer = setTimeout(() => {
+                    if (!this.ui.toggleBtn.matches(':hover')) {
+                        hideButton();
+                    }
+                }, 3000);
             }
         });
         
+        // 鼠标离开时间轴：延迟隐藏，避免鼠标移到按钮时闪烁
         this.ui.wrapper.addEventListener('mouseleave', () => {
-            // 延迟移除，避免鼠标移到 toggleBtn 时闪烁
             setTimeout(() => {
                 // 如果鼠标已经在 toggleBtn 上，不移除
                 if (!this.ui.toggleBtn.matches(':hover')) {
-                    this.ui.toggleBtn.classList.remove('visible');
+                    hideButton();
                 }
             }, 50);
+        });
+        
+        // 鼠标进入按钮：取消自动隐藏
+        this.ui.toggleBtn.addEventListener('mouseenter', () => {
+            clearAutoHideTimer();
+        });
+        
+        // 鼠标离开按钮：隐藏
+        this.ui.toggleBtn.addEventListener('mouseleave', () => {
+            // 如果鼠标回到 wrapper 上，重新启动定时器
+            if (this.ui.wrapper.matches(':hover')) {
+                autoHideTimer = setTimeout(() => {
+                    if (!this.ui.toggleBtn.matches(':hover')) {
+                        hideButton();
+                    }
+                }, 3000);
+            } else {
+                hideButton();
+            }
         });
     }
     
     /**
      * ✅ 判断是否应该显示收起按钮
-     * 条件：消息体右侧距离浏览器右边框 < 80px
+     * 条件：消息体右侧距离浏览器右边框 < n px
      */
     shouldShowCollapseButton() {
         try {
@@ -449,8 +485,8 @@ class TimelineManager {
             // 计算距离浏览器右边框的距离
             const distanceToRight = window.innerWidth - rect.right;
             
-            // 距离小于 80px 时显示收起按钮
-            return distanceToRight < 80;
+            // 距离小于 n px 时显示收起按钮
+            return distanceToRight < 200;
         } catch (e) {
             return true;
         }
@@ -839,6 +875,38 @@ class TimelineManager {
         //     countChanged: nodeCountChanged, 
         //     idsChanged: nodeIdsChanged 
         // });
+        
+        // ✅ 节点数量变化时，对外派发事件（在更新 lastNodeCount 之前，以便计算 delta）
+        if (nodeCountChanged) {
+            const previousCount = this.lastNodeCount || 0;
+            const currentCount = userTurnElements.length;
+            
+            // ✅ 检查数据是否真的变化了（避免重复 emit 相同数据）
+            const lastChange = this.lastNodesChange;
+            const shouldEmit = !(lastChange && lastChange.count === currentCount && lastChange.previousCount === previousCount);
+            
+            if (shouldEmit) {
+                // ✅ 存储变更记录，外部可通过 window.timelineManager.lastNodesChange 获取
+                this.lastNodesChange = {
+                    count: currentCount,
+                    previousCount: previousCount,
+                    timestamp: Date.now()
+                };
+                
+                console.log('[Timeline] 📢 节点数量变化:', { previousCount, currentCount });
+                
+                try {
+                    window.dispatchEvent(new CustomEvent('timeline:nodesChange', {
+                        detail: {
+                            count: currentCount,           // 当前节点总数
+                            previousCount: previousCount   // 变化前节点数
+                        }
+                    }));
+                } catch (e) {
+                    // 静默处理事件派发失败
+                }
+            }
+        }
         
         // 更新跟踪状态
         this.lastNodeCount = userTurnElements.length;

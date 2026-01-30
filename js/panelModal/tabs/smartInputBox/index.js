@@ -27,6 +27,24 @@ class SmartInputBoxTab extends BaseTab {
         // 平台列表（过滤掉 Claude，因其 Enter 键行为无法被拦截）
         const smartInputPlatforms = getPlatformsByFeature('smartInput').filter(p => p.id !== 'claude');
         
+        // ==================== 追问功能模块 ====================
+        const quoteReplySection = `
+            <div class="setting-section">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">${chrome.i18n.getMessage('quoteReplyTitle') || '追问功能'}</div>
+                        <div class="setting-hint">${chrome.i18n.getMessage('quoteReplyHint') || '选中页面上的文字后，显示追问按钮，点击可快速引用到对话框中'}</div>
+                    </div>
+                    <label class="ait-toggle-switch">
+                        <input type="checkbox" id="quote-reply-toggle">
+                        <span class="ait-toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        `;
+        
+        const divider = '<div class="divider"></div>';
+        
         // ==================== Enter 换行控制模块 ====================
         const enterKeySection = `
             <div class="platform-list">
@@ -48,7 +66,7 @@ class SmartInputBoxTab extends BaseTab {
             </div>
         `;
         
-        container.innerHTML = enterKeySection;
+        container.innerHTML = quoteReplySection + divider + enterKeySection;
         
         return container;
     }
@@ -59,8 +77,50 @@ class SmartInputBoxTab extends BaseTab {
     async mounted() {
         super.mounted();
         
+        // 加载追问功能设置
+        await this.loadQuoteReplySettings();
+        
         // 加载平台设置
         await this.loadPlatformSettings();
+    }
+    
+    /**
+     * 加载追问功能设置
+     */
+    async loadQuoteReplySettings() {
+        const quoteReplyToggle = document.getElementById('quote-reply-toggle');
+        if (!quoteReplyToggle) return;
+        
+        try {
+            // 读取当前状态（默认开启）
+            const result = await chrome.storage.local.get('quoteReplyEnabled');
+            // 默认值为 true（开启）
+            quoteReplyToggle.checked = result.quoteReplyEnabled !== false;
+        } catch (e) {
+            quoteReplyToggle.checked = true;
+        }
+        
+        // 监听开关变化
+        this.addEventListener(quoteReplyToggle, 'change', async (e) => {
+            try {
+                const enabled = e.target.checked;
+                
+                // 保存到 Storage
+                await chrome.storage.local.set({ quoteReplyEnabled: enabled });
+                
+                // 通知 QuoteReply 模块
+                if (window.AIChatTimelineQuoteReply) {
+                    if (enabled) {
+                        window.AIChatTimelineQuoteReply.enable();
+                    } else {
+                        window.AIChatTimelineQuoteReply.disable();
+                    }
+                }
+            } catch (e) {
+                console.error('[SmartInputBoxTab] Failed to save quote reply setting:', e);
+                quoteReplyToggle.checked = !quoteReplyToggle.checked;
+            }
+        });
     }
     
     /**
