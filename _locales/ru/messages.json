@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Водяной знак"
   },
+  "dataSyncTabName": {
+    "message": "Миграция данных"
+  },
   "formulaFormatTitle": {
     "message": "Выберите формат копирования"
+  },
+  "importSuccess": {
+    "message": "Импорт успешен"
+  },
+  "importSuccessHint": {
+    "message": "Данные успешно импортированы. Обновите страницу для применения"
+  },
+  "importFailed": {
+    "message": "Ошибка импорта"
+  },
+  "refreshPage": {
+    "message": "Обновить страницу"
+  },
+  "refreshLater": {
+    "message": "Обновить позже"
   },
   "quoteReply": {
     "message": "Уточнить"

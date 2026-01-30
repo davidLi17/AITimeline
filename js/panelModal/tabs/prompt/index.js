@@ -92,7 +92,7 @@ class PromptTab extends BaseTab {
         await this.loadPrompts();
         
         // 渲染提示词列表
-        this.renderbiwhckdj();
+        this.renderPromptList();
         
         // 绑定添加按钮事件
         this.bindAddButtonEvent();
@@ -103,11 +103,12 @@ class PromptTab extends BaseTab {
     
     /**
      * 加载提示词列表
+     * 注：key 迁移逻辑已移至 StorageAdapter.migrateLocalKeys()
      */
     async loadPrompts() {
         try {
-            const result = await chrome.storage.local.get('biwhckdj');
-            this.setState('prompts', result.biwhckdj || []);
+            const result = await chrome.storage.local.get('prompts');
+            this.setState('prompts', result.prompts || []);
         } catch (e) {
             console.error('[PromptTab] Failed to load prompts:', e);
             this.setState('prompts', []);
@@ -120,7 +121,7 @@ class PromptTab extends BaseTab {
     async savePrompts() {
         try {
             const prompts = this.getState('prompts') || [];
-            await chrome.storage.local.set({ biwhckdj: prompts });
+            await chrome.storage.local.set({ prompts: prompts });
         } catch (e) {
             console.error('[PromptTab] Failed to save prompts:', e);
         }
@@ -137,7 +138,7 @@ class PromptTab extends BaseTab {
     /**
      * 渲染提示词列表
      */
-    renderbiwhckdj() {
+    renderPromptList() {
         const container = document.getElementById('prompt-list-container');
         if (!container) return;
         
@@ -198,6 +199,16 @@ class PromptTab extends BaseTab {
                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                                 </svg>
                             </button>
+                            <button class="prompt-item-btn prompt-move-up-btn" data-id="${prompt.id}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                            </button>
+                            <button class="prompt-item-btn prompt-move-down-btn" data-id="${prompt.id}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <div class="prompt-item-text"><span class="prompt-item-text-content">${this._escapeHtml(prompt.content)}</span></div>
@@ -232,6 +243,12 @@ class PromptTab extends BaseTab {
                 const id = btn.getAttribute('data-id');
                 this.togglePin(id);
             });
+            this.addEventListener(btn, 'mouseenter', () => {
+                window.globalTooltipManager?.show('prompt-pin', 'button', btn, chrome.i18n.getMessage('pntotp') || '置顶');
+            });
+            this.addEventListener(btn, 'mouseleave', () => {
+                window.globalTooltipManager?.hide();
+            });
         });
         
         // 编辑按钮
@@ -240,6 +257,12 @@ class PromptTab extends BaseTab {
             this.addEventListener(btn, 'click', (e) => {
                 const id = btn.getAttribute('data-id');
                 this.hsksuywm(id);
+            });
+            this.addEventListener(btn, 'mouseenter', () => {
+                window.globalTooltipManager?.show('prompt-edit', 'button', btn, chrome.i18n.getMessage('vkpxzm') || '编辑');
+            });
+            this.addEventListener(btn, 'mouseleave', () => {
+                window.globalTooltipManager?.hide();
             });
         });
         
@@ -250,8 +273,43 @@ class PromptTab extends BaseTab {
                 const id = btn.getAttribute('data-id');
                 this.deletePrompt(id);
             });
+            this.addEventListener(btn, 'mouseenter', () => {
+                window.globalTooltipManager?.show('prompt-delete', 'button', btn, chrome.i18n.getMessage('mzxvkp') || '删除');
+            });
+            this.addEventListener(btn, 'mouseleave', () => {
+                window.globalTooltipManager?.hide();
+            });
         });
         
+        // 上移按钮
+        const moveUpBtns = document.querySelectorAll('.prompt-move-up-btn');
+        moveUpBtns.forEach(btn => {
+            this.addEventListener(btn, 'click', (e) => {
+                const id = btn.getAttribute('data-id');
+                this.movePrompt(id, 'up');
+            });
+            this.addEventListener(btn, 'mouseenter', () => {
+                window.globalTooltipManager?.show('prompt-move-up', 'button', btn, chrome.i18n.getMessage('mvupkt') || '上移');
+            });
+            this.addEventListener(btn, 'mouseleave', () => {
+                window.globalTooltipManager?.hide();
+            });
+        });
+        
+        // 下移按钮
+        const moveDownBtns = document.querySelectorAll('.prompt-move-down-btn');
+        moveDownBtns.forEach(btn => {
+            this.addEventListener(btn, 'click', (e) => {
+                const id = btn.getAttribute('data-id');
+                this.movePrompt(id, 'down');
+            });
+            this.addEventListener(btn, 'mouseenter', () => {
+                window.globalTooltipManager?.show('prompt-move-down', 'button', btn, chrome.i18n.getMessage('mvdnkt') || '下移');
+            });
+            this.addEventListener(btn, 'mouseleave', () => {
+                window.globalTooltipManager?.hide();
+            });
+        });
     }
     
     /**
@@ -267,7 +325,7 @@ class PromptTab extends BaseTab {
             
             this.setState('prompts', prompts);
             await this.savePrompts();
-            this.renderbiwhckdj();
+            this.renderPromptList();
             
             // 显示提示
             if (window.globalToastManager) {
@@ -277,6 +335,32 @@ class PromptTab extends BaseTab {
                 window.globalToastManager.show('success', message);
             }
         }
+    }
+    
+    /**
+     * 移动提示词位置
+     * @param {string} id - 提示词 ID
+     * @param {string} direction - 移动方向：'up' 或 'down'
+     */
+    async movePrompt(id, direction) {
+        const prompts = this.getState('prompts') || [];
+        const index = prompts.findIndex(p => p.id === id);
+        
+        if (index === -1) return;
+        
+        const targetIndex = direction === 'up' ? index - 1 : index + 1;
+        
+        // 边界检查
+        if (targetIndex < 0 || targetIndex >= prompts.length) {
+            return;
+        }
+        
+        // 交换位置
+        [prompts[index], prompts[targetIndex]] = [prompts[targetIndex], prompts[index]];
+        
+        this.setState('prompts', prompts);
+        await this.savePrompts();
+        this.renderPromptList();
     }
     
     /**
@@ -480,7 +564,7 @@ class PromptTab extends BaseTab {
         this.setState('prompts', prompts);
         
         await this.savePrompts();
-        this.renderbiwhckdj();
+        this.renderPromptList();
         
         // 显示成功提示
         if (window.globalToastManager) {
@@ -517,7 +601,7 @@ class PromptTab extends BaseTab {
             
             this.setState('prompts', prompts);
             await this.savePrompts();
-            this.renderbiwhckdj();
+            this.renderPromptList();
             
             // 显示成功提示
             if (window.globalToastManager) {
@@ -538,14 +622,15 @@ class PromptTab extends BaseTab {
             const confirmed = await window.globalPopconfirmManager.show({
                 title: chrome.i18n.getMessage('dcnfmq'),
                 confirmText: chrome.i18n.getMessage('mzxvkp'),
-                cancelText: chrome.i18n.getMessage('pxvkmz')
+                cancelText: chrome.i18n.getMessage('pxvkmz'),
+                confirmTextType: 'danger'
             });
             
             if (confirmed) {
                 const newPrompts = prompts.filter(p => p.id !== id);
                 this.setState('prompts', newPrompts);
                 await this.savePrompts();
-                this.renderbiwhckdj();
+                this.renderPromptList();
                 
                 // 显示成功提示
                 if (window.globalToastManager) {

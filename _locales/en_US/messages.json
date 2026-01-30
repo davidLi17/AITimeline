@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Watermark"
   },
+  "dataSyncTabName": {
+    "message": "Data Migration"
+  },
   "formulaFormatTitle": {
     "message": "Select Copy Format"
+  },
+  "importSuccess": {
+    "message": "Import Successful"
+  },
+  "importSuccessHint": {
+    "message": "Data imported successfully. Please refresh the page to apply changes"
+  },
+  "importFailed": {
+    "message": "Import failed"
+  },
+  "refreshPage": {
+    "message": "Refresh Page"
+  },
+  "refreshLater": {
+    "message": "Later"
   },
   "quoteReply": {
     "message": "Follow Up"

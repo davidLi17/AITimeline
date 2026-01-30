@@ -63,6 +63,11 @@ class SmartEnterAdapterRegistry {
         if (typeof YuanbaoSmartEnterAdapter !== 'undefined') {
             this.adapters.push(new YuanbaoSmartEnterAdapter());
         }
+        
+        // 注册 NotebookLM 适配器
+        if (typeof NotebookLMSmartEnterAdapter !== 'undefined') {
+            this.adapters.push(new NotebookLMSmartEnterAdapter());
+        }
     }
     
     /**

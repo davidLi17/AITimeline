@@ -40,6 +40,7 @@ class GlobalTooltipManager {
         
         // 观察器
         this.targetObserver = null;  // 监听目标元素被删除
+        this.intersectionObserver = null;  // 监听目标元素离开视口
         
         // 配置
         this.config = {
@@ -268,6 +269,10 @@ class GlobalTooltipManager {
             this.targetObserver.disconnect();
             this.targetObserver = null;
         }
+        if (this.intersectionObserver) {
+            this.intersectionObserver.disconnect();
+            this.intersectionObserver = null;
+        }
         
         // 移除所有 tooltip DOM
         this.instances.forEach(tooltip => {
@@ -453,6 +458,11 @@ class GlobalTooltipManager {
         // 停止观察目标元素
         if (this.targetObserver) {
             this.targetObserver.disconnect();
+            this.targetObserver = null;
+        }
+        if (this.intersectionObserver) {
+            this.intersectionObserver.disconnect();
+            this.intersectionObserver = null;
         }
         
         // 重置状态
@@ -655,9 +665,10 @@ class GlobalTooltipManager {
     }
     
     /**
-     * 监听目标元素被删除
+     * 监听目标元素被删除或离开视口
      */
     _observeTarget(target) {
+        // 1. MutationObserver - 监听目标元素被删除
         if (this.targetObserver) {
             this.targetObserver.disconnect();
         }
@@ -677,6 +688,25 @@ class GlobalTooltipManager {
                 subtree: false
             });
         }
+        
+        // 2. IntersectionObserver - 监听目标元素离开视口（解决内部容器滚动问题）
+        if (this.intersectionObserver) {
+            this.intersectionObserver.disconnect();
+        }
+        
+        this.intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // 当目标元素不再可见时（离开视口），隐藏 tooltip
+                if (!entry.isIntersecting && this.state.isVisible) {
+                    this._log('Target scrolled out of view, hiding tooltip');
+                    this.forceHideAll();
+                }
+            });
+        }, {
+            threshold: 0  // 只要有一点离开就触发
+        });
+        
+        this.intersectionObserver.observe(target);
     }
     
     /**

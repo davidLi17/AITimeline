@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Hình mờ"
   },
+  "dataSyncTabName": {
+    "message": "Di chuyển dữ liệu"
+  },
   "formulaFormatTitle": {
     "message": "Chọn định dạng sao chép"
+  },
+  "importSuccess": {
+    "message": "Nhập thành công"
+  },
+  "importSuccessHint": {
+    "message": "Dữ liệu đã được nhập thành công. Vui lòng làm mới trang"
+  },
+  "importFailed": {
+    "message": "Nhập thất bại"
+  },
+  "refreshPage": {
+    "message": "Làm mới trang"
+  },
+  "refreshLater": {
+    "message": "Làm mới sau"
   },
   "quoteReply": {
     "message": "Hỏi thêm"

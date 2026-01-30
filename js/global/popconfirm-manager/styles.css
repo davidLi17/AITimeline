@@ -131,6 +131,16 @@
     background: #16a34a;
 }
 
+/* 确认按钮 - 默认（黑色） */
+.popconfirm-btn-confirm.popconfirm-btn-default {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.popconfirm-btn-confirm.popconfirm-btn-default:hover {
+    background: #333333;
+}
+
 /* 响应式 */
 @media (max-width: 640px) {
     .global-popconfirm {

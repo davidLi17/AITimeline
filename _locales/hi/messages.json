@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "वॉटरमार्क"
   },
+  "dataSyncTabName": {
+    "message": "डेटा माइग्रेशन"
+  },
   "formulaFormatTitle": {
     "message": "कॉपी प्रारूप चुनें"
+  },
+  "importSuccess": {
+    "message": "आयात सफल"
+  },
+  "importSuccessHint": {
+    "message": "डेटा सफलतापूर्वक आयात किया गया। कृपया पेज रीफ्रेश करें"
+  },
+  "importFailed": {
+    "message": "आयात विफल"
+  },
+  "refreshPage": {
+    "message": "पेज रीफ्रेश करें"
+  },
+  "refreshLater": {
+    "message": "बाद में रीफ्रेश करें"
   },
   "quoteReply": {
     "message": "अनुवर्ती प्रश्न"

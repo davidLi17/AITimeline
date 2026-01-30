@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Wasserzeichen"
   },
+  "dataSyncTabName": {
+    "message": "Datenmigration"
+  },
   "formulaFormatTitle": {
     "message": "Kopierformat auswählen"
+  },
+  "importSuccess": {
+    "message": "Import erfolgreich"
+  },
+  "importSuccessHint": {
+    "message": "Daten wurden erfolgreich importiert. Bitte aktualisieren Sie die Seite"
+  },
+  "importFailed": {
+    "message": "Import fehlgeschlagen"
+  },
+  "refreshPage": {
+    "message": "Seite aktualisieren"
+  },
+  "refreshLater": {
+    "message": "Später aktualisieren"
   },
   "quoteReply": {
     "message": "Nachfragen"

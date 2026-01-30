@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "去除浮水印"
   },
+  "dataSyncTabName": {
+    "message": "資料遷移"
+  },
   "formulaFormatTitle": {
     "message": "選擇複製格式"
+  },
+  "importSuccess": {
+    "message": "匯入成功"
+  },
+  "importSuccessHint": {
+    "message": "資料已成功匯入，需要重新整理頁面後生效"
+  },
+  "importFailed": {
+    "message": "匯入失敗"
+  },
+  "refreshPage": {
+    "message": "重新整理頁面"
+  },
+  "refreshLater": {
+    "message": "稍後重新整理"
   },
   "quoteReply": {
     "message": "追問"

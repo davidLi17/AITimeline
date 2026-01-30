@@ -217,7 +217,7 @@ class DataSyncTab extends BaseTab {
                     content: chrome.i18n.getMessage('importSuccessHint') || '数据已成功导入，需要刷新页面后生效',
                     confirmText: chrome.i18n.getMessage('refreshPage') || '刷新页面',
                     cancelText: chrome.i18n.getMessage('refreshLater') || '稍后刷新',
-                    confirmTextType: 'primary'
+                    confirmTextType: 'default'
                 });
                 
                 if (confirmed) {
@@ -270,7 +270,7 @@ class DataSyncTab extends BaseTab {
      * 合并规则：
      * - chatTimelineStars → 按 key 字段合并，导入覆盖
      * - chatTimelinePins → 按 key 字段合并，导入覆盖
-     * - biwhckdj（提示词）→ 按 id 字段合并，导入覆盖
+     * - prompts（提示词）→ 按 id 字段合并，导入覆盖
      * - folders（文件夹）→ 按 id 字段合并，导入覆盖
      * - *PlatformSettings → 对象按 key 合并
      * - 其他类型 → 新值覆盖
@@ -317,8 +317,8 @@ class DataSyncTab extends BaseTab {
             return this.mergeArrayByField(existing, newValue, 'key');
         }
         
-        // biwhckdj（提示词）- 按 id 字段合并
-        if (key === 'biwhckdj') {
+        // prompts（提示词）- 按 id 字段合并
+        if (key === 'prompts') {
             return this.mergeArrayByField(existing, newValue, 'id');
         }
         

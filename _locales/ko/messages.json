@@ -300,7 +300,7 @@
     "message": "복사 형식 선택"
   },
   "dataSyncTabName": {
-    "message": "가져오기/내보내기"
+    "message": "데이터 마이그레이션"
   },
   "exportTitle": {
     "message": "데이터 내보내기"
@@ -336,7 +336,19 @@
     "message": "내보내기 성공"
   },
   "importSuccess": {
-    "message": "가져오기 성공, 페이지 새로고침 후 적용"
+    "message": "가져오기 성공"
+  },
+  "importSuccessHint": {
+    "message": "데이터를 성공적으로 가져왔습니다. 페이지를 새로고침하여 적용하세요"
+  },
+  "importFailed": {
+    "message": "가져오기 실패"
+  },
+  "refreshPage": {
+    "message": "페이지 새로고침"
+  },
+  "refreshLater": {
+    "message": "나중에 새로고침"
   },
   "quoteReply": {
     "message": "추가 질문"

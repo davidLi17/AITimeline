@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Filigrana"
   },
+  "dataSyncTabName": {
+    "message": "Migrazione dati"
+  },
   "formulaFormatTitle": {
     "message": "Seleziona formato di copia"
+  },
+  "importSuccess": {
+    "message": "Importazione riuscita"
+  },
+  "importSuccessHint": {
+    "message": "I dati sono stati importati con successo. Aggiorna la pagina per applicare"
+  },
+  "importFailed": {
+    "message": "Importazione fallita"
+  },
+  "refreshPage": {
+    "message": "Aggiorna pagina"
+  },
+  "refreshLater": {
+    "message": "Aggiorna più tardi"
   },
   "quoteReply": {
     "message": "Approfondisci"

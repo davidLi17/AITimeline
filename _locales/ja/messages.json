@@ -300,7 +300,7 @@
     "message": "コピー形式を選択"
   },
   "dataSyncTabName": {
-    "message": "インポート/エクスポート"
+    "message": "データ移行"
   },
   "exportTitle": {
     "message": "データをエクスポート"
@@ -336,7 +336,19 @@
     "message": "エクスポート成功"
   },
   "importSuccess": {
-    "message": "インポート成功、ページを更新して適用"
+    "message": "インポート成功"
+  },
+  "importSuccessHint": {
+    "message": "データのインポートが成功しました。ページを更新して適用してください"
+  },
+  "importFailed": {
+    "message": "インポート失敗"
+  },
+  "refreshPage": {
+    "message": "ページを更新"
+  },
+  "refreshLater": {
+    "message": "後で更新"
   },
   "quoteReply": {
     "message": "追加質問"

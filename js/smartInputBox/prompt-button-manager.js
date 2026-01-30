@@ -65,8 +65,8 @@ class PromptButtonManager {
      */
     async _loadPrompts() {
         try {
-            const result = await chrome.storage.local.get('biwhckdj');
-            this.prompts = result.biwhckdj || [];
+            const result = await chrome.storage.local.get('prompts');
+            this.prompts = result.prompts || [];
         } catch (e) {
             console.error('[PromptButton] Failed to load prompts:', e);
             this.prompts = [];
@@ -158,8 +158,8 @@ class PromptButtonManager {
                 }
                 
                 // 监听提示词列表变化
-                if (changes.biwhckdj) {
-                    this.prompts = changes.biwhckdj.newValue || [];
+                if (changes.prompts) {
+                    this.prompts = changes.prompts.newValue || [];
                 }
             }
         };
@@ -181,7 +181,9 @@ class PromptButtonManager {
         `;
         
         button.style.display = 'none';
-        button.addEventListener('click', (e) => {
+        
+        // ✅ 使用事件委托（解决长时间停留后事件失效问题）
+        window.eventDelegateManager.on('click', '.smart-input-prompt-btn', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this._handleClick();

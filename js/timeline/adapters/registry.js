@@ -18,6 +18,7 @@ class SiteAdapterRegistry {
             new GrokAdapter(),
             new PerplexityAdapter(),
             new ClaudeAdapter(),
+            new NotebookLMAdapter(),
             // Add more adapters here in the future
         ];
     }

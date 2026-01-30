@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Filigrane"
   },
+  "dataSyncTabName": {
+    "message": "Migration de données"
+  },
   "formulaFormatTitle": {
     "message": "Sélectionner le format de copie"
+  },
+  "importSuccess": {
+    "message": "Importation réussie"
+  },
+  "importSuccessHint": {
+    "message": "Les données ont été importées avec succès. Veuillez actualiser la page"
+  },
+  "importFailed": {
+    "message": "Échec de l'importation"
+  },
+  "refreshPage": {
+    "message": "Actualiser la page"
+  },
+  "refreshLater": {
+    "message": "Actualiser plus tard"
   },
   "quoteReply": {
     "message": "Question de suivi"

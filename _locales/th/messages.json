@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "ลายน้ำ"
   },
+  "dataSyncTabName": {
+    "message": "การย้ายข้อมูล"
+  },
   "formulaFormatTitle": {
     "message": "เลือกรูปแบบการคัดลอก"
+  },
+  "importSuccess": {
+    "message": "นำเข้าสำเร็จ"
+  },
+  "importSuccessHint": {
+    "message": "นำเข้าข้อมูลสำเร็จ กรุณารีเฟรชหน้า"
+  },
+  "importFailed": {
+    "message": "นำเข้าล้มเหลว"
+  },
+  "refreshPage": {
+    "message": "รีเฟรชหน้า"
+  },
+  "refreshLater": {
+    "message": "รีเฟรชภายหลัง"
   },
   "quoteReply": {
     "message": "ถามต่อ"

@@ -35,7 +35,7 @@ class GlobalPopconfirmManager {
      * @param {string} options.content - 内容
      * @param {string} options.confirmText - 确认按钮文本（默认"确定"）
      * @param {string} options.cancelText - 取消按钮文本（默认"取消"）
-     * @param {string} options.confirmTextType - 确认按钮类型：'danger'(红色,默认), 'primary'(蓝色), 'success'(绿色)
+     * @param {string} options.confirmTextType - 确认按钮类型：'danger'(红色,默认), 'primary'(蓝色), 'success'(绿色), 'default'(黑色)
      * @param {boolean} options.showCancel - 是否显示取消按钮（默认true）
      * @returns {Promise<boolean>} 用户选择：true=确认，false=取消
      */

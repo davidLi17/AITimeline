@@ -242,6 +242,15 @@
   "pmuknp": {
     "message": "Unpinned"
   },
+  "mvupkt": {
+    "message": "Move Up"
+  },
+  "mvdnkt": {
+    "message": "Move Down"
+  },
+  "pntotp": {
+    "message": "Pin"
+  },
   "addkbt": {
     "message": "Add"
   },
@@ -318,7 +327,7 @@
     "message": "Select Copy Format"
   },
   "dataSyncTabName": {
-    "message": "Import/Export"
+    "message": "Data Migration"
   },
   "exportTitle": {
     "message": "Export Data"

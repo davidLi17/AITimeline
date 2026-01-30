@@ -300,7 +300,7 @@
     "message": "選擇複製格式"
   },
   "dataSyncTabName": {
-    "message": "匯入匯出"
+    "message": "資料遷移"
   },
   "exportTitle": {
     "message": "匯出數據"
@@ -336,7 +336,19 @@
     "message": "匯出成功"
   },
   "importSuccess": {
-    "message": "匯入成功，重新整理頁面後生效"
+    "message": "匯入成功"
+  },
+  "importSuccessHint": {
+    "message": "資料已成功匯入，需要重新整理頁面後生效"
+  },
+  "importFailed": {
+    "message": "匯入失敗"
+  },
+  "refreshPage": {
+    "message": "重新整理頁面"
+  },
+  "refreshLater": {
+    "message": "稍後重新整理"
   },
   "quoteReply": {
     "message": "追問"

@@ -15,7 +15,7 @@
  */
 
 /* ========== 主容器 ========== */
-.panel-modal {
+.ait-panel-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,12 +27,12 @@
     justify-content: center;
 }
 
-.panel-modal.visible {
+.ait-panel-modal.visible {
     display: flex;
 }
 
 /* ========== 遮罩层 ========== */
-.panel-modal-overlay {
+.ait-panel-modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,7 +44,7 @@
 }
 
 /* ========== 弹窗容器（居中） ========== */
-.panel-modal-wrapper {
+.ait-panel-modal-wrapper {
     position: relative;
     width: 820px;
     max-width: 90vw;
@@ -60,7 +60,7 @@
 }
 
 /* ========== 左侧边栏 ========== */
-.panel-modal-sidebar {
+.ait-panel-modal-sidebar {
     width: 210px;
     background: #f6f6f8;
     display: flex;
@@ -69,7 +69,7 @@
 }
 
 /* 左侧顶部区域（关闭按钮 + 标题） */
-.panel-modal-sidebar-header {
+.ait-panel-modal-sidebar-header {
     height: 56px;
     display: flex;
     align-items: center;
@@ -80,7 +80,7 @@
 }
 
 /* 关闭按钮 */
-.panel-modal-close {
+.ait-panel-modal-close {
     width: 32px;
     height: 32px;
     display: flex;
@@ -96,23 +96,23 @@
     padding: 0;
 }
 
-.panel-modal-close:hover {
+.ait-panel-modal-close:hover {
     background: rgba(0, 0, 0, 0.1);
     color: #333;
 }
 
-.panel-modal-close:active {
+.ait-panel-modal-close:active {
     transform: scale(0.95);
 }
 
-.panel-modal-close svg {
+.ait-panel-modal-close svg {
     width: 16px;
     height: 16px;
     stroke-width: 2.5;
 }
 
 /* 标题 */
-.panel-modal-sidebar-title {
+.ait-panel-modal-sidebar-title {
     font-size: 16px;
     font-weight: 700;
     background: linear-gradient(135deg, #7450ff 0%, #9b7dff 100%);
@@ -124,23 +124,23 @@
 }
 
 /* Tabs 区域（可滚动） */
-.panel-modal-tabs {
+.ait-panel-modal-tabs {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 12px 0;
 }
 
-.panel-modal-tabs::-webkit-scrollbar {
+.ait-panel-modal-tabs::-webkit-scrollbar {
     width: 4px;
 }
 
-.panel-modal-tabs::-webkit-scrollbar-thumb {
+.ait-panel-modal-tabs::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 2px;
 }
 
-.panel-modal-tabs::-webkit-scrollbar-track {
+.ait-panel-modal-tabs::-webkit-scrollbar-track {
     background: transparent;
 }
 
@@ -200,7 +200,7 @@
 }
 
 /* Footer 底部信息区域（左侧底部固定） */
-.panel-modal-footer {
+.ait-panel-modal-footer {
     padding: 12px 10px 12px 12px;
     border-top: 1px solid #e5e5e7;
     font-size: 11px;
@@ -208,16 +208,16 @@
     line-height: 1.6;
 }
 
-.panel-modal-footer-item {
+.ait-panel-modal-footer-item {
     display: block;
     margin-bottom: 4px;
 }
 
-.panel-modal-footer-item:last-child {
+.ait-panel-modal-footer-item:last-child {
     margin-bottom: 0;
 }
 
-.panel-modal-footer-item svg {
+.ait-panel-modal-footer-item svg {
     display: inline-block;
     width: 12px;
     height: 12px;
@@ -226,12 +226,12 @@
     color: #aaa;
 }
 
-.panel-modal-footer-item span {
+.ait-panel-modal-footer-item span {
     display: inline;
     vertical-align: middle;
 }
 
-.panel-modal-footer-link {
+.ait-panel-modal-footer-link {
     display: inline;
     color: #007aff!important;
     text-decoration: none;
@@ -241,7 +241,7 @@
     margin-left: 4px;
 }
 
-.panel-modal-footer-version {
+.ait-panel-modal-footer-version {
     display: inline-block;
     padding: 3px 8px;
     font-size: 10px;
@@ -251,12 +251,12 @@
     border: 1px solid rgba(109, 40, 217, 0.2);
 }
 
-.panel-modal-footer-link:hover {
+.ait-panel-modal-footer-link:hover {
     text-decoration: underline;
 }
 
 /* ========== 右侧主区域 ========== */
-.panel-modal-main {
+.ait-panel-modal-main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -265,7 +265,7 @@
 }
 
 /* 标题栏（右侧顶部） */
-.panel-modal-header {
+.ait-panel-modal-header {
     height: 56px;
     padding: 0 24px;
     display: flex;
@@ -275,7 +275,7 @@
     background: #fafafa;
 }
 
-.panel-modal-title {
+.ait-panel-modal-title {
     margin: 0;
     font-size: 20px;
     font-weight: 600;
@@ -283,23 +283,23 @@
 }
 
 /* 内容区（可滚动） */
-.panel-modal-content {
+.ait-panel-modal-content {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 20px;
 }
 
-.panel-modal-content::-webkit-scrollbar {
+.ait-panel-modal-content::-webkit-scrollbar {
     width: 8px;
 }
 
-.panel-modal-content::-webkit-scrollbar-thumb {
+.ait-panel-modal-content::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
 }
 
-.panel-modal-content::-webkit-scrollbar-track {
+.ait-panel-modal-content::-webkit-scrollbar-track {
     background: transparent;
 }
 
@@ -527,11 +527,11 @@
 }
 
 /* 反馈触发器按钮样式 */
-.panel-modal-feedback-trigger {
+.ait-panel-modal-feedback-trigger {
     cursor: pointer;
     transition: opacity 0.2s;
 }
 
-.panel-modal-feedback-trigger:hover {
+.ait-panel-modal-feedback-trigger:hover {
     opacity: 0.8;
 }

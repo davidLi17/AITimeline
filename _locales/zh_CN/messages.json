@@ -242,6 +242,15 @@
   "pmuknp": {
     "message": "已取消置顶"
   },
+  "mvupkt": {
+    "message": "上移"
+  },
+  "mvdnkt": {
+    "message": "下移"
+  },
+  "pntotp": {
+    "message": "置顶"
+  },
   "addkbt": {
     "message": "添加"
   },
@@ -318,7 +327,7 @@
     "message": "选择复制格式"
   },
   "dataSyncTabName": {
-    "message": "导入导出"
+    "message": "数据迁移"
   },
   "exportTitle": {
     "message": "导出数据"

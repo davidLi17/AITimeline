@@ -34,8 +34,7 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            quoteReplyPosition: 'bottomLeft',  // 追问按钮位置
-            sidebarStarred: false  // 侧边栏收藏分组
+            quoteReplyPosition: 'bottomLeft'  // 追问按钮位置
         }
     },
     {
@@ -46,8 +45,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true,
-            sidebarStarred: false  // 侧边栏收藏分组
+            quoteReply: true
         }
     },
     {
@@ -69,8 +67,7 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true,
-            sidebarStarred: false  // 侧边栏收藏分组
+            quoteReply: true
         }
     },
     {
@@ -151,6 +148,17 @@ const SITE_INFO = [
             smartInput: true,
             quoteReply: true,
             quoteReplyPosition: 'bottomLeft'
+        }
+    },
+    {
+        id: 'notebooklm',
+        sites: ['notebooklm.google.com'],
+        name: 'NotebookLM',
+        logoPath: 'images/logo/gemini.webp',  // 复用 Gemini logo
+        features: {
+            timeline: false,
+            smartInput: true,
+            quoteReply: true
         }
     }
 ];

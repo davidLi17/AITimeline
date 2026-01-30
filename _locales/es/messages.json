@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Marca de agua"
   },
+  "dataSyncTabName": {
+    "message": "Migración de datos"
+  },
   "formulaFormatTitle": {
     "message": "Seleccionar formato de copia"
+  },
+  "importSuccess": {
+    "message": "Importación exitosa"
+  },
+  "importSuccessHint": {
+    "message": "Los datos se han importado correctamente. Por favor actualice la página"
+  },
+  "importFailed": {
+    "message": "Error en la importación"
+  },
+  "refreshPage": {
+    "message": "Actualizar página"
+  },
+  "refreshLater": {
+    "message": "Actualizar más tarde"
   },
   "quoteReply": {
     "message": "Preguntar más"

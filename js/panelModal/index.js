@@ -53,27 +53,27 @@ class PanelModal {
     createDOM() {
         // 主容器
         this.container = document.createElement('div');
-        this.container.className = 'panel-modal';
+        this.container.className = 'ait-panel-modal';
         
         // 遮罩层
         this.overlay = document.createElement('div');
-        this.overlay.className = 'panel-modal-overlay';
+        this.overlay.className = 'ait-panel-modal-overlay';
         
         // 内容容器（居中弹窗）
         const wrapper = document.createElement('div');
-        wrapper.className = 'panel-modal-wrapper';
+        wrapper.className = 'ait-panel-modal-wrapper';
         
         // ========== 左侧边栏 ==========
         const sidebar = document.createElement('div');
-        sidebar.className = 'panel-modal-sidebar';
+        sidebar.className = 'ait-panel-modal-sidebar';
         
         // 顶部区域（关闭按钮 + 标题）
         const sidebarHeader = document.createElement('div');
-        sidebarHeader.className = 'panel-modal-sidebar-header';
+        sidebarHeader.className = 'ait-panel-modal-sidebar-header';
         
         // 关闭按钮（左侧顶部）
         this.closeBtn = document.createElement('button');
-        this.closeBtn.className = 'panel-modal-close';
+        this.closeBtn.className = 'ait-panel-modal-close';
         this.closeBtn.innerHTML = `
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -83,7 +83,7 @@ class PanelModal {
         
         // 标题（关闭按钮右侧）
         const sidebarTitle = document.createElement('span');
-        sidebarTitle.className = 'panel-modal-sidebar-title';
+        sidebarTitle.className = 'ait-panel-modal-sidebar-title';
         sidebarTitle.textContent = 'AI Timeline';
         
         sidebarHeader.appendChild(this.closeBtn);
@@ -91,11 +91,11 @@ class PanelModal {
         
         // Tab 栏（可滚动区域）
         this.tabsContainer = document.createElement('div');
-        this.tabsContainer.className = 'panel-modal-tabs';
+        this.tabsContainer.className = 'ait-panel-modal-tabs';
         
         // Footer 底部信息区域
         const footer = document.createElement('div');
-        footer.className = 'panel-modal-footer';
+        footer.className = 'ait-panel-modal-footer';
         
         // 判断浏览器类型（Edge 或 Chrome）
         const isEdge = /Edg/i.test(navigator.userAgent);
@@ -110,10 +110,10 @@ class PanelModal {
             version = '';
         }
         footer.innerHTML = `
-            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>${chrome.i18n.getMessage('xpzmkv')}</span><a href="${storeUrl}" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('pkmzvx')}</a> ❤️</div>
-            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>${chrome.i18n.getMessage('fiveStarReview')}</span><a href="${storeUrl}" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('goToReview')}</a> ⭐</div>
-            <div class="panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>${chrome.i18n.getMessage('vxpzmk')}</span><a href="https://github.com/houyanchao/AITimeline" target="_blank" class="panel-modal-footer-link">${chrome.i18n.getMessage('mkvxpz')}</a> ⭐</div>
-            <div class="panel-modal-footer-item panel-modal-footer-version">v${version}</div>
+            <div class="ait-panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>${chrome.i18n.getMessage('xpzmkv')}</span><a href="${storeUrl}" target="_blank" class="ait-panel-modal-footer-link">${chrome.i18n.getMessage('pkmzvx')}</a> ❤️</div>
+            <div class="ait-panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>${chrome.i18n.getMessage('fiveStarReview')}</span><a href="${storeUrl}" target="_blank" class="ait-panel-modal-footer-link">${chrome.i18n.getMessage('goToReview')}</a> ⭐</div>
+            <div class="ait-panel-modal-footer-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span>${chrome.i18n.getMessage('vxpzmk')}</span><a href="https://github.com/houyanchao/AITimeline" target="_blank" class="ait-panel-modal-footer-link">${chrome.i18n.getMessage('mkvxpz')}</a> ⭐</div>
+            <div class="ait-panel-modal-footer-item ait-panel-modal-footer-version">v${version}</div>
         `;
         
         sidebar.appendChild(sidebarHeader);
@@ -122,21 +122,21 @@ class PanelModal {
         
         // ========== 右侧主区域 ==========
         const main = document.createElement('div');
-        main.className = 'panel-modal-main';
+        main.className = 'ait-panel-modal-main';
         
         // 标题栏（右侧顶部）
         const header = document.createElement('div');
-        header.className = 'panel-modal-header';
+        header.className = 'ait-panel-modal-header';
         
         this.titleElement = document.createElement('h2');
-        this.titleElement.className = 'panel-modal-title';
+        this.titleElement.className = 'ait-panel-modal-title';
         this.titleElement.textContent = 'Panel'; // 默认标题，会在切换 tab 时更新
         
         header.appendChild(this.titleElement);
         
         // 内容区（可滚动）
         this.content = document.createElement('div');
-        this.content.className = 'panel-modal-content';
+        this.content.className = 'ait-panel-modal-content';
         
         main.appendChild(header);
         main.appendChild(this.content);

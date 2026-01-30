@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Tanda Air"
   },
+  "dataSyncTabName": {
+    "message": "Migrasi Data"
+  },
   "formulaFormatTitle": {
     "message": "Pilih Format Salin"
+  },
+  "importSuccess": {
+    "message": "Impor berhasil"
+  },
+  "importSuccessHint": {
+    "message": "Data berhasil diimpor. Silakan refresh halaman"
+  },
+  "importFailed": {
+    "message": "Impor gagal"
+  },
+  "refreshPage": {
+    "message": "Refresh halaman"
+  },
+  "refreshLater": {
+    "message": "Refresh nanti"
   },
   "quoteReply": {
     "message": "Tanya Lanjutan"

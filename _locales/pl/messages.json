@@ -296,8 +296,26 @@
   "watermarkTabName": {
     "message": "Znak wodny"
   },
+  "dataSyncTabName": {
+    "message": "Migracja danych"
+  },
   "formulaFormatTitle": {
     "message": "Wybierz format kopiowania"
+  },
+  "importSuccess": {
+    "message": "Import zakończony pomyślnie"
+  },
+  "importSuccessHint": {
+    "message": "Dane zostały pomyślnie zaimportowane. Odśwież stronę, aby zastosować"
+  },
+  "importFailed": {
+    "message": "Import nie powiódł się"
+  },
+  "refreshPage": {
+    "message": "Odśwież stronę"
+  },
+  "refreshLater": {
+    "message": "Odśwież później"
   },
   "quoteReply": {
     "message": "Dopytaj"

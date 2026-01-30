@@ -379,7 +379,8 @@ class TimelineManager {
             toggleBtn.className = 'timeline-toggle-btn';
             toggleBtn.innerHTML = TimelineManager.TOGGLE_ICON_COLLAPSE; // 默认展开状态，显示 >> 收起按钮
             
-            toggleBtn.addEventListener('click', () => {
+            // ✅ 使用事件委托（解决长时间停留后事件失效问题）
+            window.eventDelegateManager.on('click', '.timeline-toggle-btn', () => {
                 this.toggleTimelineVisibility();
             });
             
@@ -400,63 +401,80 @@ class TimelineManager {
     /**
      * ✅ 设置 wrapper hover 时显示收起按钮
      * 优化：显示后3秒内如果用户未 hover 到按钮上，自动隐藏
+     * 
+     * 使用事件委托解决页面长时间停留后事件失效的问题
      */
     setupToggleButtonHover() {
         if (!this.ui.wrapper || !this.ui.toggleBtn) return;
         
-        let autoHideTimer = null;
+        // 使用实例属性存储定时器，以便在事件委托回调中访问
+        this._autoHideTimer = null;
+        
+        const edm = window.eventDelegateManager;
+        if (!edm) {
+            console.warn('[TimelineManager] eventDelegateManager not available for hover events');
+            return;
+        }
         
         // 清除自动隐藏定时器
         const clearAutoHideTimer = () => {
-            if (autoHideTimer) {
-                clearTimeout(autoHideTimer);
-                autoHideTimer = null;
+            if (this._autoHideTimer) {
+                clearTimeout(this._autoHideTimer);
+                this._autoHideTimer = null;
             }
         };
         
         // 隐藏按钮
         const hideButton = () => {
             clearAutoHideTimer();
-            this.ui.toggleBtn.classList.remove('visible');
+            if (this.ui.toggleBtn) {
+                this.ui.toggleBtn.classList.remove('visible');
+            }
         };
         
-        // 鼠标进入时间轴：显示按钮，启动3秒自动隐藏
-        this.ui.wrapper.addEventListener('mouseenter', () => {
+        // 1. 鼠标进入时间轴：显示按钮，启动3秒自动隐藏
+        edm.on('mouseenter', '.ait-chat-timeline-wrapper', () => {
+            if (!this.ui.wrapper || !this.ui.toggleBtn) return;
+            
             // 只有时间轴展开时且应该显示按钮时才需要通过 hover 显示按钮
             if (!this.ui.wrapper.classList.contains('ait-collapsed') && this.shouldShowCollapseButton()) {
                 clearAutoHideTimer();
                 this.ui.toggleBtn.classList.add('visible');
                 
                 // 3秒后自动隐藏（如果用户没有 hover 到按钮上）
-                autoHideTimer = setTimeout(() => {
-                    if (!this.ui.toggleBtn.matches(':hover')) {
+                this._autoHideTimer = setTimeout(() => {
+                    if (this.ui.toggleBtn && !this.ui.toggleBtn.matches(':hover')) {
                         hideButton();
                     }
                 }, 3000);
             }
         });
         
-        // 鼠标离开时间轴：延迟隐藏，避免鼠标移到按钮时闪烁
-        this.ui.wrapper.addEventListener('mouseleave', () => {
+        // 2. 鼠标离开时间轴：延迟隐藏，避免鼠标移到按钮时闪烁
+        edm.on('mouseleave', '.ait-chat-timeline-wrapper', () => {
+            if (!this.ui.toggleBtn) return;
+            
             setTimeout(() => {
                 // 如果鼠标已经在 toggleBtn 上，不移除
-                if (!this.ui.toggleBtn.matches(':hover')) {
+                if (this.ui.toggleBtn && !this.ui.toggleBtn.matches(':hover')) {
                     hideButton();
                 }
             }, 50);
         });
         
-        // 鼠标进入按钮：取消自动隐藏
-        this.ui.toggleBtn.addEventListener('mouseenter', () => {
+        // 3. 鼠标进入按钮：取消自动隐藏
+        edm.on('mouseenter', '.timeline-toggle-btn', () => {
             clearAutoHideTimer();
         });
         
-        // 鼠标离开按钮：隐藏
-        this.ui.toggleBtn.addEventListener('mouseleave', () => {
+        // 4. 鼠标离开按钮：隐藏
+        edm.on('mouseleave', '.timeline-toggle-btn', () => {
+            if (!this.ui.wrapper || !this.ui.toggleBtn) return;
+            
             // 如果鼠标回到 wrapper 上，重新启动定时器
             if (this.ui.wrapper.matches(':hover')) {
-                autoHideTimer = setTimeout(() => {
-                    if (!this.ui.toggleBtn.matches(':hover')) {
+                this._autoHideTimer = setTimeout(() => {
+                    if (this.ui.toggleBtn && !this.ui.toggleBtn.matches(':hover')) {
                         hideButton();
                     }
                 }, 3000);
@@ -586,39 +604,65 @@ class TimelineManager {
             ${isDeepSeek ? 'position: absolute; top: 14px; right: 56px; z-index: 1000;' : 'position: relative;'}
         `;
         
-        // 6. Hover效果和tooltip - 使用全局 Tooltip 管理器
-        starChatBtn.onmouseenter = async () => {
-            starChatBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+        // 6. Hover效果和tooltip、点击事件 - 使用事件委托
+        // ✅ 事件委托解决页面长时间停留后事件失效的问题
+        this._setupStarChatBtnEvents();
+        
+        // 9. 插入按钮到原生UI
+        targetElement.parentNode.insertBefore(starChatBtn, targetElement);
+        
+        // 10. 保存引用
+        this.ui.starChatBtn = starChatBtn;
+    }
+    
+    /**
+     * ✅ 设置收藏聊天按钮的事件委托
+     * 使用事件委托解决页面长时间停留后事件失效的问题
+     */
+    _setupStarChatBtnEvents() {
+        const edm = window.eventDelegateManager;
+        if (!edm) {
+            console.warn('[TimelineManager] eventDelegateManager not available for star chat btn');
+            return;
+        }
+        
+        // 1. 鼠标进入：hover 效果和 tooltip
+        edm.on('mouseenter', '.ait-timeline-star-chat-btn-native', async (e, btn) => {
+            btn.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
             
             const isStarred = await this.isChatStarred();
             const tooltipText = isStarred ? chrome.i18n.getMessage('bpxjkw') : chrome.i18n.getMessage('zmvkpx');
             
-            window.globalTooltipManager.show(
+            window.globalTooltipManager?.show(
                 'star-chat-btn',
                 'button',
-                starChatBtn,
+                btn,
                 tooltipText,
                 { placement: 'bottom' }
             );
-        };
+        });
         
-        starChatBtn.onmouseleave = () => {
-            starChatBtn.style.backgroundColor = 'transparent';
-            window.globalTooltipManager.hide();
-        };
+        // 2. 鼠标离开：移除 hover 效果和隐藏 tooltip
+        edm.on('mouseleave', '.ait-timeline-star-chat-btn-native', (e, btn) => {
+            btn.style.backgroundColor = 'transparent';
+            window.globalTooltipManager?.hide();
+        });
         
-        // 8. 点击事件
-        starChatBtn.addEventListener('click', async () => {
+        // 3. 点击：切换收藏状态
+        edm.on('click', '.ait-timeline-star-chat-btn-native', async (e, btn) => {
             const result = await this.toggleChatStar();
             
             if (result && result.success) {
                 const nowStarred = await this.isChatStarred();
-                starChatBtn.querySelector('svg').setAttribute('fill', nowStarred ? 'rgb(255, 125, 3)' : 'none');
-                starChatBtn.querySelector('svg').setAttribute('stroke', nowStarred ? 'rgb(255, 125, 3)' : 'currentColor');
+                const svg = btn.querySelector('svg');
+                if (svg) {
+                    svg.setAttribute('fill', nowStarred ? 'rgb(255, 125, 3)' : 'none');
+                    svg.setAttribute('stroke', nowStarred ? 'rgb(255, 125, 3)' : 'currentColor');
+                }
                 
                 // 更新 tooltip 文本
                 const newText = nowStarred ? chrome.i18n.getMessage('bpxjkw') : chrome.i18n.getMessage('zmvkpx');
-                window.globalTooltipManager.updateContent(newText);
+                window.globalTooltipManager?.updateContent(newText);
                 
                 // 显示 toast
                 if (window.globalToastManager) {
@@ -635,12 +679,6 @@ class TimelineManager {
                 }
             }
         });
-        
-        // 9. 插入按钮到原生UI
-        targetElement.parentNode.insertBefore(starChatBtn, targetElement);
-        
-        // 10. 保存引用
-        this.ui.starChatBtn = starChatBtn;
     }
     
     /**
@@ -1739,13 +1777,12 @@ class TimelineManager {
         try { StorageAdapter.addChangeListener(this.onStorage); } catch {}
         
         // ✅ 收藏按钮点击事件（打开 Panel Modal 并显示收藏 tab）
-        if (this.ui.starredBtn) {
-            this.ui.starredBtn.addEventListener('click', () => {
-                if (window.panelModal) {
-                    window.panelModal.show('starred');
-                }
-            });
-        }
+        // 使用事件委托（解决长时间停留后事件失效问题）
+        window.eventDelegateManager.on('click', '.timeline-starred-btn', () => {
+            if (window.panelModal) {
+                window.panelModal.show('starred');
+            }
+        });
         
         // ✅ 优化：监听主题变化，清空缓存
         this.setupThemeChangeListener();

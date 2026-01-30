@@ -478,14 +478,14 @@ class SmartEnterManager {
                 return;
             }
             
-            // 检查提示次数（所有平台共享）
+            // 检查提示次数
             const result = await chrome.storage.local.get('smartEnterToastCount');
             const count = result.smartEnterToastCount || 0;
             
             // 如果已提示超过30次，不再提示
-            // if (count >= 30) {
-            //     return;
-            // }
+            if (count >= 30) {
+                return;
+            }
             
             // 显示Toast
             const message = chrome.i18n.getMessage('vxmkpz');

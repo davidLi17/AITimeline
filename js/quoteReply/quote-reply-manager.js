@@ -102,14 +102,13 @@ class QuoteReplyManager {
         `;
         btn.style.display = 'none';
         
-        btn.addEventListener('click', (e) => {
+        // ✅ 使用事件委托（解决长时间停留后事件失效问题）
+        window.eventDelegateManager.on('click', '.ait-quote-reply-btn', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this._handleQuote();
         });
-        
-        // 阻止按钮上的 mousedown 导致选区丢失
-        btn.addEventListener('mousedown', (e) => {
+        window.eventDelegateManager.on('mousedown', '.ait-quote-reply-btn', (e) => {
             e.preventDefault();
         });
         
