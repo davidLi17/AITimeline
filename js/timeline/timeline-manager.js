@@ -407,14 +407,8 @@ class TimelineManager {
     setupToggleButtonHover() {
         if (!this.ui.wrapper || !this.ui.toggleBtn) return;
         
-        // 使用实例属性存储定时器，以便在事件委托回调中访问
+        // 使用实例属性存储定时器
         this._autoHideTimer = null;
-        
-        const edm = window.eventDelegateManager;
-        if (!edm) {
-            console.warn('[TimelineManager] eventDelegateManager not available for hover events');
-            return;
-        }
         
         // 清除自动隐藏定时器
         const clearAutoHideTimer = () => {
@@ -433,7 +427,7 @@ class TimelineManager {
         };
         
         // 1. 鼠标进入时间轴：显示按钮，启动3秒自动隐藏
-        edm.on('mouseenter', '.ait-chat-timeline-wrapper', () => {
+        this.ui.wrapper.addEventListener('mouseenter', () => {
             if (!this.ui.wrapper || !this.ui.toggleBtn) return;
             
             // 只有时间轴展开时且应该显示按钮时才需要通过 hover 显示按钮
@@ -451,7 +445,7 @@ class TimelineManager {
         });
         
         // 2. 鼠标离开时间轴：延迟隐藏，避免鼠标移到按钮时闪烁
-        edm.on('mouseleave', '.ait-chat-timeline-wrapper', () => {
+        this.ui.wrapper.addEventListener('mouseleave', () => {
             if (!this.ui.toggleBtn) return;
             
             setTimeout(() => {
@@ -463,12 +457,12 @@ class TimelineManager {
         });
         
         // 3. 鼠标进入按钮：取消自动隐藏
-        edm.on('mouseenter', '.timeline-toggle-btn', () => {
+        this.ui.toggleBtn.addEventListener('mouseenter', () => {
             clearAutoHideTimer();
         });
         
         // 4. 鼠标离开按钮：隐藏
-        edm.on('mouseleave', '.timeline-toggle-btn', () => {
+        this.ui.toggleBtn.addEventListener('mouseleave', () => {
             if (!this.ui.wrapper || !this.ui.toggleBtn) return;
             
             // 如果鼠标回到 wrapper 上，重新启动定时器
@@ -604,9 +598,29 @@ class TimelineManager {
             ${isDeepSeek ? 'position: absolute; top: 14px; right: 56px; z-index: 1000;' : 'position: relative;'}
         `;
         
-        // 6. Hover效果和tooltip、点击事件 - 使用事件委托
-        // ✅ 事件委托解决页面长时间停留后事件失效的问题
-        this._setupStarChatBtnEvents();
+        // 6. Hover效果和tooltip - 直接绑定（mouseenter/mouseleave 不冒泡）
+        starChatBtn.addEventListener('mouseenter', async () => {
+            starChatBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+            
+            const isStarred = await this.isChatStarred();
+            const tooltipText = isStarred ? chrome.i18n.getMessage('bpxjkw') : chrome.i18n.getMessage('zmvkpx');
+            
+            window.globalTooltipManager?.show(
+                'star-chat-btn',
+                'button',
+                starChatBtn,
+                tooltipText,
+                { placement: 'bottom' }
+            );
+        });
+        
+        starChatBtn.addEventListener('mouseleave', () => {
+            starChatBtn.style.backgroundColor = 'transparent';
+            window.globalTooltipManager?.hide();
+        });
+        
+        // 7. 点击事件 - 使用事件委托（click 可以冒泡）
+        this._setupStarChatBtnClickEvent();
         
         // 9. 插入按钮到原生UI
         targetElement.parentNode.insertBefore(starChatBtn, targetElement);
@@ -616,39 +630,17 @@ class TimelineManager {
     }
     
     /**
-     * ✅ 设置收藏聊天按钮的事件委托
-     * 使用事件委托解决页面长时间停留后事件失效的问题
+     * ✅ 设置收藏聊天按钮的点击事件委托
+     * 使用事件委托解决页面长时间停留后点击事件失效的问题
      */
-    _setupStarChatBtnEvents() {
+    _setupStarChatBtnClickEvent() {
         const edm = window.eventDelegateManager;
         if (!edm) {
             console.warn('[TimelineManager] eventDelegateManager not available for star chat btn');
             return;
         }
         
-        // 1. 鼠标进入：hover 效果和 tooltip
-        edm.on('mouseenter', '.ait-timeline-star-chat-btn-native', async (e, btn) => {
-            btn.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
-            
-            const isStarred = await this.isChatStarred();
-            const tooltipText = isStarred ? chrome.i18n.getMessage('bpxjkw') : chrome.i18n.getMessage('zmvkpx');
-            
-            window.globalTooltipManager?.show(
-                'star-chat-btn',
-                'button',
-                btn,
-                tooltipText,
-                { placement: 'bottom' }
-            );
-        });
-        
-        // 2. 鼠标离开：移除 hover 效果和隐藏 tooltip
-        edm.on('mouseleave', '.ait-timeline-star-chat-btn-native', (e, btn) => {
-            btn.style.backgroundColor = 'transparent';
-            window.globalTooltipManager?.hide();
-        });
-        
-        // 3. 点击：切换收藏状态
+        // 点击：切换收藏状态
         edm.on('click', '.ait-timeline-star-chat-btn-native', async (e, btn) => {
             const result = await this.toggleChatStar();
             

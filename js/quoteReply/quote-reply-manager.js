@@ -215,6 +215,11 @@ class QuoteReplyManager {
             return false;
         }
         
+        // 排除代码执行器
+        if (element.closest('.runner-panel, .floating-runner-container, .runner-container')) {
+            return false;
+        }
+        
         return true;
     }
     
