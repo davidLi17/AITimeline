@@ -35,5 +35,12 @@ class ChatGPTSmartEnterAdapter extends BaseSmartEnterAdapter {
     getPromptButtonOffset() {
         return { top: 10, left: -2 };
     }
+    
+    /**
+     * 获取回到底部按钮位置偏移量
+     */
+    getScrollToBottomOffset() {
+        return { top: -3, right: 8 };
+    }
 }
 

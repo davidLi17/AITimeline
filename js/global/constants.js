@@ -35,6 +35,7 @@ const SITE_INFO = [
             smartInput: true,
             quoteReply: true,
             quoteReplyPosition: 'bottomLeft'  // 追问按钮位置
+            // scrollToBottom: false  // ChatGPT 有自己的回到底部功能
         }
     },
     {
@@ -45,7 +46,8 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true
+            quoteReply: true,
+            scrollToBottom: true  // 回到底部按钮
         }
     },
     {

@@ -1856,6 +1856,46 @@ class TimelineManager {
         });
     }
     
+    /**
+     * ✅ 对外 API：根据索引滚动到指定节点
+     * @param {number} index - 节点索引（0-based），支持负数（-1 表示最后一个）
+     * @returns {boolean} - 是否成功滚动
+     */
+    scrollToIndex(index) {
+        if (!this.markers || this.markers.length === 0) return false;
+        
+        // 支持负数索引（如 -1 表示最后一个）
+        let targetIndex = index;
+        if (index < 0) {
+            targetIndex = this.markers.length + index;
+        }
+        
+        // 边界检查
+        if (targetIndex < 0 || targetIndex >= this.markers.length) return false;
+        
+        const marker = this.markers[targetIndex];
+        if (!marker?.element) return false;
+        
+        this.smoothScrollTo(marker.element);
+        return true;
+    }
+    
+    /**
+     * ✅ 对外 API：滚动到最后一个节点（底部）
+     * @returns {boolean} - 是否成功滚动
+     */
+    scrollToLast() {
+        return this.scrollToIndex(-1);
+    }
+    
+    /**
+     * ✅ 对外 API：滚动到第一个节点（顶部）
+     * @returns {boolean} - 是否成功滚动
+     */
+    scrollToFirst() {
+        return this.scrollToIndex(0);
+    }
+    
     smoothScrollTo(targetElement, duration = 600) {
         if (!targetElement || !this.scrollContainer) return;
         
@@ -2850,18 +2890,66 @@ class TimelineManager {
                     this.activeChangeTimer = setTimeout(() => {
                         this.activeChangeTimer = null;
                         if (this.pendingActiveId && this.pendingActiveId !== this.activeTurnId) {
+                            const previousId = this.activeTurnId;
                             this.activeTurnId = this.pendingActiveId;
                             this.updateActiveDotUI();
                             this.lastActiveChangeTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+                            // ✅ 对外派发激活节点变化事件
+                            this._emitActiveChange(previousId, this.activeTurnId);
                         }
                         this.pendingActiveId = null;
                     }, delay);
                 }
             } else {
+                const previousId = this.activeTurnId;
                 this.activeTurnId = activeId;
                 this.updateActiveDotUI();
                 this.lastActiveChangeTime = now;
+                // ✅ 对外派发激活节点变化事件
+                this._emitActiveChange(previousId, activeId);
             }
+        }
+    }
+    
+    /**
+     * ✅ 对外派发激活节点变化事件
+     * @param {string} previousId - 变化前的激活节点 ID
+     * @param {string} currentId - 当前激活的节点 ID
+     */
+    _emitActiveChange(previousId, currentId) {
+        // 查找当前和之前激活节点的索引
+        const currentIndex = this.markers.findIndex(m => m.id === currentId);
+        const previousIndex = previousId ? this.markers.findIndex(m => m.id === previousId) : -1;
+        const totalCount = this.markers.length;
+        const isFirst = currentIndex === 0;
+        const isLast = currentIndex === totalCount - 1;
+        
+        // 滚动方向：1=向下（index增加），-1=向上（index减少），0=初始化
+        const direction = previousIndex === -1 ? 0 : (currentIndex > previousIndex ? 1 : -1);
+        
+        // ✅ 存储最新的激活状态，外部可通过 window.timelineManager.lastActiveChange 获取
+        this.lastActiveChange = {
+            currentIndex,
+            totalCount,
+            isFirst,
+            isLast,
+            direction,
+            timestamp: Date.now()
+        };
+        
+        try {
+            window.dispatchEvent(new CustomEvent('timeline:activeChange', {
+                detail: {
+                    currentIndex,       // 当前选中节点索引（0-based）
+                    previousIndex,      // 之前选中节点索引（-1 表示初始化）
+                    totalCount,         // 当前节点总数
+                    isFirst,            // 是否是第一个节点（顶部）
+                    isLast,             // 是否是最后一个节点（底部）
+                    direction           // 滚动方向：1=向下，-1=向上，0=初始化
+                }
+            }));
+        } catch (e) {
+            // 静默处理事件派发失败
         }
     }
 

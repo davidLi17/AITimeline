@@ -1,22 +1,26 @@
 /**
- * Prompt Button Styles
+ * Scroll To Bottom Button Styles
  * 
- * 提示词按钮样式 - 简洁专业风格
+ * 回到底部按钮样式 - 与提示词按钮保持一致的毛玻璃风格
  */
 
-/* 提示词按钮容器 */
-.smart-input-prompt-btn {
+.ait-scroll-to-bottom-btn {
     position: fixed;
     z-index: 9;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     cursor: pointer;
     user-select: none;
-    transition: all 0.15s ease;
+    /* 只过渡颜色和阴影，不过渡 transform */
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    
+    /* 初始隐藏状态 */
+    opacity: 0;
+    pointer-events: none;
     
     /* 浅色模式 - 毛玻璃效果 */
     background: rgba(255, 255, 255, 0.9);
@@ -30,8 +34,15 @@
     border: none;
 }
 
+/* 可见状态 */
+.ait-scroll-to-bottom-btn.visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
 /* Hover 效果 */
-.smart-input-prompt-btn:hover {
+.ait-scroll-to-bottom-btn:hover {
     background: rgba(255, 255, 255, 0.95);
     color: #4f46e5;
     box-shadow: 
@@ -41,14 +52,14 @@
 }
 
 /* Active 效果 - 只改变透明度 */
-.smart-input-prompt-btn:active {
+.ait-scroll-to-bottom-btn:active {
     opacity: 0.8;
 }
 
-/* 魔法棒图标 */
-.smart-input-prompt-icon {
-    width: 18px;
-    height: 18px;
+/* 图标样式 */
+.ait-scroll-to-bottom-btn svg {
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
     stroke-width: 2;
 }
@@ -56,10 +67,10 @@
 /* ==================== 深色模式适配 ==================== */
 
 /* 深色模式 */
-html[data-timeline-theme="dark"] .smart-input-prompt-btn,
-html[class*="dark"] .smart-input-prompt-btn,
-body.dark .smart-input-prompt-btn,
-body[class*="dark"] .smart-input-prompt-btn {
+html[data-timeline-theme="dark"] .ait-scroll-to-bottom-btn,
+html[class*="dark"] .ait-scroll-to-bottom-btn,
+body.dark .ait-scroll-to-bottom-btn,
+body[class*="dark"] .ait-scroll-to-bottom-btn {
     background: rgba(55, 65, 81, 0.9);
     color: #e5e7eb;
     box-shadow: 
@@ -68,10 +79,10 @@ body[class*="dark"] .smart-input-prompt-btn {
         inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
-html[data-timeline-theme="dark"] .smart-input-prompt-btn:hover,
-html[class*="dark"] .smart-input-prompt-btn:hover,
-body.dark .smart-input-prompt-btn:hover,
-body[class*="dark"] .smart-input-prompt-btn:hover {
+html[data-timeline-theme="dark"] .ait-scroll-to-bottom-btn:hover,
+html[class*="dark"] .ait-scroll-to-bottom-btn:hover,
+body.dark .ait-scroll-to-bottom-btn:hover,
+body[class*="dark"] .ait-scroll-to-bottom-btn:hover {
     background: rgba(75, 85, 99, 0.95);
     color: #818cf8;
     box-shadow: 
@@ -82,7 +93,7 @@ body[class*="dark"] .smart-input-prompt-btn:hover {
 
 /* 通过 prefers-color-scheme 检测系统深色模式 */
 @media (prefers-color-scheme: dark) {
-    .smart-input-prompt-btn {
+    .ait-scroll-to-bottom-btn {
         background: rgba(55, 65, 81, 0.9);
         color: #e5e7eb;
         box-shadow: 
@@ -91,7 +102,7 @@ body[class*="dark"] .smart-input-prompt-btn:hover {
             inset 0 0 0 1px rgba(255, 255, 255, 0.08);
     }
     
-    .smart-input-prompt-btn:hover {
+    .ait-scroll-to-bottom-btn:hover {
         background: rgba(75, 85, 99, 0.95);
         color: #818cf8;
         box-shadow: 
@@ -101,20 +112,3 @@ body[class*="dark"] .smart-input-prompt-btn:hover {
     }
 }
 
-/* ==================== 动画效果 ==================== */
-
-/* 出现动画 */
-@keyframes prompt-btn-appear {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.smart-input-prompt-btn[style*="display: flex"] {
-    animation: prompt-btn-appear 0.15s ease-out;
-}

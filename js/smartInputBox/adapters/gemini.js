@@ -36,6 +36,22 @@ class GeminiSmartEnterAdapter extends BaseSmartEnterAdapter {
     getPromptButtonOffset() {
         return { top: 15, left: -2 };
     }
+    
+    /**
+     * 获取回到底部按钮位置偏移量
+     * 位置：输入框右上方
+     */
+    getScrollToBottomOffset() {
+        return { top: -3, right: 8 };  // 向下移动 5px（从 -8 改为 -3）
+    }
+    
+    /**
+     * 获取滚动容器
+     * Gemini 使用虚拟滚动，实际滚动发生在 window 上
+     */
+    getScrollContainer() {
+        return window;
+    }
 }
 
 
