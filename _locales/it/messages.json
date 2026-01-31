@@ -171,7 +171,7 @@
     "message": "Casella di chat"
   },
   "kvzmxp": {
-    "message": "Usa il tasto Invio per andare a capo"
+    "message": "Tasto Invio per andare a capo"
   },
   "kpxvmz": {
     "message": "Copia formula"
@@ -319,6 +319,12 @@
   },
   "quoteReply": {
     "message": "Approfondisci"
+  },
+  "scrollToBottomTitle": {
+    "message": "Vai in fondo"
+  },
+  "scrollToBottomHint": {
+    "message": "Mostra un pulsante rapido per tornare all'ultimo messaggio"
   }
 }
 

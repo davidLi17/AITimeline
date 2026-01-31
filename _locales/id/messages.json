@@ -171,7 +171,7 @@
     "message": "Kotak chat"
   },
   "kvzmxp": {
-    "message": "Gunakan tombol Enter untuk baris baru"
+    "message": "Tombol Enter untuk baris baru"
   },
   "kpxvmz": {
     "message": "Salin rumus"
@@ -319,5 +319,11 @@
   },
   "quoteReply": {
     "message": "Tanya Lanjutan"
+  },
+  "scrollToBottomTitle": {
+    "message": "Ke Bawah"
+  },
+  "scrollToBottomHint": {
+    "message": "Tampilkan tombol cepat untuk kembali ke pesan terbaru"
   }
 }

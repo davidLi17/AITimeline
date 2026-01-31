@@ -165,7 +165,7 @@
     "message": "对话框"
   },
   "kvzmxp": {
-    "message": "使用键盘 Enter 键换行"
+    "message": "键盘 Enter 键换行"
   },
   "kpxvmz": {
     "message": "复制公式"
@@ -394,5 +394,11 @@
   },
   "quoteReplyHint": {
     "message": "选中页面上的文字后，显示追问按钮，点击可快速引用到对话框中"
+  },
+  "scrollToBottomTitle": {
+    "message": "返回底部"
+  },
+  "scrollToBottomHint": {
+    "message": "显示返回底部的快捷按钮，方便回到最新消息"
   }
 }

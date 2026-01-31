@@ -42,6 +42,22 @@ class SmartInputBoxTab extends BaseTab {
             </div>
         `;
         
+        // ==================== 返回底部模块 ====================
+        const scrollToBottomSection = `
+            <div class="setting-section">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">${chrome.i18n.getMessage('scrollToBottomTitle') || '返回底部'}</div>
+                        <div class="setting-hint">${chrome.i18n.getMessage('scrollToBottomHint') || '显示返回底部的快捷按钮，方便回到最新消息'}</div>
+                    </div>
+                    <label class="ait-toggle-switch">
+                        <input type="checkbox" id="scroll-to-bottom-toggle">
+                        <span class="ait-toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        `;
+        
         const divider = '<div class="divider"></div>';
         
         // ==================== Enter 换行控制模块 ====================
@@ -65,7 +81,7 @@ class SmartInputBoxTab extends BaseTab {
             </div>
         `;
         
-        container.innerHTML = quoteReplySection + divider + enterKeySection;
+        container.innerHTML = quoteReplySection + scrollToBottomSection + divider + enterKeySection;
         
         return container;
     }
@@ -78,6 +94,9 @@ class SmartInputBoxTab extends BaseTab {
         
         // 加载追问功能设置
         await this.loadQuoteReplySettings();
+        
+        // 加载返回底部设置
+        await this.loadScrollToBottomSettings();
         
         // 加载平台设置
         await this.loadPlatformSettings();
@@ -118,6 +137,36 @@ class SmartInputBoxTab extends BaseTab {
             } catch (e) {
                 console.error('[SmartInputBoxTab] Failed to save quote reply setting:', e);
                 quoteReplyToggle.checked = !quoteReplyToggle.checked;
+            }
+        });
+    }
+    
+    /**
+     * 加载返回底部设置
+     */
+    async loadScrollToBottomSettings() {
+        const scrollToBottomToggle = document.getElementById('scroll-to-bottom-toggle');
+        if (!scrollToBottomToggle) return;
+        
+        try {
+            // 读取当前状态（默认开启）
+            const result = await chrome.storage.local.get('scrollToBottomEnabled');
+            // 默认值为 true（开启）
+            scrollToBottomToggle.checked = result.scrollToBottomEnabled !== false;
+        } catch (e) {
+            scrollToBottomToggle.checked = true;
+        }
+        
+        // 监听开关变化
+        this.addEventListener(scrollToBottomToggle, 'change', async (e) => {
+            try {
+                const enabled = e.target.checked;
+                
+                // 保存到 Storage
+                await chrome.storage.local.set({ scrollToBottomEnabled: enabled });
+            } catch (e) {
+                console.error('[SmartInputBoxTab] Failed to save scroll to bottom setting:', e);
+                scrollToBottomToggle.checked = !scrollToBottomToggle.checked;
             }
         });
     }

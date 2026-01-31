@@ -11,6 +11,11 @@
     box-sizing: border-box;
 }
 
+/* 连续的设置区块添加间距 */
+.smart-input-box-settings .setting-section + .setting-section {
+    margin-top: 16px;
+}
+
 /* 分隔线 */
 .smart-input-box-settings .divider {
     height: 1px;

@@ -171,7 +171,7 @@
     "message": "Pole czatu"
   },
   "kvzmxp": {
-    "message": "Użyj klawisza Enter do nowej linii"
+    "message": "Klawisz Enter do nowej linii"
   },
   "kpxvmz": {
     "message": "Kopiuj formułę"
@@ -319,6 +319,12 @@
   },
   "quoteReply": {
     "message": "Dopytaj"
+  },
+  "scrollToBottomTitle": {
+    "message": "Na dół"
+  },
+  "scrollToBottomHint": {
+    "message": "Pokaż przycisk szybkiego przejścia do najnowszej wiadomości"
   }
 }
 

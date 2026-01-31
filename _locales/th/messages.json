@@ -171,7 +171,7 @@
     "message": "กล่องแชท"
   },
   "kvzmxp": {
-    "message": "ใช้ปุ่ม Enter เพื่อขึ้นบรรทัดใหม่"
+    "message": "ปุ่ม Enter ขึ้นบรรทัดใหม่"
   },
   "kpxvmz": {
     "message": "คัดลอกสูตร"
@@ -319,6 +319,12 @@
   },
   "quoteReply": {
     "message": "ถามต่อ"
+  },
+  "scrollToBottomTitle": {
+    "message": "ไปด้านล่าง"
+  },
+  "scrollToBottomHint": {
+    "message": "แสดงปุ่มลัดเพื่อกลับไปยังข้อความล่าสุด"
   }
 }
 

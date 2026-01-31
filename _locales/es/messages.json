@@ -171,7 +171,7 @@
     "message": "Cuadro de chat"
   },
   "kvzmxp": {
-    "message": "Usar tecla Enter para nueva línea"
+    "message": "Tecla Enter para nueva línea"
   },
   "kpxvmz": {
     "message": "Copiar fórmula"
@@ -319,5 +319,11 @@
   },
   "quoteReply": {
     "message": "Preguntar más"
+  },
+  "scrollToBottomTitle": {
+    "message": "Ir al final"
+  },
+  "scrollToBottomHint": {
+    "message": "Mostrar botón rápido para volver al mensaje más reciente"
   }
 }

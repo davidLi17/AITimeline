@@ -171,7 +171,7 @@
     "message": "Окно чата"
   },
   "kvzmxp": {
-    "message": "Используйте клавишу Enter для переноса строки"
+    "message": "Клавиша Enter для переноса строки"
   },
   "kpxvmz": {
     "message": "Копировать формулу"
@@ -319,6 +319,12 @@
   },
   "quoteReply": {
     "message": "Уточнить"
+  },
+  "scrollToBottomTitle": {
+    "message": "Вниз"
+  },
+  "scrollToBottomHint": {
+    "message": "Показать кнопку быстрого перехода к последнему сообщению"
   }
 }
 

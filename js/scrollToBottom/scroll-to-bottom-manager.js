@@ -21,6 +21,7 @@ class ScrollToBottomManager {
         this.isEnabled = false;
         this.isDestroyed = false;
         this.isVisible = false;
+        this.globalEnabled = true;  // 全局开关状态（默认开启）
         this.platformSettings = {};
         this.storageListener = null;
         this._unsubscribeObserver = null;
@@ -98,10 +99,13 @@ class ScrollToBottomManager {
      */
     async _loadPlatformSettings() {
         try {
-            const result = await chrome.storage.local.get('scrollToBottomPlatformSettings');
+            const result = await chrome.storage.local.get(['scrollToBottomPlatformSettings', 'scrollToBottomEnabled']);
             this.platformSettings = result.scrollToBottomPlatformSettings || {};
+            // 全局开关，默认开启
+            this.globalEnabled = result.scrollToBottomEnabled !== false;
         } catch (e) {
             this.platformSettings = {};
+            this.globalEnabled = true;
         }
     }
     
@@ -110,6 +114,9 @@ class ScrollToBottomManager {
      */
     _isPlatformEnabled() {
         try {
+            // 先检查全局开关
+            if (!this.globalEnabled) return false;
+            
             const platform = getCurrentPlatform();
             if (!platform) return false;
             if (platform.features?.scrollToBottom !== true) return false;
@@ -126,14 +133,29 @@ class ScrollToBottomManager {
         this.storageListener = (changes, areaName) => {
             if (this.isDestroyed) return;
             
-            if (areaName === 'local' && changes.scrollToBottomPlatformSettings) {
-                this.platformSettings = changes.scrollToBottomPlatformSettings.newValue || {};
-                const shouldEnable = this._isPlatformEnabled();
+            if (areaName === 'local') {
+                let needsUpdate = false;
                 
-                if (shouldEnable && !this.isEnabled) {
-                    this._enable();
-                } else if (!shouldEnable && this.isEnabled) {
-                    this._disable();
+                // 监听全局开关变化
+                if (changes.scrollToBottomEnabled) {
+                    this.globalEnabled = changes.scrollToBottomEnabled.newValue !== false;
+                    needsUpdate = true;
+                }
+                
+                // 监听平台设置变化
+                if (changes.scrollToBottomPlatformSettings) {
+                    this.platformSettings = changes.scrollToBottomPlatformSettings.newValue || {};
+                    needsUpdate = true;
+                }
+                
+                if (needsUpdate) {
+                    const shouldEnable = this._isPlatformEnabled();
+                    
+                    if (shouldEnable && !this.isEnabled) {
+                        this._enable();
+                    } else if (!shouldEnable && this.isEnabled) {
+                        this._disable();
+                    }
                 }
             }
         };

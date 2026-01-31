@@ -171,7 +171,7 @@
     "message": "Chat Box"
   },
   "kvzmxp": {
-    "message": "Use Enter Key for New Line"
+    "message": "Enter Key for New Line"
   },
   "kpxvmz": {
     "message": "Copy Formula"
@@ -319,5 +319,11 @@
   },
   "quoteReply": {
     "message": "Follow Up"
+  },
+  "scrollToBottomTitle": {
+    "message": "Scroll to Bottom"
+  },
+  "scrollToBottomHint": {
+    "message": "Show a quick button to scroll to the latest message"
   }
 }

@@ -171,7 +171,7 @@
     "message": "Hộp chat"
   },
   "kvzmxp": {
-    "message": "Sử dụng phím Enter để xuống dòng"
+    "message": "Phím Enter để xuống dòng"
   },
   "kpxvmz": {
     "message": "Sao chép công thức"
@@ -319,6 +319,12 @@
   },
   "quoteReply": {
     "message": "Hỏi thêm"
+  },
+  "scrollToBottomTitle": {
+    "message": "Xuống cuối"
+  },
+  "scrollToBottomHint": {
+    "message": "Hiển thị nút nhanh để quay lại tin nhắn mới nhất"
   }
 }
 

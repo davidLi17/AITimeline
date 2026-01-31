@@ -12,7 +12,7 @@ class GeminiAdapter extends SiteAdapter {
     constructor() {
         super();
     }
-
+    
     matches(url) {
         return matchesPlatform(url, 'gemini');
     }
@@ -219,5 +219,5 @@ class GeminiAdapter extends SiteAdapter {
         // ✅ 必须返回 boolean，找不到按钮视为 false（未生成），而不是 null（未实现）
         return !!(sendButton && sendButton.classList.contains('stop'));
     }
+    
 }
-

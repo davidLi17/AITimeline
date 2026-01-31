@@ -171,7 +171,7 @@
     "message": "Zone de chat"
   },
   "kvzmxp": {
-    "message": "Utiliser la touche Entrée pour retour à la ligne"
+    "message": "Touche Entrée pour retour à la ligne"
   },
   "kpxvmz": {
     "message": "Copier la formule"
@@ -319,5 +319,11 @@
   },
   "quoteReply": {
     "message": "Question de suivi"
+  },
+  "scrollToBottomTitle": {
+    "message": "Aller en bas"
+  },
+  "scrollToBottomHint": {
+    "message": "Afficher un bouton rapide pour revenir au dernier message"
   }
 }

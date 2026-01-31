@@ -352,5 +352,11 @@
   },
   "quoteReply": {
     "message": "追加質問"
+  },
+  "scrollToBottomTitle": {
+    "message": "最下部へ"
+  },
+  "scrollToBottomHint": {
+    "message": "最新メッセージに戻るクイックボタンを表示"
   }
 }

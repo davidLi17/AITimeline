@@ -352,5 +352,11 @@
   },
   "quoteReply": {
     "message": "추가 질문"
+  },
+  "scrollToBottomTitle": {
+    "message": "맨 아래로"
+  },
+  "scrollToBottomHint": {
+    "message": "최신 메시지로 빠르게 이동하는 버튼 표시"
   }
 }

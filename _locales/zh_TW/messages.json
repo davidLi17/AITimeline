@@ -171,7 +171,7 @@
     "message": "對話框"
   },
   "kvzmxp": {
-    "message": "使用鍵盤 Enter 鍵換行"
+    "message": "鍵盤 Enter 鍵換行"
   },
   "kpxvmz": {
     "message": "複製公式"
@@ -358,5 +358,11 @@
   },
   "quoteReplyHint": {
     "message": "選中頁面上的文字後，顯示追問按鈕，點擊可快速引用到對話框中"
+  },
+  "scrollToBottomTitle": {
+    "message": "返回底部"
+  },
+  "scrollToBottomHint": {
+    "message": "顯示返回底部的快捷按鈕，方便回到最新訊息"
   }
 }

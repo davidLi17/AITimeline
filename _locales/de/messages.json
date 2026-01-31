@@ -319,5 +319,11 @@
   },
   "quoteReply": {
     "message": "Nachfragen"
+  },
+  "scrollToBottomTitle": {
+    "message": "Nach unten"
+  },
+  "scrollToBottomHint": {
+    "message": "Schnellschaltfläche anzeigen, um zur neuesten Nachricht zu gelangen"
   }
 }
