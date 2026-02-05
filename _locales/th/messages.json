@@ -325,6 +325,15 @@
   },
   "scrollToBottomHint": {
     "message": "แสดงปุ่มลัดเพื่อกลับไปยังข้อความล่าสุด"
+  },
+  "pleaseWait": {
+    "message": "กรุณารอสักครู่ กำลังโหลด ID โหนด..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "แสดงเวลาแชท"
+  },
+  "chatTimeLabelHint": {
+    "message": "แสดงเวลาส่งในแต่ละข้อความ บันทึกเวลาจะถูกบันทึกแม้ปิดใช้งาน"
   }
 }
 

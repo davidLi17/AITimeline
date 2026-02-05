@@ -400,5 +400,14 @@
   },
   "scrollToBottomHint": {
     "message": "显示返回底部的快捷按钮，方便回到最新消息"
+  },
+  "pleaseWait": {
+    "message": "请稍等，节点ID正在加载..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "显示对话时间"
+  },
+  "chatTimeLabelHint": {
+    "message": "在每条消息上显示发送时间，关闭后时间记录仍会保存"
   }
 }

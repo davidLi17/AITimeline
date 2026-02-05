@@ -26,9 +26,9 @@ class TimelineManager {
         this.activeTurnId = null;
         this.ui = { timelineBar: null, tooltip: null, track: null, trackContent: null };
         
-        // ✅ 用于跟踪节点变化，避免不必要的重新计算
-        this.lastNodeCount = 0;
-        this.lastNodeIds = new Set();
+        // ✅ 上次渲染时的节点状态（用于变化检测，决定是否需要重新计算）
+        this._renderedNodeCount = 0;
+        this._renderedNodeIds = new Set();
 
         this.mutationObserver = null;
         this.resizeObserver = null;
@@ -882,9 +882,9 @@ class TimelineManager {
         });
         
         // 判断节点是否变化：数量变化 或 ID 集合变化 或 DOM 引用失效
-        const nodeCountChanged = userTurnElements.length !== this.lastNodeCount;
-        const nodeIdsChanged = currentNodeIds.size !== this.lastNodeIds.size || 
-                               ![...currentNodeIds].every(id => this.lastNodeIds.has(id));
+        const nodeCountChanged = userTurnElements.length !== this._renderedNodeCount;
+        const nodeIdsChanged = currentNodeIds.size !== this._renderedNodeIds.size || 
+                               ![...currentNodeIds].every(id => this._renderedNodeIds.has(id));
         // ✅ 新增：检查是否有 DOM 引用失效（处理虚拟滚动导致的 DOM 回收）
         const hasInvalidDom = this.markers.some(m => !m.element?.isConnected);
         const needsRecalculation = nodeCountChanged || nodeIdsChanged || hasInvalidDom;
@@ -906,13 +906,16 @@ class TimelineManager {
         //     idsChanged: nodeIdsChanged 
         // });
         
-        // ✅ 节点数量变化时，对外派发事件（在更新 lastNodeCount 之前，以便计算 delta）
+        // ✅ 节点数量变化时，对外派发事件
+        let pendingNodesChange = null;
         if (nodeCountChanged) {
-            const previousCount = this.lastNodeCount || 0;
+            // 使用 lastNodesChange.count 获取上一次的节点数（不受 resize 重置影响）
+            const previousCount = this.lastNodesChange?.count ?? 0;
             const currentCount = userTurnElements.length;
             
             // ✅ 检查数据是否真的变化了（避免重复 emit 相同数据）
             const lastChange = this.lastNodesChange;
+            // 帮我打一些console，我要看下节点数量的变化
             const shouldEmit = !(lastChange && lastChange.count === currentCount && lastChange.previousCount === previousCount);
             
             if (shouldEmit) {
@@ -923,24 +926,13 @@ class TimelineManager {
                     timestamp: Date.now()
                 };
                 
-                console.log('[Timeline] 📢 节点数量变化:', { previousCount, currentCount });
-                
-                try {
-                    window.dispatchEvent(new CustomEvent('timeline:nodesChange', {
-                        detail: {
-                            count: currentCount,           // 当前节点总数
-                            previousCount: previousCount   // 变化前节点数
-                        }
-                    }));
-                } catch (e) {
-                    // 静默处理事件派发失败
-                }
+                pendingNodesChange = { previousCount, currentCount };
             }
         }
         
         // 更新跟踪状态
-        this.lastNodeCount = userTurnElements.length;
-        this.lastNodeIds = currentNodeIds;
+        this._renderedNodeCount = userTurnElements.length;
+        this._renderedNodeIds = currentNodeIds;
         
         // 节点发生变化，清除旧的 dots，准备重新计算和渲染
         (this.ui.trackContent || this.ui.timelineBar).querySelectorAll('.ait-timeline-dot').forEach(n => n.remove());
@@ -1145,6 +1137,24 @@ class TimelineManager {
         // Ensure active class is applied after dots are created
         this.updateActiveDotUI();
         this.scheduleScrollSync();
+        
+        // ✅ 对外派发节点数量变化事件
+        if (pendingNodesChange) {
+            const nodesChangeDetail = {
+                count: pendingNodesChange.currentCount,           // 当前节点总数
+                previousCount: pendingNodesChange.previousCount,  // 变化前节点数
+                adapter: this.adapter                             // 传递 adapter 引用
+            };
+            console.log('[TimelineManager] timeline:nodesChange', { count: nodesChangeDetail.count, previousCount: nodesChangeDetail.previousCount });
+            try {
+                window.dispatchEvent(new CustomEvent('timeline:nodesChange', {
+                    detail: nodesChangeDetail
+                }));
+            } catch (e) {
+                // 静默处理事件派发失败
+            }
+        }
+        
         // ✅ 辅助函数：根据 nodeKey 查找 marker（支持 nodeId 和 index fallback）
         const findMarkerByNodeKey = (nodeKey) => {
             if (nodeKey === null || nodeKey === undefined) return null;
@@ -1205,7 +1215,6 @@ class TimelineManager {
                 m.type === 'childList' && 
                 (m.addedNodes.length > 0 || m.removedNodes.length > 0)
             );
-            
             if (!hasRelevantChange) return;
             
             // ✅ 注意：padding 恢复逻辑已移至 scheduleScrollSync()
@@ -1308,7 +1317,6 @@ class TimelineManager {
                 // 只处理尚未隐藏的元素，避免重复操作
                 if (el.style.display !== 'none') {
                     el.style.display = 'none';
-                    console.log(`[AI Timeline] 已隐藏冲突的时间轴元素: ${selector}`);
                 }
             });
         });
@@ -1357,8 +1365,13 @@ class TimelineManager {
         this.conversationContainer = newConv;
         
         // ✅ 重置节点跟踪状态，因为切换了对话
-        this.lastNodeCount = 0;
-        this.lastNodeIds = new Set();
+        this._renderedNodeCount = 0;
+        this._renderedNodeIds = new Set();
+        
+        // ✅ 重置 ChatTimeRecorder 状态（解耦：通过全局函数调用）
+        if (typeof resetChatTimeRecorder === 'function') {
+            resetChatTimeRecorder();
+        }
         
         // ✅ Padding 状态由 adapter.isAIGenerating() 实时控制
 
@@ -1633,8 +1646,8 @@ class TimelineManager {
         this.onWindowResize = () => {
             // ✅ GlobalTooltipManager 会处理 tooltip 在 resize 时的行为
             // ✅ 强制重新计算节点位置（包括 padding，由 isAIGenerating 实时控制）
-            this.lastNodeCount = 0;
-            this.lastNodeIds.clear();
+            this._renderedNodeCount = 0;
+            this._renderedNodeIds.clear();
             this.debouncedRecalculateAndRender();
         };
         window.addEventListener('resize', this.onWindowResize);
@@ -1651,8 +1664,8 @@ class TimelineManager {
         if (window.visualViewport) {
             this.onVisualViewportResize = () => {
                 // ✅ 强制重新计算节点位置（包括 padding，由 isAIGenerating 实时控制）
-                this.lastNodeCount = 0;
-                this.lastNodeIds.clear();
+                this._renderedNodeCount = 0;
+                this._renderedNodeIds.clear();
                 this.debouncedRecalculateAndRender();
             };
             try { window.visualViewport.addEventListener('resize', this.onVisualViewportResize); } catch {}
@@ -1787,6 +1800,11 @@ class TimelineManager {
         
         // ✅ 挂载到 window 以便其他模块访问
         window.timelineManager = this;
+        
+        // ✅ 初始化时间记录器（解耦模块，确保 adapter 已就绪）
+        if (typeof initChatTimeRecorder === 'function') {
+            initChatTimeRecorder();
+        }
     }
     
     /**
@@ -2927,6 +2945,11 @@ class TimelineManager {
         // 滚动方向：1=向下（index增加），-1=向上（index减少），0=初始化
         const direction = previousIndex === -1 ? 0 : (currentIndex > previousIndex ? 1 : -1);
         
+        // ✅ previousIndex 无效时不对外派发
+        if (previousIndex === -1) {
+            return;
+        }
+        
         // ✅ 存储最新的激活状态，外部可通过 window.timelineManager.lastActiveChange 获取
         this.lastActiveChange = {
             currentIndex,
@@ -2938,6 +2961,14 @@ class TimelineManager {
         };
         
         try {
+            console.log('[Timeline] 📢 timeline:activeChange detail:', {
+                currentIndex,
+                previousIndex,
+                totalCount,
+                isFirst,
+                isLast,
+                direction
+            });
             window.dispatchEvent(new CustomEvent('timeline:activeChange', {
                 detail: {
                     currentIndex,       // 当前选中节点索引（0-based）
@@ -2990,6 +3021,14 @@ class TimelineManager {
         if (this.healthCheckInterval) {
             clearInterval(this.healthCheckInterval);
             this.healthCheckInterval = null;
+        }
+        
+        // ✅ 清理节点上的时间标签
+        this.cleanupNodeTimeLabels();
+        
+        // ✅ 销毁时间记录器（解耦模块）
+        if (typeof destroyChatTimeRecorder === 'function') {
+            destroyChatTimeRecorder();
         }
 
         this.visibleUserTurns.clear();
@@ -3162,6 +3201,13 @@ class TimelineManager {
     }
 
     /**
+     * ✅ 清理节点上的时间标签
+     */
+    cleanupNodeTimeLabels() {
+        document.querySelectorAll('.ait-node-time-label').forEach(el => el.remove());
+    }
+
+    /**
      * ✅ 检查当前平台是否启用箭头键导航
      */
     isPlatformEnabled() {
@@ -3306,6 +3352,20 @@ class TimelineManager {
         
         const m = this.markerMap.get(id);
         if (!m) return { success: false, action: null };
+        
+        // ✅ 检查是否是 stableNodeId 平台但还没有真正的 ID
+        const features = getCurrentPlatform()?.features;
+        if (features?.stableNodeId) {
+            // 检查 ID 是否是临时格式（以 -数字 结尾，如 gemini-0）
+            const isTempId = /^.+-\d+$/.test(id);
+            if (isTempId) {
+                // 显示提示
+                if (window.globalToastManager) {
+                    window.globalToastManager.info(chrome.i18n.getMessage('pleaseWait') || '请稍等，节点ID正在加载...');
+                }
+                return { success: false, action: null };
+            }
+        }
         
         // ✅ 使用 adapter 提取稳定的 nodeId（可能是字符串或数字）
         // Gemini: 父元素 id（字符串如 'r_abc123'）
@@ -3624,6 +3684,20 @@ class TimelineManager {
         const marker = this.markers.find(m => m.id === id);
         if (!marker) {
             return false;
+        }
+        
+        // ✅ 检查是否是 stableNodeId 平台但还没有真正的 ID
+        const features = getCurrentPlatform()?.features;
+        if (features?.stableNodeId) {
+            // 检查 ID 是否是临时格式（以 -数字 结尾，如 gemini-0）
+            const isTempId = /^.+-\d+$/.test(id);
+            if (isTempId) {
+                // 显示提示
+                if (window.globalToastManager) {
+                    window.globalToastManager.info(chrome.i18n.getMessage('pleaseWait') || '请稍等，节点ID正在加载...');
+                }
+                return false;
+            }
         }
         
         // ✅ 使用 adapter 提取稳定的 nodeId（与 toggleStar 一致）

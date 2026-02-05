@@ -100,6 +100,10 @@ class DoubaoAdapter extends SiteAdapter {
         const text = (textEl?.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    getTextContainer(element) {
+        return element.querySelector('[data-testid="message_text_content"]') || element;
+    }
 
     isConversationRoute(pathname) {
         // Doubao conversation URLs: /chat/数字ID
@@ -148,6 +152,27 @@ class DoubaoAdapter extends SiteAdapter {
             top: '120px',      // 避开顶部导航栏
             right: '22px',    // 右侧边距
             bottom: '120px',   // 避开底部输入框
+        };
+    }
+    
+    /**
+     * 检测 AI 是否正在生成回复
+     * 豆包: 当存在 class 包含 "break-btn-" 的元素时，表示正在生成
+     * @returns {boolean}
+     */
+    isAIGenerating() {
+        const breakBtn = document.querySelector('[class*="break-btn-"]');
+        return !!breakBtn;
+    }
+    
+    /**
+     * 获取时间标签位置配置
+     */
+    getTimeLabelPosition() {
+        // 相对于消息元素定位
+        return {
+            top: '-18px',
+            right: '5px'
         };
     }
     

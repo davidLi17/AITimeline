@@ -325,5 +325,14 @@
   },
   "scrollToBottomHint": {
     "message": "Mostrar botón rápido para volver al mensaje más reciente"
+  },
+  "pleaseWait": {
+    "message": "Por favor espere, el ID del nodo se está cargando..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Mostrar hora del chat"
+  },
+  "chatTimeLabelHint": {
+    "message": "Mostrar hora de envío en cada mensaje. Los registros de tiempo se guardan incluso cuando está desactivado"
   }
 }

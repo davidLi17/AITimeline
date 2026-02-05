@@ -64,6 +64,24 @@ class TimelineSettingsTab extends BaseTab {
         // 分隔线
         const divider = `<div class="divider"></div>`;
         
+        // 显示对话时间开关
+        const chatTimeLabelSection = `
+            <div class="setting-section">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <div class="setting-label">${chrome.i18n.getMessage('chatTimeLabelTitle')}</div>
+                        <div class="setting-hint">
+                            ${chrome.i18n.getMessage('chatTimeLabelHint')}
+                        </div>
+                    </div>
+                    <label class="ait-toggle-switch">
+                        <input type="checkbox" id="chat-time-label-toggle">
+                        <span class="ait-toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        `;
+        
         // 第一部分：长按标记重点对话开关
         const longPressMarkSection = `
             <div class="setting-section">
@@ -100,7 +118,7 @@ class TimelineSettingsTab extends BaseTab {
             </div>
         `;
         
-        container.innerHTML = longPressMarkSection + divider + arrowKeysSection + divider + platformSection;
+        container.innerHTML = chatTimeLabelSection + divider + longPressMarkSection + divider + arrowKeysSection + divider + platformSection;
         
         return container;
     }
@@ -110,6 +128,38 @@ class TimelineSettingsTab extends BaseTab {
      */
     async mounted() {
         super.mounted();
+        
+        // 0. 处理显示对话时间开关（默认开启）
+        const chatTimeLabelCheckbox = document.getElementById('chat-time-label-toggle');
+        if (chatTimeLabelCheckbox) {
+            // 读取当前状态（默认开启）
+            try {
+                const result = await chrome.storage.local.get('chatTimeLabelEnabled');
+                // 默认值为 true（开启）
+                chatTimeLabelCheckbox.checked = result.chatTimeLabelEnabled !== false;
+            } catch (e) {
+                console.error('[TimelineSettingsTab] Failed to load chat time label state:', e);
+                chatTimeLabelCheckbox.checked = true;
+            }
+            
+            // 监听开关变化
+            this.addEventListener(chatTimeLabelCheckbox, 'change', async (e) => {
+                try {
+                    const enabled = e.target.checked;
+                    
+                    // 保存到 Storage
+                    await chrome.storage.local.set({ chatTimeLabelEnabled: enabled });
+                    
+                    // 立即更新当前页面的时间标签显示
+                    if (window.chatTimeRecorder) {
+                        window.chatTimeRecorder.updateLabelVisibility(enabled);
+                    }
+                } catch (e) {
+                    console.error('[TimelineSettingsTab] Failed to save chat time label state:', e);
+                    chatTimeLabelCheckbox.checked = !chatTimeLabelCheckbox.checked;
+                }
+            });
+        }
         
         // 1. 处理长按标记重点对话开关（默认开启，无法关闭）
         const longPressCheckbox = document.getElementById('long-press-mark-toggle');

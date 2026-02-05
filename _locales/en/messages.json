@@ -400,5 +400,14 @@
   },
   "scrollToBottomHint": {
     "message": "Show a quick button to scroll to the latest message"
+  },
+  "pleaseWait": {
+    "message": "Please wait, node ID is loading..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Show Chat Time"
+  },
+  "chatTimeLabelHint": {
+    "message": "Display send time on each message. Time records are saved even when disabled"
   }
 }

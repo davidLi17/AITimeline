@@ -30,6 +30,16 @@ class ClaudeAdapter extends SiteAdapter {
         const text = (pElement?.textContent || element.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    /**
+     * 获取文本容器元素（用于时间标签定位）
+     * Claude: 使用 p 标签（文本在 p 标签中）
+     */
+    getTextContainer(element) {
+        // extractText 从 p 标签提取文本，所以返回 p 标签
+        const pElement = element.querySelector('p');
+        return pElement || element;
+    }
 
     isConversationRoute(pathname) {
         // Claude 对话 URL: /chat/{uuid} 或分享页面 /share/{uuid}

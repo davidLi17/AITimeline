@@ -325,5 +325,14 @@
   },
   "scrollToBottomHint": {
     "message": "Afficher un bouton rapide pour revenir au dernier message"
+  },
+  "pleaseWait": {
+    "message": "Veuillez patienter, l'ID du nœud est en cours de chargement..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Afficher l'heure du chat"
+  },
+  "chatTimeLabelHint": {
+    "message": "Afficher l'heure d'envoi sur chaque message. Les enregistrements de temps sont sauvegardés même désactivés"
   }
 }

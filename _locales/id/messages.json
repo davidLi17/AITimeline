@@ -325,5 +325,14 @@
   },
   "scrollToBottomHint": {
     "message": "Tampilkan tombol cepat untuk kembali ke pesan terbaru"
+  },
+  "pleaseWait": {
+    "message": "Harap tunggu, ID node sedang dimuat..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Tampilkan Waktu Chat"
+  },
+  "chatTimeLabelHint": {
+    "message": "Tampilkan waktu kirim di setiap pesan. Catatan waktu tetap disimpan meski dinonaktifkan"
   }
 }

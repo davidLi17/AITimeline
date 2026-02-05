@@ -189,7 +189,7 @@ async function handleUrlChange() {
     currentUrl = location.href;
     initVersion++;
 
-    // URL 变化了，先清理旧时间轴实例
+    // URL 变化了，先清理旧时间轴实例（内部会销毁 ChatTimeRecorder）
     if (timelineManagerInstance) {
         try { timelineManagerInstance.destroy(); } catch {}
         timelineManagerInstance = null;

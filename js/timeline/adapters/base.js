@@ -48,6 +48,26 @@ class SiteAdapter {
         const text = (element.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    /**
+     * Get the text container element for time label positioning
+     * @param {Element} element - Message DOM element
+     * @returns {Element|null} - The element that wraps the text content
+     */
+    getTextContainer(element) {
+        return element; // 默认返回消息元素本身
+    }
+    
+    /**
+     * Get time label position configuration
+     * @returns {Object} - { top, right, left, bottom } CSS values
+     */
+    getTimeLabelPosition() {
+        return {
+            top: '-18px',
+            right: '0'
+        };
+    }
 
     /**
      * Check if current path is a conversation page

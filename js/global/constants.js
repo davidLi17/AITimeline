@@ -34,8 +34,9 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            quoteReplyPosition: 'bottomLeft'  // 追问按钮位置
-            // scrollToBottom: false  // ChatGPT 有自己的回到底部功能
+            quoteReplyPosition: 'bottomLeft',  // 追问按钮位置
+            chatTimes: true,  // 提问时间记录
+            stableNodeId: true  // 使用稳定的节点 ID（data-message-id），需等待 id 分配后记录
         }
     },
     {
@@ -47,7 +48,9 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            scrollToBottom: true  // 回到底部按钮
+            scrollToBottom: true,  // 回到底部按钮
+            chatTimes: true,  // 提问时间记录
+            stableNodeId: true  // 使用稳定的节点 ID（父元素 id），需等待 id 分配后记录
         }
     },
     {
@@ -58,7 +61,9 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true
+            quoteReply: true,
+            chatTimes: true,  // 提问时间记录
+            stableNodeId: true  // 使用稳定的节点 ID（data-message-id），需等待 id 分配后记录
         }
     },
     {
@@ -69,7 +74,9 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true
+            quoteReply: true,
+            chatTimes: true,  // 提问时间记录
+            chatTimesShowOn: 'afterGeneration'  // 时间显示时机：immediate=立即显示（默认）, afterGeneration=AI生成完成后显示
         }
     },
     {
@@ -80,7 +87,8 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: false,
-            quoteReply: true
+            quoteReply: true,
+            chatTimes: false  // 提问时间记录
         }
     },
     {
@@ -91,7 +99,8 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true
+            quoteReply: true,
+            chatTimes: false  // 提问时间记录
         }
     },
     {
@@ -102,7 +111,8 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true
+            quoteReply: true,
+            chatTimes: true  // 提问时间记录
         }
     },
     {
@@ -113,7 +123,8 @@ const SITE_INFO = [
         features: {
             timeline: true,
             smartInput: true,
-            quoteReply: true
+            quoteReply: true,
+            chatTimes: false  // 提问时间记录
         }
     },
     {
@@ -125,7 +136,8 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            quoteReplyPosition: 'bottomLeft'
+            quoteReplyPosition: 'bottomLeft',
+            chatTimes: false  // 提问时间记录
         }
     },
     {
@@ -137,7 +149,8 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            quoteReplyPosition: 'bottomLeft'
+            quoteReplyPosition: 'bottomLeft',
+            chatTimes: false  // 提问时间记录
         }
     },
     {
@@ -149,7 +162,8 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            quoteReplyPosition: 'bottomLeft'
+            quoteReplyPosition: 'bottomLeft',
+            chatTimes: false  // 提问时间记录
         }
     },
     {

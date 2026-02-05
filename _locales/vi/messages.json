@@ -325,6 +325,15 @@
   },
   "scrollToBottomHint": {
     "message": "Hiển thị nút nhanh để quay lại tin nhắn mới nhất"
+  },
+  "pleaseWait": {
+    "message": "Vui lòng chờ, đang tải ID nút..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Hiển thị thời gian chat"
+  },
+  "chatTimeLabelHint": {
+    "message": "Hiển thị thời gian gửi trên mỗi tin nhắn. Bản ghi thời gian vẫn được lưu khi tắt"
   }
 }
 

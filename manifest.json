@@ -13,7 +13,8 @@
   },
   
   "permissions": [
-    "storage"
+    "storage",
+    "unlimitedStorage"
   ],
   
   "content_scripts": [
@@ -127,6 +128,7 @@
         "js/timeline/common.js",
         "js/timeline/container-finder.js",
         "js/timeline/star-input-modal/star-input-modal.js",
+        "js/timeline/chat-time-recorder.js",
         "js/timeline/timeline-manager.js",
         "js/timeline/index.js",
         "js/url-button/index.js"

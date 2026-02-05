@@ -29,6 +29,10 @@ class YiyanAdapter extends SiteAdapter {
         const text = (span?.textContent || element.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    getTextContainer(element) {
+        return element.querySelector('span') || element;
+    }
 
     isConversationRoute(pathname) {
         // 文心一言对话 URL: /chat/{id}

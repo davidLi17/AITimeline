@@ -32,6 +32,10 @@ class GrokAdapter extends SiteAdapter {
         const text = (textElement?.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    getTextContainer(element) {
+        return element.querySelector('p.break-words') || element;
+    }
 
     isConversationRoute(pathname) {
         // Grok 对话 URL: /c/xxx 或分享页面 /share/xxx

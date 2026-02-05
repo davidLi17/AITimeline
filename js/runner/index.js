@@ -561,8 +561,8 @@
             // 默认值为 true（开启）
             return result.runnerJsEnabled !== false;
         } catch (e) {
-            console.error('[Runner] Failed to check enabled state:', e);
-            return true; // 默认开启
+            // 上下文失效时静默返回 false
+            return false;
         }
     }
 
@@ -576,8 +576,8 @@
             // 默认值为 true（开启）
             return result.runnerPythonEnabled !== false;
         } catch (e) {
-            console.error('[Runner] Failed to check Python enabled state:', e);
-            return true; // 默认开启
+            // 上下文失效时静默返回 false
+            return false;
         }
     }
 
@@ -591,8 +591,8 @@
             // 默认值为 true（开启）
             return result.runnerTypeScriptEnabled !== false;
         } catch (e) {
-            console.error('[Runner] Failed to check TypeScript enabled state:', e);
-            return true; // 默认开启
+            // 上下文失效时静默返回 false
+            return false;
         }
     }
 
@@ -606,8 +606,8 @@
             // 默认值为 true（开启）
             return result.runnerSQLEnabled !== false;
         } catch (e) {
-            console.error('[Runner] Failed to check SQL enabled state:', e);
-            return true; // 默认开启
+            // 上下文失效时静默返回 false
+            return false;
         }
     }
 
@@ -620,7 +620,7 @@
             const result = await chrome.storage.local.get('runnerHtmlEnabled');
             return result.runnerHtmlEnabled !== false;
         } catch (e) {
-            return true;
+            return false;
         }
     }
 
@@ -633,7 +633,7 @@
             const result = await chrome.storage.local.get('runnerJsonEnabled');
             return result.runnerJsonEnabled !== false;
         } catch (e) {
-            return true;
+            return false;
         }
     }
 
@@ -646,7 +646,7 @@
             const result = await chrome.storage.local.get('runnerMarkdownEnabled');
             return result.runnerMarkdownEnabled !== false;
         } catch (e) {
-            return true;
+            return false;
         }
     }
 
@@ -659,7 +659,7 @@
             const result = await chrome.storage.local.get('runnerLuaEnabled');
             return result.runnerLuaEnabled !== false;
         } catch (e) {
-            return true;
+            return false;
         }
     }
 
@@ -671,8 +671,8 @@
         try {
             const result = await chrome.storage.local.get('runnerRubyEnabled');
             return result.runnerRubyEnabled !== false;
-        } catch (e) {
-            return true;
+        } catch {
+            return false;
         }
     }
 

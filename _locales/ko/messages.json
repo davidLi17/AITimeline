@@ -358,5 +358,14 @@
   },
   "scrollToBottomHint": {
     "message": "최신 메시지로 빠르게 이동하는 버튼 표시"
+  },
+  "pleaseWait": {
+    "message": "잠시만 기다려주세요, 노드 ID를 로드 중..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "대화 시간 표시"
+  },
+  "chatTimeLabelHint": {
+    "message": "각 메시지에 전송 시간 표시. 비활성화해도 시간 기록은 저장됩니다"
   }
 }

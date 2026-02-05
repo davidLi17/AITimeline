@@ -421,7 +421,7 @@ class PromptTab extends BaseTab {
                     <label>${chrome.i18n.getMessage('promptContent')}<span class="required-mark">*</span></label>
                     <textarea class="prompt-modal-textarea" id="prompt-content-input"
                         placeholder="${chrome.i18n.getMessage('uwkjwjw')}"
-                        rows="4" maxlength="2500">${this._escapeHtml(prompt?.content || '')}</textarea>
+                        rows="4" maxlength="5000">${this._escapeHtml(prompt?.content || '')}</textarea>
                     <div class="prompt-char-counter">
                         <div class="prompt-platform-select" id="prompt-platform-select">
                             <span class="prompt-platform-label">${chrome.i18n.getMessage('ptfmsl')}：</span>
@@ -430,7 +430,7 @@ class PromptTab extends BaseTab {
                                 <polyline points="6 9 12 15 18 9"/>
                             </svg>
                         </div>
-                        <span><span id="prompt-char-count">${prompt?.content?.length || 0}</span>/2500</span>
+                        <span><span id="prompt-char-count">${prompt?.content?.length || 0}</span>/5000</span>
                     </div>
                 </div>
             </div>

@@ -358,5 +358,14 @@
   },
   "scrollToBottomHint": {
     "message": "最新メッセージに戻るクイックボタンを表示"
+  },
+  "pleaseWait": {
+    "message": "お待ちください、ノードIDを読み込み中..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "会話時間を表示"
+  },
+  "chatTimeLabelHint": {
+    "message": "各メッセージに送信時間を表示。オフにしても時間記録は保存されます"
   }
 }

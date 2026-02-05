@@ -46,6 +46,10 @@ class DeepSeekAdapter extends SiteAdapter {
         const text = (firstDiv?.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    getTextContainer(element) {
+        return element.querySelector('div') || element;
+    }
 
     isConversationRoute(pathname) {
         // DeepSeek 对话 URL: /a/chat/s/{id} 或分享页面 /share/{id}
@@ -83,6 +87,17 @@ class DeepSeekAdapter extends SiteAdapter {
             top: '120px',       // 避开顶部导航栏
             right: '22px',     // 右侧边距
             bottom: '120px',    // 避开底部输入框
+        };
+    }
+    
+    /**
+     * 获取时间标签位置配置
+     */
+    getTimeLabelPosition() {
+        // 相对于 .ds-message 元素定位
+        return {
+            top: '-18px',
+            right: '15px'
         };
     }
     

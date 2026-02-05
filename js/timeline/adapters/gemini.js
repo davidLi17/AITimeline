@@ -111,6 +111,27 @@ class GeminiAdapter extends SiteAdapter {
         const text = texts.join(' ').replace(/\s+/g, ' ').trim();
         return text || '[图片或文件]';
     }
+    
+    /**
+     * 获取文本容器元素（用于时间标签定位）
+     * Gemini: 使用第一个 p.query-text-line 元素
+     */
+    getTextContainer(element) {
+        // 使用第一个 .query-text-line（p 标签）
+        const firstLine = element.querySelector('.query-text-line');
+        return firstLine || element;
+    }
+    
+    /**
+     * 获取时间标签位置配置
+     * Gemini: 相对于 user-query 元素定位
+     */
+    getTimeLabelPosition() {
+        return {
+            top: '-10px',
+            right: '2px'
+        };
+    }
 
     isConversationRoute(pathname) {
         // Gemini conversation URLs: /app/xxx, /share/xxx, /gem/xxx/xxx

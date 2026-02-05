@@ -29,6 +29,10 @@ class TongyiAdapter extends SiteAdapter {
         const text = (bubble?.textContent || element.textContent || '').trim();
         return text || '[图片或文件]';
     }
+    
+    getTextContainer(element) {
+        return element.querySelector('[class*="bubble"]') || element;
+    }
 
     isConversationRoute(pathname) {
         // 通义千问对话 URL:

@@ -325,6 +325,15 @@
   },
   "scrollToBottomHint": {
     "message": "Mostrar botão rápido para voltar à mensagem mais recente"
+  },
+  "pleaseWait": {
+    "message": "Por favor aguarde, o ID do nó está a carregar..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Mostrar hora do chat"
+  },
+  "chatTimeLabelHint": {
+    "message": "Mostrar hora de envio em cada mensagem. Os registos de tempo são guardados mesmo quando desativado"
   }
 }
 

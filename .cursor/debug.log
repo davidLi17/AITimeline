@@ -1,0 +1,2 @@
+{"location":"timeline-manager.js:957","message":"calling chatTimeRecorder.onNodesCountChange","data":{"previousCount":4,"currentCount":4,"userTurnElementsLen":4,"chatTimeRecorderExists":true},"timestamp":1770263211428,"sessionId":"debug-session","hypothesisId":"H2"}
+{"location":"chat-time-recorder.js:106","message":"onNodesCountChange entry","data":{"enabled":true,"previousCount":4,"currentCount":4,"recordedNodeIdsSize":5},"timestamp":1770263211429,"sessionId":"debug-session","hypothesisId":"H1,H2"}

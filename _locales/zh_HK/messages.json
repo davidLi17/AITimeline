@@ -325,6 +325,15 @@
   },
   "scrollToBottomHint": {
     "message": "顯示返回底部的快捷按鈕，方便回到最新訊息"
+  },
+  "pleaseWait": {
+    "message": "請稍等，節點ID正在載入..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "顯示對話時間"
+  },
+  "chatTimeLabelHint": {
+    "message": "在每條訊息上顯示發送時間，關閉後時間記錄仍會保存"
   }
 }
 

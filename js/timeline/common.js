@@ -264,13 +264,6 @@ const StorageAdapter = {
                     resolve();
                 });
             });
-            
-            console.log('[StorageAdapter] Migrated from sync to local:', {
-                total: syncKeys.length,
-                stars: starItems.length,
-                pins: pinItems.length,
-                others: Object.keys(otherData).length
-            });
         } catch (e) {
             console.error('[StorageAdapter] Migration failed:', e);
         }
@@ -299,13 +292,11 @@ const StorageAdapter = {
                 await new Promise(resolve => {
                     chrome.storage.local.remove('biwhckdj', resolve);
                 });
-                console.log('[StorageAdapter] Migrated key: biwhckdj → prompts');
             } else if (result.biwhckdj && result.prompts) {
                 // 两个都存在，删除旧的
                 await new Promise(resolve => {
                     chrome.storage.local.remove('biwhckdj', resolve);
                 });
-                console.log('[StorageAdapter] Removed old key: biwhckdj');
             }
         } catch (e) {
             console.error('[StorageAdapter] Local key migration failed:', e);
@@ -660,7 +651,224 @@ const PinStorageManager = {
     }
 };
 
+// ==================== Chat Time Storage Manager ====================
+
+/**
+ * Chat Time Storage Manager - 提问时间记录管理
+ * 用于记录每个提问节点的创建时间，方便用户了解对话时间线
+ * 
+ * 存储键：chatTimes
+ * 数据结构：{ 
+ *   conversationKey: { 
+ *     createTime: timestamp,    // 会话首次创建时间（只在首次设置）
+ *     lastVisit: timestamp,     // 上次进入时间（用于清理不活跃数据）
+ *     nodes: { nodeId: timestamp, ... } 
+ *   }, 
+ *   ... 
+ * }
+ */
+const ChatTimeStorageManager = {
+    STORAGE_KEY: 'chatTimes',
+
+    /**
+     * 获取所有时间记录
+     * @returns {Promise<Object>}
+     */
+    async getAllRecords() {
+        const data = await StorageAdapter.get(this.STORAGE_KEY);
+        return data && typeof data === 'object' ? data : {};
+    },
+
+    /**
+     * 获取指定会话的时间记录
+     * @param {string} conversationKey - 会话标识（urlWithoutProtocol）
+     * @returns {Promise<Object>} - { createTime, lastVisit, nodes: { nodeId: timestamp, ... } }
+     */
+    async getByConversation(conversationKey) {
+        if (!conversationKey) return { createTime: null, lastVisit: null, nodes: {} };
+        const all = await this.getAllRecords();
+        return all[conversationKey] || { createTime: null, lastVisit: null, nodes: {} };
+    },
+
+    /**
+     * 更新会话的最后访问时间（只更新已有记录，不创建新记录）
+     * @param {string} conversationKey - 会话标识
+     * @returns {Promise<boolean>} - 是否实际更新
+     */
+    async updateLastVisit(conversationKey) {
+        if (!conversationKey) return false;
+        
+        const all = await this.getAllRecords();
+        
+        // 只更新已有记录，不创建新记录（避免刷新旧对话时创建空记录）
+        if (!all[conversationKey]) {
+            return false;
+        }
+        
+        all[conversationKey].lastVisit = Date.now();
+        await StorageAdapter.set(this.STORAGE_KEY, all);
+        return true;
+    },
+
+    /**
+     * 清理临时节点 ID（格式：平台名-纯数字，如 gemini-0, chatgpt-8）
+     * 仅用于 stableNodeId=true 的平台
+     * @param {string} conversationKey - 会话标识
+     * @returns {Promise<number>} - 清理的数量
+     */
+    async cleanupTempIds(conversationKey) {
+        if (!conversationKey) return 0;
+        
+        const all = await this.getAllRecords();
+        
+        if (!all[conversationKey] || !all[conversationKey].nodes) {
+            return 0;
+        }
+        
+        const nodes = all[conversationKey].nodes;
+        const isTempId = (nodeId) => /^[a-z]+-\d+$/i.test(nodeId);
+        let cleanedCount = 0;
+        
+        for (const nodeId of Object.keys(nodes)) {
+            if (isTempId(nodeId)) {
+                delete nodes[nodeId];
+                cleanedCount++;
+            }
+        }
+        
+        if (cleanedCount > 0) {
+            await StorageAdapter.set(this.STORAGE_KEY, all);
+        }
+        
+        return cleanedCount;
+    },
+
+    /**
+     * 设置会话的创建时间（只在新对话时调用，已有 createTime 时不覆盖）
+     * @param {string} conversationKey - 会话标识
+     * @param {number} timestamp - 时间戳（默认当前时间）
+     * @returns {Promise<boolean>} - 是否实际写入
+     */
+    async setCreateTime(conversationKey, timestamp = Date.now()) {
+        if (!conversationKey) return false;
+        
+        const all = await this.getAllRecords();
+        
+        if (!all[conversationKey]) {
+            all[conversationKey] = { createTime: timestamp, lastVisit: timestamp, nodes: {} };
+            await StorageAdapter.set(this.STORAGE_KEY, all);
+            return true;
+        }
+        
+        // 已有 createTime 时不覆盖
+        if (all[conversationKey].createTime) {
+            return false;
+        }
+        
+        all[conversationKey].createTime = timestamp;
+        await StorageAdapter.set(this.STORAGE_KEY, all);
+        return true;
+    },
+
+    /**
+     * 批量设置节点时间（只添加新的，同时更新 lastVisit）
+     * @param {string} conversationKey - 会话标识
+     * @param {Array<{nodeId: string, timestamp?: number}>} nodes - 节点数组
+     * @returns {Promise<number>} - 实际新增的数量
+     */
+    async batchSetNodeTimes(conversationKey, nodes) {
+        if (!conversationKey || !Array.isArray(nodes) || nodes.length === 0) return 0;
+        
+        const all = await this.getAllRecords();
+        const now = Date.now();
+        
+        if (!all[conversationKey]) {
+            all[conversationKey] = { createTime: null, lastVisit: now, nodes: {} };
+        }
+        if (!all[conversationKey].nodes) {
+            all[conversationKey].nodes = {};
+        }
+        
+        let addedCount = 0;
+        
+        for (const { nodeId, timestamp } of nodes) {
+            if (nodeId !== undefined && nodeId !== null && all[conversationKey].nodes[nodeId] === undefined) {
+                all[conversationKey].nodes[nodeId] = timestamp || now;
+                addedCount++;
+            }
+        }
+        
+        // 更新 lastVisit
+        all[conversationKey].lastVisit = now;
+        
+        if (addedCount > 0) {
+            await StorageAdapter.set(this.STORAGE_KEY, all);
+        }
+        
+        return addedCount;
+    },
+
+    /**
+     * 迁移节点 ID（从临时 ID 迁移到真实 ID）
+     * @param {string} conversationKey - 会话标识
+     * @param {string} tempId - 临时节点 ID
+     * @param {string} realId - 真实节点 ID
+     * @returns {Promise<boolean>} - 是否成功迁移
+     */
+    async migrateNodeId(conversationKey, tempId, realId) {
+        if (!conversationKey || !tempId || !realId) return false;
+        
+        const all = await this.getAllRecords();
+        
+        if (!all[conversationKey] || !all[conversationKey].nodes) {
+            return false;
+        }
+        
+        const nodes = all[conversationKey].nodes;
+        
+        // 如果临时 ID 存在，迁移到真实 ID
+        if (nodes[tempId] !== undefined) {
+            const timestamp = nodes[tempId];
+            delete nodes[tempId];
+            nodes[realId] = timestamp;
+            await StorageAdapter.set(this.STORAGE_KEY, all);
+            return true;
+        }
+        
+        return false;
+    },
+
+    /**
+     * 清理不活跃的会话数据
+     * @param {number} maxInactiveDays - 最大不活跃天数（默认30天）
+     * @returns {Promise<number>} - 清理的会话数量
+     */
+    async cleanup(maxInactiveDays = 30) {
+        const all = await this.getAllRecords();
+        const now = Date.now();
+        const maxAge = maxInactiveDays * 24 * 60 * 60 * 1000;
+        let cleanedCount = 0;
+        
+        for (const [convKey, data] of Object.entries(all)) {
+            // 如果没有 lastVisit 或 lastVisit 已过期，删除该会话
+            if (!data.lastVisit || (now - data.lastVisit > maxAge)) {
+                delete all[convKey];
+                cleanedCount++;
+            }
+        }
+        
+        if (cleanedCount > 0) {
+            await StorageAdapter.set(this.STORAGE_KEY, all);
+        }
+        
+        return cleanedCount;
+    }
+};
+
 // ==================== 执行迁移 ====================
 // 在脚本加载时立即执行迁移检查（异步，不阻塞）
 StorageAdapter.migrateFromSyncToLocal();
+
+// 定期清理不活跃的 chatTimes 数据（每次加载时检查）
+ChatTimeStorageManager.cleanup(30).catch(() => {});
 

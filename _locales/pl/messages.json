@@ -325,6 +325,15 @@
   },
   "scrollToBottomHint": {
     "message": "Pokaż przycisk szybkiego przejścia do najnowszej wiadomości"
+  },
+  "pleaseWait": {
+    "message": "Proszę czekać, ładowanie ID węzła..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Pokaż czas czatu"
+  },
+  "chatTimeLabelHint": {
+    "message": "Wyświetl czas wysłania przy każdej wiadomości. Rekordy czasu są zapisywane nawet po wyłączeniu"
   }
 }
 

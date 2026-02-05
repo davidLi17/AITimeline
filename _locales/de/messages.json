@@ -325,5 +325,14 @@
   },
   "scrollToBottomHint": {
     "message": "Schnellschaltfläche anzeigen, um zur neuesten Nachricht zu gelangen"
+  },
+  "pleaseWait": {
+    "message": "Bitte warten, Knoten-ID wird geladen..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Chat-Zeit anzeigen"
+  },
+  "chatTimeLabelHint": {
+    "message": "Sendezeit bei jeder Nachricht anzeigen. Zeitaufzeichnungen werden auch bei Deaktivierung gespeichert"
   }
 }

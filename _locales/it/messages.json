@@ -325,6 +325,15 @@
   },
   "scrollToBottomHint": {
     "message": "Mostra un pulsante rapido per tornare all'ultimo messaggio"
+  },
+  "pleaseWait": {
+    "message": "Attendere, caricamento dell'ID del nodo in corso..."
+  },
+  "chatTimeLabelTitle": {
+    "message": "Mostra ora chat"
+  },
+  "chatTimeLabelHint": {
+    "message": "Mostra l'ora di invio su ogni messaggio. I record temporali vengono salvati anche quando disattivato"
   }
 }
 

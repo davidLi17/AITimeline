@@ -102,6 +102,14 @@ class ChatGPTAdapter extends SiteAdapter {
         const text = (textElement?.textContent || '').replace(/\s+/g, ' ').trim();
         return text || '[图片或文件]';
     }
+    
+    /**
+     * 获取文本容器元素（用于时间标签定位）
+     * ChatGPT: 使用 .whitespace-pre-wrap 元素
+     */
+    getTextContainer(element) {
+        return element.querySelector('.whitespace-pre-wrap') || element;
+    }
 
     isConversationRoute(pathname) {
         const segs = pathname.split('/').filter(Boolean);
@@ -193,6 +201,18 @@ class ChatGPTAdapter extends SiteAdapter {
             top: '120px',      // 避开顶部导航栏
             right: '22px',    // 右侧边距
             bottom: '120px',   // 避开底部输入框
+        };
+    }
+    
+    /**
+     * 获取时间标签位置配置
+     * ChatGPT: 底部显示
+     */
+    getTimeLabelPosition() {
+        // 相对于消息元素定位
+        return {
+            top: '-16px',
+            right: '10px'
         };
     }
     
