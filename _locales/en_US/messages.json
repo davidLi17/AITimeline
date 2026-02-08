@@ -321,7 +321,7 @@
     "message": "Show Chat Time"
   },
   "chatTimeLabelHint": {
-    "message": "Display send time on each message. Time records are saved even when disabled"
+    "message": "Display send time on each message, as clear as a chat log"
   },
   "exportTitle": {
     "message": "Manual Sync"

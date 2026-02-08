@@ -321,7 +321,7 @@
     "message": "Chat-Zeit anzeigen"
   },
   "chatTimeLabelHint": {
-    "message": "Sendezeit bei jeder Nachricht anzeigen. Zeitaufzeichnungen werden auch bei Deaktivierung gespeichert"
+    "message": "Sendezeit bei jeder Nachricht anzeigen, so übersichtlich wie ein Chatverlauf"
   },
   "exportTitle": {
     "message": "Manuelle Synchronisierung"

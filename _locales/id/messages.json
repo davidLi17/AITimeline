@@ -321,7 +321,7 @@
     "message": "Tampilkan Waktu Chat"
   },
   "chatTimeLabelHint": {
-    "message": "Tampilkan waktu kirim di setiap pesan. Catatan waktu tetap disimpan meski dinonaktifkan"
+    "message": "Tampilkan waktu kirim di setiap pesan, sejelas riwayat chat"
   },
   "exportTitle": {
     "message": "Sinkronisasi Manual"

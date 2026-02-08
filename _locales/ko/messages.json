@@ -354,7 +354,7 @@
     "message": "대화 시간 표시"
   },
   "chatTimeLabelHint": {
-    "message": "각 메시지에 전송 시간 표시. 비활성화해도 시간 기록은 저장됩니다"
+    "message": "각 메시지에 전송 시간 표시, 채팅 기록처럼 한눈에"
   },
   "gdriveTitle": {
     "message": "Google Drive 동기화"

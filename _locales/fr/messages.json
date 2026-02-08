@@ -321,7 +321,7 @@
     "message": "Afficher l'heure du chat"
   },
   "chatTimeLabelHint": {
-    "message": "Afficher l'heure d'envoi sur chaque message. Les enregistrements de temps sont sauvegardés même désactivés"
+    "message": "Afficher l'heure d'envoi sur chaque message, aussi clair qu'un historique de chat"
   },
   "exportTitle": {
     "message": "Synchronisation manuelle"

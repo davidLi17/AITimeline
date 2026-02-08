@@ -321,7 +321,7 @@
     "message": "Mostra ora chat"
   },
   "chatTimeLabelHint": {
-    "message": "Mostra l'ora di invio su ogni messaggio. I record temporali vengono salvati anche quando disattivato"
+    "message": "Mostra l'ora di invio su ogni messaggio, chiaro come una cronologia chat"
   },
   "exportTitle": {
     "message": "Sincronizzazione manuale"

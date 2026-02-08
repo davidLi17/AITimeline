@@ -321,7 +321,7 @@
     "message": "Pokaż czas czatu"
   },
   "chatTimeLabelHint": {
-    "message": "Wyświetl czas wysłania przy każdej wiadomości. Rekordy czasu są zapisywane nawet po wyłączeniu"
+    "message": "Wyświetl czas wysłania przy każdej wiadomości, przejrzyście jak historia czatu"
   },
   "exportTitle": {
     "message": "Ręczna synchronizacja"

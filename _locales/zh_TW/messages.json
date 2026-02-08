@@ -360,7 +360,7 @@
     "message": "顯示對話時間"
   },
   "chatTimeLabelHint": {
-    "message": "在每條訊息上顯示發送時間，關閉後時間記錄仍會保存"
+    "message": "在每條訊息上顯示發送時間，像聊天記錄一樣清晰"
   },
   "gdriveTitle": {
     "message": "Google Drive 雲端同步"

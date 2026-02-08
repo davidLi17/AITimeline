@@ -396,7 +396,7 @@
     "message": "显示对话时间"
   },
   "chatTimeLabelHint": {
-    "message": "在每条消息上显示发送时间，关闭后时间记录仍会保存"
+    "message": "在每条消息上显示发送时间，像聊天记录一样清晰"
   },
   "gdriveTitle": {
     "message": "Google Drive 云同步"

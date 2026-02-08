@@ -354,7 +354,7 @@
     "message": "会話時間を表示"
   },
   "chatTimeLabelHint": {
-    "message": "各メッセージに送信時間を表示。オフにしても時間記録は保存されます"
+    "message": "各メッセージに送信時間を表示、チャット履歴のように一目瞭然"
   },
   "gdriveTitle": {
     "message": "Google Drive 同期"

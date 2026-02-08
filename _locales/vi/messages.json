@@ -321,7 +321,7 @@
     "message": "Hiển thị thời gian chat"
   },
   "chatTimeLabelHint": {
-    "message": "Hiển thị thời gian gửi trên mỗi tin nhắn. Bản ghi thời gian vẫn được lưu khi tắt"
+    "message": "Hiển thị thời gian gửi trên mỗi tin nhắn, rõ ràng như lịch sử trò chuyện"
   },
   "exportTitle": {
     "message": "Đồng bộ thủ công"
