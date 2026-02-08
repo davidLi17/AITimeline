@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Danos 5 estrellas"
   },
-  "urlButtonHint": {
-    "message": "Convertir URLs de texto plano en enlaces clicables que se abren en una nueva pestaña"
-  },
   "runBtn": {
     "message": "Ejecutar"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Claro"
-  },
-  "watermarkRemoverHint": {
-    "message": "Cuando está activado, elimina automáticamente las marcas de agua Nano Banana de las imágenes generadas por Gemini"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Descargar sin marca de agua"
-  },
-  "watermarkTabName": {
-    "message": "Marca de agua"
   },
   "dataSyncTabName": {
     "message": "Migración de datos"
@@ -334,5 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Mostrar hora de envío en cada mensaje. Los registros de tiempo se guardan incluso cuando está desactivado"
+  },
+  "exportTitle": {
+    "message": "Sincronización manual"
+  },
+  "exportHint": {
+    "message": "Copia de seguridad o restauración manual de datos mediante archivo JSON para migrar a otros navegadores."
+  },
+  "gdriveTitle": {
+    "message": "Sincronización con Google Drive"
+  },
+  "gdriveHint": {
+    "message": "Haz una copia de seguridad en tu Google Drive para sincronizar entre dispositivos."
   }
 }

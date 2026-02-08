@@ -270,6 +270,7 @@ class ScrollToBottomManager {
                         this._updatePosition();
                     }
                 },
+                filter: { hasAddedNodes: true },
                 debounce: 300
             });
         }

@@ -202,6 +202,7 @@ class SmartEnterManager {
             if (window.DOMObserverManager) {
                 this._unsubscribeObserver = window.DOMObserverManager.getInstance().subscribeBody('smart-enter', {
                     callback: () => this._debouncedAttach(),
+                    filter: { hasAddedNodes: true },
                     debounce: SMART_ENTER_CONFIG.DEBOUNCE_DELAY  // 200ms 防抖
                 });
             }

@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "5つ星評価をお願いします"
   },
-  "urlButtonHint": {
-    "message": "テキストURLをクリック可能なリンクに変換し、新しいタブで開きます"
-  },
   "runBtn": {
     "message": "実行"
   },
@@ -287,15 +284,6 @@
   "themeLight": {
     "message": "ライト"
   },
-  "watermarkRemoverHint": {
-    "message": "有効にすると、Gemini で生成された画像から Nano Banana ウォーターマークを自動的に削除します"
-  },
-  "watermarkRemoverDownload": {
-    "message": "ウォーターマークなしでダウンロード"
-  },
-  "watermarkTabName": {
-    "message": "透かし削除"
-  },
   "formulaFormatTitle": {
     "message": "コピー形式を選択"
   },
@@ -303,10 +291,10 @@
     "message": "データ移行"
   },
   "exportTitle": {
-    "message": "データをエクスポート"
+    "message": "手動同期"
   },
   "exportHint": {
-    "message": "すべての設定とお気に入りをJSONファイルにエクスポートして、バックアップや他のデバイスへの移行に使用できます。"
+    "message": "JSONファイルで手動バックアップまたはデータ復元を行い、他のブラウザへの移行に使用できます。"
   },
   "exportBtn": {
     "message": "エクスポート"
@@ -367,5 +355,11 @@
   },
   "chatTimeLabelHint": {
     "message": "各メッセージに送信時間を表示。オフにしても時間記録は保存されます"
+  },
+  "gdriveTitle": {
+    "message": "Google Drive 同期"
+  },
+  "gdriveHint": {
+    "message": "データをGoogle Driveにバックアップし、複数デバイス間で同期します。"
   }
 }

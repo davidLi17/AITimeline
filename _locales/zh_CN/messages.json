@@ -296,9 +296,6 @@
   "goToReview": {
     "message": "给我们五星好评"
   },
-  "urlButtonHint": {
-    "message": "将纯文本网址转为可点击的链接，点击可在新标签页打开链接"
-  },
   "runBtn": {
     "message": "运行"
   },
@@ -307,15 +304,6 @@
   },
   "themeLight": {
     "message": "浅色"
-  },
-  "watermarkRemoverHint": {
-    "message": "启用后，自动去除 Gemini 生成图片上的 Nano Banana 水印"
-  },
-  "watermarkRemoverDownload": {
-    "message": "下载无水印图片"
-  },
-  "watermarkTabName": {
-    "message": "去除水印"
   },
   "zxvkpm": {
     "message": "查看全部"
@@ -330,10 +318,10 @@
     "message": "数据迁移"
   },
   "exportTitle": {
-    "message": "导出数据"
+    "message": "手动同步"
   },
   "exportHint": {
-    "message": "将本插件在本浏览器的数据导出为 JSON 文件，用于备份或迁移到其他浏览器。"
+    "message": "通过 JSON 文件手动备份或恢复数据，用于迁移到其他浏览器。"
   },
   "exportBtn": {
     "message": "导出数据"
@@ -409,5 +397,11 @@
   },
   "chatTimeLabelHint": {
     "message": "在每条消息上显示发送时间，关闭后时间记录仍会保存"
+  },
+  "gdriveTitle": {
+    "message": "Google Drive 云同步"
+  },
+  "gdriveHint": {
+    "message": "将数据备份到你的 Google Drive 中，实现多设备同步。"
   }
 }

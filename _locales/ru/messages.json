@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Поставьте нам 5 звёзд"
   },
-  "urlButtonHint": {
-    "message": "Преобразовать текстовые URL в кликабельные ссылки, открывающиеся в новой вкладке"
-  },
   "runBtn": {
     "message": "Запуск"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Светлая"
-  },
-  "watermarkRemoverHint": {
-    "message": "При включении автоматически удаляет водяные знаки Nano Banana с изображений, созданных Gemini"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Скачать без водяного знака"
-  },
-  "watermarkTabName": {
-    "message": "Водяной знак"
   },
   "dataSyncTabName": {
     "message": "Миграция данных"
@@ -334,6 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Показывать время отправки для каждого сообщения. Записи времени сохраняются даже при отключении"
+  },
+  "exportTitle": {
+    "message": "Ручная синхронизация"
+  },
+  "exportHint": {
+    "message": "Ручное резервное копирование или восстановление данных через JSON-файл для переноса в другие браузеры."
+  },
+  "gdriveTitle": {
+    "message": "Синхронизация Google Drive"
+  },
+  "gdriveHint": {
+    "message": "Резервное копирование данных в Google Drive для синхронизации между устройствами."
   }
 }
-

@@ -91,22 +91,38 @@ class QuoteReplyManager {
     _createButton() {
         if (this.buttonElement) return;
         
-        const btn = document.createElement('button');
+        const btn = document.createElement('div');
         btn.className = 'ait-quote-reply-btn';
         btn.innerHTML = `
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/>
-                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
-            </svg>
-            <span>${chrome.i18n.getMessage('quoteReply') || '追问'}</span>
+            <button class="ait-quote-reply-action">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/>
+                    <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+                </svg>
+                <span>${chrome.i18n.getMessage('quoteReply') || '追问'}</span>
+            </button>
+            <span class="ait-quote-reply-divider"></span>
+            <button class="ait-quote-reply-logo">
+                <img src="${chrome.runtime.getURL('images/logo.png')}" width="14" height="14" alt="AIT">
+            </button>
         `;
         btn.style.display = 'none';
         
         // ✅ 使用事件委托（解决长时间停留后事件失效问题）
-        window.eventDelegateManager.on('click', '.ait-quote-reply-btn', (e) => {
+        // 追问按钮：执行引用追问
+        window.eventDelegateManager.on('click', '.ait-quote-reply-action', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this._handleQuote();
+        });
+        // Logo 按钮：打开 panelModal 收藏对话框
+        window.eventDelegateManager.on('click', '.ait-quote-reply-logo', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this._hideButton();
+            if (window.panelModal) {
+                window.panelModal.show('smartInputBox');
+            }
         });
         window.eventDelegateManager.on('mousedown', '.ait-quote-reply-btn', (e) => {
             e.preventDefault();
@@ -354,9 +370,16 @@ class QuoteReplyManager {
         }
         
         // 格式化为引用格式（每行前加 > ），末尾换行由通用方法处理
-        const quotedText = this.currentSelection
+        // 先处理伪换行：公式渲染（KaTeX/MathJax）会在元素边界插入单个换行符，
+        // 需要将其合并为空格，只保留双换行作为真正的段落分隔
+        const normalizedText = this.currentSelection
+            .replace(/\n{2,}/g, '\n\n')       // 标准化段落分隔为双换行
+            .replace(/(?<!\n)\n(?!\n)/g, ' ')  // 单个换行 → 空格（公式渲染产生的伪换行）
+            .replace(/ {2,}/g, ' ');           // 合并多余空格
+        
+        const quotedText = normalizedText
             .split('\n')
-            .map(line => `> ${line}`)
+            .map(line => line.trim() ? `> ${line.trim()}` : '>')
             .join('\n');
         
         // 插入到输入框

@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "俾我哋五星好評"
   },
-  "urlButtonHint": {
-    "message": "將純文字網址轉為可點擊嘅連結，點擊可喺新分頁開啟"
-  },
   "runBtn": {
     "message": "執行"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "淺色"
-  },
-  "watermarkRemoverHint": {
-    "message": "啟用後，自動去除 Gemini 生成圖片上的 Nano Banana 浮水印"
-  },
-  "watermarkRemoverDownload": {
-    "message": "下載無浮水印圖片"
-  },
-  "watermarkTabName": {
-    "message": "去除浮水印"
   },
   "dataSyncTabName": {
     "message": "資料遷移"
@@ -334,6 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "在每條訊息上顯示發送時間，關閉後時間記錄仍會保存"
+  },
+  "exportTitle": {
+    "message": "手動同步"
+  },
+  "exportHint": {
+    "message": "透過 JSON 檔案手動備份或恢復數據，用於遷移到其他瀏覽器。"
+  },
+  "gdriveTitle": {
+    "message": "Google Drive 雲端同步"
+  },
+  "gdriveHint": {
+    "message": "將數據備份到你的 Google Drive 中，實現多設備同步。"
   }
 }
-

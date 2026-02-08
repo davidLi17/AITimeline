@@ -30,7 +30,6 @@
 |---------|-------------|
 | 🎯 **Timeline Navigation** | Click timeline nodes to quickly jump to any conversation |
 | 🧮 **Formula Extraction** | Intelligently identify formulas and extract their LaTeX |
-| 🖼️ **Watermark Removal** | Remove Nano Banana watermarks from Gemini-generated images |
 | ⭐️ **Smart Bookmarks** | Save important Q&As with notes and folder organization |
 | 📌 **Page Bookmarks** | Bookmark entire chat pages for easy reference |
 | 🔍 **Quick Preview** | Hover to preview conversation content without jumping |

@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Bewerten Sie uns mit 5 Sternen"
   },
-  "urlButtonHint": {
-    "message": "Klartext-URLs in anklickbare Links umwandeln, die in einem neuen Tab öffnen"
-  },
   "runBtn": {
     "message": "Ausführen"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Hell"
-  },
-  "watermarkRemoverHint": {
-    "message": "Wenn aktiviert, werden Nano Banana Wasserzeichen automatisch von Gemini-generierten Bildern entfernt"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Ohne Wasserzeichen herunterladen"
-  },
-  "watermarkTabName": {
-    "message": "Wasserzeichen"
   },
   "dataSyncTabName": {
     "message": "Datenmigration"
@@ -334,5 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Sendezeit bei jeder Nachricht anzeigen. Zeitaufzeichnungen werden auch bei Deaktivierung gespeichert"
+  },
+  "exportTitle": {
+    "message": "Manuelle Synchronisierung"
+  },
+  "exportHint": {
+    "message": "Daten manuell über JSON-Datei sichern oder wiederherstellen, um sie auf andere Browser zu übertragen."
+  },
+  "gdriveTitle": {
+    "message": "Google Drive Synchronisierung"
+  },
+  "gdriveHint": {
+    "message": "Daten in Google Drive sichern und geräteübergreifend synchronisieren."
   }
 }

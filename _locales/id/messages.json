@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Beri kami bintang 5"
   },
-  "urlButtonHint": {
-    "message": "Ubah URL teks biasa menjadi tautan yang dapat diklik, buka di tab baru"
-  },
   "runBtn": {
     "message": "Jalankan"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Terang"
-  },
-  "watermarkRemoverHint": {
-    "message": "Saat diaktifkan, secara otomatis menghapus tanda air Nano Banana dari gambar yang dibuat Gemini"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Unduh tanpa tanda air"
-  },
-  "watermarkTabName": {
-    "message": "Tanda Air"
   },
   "dataSyncTabName": {
     "message": "Migrasi Data"
@@ -334,5 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Tampilkan waktu kirim di setiap pesan. Catatan waktu tetap disimpan meski dinonaktifkan"
+  },
+  "exportTitle": {
+    "message": "Sinkronisasi Manual"
+  },
+  "exportHint": {
+    "message": "Cadangkan atau pulihkan data secara manual melalui file JSON untuk migrasi ke browser lain."
+  },
+  "gdriveTitle": {
+    "message": "Sinkronisasi Google Drive"
+  },
+  "gdriveHint": {
+    "message": "Cadangkan data ke Google Drive Anda untuk sinkronisasi multi-perangkat."
   }
 }

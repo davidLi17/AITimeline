@@ -181,6 +181,11 @@ function initializeTimeline() {
         timelineManagerInstance.init().catch(err => {});
     } catch (err) {
     }
+    
+    // ✅ 启动 AI 状态监控（事件驱动，替代各模块的 setInterval 轮询）
+    if (window.AIStateMonitor && currentAdapter) {
+        window.AIStateMonitor.getInstance().start(currentAdapter);
+    }
 }
 
 async function handleUrlChange() {
@@ -193,6 +198,11 @@ async function handleUrlChange() {
     if (timelineManagerInstance) {
         try { timelineManagerInstance.destroy(); } catch {}
         timelineManagerInstance = null;
+    }
+    
+    // 停止 AI 状态监控（initializeTimeline 中会重新启动）
+    if (window.AIStateMonitor) {
+        window.AIStateMonitor.getInstance().stop();
     }
     
     // ============================================

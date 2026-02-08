@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "हमें 5 स्टार दें"
   },
-  "urlButtonHint": {
-    "message": "सादे टेक्स्ट URL को क्लिक करने योग्य लिंक में बदलें जो नए टैब में खुलते हैं"
-  },
   "runBtn": {
     "message": "चलाएं"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "हल्का"
-  },
-  "watermarkRemoverHint": {
-    "message": "सक्षम होने पर, Gemini द्वारा बनाई गई छवियों से Nano Banana वॉटरमार्क स्वचालित रूप से हटा देता है"
-  },
-  "watermarkRemoverDownload": {
-    "message": "बिना वॉटरमार्क के डाउनलोड करें"
-  },
-  "watermarkTabName": {
-    "message": "वॉटरमार्क"
   },
   "dataSyncTabName": {
     "message": "डेटा माइग्रेशन"
@@ -334,5 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "प्रत्येक संदेश पर भेजने का समय दिखाएं। अक्षम होने पर भी समय रिकॉर्ड सहेजे जाते हैं"
+  },
+  "exportTitle": {
+    "message": "मैन्युअल सिंक"
+  },
+  "exportHint": {
+    "message": "अन्य ब्राउज़रों में माइग्रेट करने के लिए JSON फ़ाइल के माध्यम से मैन्युअल रूप से डेटा बैकअप या रीस्टोर करें।"
+  },
+  "gdriveTitle": {
+    "message": "Google Drive सिंक"
+  },
+  "gdriveHint": {
+    "message": "मल्टी-डिवाइस सिंक के लिए डेटा को अपने Google Drive में बैकअप करें।"
   }
 }

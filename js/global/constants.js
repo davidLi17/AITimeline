@@ -75,8 +75,7 @@ const SITE_INFO = [
             timeline: true,
             smartInput: true,
             quoteReply: true,
-            chatTimes: true,  // 提问时间记录
-            chatTimesShowOn: 'afterGeneration'  // 时间显示时机：immediate=立即显示（默认）, afterGeneration=AI生成完成后显示
+            chatTimes: true  // 提问时间记录
         }
     },
     {

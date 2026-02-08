@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Donnez-nous 5 étoiles"
   },
-  "urlButtonHint": {
-    "message": "Convertir les URL en texte brut en liens cliquables qui s'ouvrent dans un nouvel onglet"
-  },
   "runBtn": {
     "message": "Exécuter"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Clair"
-  },
-  "watermarkRemoverHint": {
-    "message": "Lorsqu'activé, supprime automatiquement les filigranes Nano Banana des images générées par Gemini"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Télécharger sans filigrane"
-  },
-  "watermarkTabName": {
-    "message": "Filigrane"
   },
   "dataSyncTabName": {
     "message": "Migration de données"
@@ -334,5 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Afficher l'heure d'envoi sur chaque message. Les enregistrements de temps sont sauvegardés même désactivés"
+  },
+  "exportTitle": {
+    "message": "Synchronisation manuelle"
+  },
+  "exportHint": {
+    "message": "Sauvegardez ou restaurez manuellement vos données via un fichier JSON pour migrer vers d'autres navigateurs."
+  },
+  "gdriveTitle": {
+    "message": "Synchronisation Google Drive"
+  },
+  "gdriveHint": {
+    "message": "Sauvegardez vos données sur Google Drive pour synchroniser entre plusieurs appareils."
   }
 }

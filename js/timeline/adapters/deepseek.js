@@ -2,13 +2,13 @@
  * DeepSeek Adapter
  * 
  * Supports: chat.deepseek.com, chat.deepseek.com/share/*
- * Features: 动态检测用户消息 class（每次加载可能不同）
+ * Features: 通过第一个 .ds-message 的父元素 class 识别用户消息容器
  */
 
 class DeepSeekAdapter extends SiteAdapter {
     constructor() {
         super();
-        this.userMessageBodyClass = null; // 动态检测的用户消息内容体 class
+        this._userMessageParentClass = null; // 动态检测的用户消息父容器 class
     }
 
     matches(url) {
@@ -16,20 +16,25 @@ class DeepSeekAdapter extends SiteAdapter {
     }
 
     getUserMessageSelector() {
-        // 动态检测用户消息内容体的 class
-        if (!this.userMessageBodyClass) {
+        /**
+         * 动态检测用户消息父容器的 class
+         * 
+         * DeepSeek 中每条消息（.ds-message）被包裹在一个带有动态哈希 class 的父容器中，
+         * 用户消息和 AI 回复的父容器 class 不同。
+         * 第一个 .ds-message 一定是用户消息，通过其父元素的 class 来识别所有用户消息。
+         */
+        if (!this._userMessageParentClass) {
             const firstMessage = document.querySelector('.ds-message');
-            if (firstMessage) {
-                const firstChild = firstMessage.querySelector('div');
-                if (firstChild) {
-                    this.userMessageBodyClass = firstChild.className;
+            if (firstMessage?.parentElement) {
+                const parentClass = firstMessage.parentElement.classList[0];
+                if (parentClass) {
+                    this._userMessageParentClass = parentClass;
                 }
             }
         }
         
-        // 返回包含该 class 子元素的 .ds-message 选择器
-        if (this.userMessageBodyClass) {
-            return `.ds-message:has(> .${this.userMessageBodyClass})`;
+        if (this._userMessageParentClass) {
+            return `.${this._userMessageParentClass} > .ds-message`;
         }
         
         // 备用：如果检测失败，返回所有 ds-message（会包含 AI 回复，但至少能工作）

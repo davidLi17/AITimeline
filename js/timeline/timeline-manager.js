@@ -1271,10 +1271,11 @@ class TimelineManager {
      * 使用 DOMObserverManager 统一管理，减少订阅数量
      */
     setupDomCheckObserver() {
-        // 已知的冲突插件时间轴选择器
+        // 已知的冲突时间轴选择器（包括其他插件和平台自带的时间轴）
         const conflictingSelectors = [
             '.gemini-timeline-bar',      // Gemini 时间轴插件
             '.chatgpt-timeline-bar',     // ChatGPT 时间轴插件
+            '[style*="--scroll-nav-page-padding"]', // DeepSeek 原生滚动导航时间轴
         ];
         
         // 检查并更新时间轴可见性
@@ -3201,10 +3202,12 @@ class TimelineManager {
     }
 
     /**
-     * ✅ 清理节点上的时间标签
+     * ✅ 清理节点上的时间标签（移除 data-ait-time 属性，::before 自动消失）
      */
     cleanupNodeTimeLabels() {
-        document.querySelectorAll('.ait-node-time-label').forEach(el => el.remove());
+        document.querySelectorAll('[data-ait-time]').forEach(el => {
+            el.removeAttribute('data-ait-time');
+        });
     }
 
     /**

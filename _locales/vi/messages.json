@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Đánh giá 5 sao cho chúng tôi"
   },
-  "urlButtonHint": {
-    "message": "Chuyển đổi URL văn bản thuần thành liên kết có thể nhấp, mở trong tab mới"
-  },
   "runBtn": {
     "message": "Chạy"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Sáng"
-  },
-  "watermarkRemoverHint": {
-    "message": "Khi bật, tự động xóa hình mờ Nano Banana khỏi hình ảnh do Gemini tạo"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Tải xuống không có hình mờ"
-  },
-  "watermarkTabName": {
-    "message": "Hình mờ"
   },
   "dataSyncTabName": {
     "message": "Di chuyển dữ liệu"
@@ -334,6 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Hiển thị thời gian gửi trên mỗi tin nhắn. Bản ghi thời gian vẫn được lưu khi tắt"
+  },
+  "exportTitle": {
+    "message": "Đồng bộ thủ công"
+  },
+  "exportHint": {
+    "message": "Sao lưu hoặc khôi phục dữ liệu thủ công qua tệp JSON để chuyển sang trình duyệt khác."
+  },
+  "gdriveTitle": {
+    "message": "Đồng bộ Google Drive"
+  },
+  "gdriveHint": {
+    "message": "Sao lưu dữ liệu vào Google Drive của bạn để đồng bộ nhiều thiết bị."
   }
 }
-

@@ -15,9 +15,7 @@ function getTabClass(name) {
         case 'SmartInputBoxTab': return typeof SmartInputBoxTab !== 'undefined' ? SmartInputBoxTab : null;
         case 'FormulaTab': return typeof FormulaTab !== 'undefined' ? FormulaTab : null;
         case 'RunnerTab': return typeof RunnerTab !== 'undefined' ? RunnerTab : null;
-        case 'WatermarkTab': return typeof WatermarkTab !== 'undefined' ? WatermarkTab : null;
         case 'DataSyncTab': return typeof DataSyncTab !== 'undefined' ? DataSyncTab : null;
-        case 'SettingsTab': return typeof SettingsTab !== 'undefined' ? SettingsTab : null;
         default: return null;
     }
 }
@@ -34,9 +32,7 @@ const TAB_CONFIG = [
     { id: 'smart-input-box', className: 'SmartInputBoxTab' },
     { id: 'formula', className: 'FormulaTab' },
     { id: 'runner', className: 'RunnerTab' },
-    // { id: 'watermark', className: 'WatermarkTab' },  // 暂时隐藏
-    { id: 'data-sync', className: 'DataSyncTab' },
-    { id: 'settings', className: 'SettingsTab' }
+    { id: 'data-sync', className: 'DataSyncTab' }
 ];
 
 /**

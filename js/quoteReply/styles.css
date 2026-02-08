@@ -3,28 +3,21 @@
  * 引用回复按钮样式
  */
 
+/* 外层容器 */
 .ait-quote-reply-btn {
     position: absolute;
     z-index: 10000;
     
     display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 6px 12px;
+    align-items: stretch;
     
     background: var(--ait-quote-btn-bg, #1a1a1a);
-    color: var(--ait-quote-btn-text, #fff);
-    border: none;
     border-radius: 6px;
+    overflow: hidden;
     
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
-    
-    cursor: pointer;
     opacity: 0;
     transform: translateY(4px);
-    transition: opacity 0.15s ease, transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+    transition: opacity 0.15s ease, transform 0.15s ease;
     
     box-shadow: 0 2px 8px var(--ait-quote-btn-shadow, rgba(0, 0, 0, 0.2));
 }
@@ -34,15 +27,69 @@
     transform: translateY(0);
 }
 
-.ait-quote-reply-btn:hover {
+/* 追问按钮 */
+.ait-quote-reply-action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    
+    background: none;
+    color: var(--ait-quote-btn-text, #fff);
+    border: none;
+    border-radius: 0;
+    
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.ait-quote-reply-action:hover {
     background: var(--ait-quote-btn-bg-hover, #333);
 }
 
-.ait-quote-reply-btn:active {
+.ait-quote-reply-action:active {
     background: var(--ait-quote-btn-bg-active, #444);
-    transform: scale(0.98);
 }
 
-.ait-quote-reply-btn svg {
+.ait-quote-reply-action svg {
     flex-shrink: 0;
+}
+
+/* 分隔线 */
+.ait-quote-reply-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+/* Logo 按钮 */
+.ait-quote-reply-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    
+    background: none;
+    border: none;
+    border-radius: 0;
+    
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.ait-quote-reply-logo:hover {
+    background: var(--ait-quote-btn-bg-hover, #333);
+}
+
+.ait-quote-reply-logo:active {
+    background: var(--ait-quote-btn-bg-active, #444);
+}
+
+.ait-quote-reply-logo img {
+    display: block;
+    border-radius: 2px;
 }

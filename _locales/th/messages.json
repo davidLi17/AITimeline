@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "ให้เรา 5 ดาว"
   },
-  "urlButtonHint": {
-    "message": "แปลง URL ข้อความธรรมดาเป็นลิงก์ที่คลิกได้ เปิดในแท็บใหม่"
-  },
   "runBtn": {
     "message": "รัน"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "สว่าง"
-  },
-  "watermarkRemoverHint": {
-    "message": "เมื่อเปิดใช้งาน จะลบลายน้ำ Nano Banana ออกจากรูปภาพที่สร้างโดย Gemini โดยอัตโนมัติ"
-  },
-  "watermarkRemoverDownload": {
-    "message": "ดาวน์โหลดโดยไม่มีลายน้ำ"
-  },
-  "watermarkTabName": {
-    "message": "ลายน้ำ"
   },
   "dataSyncTabName": {
     "message": "การย้ายข้อมูล"
@@ -334,6 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "แสดงเวลาส่งในแต่ละข้อความ บันทึกเวลาจะถูกบันทึกแม้ปิดใช้งาน"
+  },
+  "exportTitle": {
+    "message": "ซิงค์ด้วยตนเอง"
+  },
+  "exportHint": {
+    "message": "สำรองหรือกู้คืนข้อมูลด้วยตนเองผ่านไฟล์ JSON เพื่อย้ายไปยังเบราว์เซอร์อื่น"
+  },
+  "gdriveTitle": {
+    "message": "ซิงค์ Google Drive"
+  },
+  "gdriveHint": {
+    "message": "สำรองข้อมูลไปยัง Google Drive ของคุณเพื่อซิงค์ข้ามอุปกรณ์"
   }
 }
-

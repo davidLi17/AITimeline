@@ -269,7 +269,7 @@ class DOMObserverManager {
                 }
             } else if (mutation.type === 'characterData') {
                 hasCharacterData = true;
-                // 收集文本变化的父元素（用于 url-button 等场景）
+                // 收集文本变化的父元素
                 const parentEl = mutation.target?.parentElement;
                 if (parentEl) {
                     characterDataNodes.push(parentEl);

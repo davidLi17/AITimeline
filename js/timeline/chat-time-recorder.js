@@ -2,11 +2,11 @@
  * ChatTimeRecorder - 提问时间记录器
  * 
  * 完全独立的模块，负责：
- * 1. 监听 timeline:nodesChange 事件
- * 2. 检测新增节点并记录时间
- * 3. 渲染时间标签到对话节点上
+ * 1. 监听 ai:stateChange 事件（由 AIStateMonitor 派发）
+ * 2. AI 开始生成时：检测新增节点并记录时间
+ * 3. AI 生成结束时：兜底渲染时间标签
  * 
- * 与 TimelineManager 通过事件通信，代码完全解耦
+ * 与 TimelineManager 解耦，通过 AIStateMonitor 事件驱动
  * 
  * 简化设计：不使用内存缓存，每次直接从 storage 读取
  */
@@ -15,11 +15,10 @@ class ChatTimeRecorder {
         // 状态
         this.enabled = false;
         this._pendingRecord = null;
-        this._currentAdapter = null;  // 当前事件周期内的 adapter 缓存
         this._labelVisible = true;    // 时间标签是否显示（默认显示）
         
         // 事件处理函数（绑定 this）
-        this._boundOnNodesChange = this._onNodesChange.bind(this);
+        this._boundOnAIStateChange = this._onAIStateChange.bind(this);
     }
 
     /**
@@ -27,9 +26,7 @@ class ChatTimeRecorder {
      * @returns {Object|null}
      */
     _getAdapter() {
-        // 优先使用事件周期内缓存的 adapter
-        const adapter = this._currentAdapter || window.timelineManager?.adapter || null;
-        // 验证 adapter 有效性（必须有 getUserMessageSelector 方法）
+        const adapter = window.timelineManager?.adapter || null;
         if (adapter && typeof adapter.getUserMessageSelector !== 'function') {
             return null;
         }
@@ -91,8 +88,8 @@ class ChatTimeRecorder {
             }
         }
         
-        // 设置事件监听
-        window.addEventListener('timeline:nodesChange', this._boundOnNodesChange);
+        // 监听 AI 状态变化（由 AIStateMonitor 派发）
+        window.addEventListener('ai:stateChange', this._boundOnAIStateChange);
         
         // 初始渲染（页面已有节点时）
         this._renderTimeLabels();
@@ -115,28 +112,32 @@ class ChatTimeRecorder {
     }
 
     /**
-     * 节点变化事件处理
+     * AI 状态变化事件处理（由 AIStateMonitor 派发）
      * @private
      */
-    async _onNodesChange(event) {
+    async _onAIStateChange(event) {
         if (!this.enabled) return;
         
-        // 优先从事件 detail 中获取 adapter，并缓存供后续方法使用
-        const adapter = event.detail?.adapter || window.timelineManager?.adapter;
+        if (event.detail?.generating) {
+            // AI 开始生成 = 用户刚发送了消息，记录新节点时间
+            await this._recordNewNodeTime();
+        } else {
+            // AI 生成结束，兜底渲染时间标签
+            // （生成过程中 DOM 可能重排/重建，导致已渲染的标签丢失）
+            this._renderTimeLabels();
+        }
+    }
+
+    /**
+     * 记录新节点的时间（AI 开始生成时调用）
+     * @private
+     */
+    async _recordNewNodeTime() {
+        const adapter = this._getAdapter();
         if (!adapter) return;
-        this._currentAdapter = adapter;
         
-        // 获取最新的用户回合元素
         const userTurnElements = this._getUserTurnElements(adapter);
         if (!userTurnElements || userTurnElements.length === 0) return;
-        
-        // ✅ 核心判断：AI 正在生成 = 用户刚发送了消息
-        if (!adapter.isAIGenerating()) {
-            // AI 未在生成：页面刷新/恢复/浏览旧对话
-            // 只渲染已有时间，不记录新时间
-            this._renderTimeLabels();
-            return;
-        }
         
         // 检查最后一个节点是否未被记录过
         const lastIndex = userTurnElements.length - 1;
@@ -165,7 +166,7 @@ class ChatTimeRecorder {
             return;
         }
         
-        // 判断是否为新对话（第一个节点 + AI 正在生成）
+        // 判断是否为新对话（只有一个节点）
         const isNewConversation = (userTurnElements.length === 1);
         
         // 检查平台是否使用稳定的节点 ID
@@ -177,13 +178,6 @@ class ChatTimeRecorder {
         const timestamp = Date.now();
         const newNode = { nodeId: lastNodeId, index: lastIndex };
         this._recordNodes([newNode], timestamp, isNewConversation);
-        
-        // 根据配置决定时间显示时机
-        const showOn = features?.chatTimesShowOn || 'immediate';
-        if (showOn === 'afterGeneration') {
-            // 等待 AI 生成完成后再渲染时间标签
-            this._waitForGenerationComplete(adapter);
-        }
         
         if (usesStableId && isTempId) {
             // 使用稳定 ID 的平台，但还没有真正的 ID
@@ -243,14 +237,8 @@ class ChatTimeRecorder {
         try {
             const migrated = await ChatTimeStorageManager.migrateNodeId(conversationKey, tempId, realId);
             if (migrated) {
-                // 检查是否需要延迟渲染
-                const features = this._getPlatformFeatures();
-                const showOn = features?.chatTimesShowOn || 'immediate';
-                if (showOn === 'immediate') {
-                    // 重新渲染时间标签
-                    this._renderTimeLabels();
-                }
-                // afterGeneration 和 delayed 由各自的逻辑处理
+                // 重新渲染时间标签
+                this._renderTimeLabels();
             }
         } catch (e) {
             if (!e.message?.includes('Extension context invalidated')) {
@@ -283,14 +271,8 @@ class ChatTimeRecorder {
             // batchSetNodeTimes 内部会跳过已存在的节点
             const addedCount = await ChatTimeStorageManager.batchSetNodeTimes(conversationKey, nodesToRecord);
             if (addedCount > 0) {
-                // 检查是否需要延迟渲染
-                const features = this._getPlatformFeatures();
-                const showOn = features?.chatTimesShowOn || 'immediate';
-                if (showOn === 'immediate') {
-                    // 立即渲染时间标签
-                    this._renderTimeLabels();
-                }
-                // afterGeneration 和 delayed 由 _onNodesChange 中的逻辑处理
+                // 立即渲染时间标签
+                this._renderTimeLabels();
             }
         } catch (e) {
             if (!e.message?.includes('Extension context invalidated')) {
@@ -301,6 +283,10 @@ class ChatTimeRecorder {
 
     /**
      * 渲染所有节点的时间标签
+     * 
+     * 使用 data-ait-time 属性 + CSS ::before 伪元素方案：
+     * - 不插入 DOM 节点，避免干扰平台原有 DOM 结构
+     * - 通过 CSS 变量传递位置配置
      * @private
      */
     async _renderTimeLabels() {
@@ -330,67 +316,35 @@ class ChatTimeRecorder {
             return;
         }
         
+        // 获取平台自定义位置（所有节点位置一致，只需读取一次）
+        const position = adapter.getTimeLabelPosition();
+        
         userTurnElements.forEach((element, index) => {
             const nodeId = adapter.generateTurnId(element, index);
             const timestamp = nodeTimestamps[String(nodeId)];
             
             if (!timestamp) return;
             
-            // 检查是否已经有时间标签（在 element 层级查找）
-            const existingLabel = element.querySelector('.ait-node-time-label');
-            if (existingLabel) {
-                // 更新已有标签
-                existingLabel.textContent = this.formatNodeTime(timestamp);
-                return;
-            }
+            const formattedTime = this.formatNodeTime(timestamp);
             
-            // 确保 element 有相对定位（时间标签相对于 element 定位）
+            // 检查是否已有时间标签且内容相同（避免不必要的 DOM 操作）
+            if (element.getAttribute('data-ait-time') === formattedTime) return;
+            
+            // 确保 element 有相对定位（::before 相对于 element 定位）
             const computedStyle = window.getComputedStyle(element);
             if (computedStyle.position === 'static') {
                 element.style.position = 'relative';
             }
             
-            // 创建时间标签
-            const timeLabel = document.createElement('div');
-            timeLabel.className = 'ait-node-time-label';
-            timeLabel.textContent = this.formatNodeTime(timestamp);
+            // 设置时间数据属性（CSS ::before 通过 attr() 读取内容）
+            element.setAttribute('data-ait-time', formattedTime);
             
-            // 应用平台自定义位置
-            const position = adapter.getTimeLabelPosition();
-            if (position.top) timeLabel.style.top = position.top;
-            if (position.right) timeLabel.style.right = position.right;
-            if (position.left) timeLabel.style.left = position.left;
-            if (position.bottom) timeLabel.style.bottom = position.bottom;
-            
-            // 插入到 element（消息元素）层级，不受内部 overflow 影响
-            element.insertBefore(timeLabel, element.firstChild);
+            // 通过 CSS 变量传递位置配置
+            if (position.top) element.style.setProperty('--ait-time-top', position.top);
+            if (position.right) element.style.setProperty('--ait-time-right', position.right);
+            if (position.left) element.style.setProperty('--ait-time-left', position.left);
+            if (position.bottom) element.style.setProperty('--ait-time-bottom', position.bottom);
         });
-    }
-
-    /**
-     * 等待 AI 生成完成后渲染时间标签
-     * 用于 chatTimesShowOn: 'afterGeneration' 的平台（如 DeepSeek）
-     * @private
-     */
-    _waitForGenerationComplete(adapter) {
-        // 清除之前的定时器
-        if (this._labelRefreshTimer) {
-            clearInterval(this._labelRefreshTimer);
-            this._labelRefreshTimer = null;
-        }
-        
-        this._labelRefreshTimer = setInterval(() => {
-            // 检查 AI 是否还在生成
-            const stillGenerating = adapter.isAIGenerating();
-            
-            if (!stillGenerating) {
-                // AI 生成完成，停止检查
-                clearInterval(this._labelRefreshTimer);
-                this._labelRefreshTimer = null;
-                // 生成完成后渲染时间标签
-                this._renderTimeLabels();
-            }
-        }, 1000);
     }
 
     /**
@@ -433,12 +387,6 @@ class ChatTimeRecorder {
     async reset() {
         this._pendingRecord = null;
         
-        // 清理定时器，防止会话切换后旧定时器继续运行
-        if (this._labelRefreshTimer) {
-            clearInterval(this._labelRefreshTimer);
-            this._labelRefreshTimer = null;
-        }
-        
         // 更新新会话的 lastVisit
         if (this.enabled) {
             const conversationKey = this.getConversationKey();
@@ -465,15 +413,10 @@ class ChatTimeRecorder {
             // 显示：重新渲染时间标签
             this._renderTimeLabels();
         } else {
-            // 隐藏：移除所有时间标签
-            const labels = document.querySelectorAll('.ait-node-time-label');
-            labels.forEach(label => label.remove());
-            
-            // 清理等待生成完成的定时器（避免空跑）
-            if (this._labelRefreshTimer) {
-                clearInterval(this._labelRefreshTimer);
-                this._labelRefreshTimer = null;
-            }
+            // 隐藏：移除所有时间标签（清除 data 属性即可，::before 自动消失）
+            document.querySelectorAll('[data-ait-time]').forEach(el => {
+                el.removeAttribute('data-ait-time');
+            });
         }
     }
 
@@ -482,13 +425,7 @@ class ChatTimeRecorder {
      */
     destroy() {
         // 移除事件监听
-        window.removeEventListener('timeline:nodesChange', this._boundOnNodesChange);
-        
-        // 清理定时器
-        if (this._labelRefreshTimer) {
-            clearInterval(this._labelRefreshTimer);
-            this._labelRefreshTimer = null;
-        }
+        window.removeEventListener('ai:stateChange', this._boundOnAIStateChange);
         
         // 清理状态
         this._pendingRecord = null;

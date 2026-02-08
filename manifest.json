@@ -1,8 +1,9 @@
 {
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwuYt45YLc/W650gxV4+g6M5P3jbwDhqFy1aGPnU1GoeyzWV9SY7DQueG4eK37c1YP1sxbLqNYg1RrFJepqo6oKgqrlToWzzJVteit8Bz/+LmGIG/ixk0fgnAhTX/jaRYy+/6LEkTxYBlGqS7jSYmBQXEHB0cS6Ibam3YBI/DB1u0NsMkAtwyYskJZUV8Qn825dmgW/tE1zV15qWOwg052up58YbgjvaD+I84QOCnMe9Z6cm9xXv+CkY+GJm1yrDvYXvQ11jdGJLtA3DEqyFdAAzpTgZfXsEuwqUJP+dnJQGuzWGy/qK3mY/pFkumTKf6uojNd82jvUeuOdFaHUKvswIDAQAB",
   "manifest_version": 3,
   "name": "__MSG_extName__",
   "short_name": "AI Timeline",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
   "author": "yanchao hou",
@@ -14,8 +15,20 @@
   
   "permissions": [
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "identity"
   ],
+  
+  "oauth2": {
+    "client_id": "945798922226-gdjj6v37j5fueacci9253u0j1iasiht2.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive.file"
+    ]
+  },
+  
+  "background": {
+    "service_worker": "js/background.js"
+  },
   
   "content_scripts": [
     {
@@ -25,6 +38,7 @@
       "js": [
         "js/global/constants.js",
         "js/global/dom-observer-manager/index.js",
+        "js/global/ai-state-monitor/index.js",
         "js/global/tooltip-manager/index.js",
         "js/global/toast-manager/index.js",
         "js/global/input-modal/index.js",
@@ -86,9 +100,7 @@
         "js/runner/components/floating-runner.js",
         "js/runner/index.js",
         "js/panelModal/tabs/runner/index.js",
-        "js/panelModal/tabs/watermark/index.js",
         "js/panelModal/tabs/dataSync/index.js",
-        "js/panelModal/tabs/settings/index.js",
         "js/panelModal/tab-registry.js",
         "js/panelModal/index.js",
         "js/smartInputBox/constants.js",
@@ -130,8 +142,7 @@
         "js/timeline/star-input-modal/star-input-modal.js",
         "js/timeline/chat-time-recorder.js",
         "js/timeline/timeline-manager.js",
-        "js/timeline/index.js",
-        "js/url-button/index.js"
+        "js/timeline/index.js"
       ],
       "css": [
         "styles/variables.css",
@@ -151,16 +162,13 @@
         "js/runner/components/runner-panel.css",
         "js/runner/components/floating-runner.css",
         "js/panelModal/tabs/runner/styles.css",
-        "js/panelModal/tabs/watermark/styles.css",
         "js/panelModal/tabs/dataSync/styles.css",
-        "js/panelModal/tabs/settings/styles.css",
         "js/timeline/star-input-modal/star-input-modal.css",
         "js/timeline/timeline.css",
         "js/formula/formula.css",
         "js/smartInputBox/prompt-button.css",
         "js/scrollToBottom/styles.css",
-        "js/quoteReply/styles.css",
-        "js/url-button/styles.css"
+        "js/quoteReply/styles.css"
       ],
       "run_at": "document_idle"
     }
@@ -169,6 +177,7 @@
   "web_accessible_resources": [
     {
       "resources": [
+        "images/logo.png",
         "images/logo/*.webp",
         "js/runner/languages/javascript/sandbox.html",
         "js/runner/languages/javascript/sandbox-script.js",

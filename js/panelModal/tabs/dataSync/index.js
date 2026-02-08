@@ -41,54 +41,100 @@ class DataSyncTab extends BaseTab {
         container.className = 'data-sync-tab';
         
         container.innerHTML = `
-            <div class="sync-section">
-                <div class="sync-title">${chrome.i18n.getMessage('exportTitle') || '导出数据'}</div>
-                <div class="sync-hint">${chrome.i18n.getMessage('exportHint') || '将本插件在本浏览器的数据导出为 JSON 文件，用于备份或迁移到其他浏览器。'}</div>
-                <button class="sync-btn export-btn" id="export-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                        <polyline points="14,2 14,8 20,8"/>
-                        <line x1="12" y1="12" x2="12" y2="18"/>
-                        <polyline points="9,15 12,18 15,15"/>
+            <div class="sync-section gdrive-section">
+                <div class="sync-title">
+                    <svg viewBox="0 0 87.3 78" width="18" height="16" style="margin-right: 6px; flex-shrink: 0;">
+                        <path d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066DA"/>
+                        <path d="M43.65 25L29.9 1.2C28.55 2 27.4 3.1 26.6 4.5L6.2 39.8C5.4 41.2 5 42.75 5 44.3h27.5z" fill="#00AC47"/>
+                        <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8l5.85 13.95z" fill="#EA4335"/>
+                        <path d="M43.65 25l13.75-23.8C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.45-4.5 1.2z" fill="#00832D"/>
+                        <path d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684FC"/>
+                        <path d="M73.4 26.5l-10.6-18.3c-.8-1.4-1.95-2.5-3.3-3.3L45.75 28.7 59.8 53h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#FFBA00"/>
                     </svg>
-                    ${chrome.i18n.getMessage('exportBtn') || '导出数据'}
-                </button>
+                    ${chrome.i18n.getMessage('gdriveTitle') || 'Google Drive 云同步'}
+                </div>
+                <div class="sync-hint">${chrome.i18n.getMessage('gdriveHint') || '将数据备份到你的 Google Drive 中，实现多设备同步。'}</div>
+                <div class="gdrive-actions">
+                    <button class="sync-btn" id="gdrive-upload-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <polyline points="16,16 12,12 8,16"/>
+                            <line x1="12" y1="12" x2="12" y2="21"/>
+                            <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+                        </svg>
+                        上传到云端
+                    </button>
+                    <button class="sync-btn gdrive-download-btn" id="gdrive-download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <polyline points="8,17 12,21 16,17"/>
+                            <line x1="12" y1="12" x2="12" y2="21"/>
+                            <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/>
+                        </svg>
+                        从云端下载
+                    </button>
+                </div>
+
             </div>
             
             <div class="sync-divider"></div>
             
             <div class="sync-section">
-                <div class="sync-title">${chrome.i18n.getMessage('importTitle') || '导入数据'}</div>
-                <div class="sync-hint">${chrome.i18n.getMessage('importHint') || '从 JSON 文件导入数据，支持覆盖或合并两种模式。'}</div>
-                
-                <div class="import-options">
-                    <label class="import-option">
-                        <input type="radio" name="import-mode" value="merge" checked>
-                        <span class="option-radio"></span>
-                        <span class="option-content">
-                            <span class="option-label">${chrome.i18n.getMessage('importModeMerge') || '合并'}</span>
-                            <span class="option-desc">${chrome.i18n.getMessage('importModeMergeDesc') || '保留现有数据，与导入数据合并'}</span>
-                        </span>
-                    </label>
-                    <label class="import-option">
-                        <input type="radio" name="import-mode" value="overwrite">
-                        <span class="option-radio"></span>
-                        <span class="option-content">
-                            <span class="option-label">${chrome.i18n.getMessage('importModeOverwrite') || '覆盖'}</span>
-                            <span class="option-desc">${chrome.i18n.getMessage('importModeOverwriteDesc') || '清空现有数据，使用导入数据替换'}</span>
-                        </span>
-                    </label>
-                </div>
-                
-                <button class="sync-btn import-btn" id="import-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="sync-title">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px; flex-shrink: 0;">
                         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
                         <polyline points="14,2 14,8 20,8"/>
-                        <line x1="12" y1="18" x2="12" y2="12"/>
-                        <polyline points="9,15 12,12 15,15"/>
                     </svg>
-                    ${chrome.i18n.getMessage('importBtn') || '选择文件导入'}
-                </button>
+                    ${chrome.i18n.getMessage('exportTitle') || '手动同步'}
+                </div>
+                <div class="sync-hint">${chrome.i18n.getMessage('exportHint') || '通过 JSON 文件手动备份或恢复数据，用于迁移到其他浏览器。'}</div>
+                
+                <div class="local-sync-group">
+                    <div class="local-sync-item">
+                        <div class="local-sync-label">导出</div>
+                        <div class="local-sync-body">
+                            <button class="sync-btn export-btn" id="export-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="12" y1="12" x2="12" y2="18"/>
+                                    <polyline points="9,15 12,18 15,15"/>
+                                </svg>
+                                ${chrome.i18n.getMessage('exportBtn') || '导出 JSON 文件'}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="local-sync-item">
+                        <div class="local-sync-label">导入</div>
+                        <div class="local-sync-body">
+                            <div class="import-options">
+                                <label class="import-option">
+                                    <input type="radio" name="import-mode" value="merge" checked>
+                                    <span class="option-radio"></span>
+                                    <span class="option-content">
+                                        <span class="option-label">${chrome.i18n.getMessage('importModeMerge') || '合并'}</span>
+                                        <span class="option-desc">${chrome.i18n.getMessage('importModeMergeDesc') || '保留现有数据，与导入数据合并'}</span>
+                                    </span>
+                                </label>
+                                <label class="import-option">
+                                    <input type="radio" name="import-mode" value="overwrite">
+                                    <span class="option-radio"></span>
+                                    <span class="option-content">
+                                        <span class="option-label">${chrome.i18n.getMessage('importModeOverwrite') || '覆盖'}</span>
+                                        <span class="option-desc">${chrome.i18n.getMessage('importModeOverwriteDesc') || '清空现有数据，使用导入数据替换'}</span>
+                                    </span>
+                                </label>
+                            </div>
+                            <button class="sync-btn import-btn" id="import-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="12" y1="18" x2="12" y2="12"/>
+                                    <polyline points="9,15 12,12 15,15"/>
+                                </svg>
+                                ${chrome.i18n.getMessage('importBtn') || '选择文件导入'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <input type="file" id="import-file-input" accept=".json" style="display: none;">
             </div>
             
@@ -104,23 +150,142 @@ class DataSyncTab extends BaseTab {
     async mounted() {
         super.mounted();
         
+        // --- Google Drive 云同步 ---
+        const uploadBtn = document.getElementById('gdrive-upload-btn');
+        const downloadBtn = document.getElementById('gdrive-download-btn');
+        
+        if (uploadBtn) {
+            this.addEventListener(uploadBtn, 'click', () => this.handleGDriveUpload());
+        }
+        if (downloadBtn) {
+            this.addEventListener(downloadBtn, 'click', () => this.handleGDriveDownload());
+        }
+        
+        // --- 本地导入导出 ---
         const exportBtn = document.getElementById('export-btn');
         const importBtn = document.getElementById('import-btn');
         const fileInput = document.getElementById('import-file-input');
         
-        // 导出按钮点击
         if (exportBtn) {
             this.addEventListener(exportBtn, 'click', () => this.handleExport());
         }
-        
-        // 导入按钮点击
         if (importBtn) {
             this.addEventListener(importBtn, 'click', () => fileInput?.click());
         }
-        
-        // 文件选择
         if (fileInput) {
             this.addEventListener(fileInput, 'change', (e) => this.handleImport(e));
+        }
+    }
+    
+    // ============================================
+    // Google Drive 云同步方法
+    // ============================================
+    
+    /**
+     * 上传到 Google Drive（未登录或 token 失效时自动触发登录）
+     */
+    async handleGDriveUpload() {
+        const uploadBtn = document.getElementById('gdrive-upload-btn');
+        if (uploadBtn) {
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = '上传中...';
+        }
+        
+        try {
+            const data = await this.getAllStorageData();
+            const exportData = {
+                _meta: {
+                    version: '1.0',
+                    exportTime: new Date().toISOString(),
+                    source: 'AIChatTimeline'
+                },
+                data: data
+            };
+            
+            const resp = await chrome.runtime.sendMessage({ type: 'GDRIVE_UPLOAD', data: exportData });
+            if (resp?.success) {
+                if (window.globalToastManager) {
+                    window.globalToastManager.success('已上传到 Google Drive', null, { color: this.toastColors });
+                }
+            } else {
+                throw new Error(resp?.error || '上传失败');
+            }
+        } catch (e) {
+            if (window.globalToastManager) {
+                window.globalToastManager.error('上传失败: ' + e.message, null, { color: this.toastColors });
+            }
+        } finally {
+            if (uploadBtn) {
+                uploadBtn.disabled = false;
+                uploadBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16,16 12,12 8,16"/>
+                        <line x1="12" y1="12" x2="12" y2="21"/>
+                        <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/>
+                    </svg>
+                    上传到云端`;
+            }
+        }
+    }
+    
+    /**
+     * 从 Google Drive 下载
+     */
+    async handleGDriveDownload() {
+        const downloadBtn = document.getElementById('gdrive-download-btn');
+        if (downloadBtn) {
+            downloadBtn.disabled = true;
+            downloadBtn.textContent = '下载中...';
+        }
+        
+        try {
+            const resp = await chrome.runtime.sendMessage({ type: 'GDRIVE_DOWNLOAD' });
+            if (!resp?.success) {
+                throw new Error(resp?.error || '下载失败');
+            }
+            
+            if (!resp.data) {
+                if (window.globalToastManager) {
+                    window.globalToastManager.info('云端暂无备份数据', null, { color: this.toastColors });
+                }
+                return;
+            }
+            
+            // 验证数据格式
+            const importData = resp.data;
+            if (!importData.data || typeof importData.data !== 'object') {
+                throw new Error('云端数据格式无效');
+            }
+            
+            // 使用合并模式导入
+            await this.mergeData(importData.data);
+            
+            // 提醒用户刷新
+            if (window.globalPopconfirmManager) {
+                const confirmed = await window.globalPopconfirmManager.show({
+                    title: '云端数据已合并',
+                    content: '数据已成功从 Google Drive 下载并合并，需要刷新页面后生效',
+                    confirmText: chrome.i18n.getMessage('refreshPage') || '刷新页面',
+                    cancelText: chrome.i18n.getMessage('refreshLater') || '稍后刷新',
+                    confirmTextType: 'default'
+                });
+                if (confirmed) location.reload();
+            }
+        } catch (e) {
+            if (window.globalToastManager) {
+                window.globalToastManager.error('下载失败: ' + e.message, null, { color: this.toastColors });
+            }
+        } finally {
+            if (downloadBtn) {
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="8,17 12,21 16,17"/>
+                        <line x1="12" y1="12" x2="12" y2="21"/>
+                        <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"/>
+                    </svg>
+                    从云端下载`;
+            }
         }
     }
     
@@ -231,12 +396,18 @@ class DataSyncTab extends BaseTab {
     }
     
     /**
-     * 获取所有存储数据
+     * 获取所有存储数据（过滤掉 _ 开头的内部数据）
      */
     async getAllStorageData() {
         return new Promise((resolve) => {
             chrome.storage.local.get(null, (items) => {
-                resolve(items);
+                const filtered = {};
+                for (const [key, value] of Object.entries(items)) {
+                    if (!key.startsWith('_')) {
+                        filtered[key] = value;
+                    }
+                }
+                resolve(filtered);
             });
         });
     }

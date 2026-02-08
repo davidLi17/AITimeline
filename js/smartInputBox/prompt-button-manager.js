@@ -251,6 +251,7 @@ class PromptButtonManager {
                         this._updatePosition();
                     }
                 },
+                filter: { hasAddedNodes: true },
                 debounce: 300  // 300ms 防抖，减少执行频率
             });
         }

@@ -275,9 +275,6 @@
   "goToReview": {
     "message": "Rate us 5 stars"
   },
-  "urlButtonHint": {
-    "message": "Convert plain text URLs to clickable links that open in a new tab"
-  },
   "runBtn": {
     "message": "Run"
   },
@@ -286,15 +283,6 @@
   },
   "themeLight": {
     "message": "Light"
-  },
-  "watermarkRemoverHint": {
-    "message": "When enabled, automatically removes Nano Banana watermarks from Gemini-generated images"
-  },
-  "watermarkRemoverDownload": {
-    "message": "Download without watermark"
-  },
-  "watermarkTabName": {
-    "message": "Watermark"
   },
   "dataSyncTabName": {
     "message": "Data Migration"
@@ -334,5 +322,17 @@
   },
   "chatTimeLabelHint": {
     "message": "Display send time on each message. Time records are saved even when disabled"
+  },
+  "exportTitle": {
+    "message": "Manual Sync"
+  },
+  "exportHint": {
+    "message": "Manually back up or restore data via JSON file for migration to other browsers."
+  },
+  "gdriveTitle": {
+    "message": "Google Drive Sync"
+  },
+  "gdriveHint": {
+    "message": "Back up data to your Google Drive for multi-device sync."
   }
 }
