@@ -101,10 +101,6 @@ class QuoteReplyManager {
                 </svg>
                 <span>${chrome.i18n.getMessage('quoteReply') || '追问'}</span>
             </button>
-            <span class="ait-quote-reply-divider"></span>
-            <button class="ait-quote-reply-logo">
-                <img src="${chrome.runtime.getURL('images/logo.png')}" width="14" height="14" alt="AIT">
-            </button>
         `;
         btn.style.display = 'none';
         
@@ -114,15 +110,6 @@ class QuoteReplyManager {
             e.preventDefault();
             e.stopPropagation();
             this._handleQuote();
-        });
-        // Logo 按钮：打开 panelModal 收藏对话框
-        window.eventDelegateManager.on('click', '.ait-quote-reply-logo', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this._hideButton();
-            if (window.panelModal) {
-                window.panelModal.show('smartInputBox');
-            }
         });
         window.eventDelegateManager.on('mousedown', '.ait-quote-reply-btn', (e) => {
             e.preventDefault();
@@ -568,32 +555,19 @@ class QuoteReplyManager {
      * 查找输入框元素
      */
     _findInputElement() {
-        // 通用选择器列表（覆盖主流 AI 平台）
-        const selectors = [
-            // ChatGPT
-            '#prompt-textarea',
-            'textarea[data-id="root"]',
-            // Claude
-            'div[contenteditable="true"].ProseMirror',
-            // Gemini
-            'div[contenteditable="true"].ql-editor',
-            'rich-textarea div[contenteditable="true"]',
-            // DeepSeek
-            'textarea#chat-input',
-            // Kimi
-            'div[contenteditable="true"].editor',
-            // 通用
-            'textarea',
-            'div[contenteditable="true"]'
-        ];
-        
-        for (const selector of selectors) {
-            const el = document.querySelector(selector);
-            if (el && this._isVisibleElement(el)) {
-                return el;
+        try {
+            const adapter = window.smartEnterAdapterRegistry?.getAdapter?.();
+            const selector = adapter?.getInputSelector?.();
+            if (!selector) return null;
+            const elements = document.querySelectorAll(selector);
+            for (const el of elements) {
+                if (el && this._isVisibleElement(el)) {
+                    return el;
+                }
             }
+        } catch (e) {
+            console.debug('[QuoteReply] adapter selector failed', e);
         }
-        
         return null;
     }
     

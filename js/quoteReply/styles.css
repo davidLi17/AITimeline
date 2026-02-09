@@ -57,39 +57,3 @@
 .ait-quote-reply-action svg {
     flex-shrink: 0;
 }
-
-/* 分隔线 */
-.ait-quote-reply-divider {
-    width: 1px;
-    height: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    flex-shrink: 0;
-}
-
-/* Logo 按钮 */
-.ait-quote-reply-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 8px;
-    
-    background: none;
-    border: none;
-    border-radius: 0;
-    
-    cursor: pointer;
-    transition: background 0.15s ease;
-}
-
-.ait-quote-reply-logo:hover {
-    background: var(--ait-quote-btn-bg-hover, #333);
-}
-
-.ait-quote-reply-logo:active {
-    background: var(--ait-quote-btn-bg-active, #444);
-}
-
-.ait-quote-reply-logo img {
-    display: block;
-    border-radius: 2px;
-}
