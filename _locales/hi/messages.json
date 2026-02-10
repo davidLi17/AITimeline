@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "मल्टी-डिवाइस सिंक के लिए डेटा को अपने Google Drive में बैकअप करें।"
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Mermaid डायग्राम रेंडरिंग"
+  },
+  "mermaidSettingsHint": {
+    "message": "Mermaid कोड ब्लॉक को स्वचालित रूप से इंटरैक्टिव डायग्राम में रेंडर करें"
+  },
+  "mermaidDiagramBtn": {
+    "message": "डायग्राम"
+  },
+  "mermaidCodeBtn": {
+    "message": "कोड"
+  },
+  "mermaidFullscreen": {
+    "message": "पूर्ण स्क्रीन"
+  },
+  "mermaidViewerHint": {
+    "message": "ज़ूम के लिए स्क्रॉल करें · खींचकर ले जाएं · बंद करने के लिए ESC"
   }
 }

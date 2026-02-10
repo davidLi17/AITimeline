@@ -93,6 +93,7 @@
         "js/runner/languages/lua/index.js",
         "js/runner/languages/ruby/sandbox-manager.js",
         "js/runner/languages/ruby/index.js",
+        "js/runner/languages/mermaid/index.js",
         "js/runner/languages/registry.js",
         "js/runner/runner-manager.js",
         "js/runner/components/runner-panel.js",
@@ -134,6 +135,8 @@
         "js/timeline/adapters/claude.js",
         "js/timeline/adapters/notebooklm.js",
         "js/timeline/adapters/registry.js",
+        "js/mermaid/lib/mermaid.min.js",
+        "js/mermaid/index.js",
         "js/quoteReply/quote-reply-manager.js",
         "js/quoteReply/index.js",
         "js/timeline/common.js",
@@ -167,7 +170,8 @@
         "js/formula/formula.css",
         "js/smartInputBox/prompt-button.css",
         "js/scrollToBottom/styles.css",
-        "js/quoteReply/styles.css"
+        "js/quoteReply/styles.css",
+        "js/mermaid/styles.css"
       ],
       "run_at": "document_idle"
     }

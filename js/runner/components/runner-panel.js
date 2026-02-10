@@ -274,6 +274,9 @@
             }
 
             this.resultContent = this.element.querySelector('.runner-panel-output-content');
+
+            // 初始状态：Mermaid 时隐藏 output 复制按钮
+            this._updateCopyOutputVisibility();
         }
 
         /**
@@ -546,6 +549,9 @@
                 this.cmEditor.setOption('mode', langConfig.mode);
             }
 
+            // Mermaid 输出是 SVG 图表，隐藏无意义的纯文本复制按钮
+            this._updateCopyOutputVisibility();
+
             // 回调
             if (this.options.onLanguageChange) {
                 this.options.onLanguageChange(langId);
@@ -588,6 +594,8 @@
                             outputs.push({ type: 'json-formatted', json: output.data.json });
                         } else if (output.level === 'markdown-preview') {
                             outputs.push({ type: 'markdown-preview', html: output.data.html });
+                        } else if (output.level === 'mermaid-preview') {
+                            outputs.push({ type: 'mermaid-preview', svg: output.data.svg });
                         } else {
                             const content = Array.isArray(output.data) ? output.data.join(' ') : output.data;
                             outputs.push({ type: output.level || 'log', content });
@@ -659,6 +667,9 @@
                 if (output.type === 'markdown-preview') {
                     return `<div class="runner-panel-markdown-preview">${output.html}</div>`;
                 }
+                if (output.type === 'mermaid-preview') {
+                    return `<div class="runner-mermaid-preview">${output.svg}</div>`;
+                }
                 return `<div class="runner-panel-output-${output.type || 'log'}">${this._escapeHtml(output.content)}</div>`;
             }).join('');
         }
@@ -676,6 +687,17 @@
                 return `<tr>${cells}</tr>`;
             }).join('');
             return `<div class="runner-panel-table-wrapper"><table class="runner-panel-table"><thead><tr>${headerCells}</tr></thead><tbody>${rows}</tbody></table></div>`;
+        }
+
+        /**
+         * 根据语言类型切换 output 复制按钮的显示
+         */
+        _updateCopyOutputVisibility() {
+            const btn = this.element?.querySelector('[data-action="copy-output"]');
+            if (btn) {
+                // 用 !important 覆盖 .runner-panel-btn 的 display: flex !important
+                btn.style.setProperty('display', this.language === 'mermaid' ? 'none' : 'flex', 'important');
+            }
         }
 
         _escapeHtml(str) {

@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "Haz una copia de seguridad en tu Google Drive para sincronizar entre dispositivos."
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Renderizado de diagramas Mermaid"
+  },
+  "mermaidSettingsHint": {
+    "message": "Renderizar automáticamente bloques de código Mermaid como diagramas interactivos"
+  },
+  "mermaidDiagramBtn": {
+    "message": "Diagrama"
+  },
+  "mermaidCodeBtn": {
+    "message": "Código"
+  },
+  "mermaidFullscreen": {
+    "message": "Pantalla completa"
+  },
+  "mermaidViewerHint": {
+    "message": "Desplazar para zoom · Arrastrar para mover · ESC para cerrar"
   }
 }

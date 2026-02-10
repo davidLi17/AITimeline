@@ -318,7 +318,8 @@ const RUNNER_LANGUAGES = [
     { id: 'ruby', name: 'Ruby', mode: 'ruby', storageKey: 'runnerRubyEnabled', runnerClass: 'RubyRunner', hljsLang: 'ruby' },
     { id: 'html', name: 'HTML', mode: 'htmlmixed', storageKey: 'runnerHtmlEnabled', runnerClass: 'HtmlRunner', hljsLang: 'xml' },
     { id: 'json', name: 'JSON', mode: 'javascript', storageKey: 'runnerJsonEnabled', runnerClass: 'JsonRunner', hljsLang: 'json' },
-    { id: 'markdown', name: 'Markdown', mode: 'markdown', storageKey: 'runnerMarkdownEnabled', runnerClass: 'MarkdownRunner', hljsLang: 'markdown' }
+    { id: 'markdown', name: 'Markdown', mode: 'markdown', storageKey: 'runnerMarkdownEnabled', runnerClass: 'MarkdownRunner', hljsLang: 'markdown' },
+    { id: 'mermaid', name: 'Mermaid', mode: 'markdown', storageKey: 'mermaidRendererEnabled', runnerClass: 'MermaidRunner', hljsLang: null }
 ];
 
 /**

@@ -361,5 +361,26 @@
   },
   "gdriveHint": {
     "message": "データをGoogle Driveにバックアップし、複数デバイス間で同期します。"
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Mermaid ダイアグラム描画"
+  },
+  "mermaidSettingsHint": {
+    "message": "Mermaid コードブロックをインタラクティブなダイアグラムに自動レンダリング"
+  },
+  "mermaidDiagramBtn": {
+    "message": "ダイアグラム"
+  },
+  "mermaidCodeBtn": {
+    "message": "コード"
+  },
+  "mermaidFullscreen": {
+    "message": "全画面表示"
+  },
+  "mermaidViewerHint": {
+    "message": "スクロールでズーム · ドラッグで移動 · ESC で閉じる"
   }
 }

@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "Резервное копирование данных в Google Drive для синхронизации между устройствами."
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Отображение диаграмм Mermaid"
+  },
+  "mermaidSettingsHint": {
+    "message": "Автоматически отображать блоки кода Mermaid как интерактивные диаграммы"
+  },
+  "mermaidDiagramBtn": {
+    "message": "Диаграмма"
+  },
+  "mermaidCodeBtn": {
+    "message": "Код"
+  },
+  "mermaidFullscreen": {
+    "message": "Полный экран"
+  },
+  "mermaidViewerHint": {
+    "message": "Прокрутка для масштабирования · Перетаскивание для перемещения · ESC для закрытия"
   }
 }

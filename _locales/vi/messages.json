@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "Sao lưu dữ liệu vào Google Drive của bạn để đồng bộ nhiều thiết bị."
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Hiển thị biểu đồ Mermaid"
+  },
+  "mermaidSettingsHint": {
+    "message": "Tự động hiển thị khối mã Mermaid dưới dạng biểu đồ tương tác"
+  },
+  "mermaidDiagramBtn": {
+    "message": "Biểu đồ"
+  },
+  "mermaidCodeBtn": {
+    "message": "Mã nguồn"
+  },
+  "mermaidFullscreen": {
+    "message": "Toàn màn hình"
+  },
+  "mermaidViewerHint": {
+    "message": "Cuộn để thu phóng · Kéo để di chuyển · ESC để đóng"
   }
 }

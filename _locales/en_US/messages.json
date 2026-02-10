@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "Back up data to your Google Drive for multi-device sync."
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Mermaid Diagram Rendering"
+  },
+  "mermaidSettingsHint": {
+    "message": "Automatically render Mermaid code blocks as interactive diagrams"
+  },
+  "mermaidDiagramBtn": {
+    "message": "Diagram"
+  },
+  "mermaidCodeBtn": {
+    "message": "Code"
+  },
+  "mermaidFullscreen": {
+    "message": "Fullscreen"
+  },
+  "mermaidViewerHint": {
+    "message": "Scroll to zoom · Drag to pan · ESC to close"
   }
 }

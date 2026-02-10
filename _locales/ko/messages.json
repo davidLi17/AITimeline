@@ -361,5 +361,26 @@
   },
   "gdriveHint": {
     "message": "데이터를 Google Drive에 백업하여 여러 기기 간에 동기화합니다."
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Mermaid 다이어그램 렌더링"
+  },
+  "mermaidSettingsHint": {
+    "message": "Mermaid 코드 블록을 인터랙티브 다이어그램으로 자동 렌더링"
+  },
+  "mermaidDiagramBtn": {
+    "message": "다이어그램"
+  },
+  "mermaidCodeBtn": {
+    "message": "코드"
+  },
+  "mermaidFullscreen": {
+    "message": "전체 화면"
+  },
+  "mermaidViewerHint": {
+    "message": "스크롤로 확대/축소 · 드래그로 이동 · ESC로 닫기"
   }
 }

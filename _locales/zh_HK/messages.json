@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "將數據備份到你的 Google Drive 中，實現多設備同步。"
+  },
+  "mermaidTabName": {
+    "message": "Mermaid 圖表"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Mermaid 圖表渲染"
+  },
+  "mermaidSettingsHint": {
+    "message": "自動將 Mermaid 程式碼區塊渲染為可視化圖表"
+  },
+  "mermaidDiagramBtn": {
+    "message": "圖表"
+  },
+  "mermaidCodeBtn": {
+    "message": "原始碼"
+  },
+  "mermaidFullscreen": {
+    "message": "全螢幕查看"
+  },
+  "mermaidViewerHint": {
+    "message": "滾輪縮放 · 拖曳平移 · ESC 退出"
   }
 }

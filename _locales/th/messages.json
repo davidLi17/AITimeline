@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "สำรองข้อมูลไปยัง Google Drive ของคุณเพื่อซิงค์ข้ามอุปกรณ์"
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "การแสดงผลแผนภาพ Mermaid"
+  },
+  "mermaidSettingsHint": {
+    "message": "แสดงผลบล็อกโค้ด Mermaid เป็นแผนภาพแบบโต้ตอบอัตโนมัติ"
+  },
+  "mermaidDiagramBtn": {
+    "message": "แผนภาพ"
+  },
+  "mermaidCodeBtn": {
+    "message": "โค้ด"
+  },
+  "mermaidFullscreen": {
+    "message": "เต็มหน้าจอ"
+  },
+  "mermaidViewerHint": {
+    "message": "เลื่อนเพื่อซูม · ลากเพื่อเลื่อน · ESC เพื่อปิด"
   }
 }

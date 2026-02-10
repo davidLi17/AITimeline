@@ -106,6 +106,8 @@ class RunnerTab extends BaseTab {
                 this._handleLuaToggle(enabled);
             } else if (lang.id === 'ruby') {
                 this._handleRubyToggle(enabled);
+            } else if (lang.id === 'mermaid') {
+                this._handleMermaidToggle(enabled);
             }
             
             console.log(`[RunnerTab] ${lang.id} runner enabled:`, enabled);
@@ -242,6 +244,19 @@ class RunnerTab extends BaseTab {
         }
     }
     
+    /**
+     * 处理 Mermaid 渲染器开关
+     */
+    _handleMermaidToggle(enabled) {
+        if (enabled) {
+            // 开启：触发 Runner 重新扫描，Mermaid 代码块会被自动识别并渲染
+            if (window.Runner) {
+                window.Runner.scan();
+            }
+        }
+        // 关闭：已渲染的图表保留在页面上（刷新页面后生效）
+    }
+
     /**
      * 移除指定语言的 Run 按钮
      * @param {string} language - 语言类型

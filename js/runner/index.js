@@ -290,6 +290,9 @@
                     } else if (output.level === 'markdown-preview') {
                         // Markdown 预览
                         outputs.push({ type: 'markdown-preview', html: output.data.html });
+                    } else if (output.level === 'mermaid-preview') {
+                        // Mermaid 图表预览
+                        outputs.push({ type: 'mermaid-preview', svg: output.data.svg });
                     } else {
                         // 普通输出
                         const content = Array.isArray(output.data) ? output.data.join(' ') : output.data;
@@ -407,6 +410,10 @@
             if (output.type === 'markdown-preview') {
                 return renderMarkdownPreview(output.html);
             }
+            // Mermaid 图表预览
+            if (output.type === 'mermaid-preview') {
+                return renderMermaidPreview(output.svg);
+            }
             // 普通输出
             const typeClass = `runner-output-${output.type || 'log'}`;
             const content = formatOutputContent(output.content);
@@ -454,6 +461,16 @@
      */
     function renderMarkdownPreview(html) {
         return `<div class="runner-markdown-preview">${html}</div>`;
+    }
+
+    /**
+     * 渲染 Mermaid 图表预览
+     */
+    function renderMermaidPreview(svg) {
+        const fullscreenHint = typeof window.MermaidRenderer !== 'undefined'
+            ? ' style="cursor:pointer" title="Click to fullscreen"'
+            : '';
+        return `<div class="runner-mermaid-preview"${fullscreenHint}>${svg}</div>`;
     }
 
     /**
@@ -525,9 +542,21 @@
             return;
         }
 
-        // 检测代码语言
+        // 获取代码文本
         const code = getCodeText(codeElement);
-        const language = detectLanguage(code);
+
+        // === Mermaid 优先检测（hljs 无法识别 Mermaid DSL） ===
+        let language = null;
+        if (enabledLanguages.mermaid && window.MermaidRenderer) {
+            if (window.MermaidRenderer.detect(codeElement, layoutContainer)) {
+                language = 'mermaid';
+            }
+        }
+
+        // Mermaid 未命中 → hljs 自动识别其他语言
+        if (!language) {
+            language = detectLanguage(code);
+        }
         
         // 没检测到支持的语言，不标记，下次继续检测
         if (!language) return;
@@ -677,6 +706,20 @@
     }
 
     /**
+     * 检查 Mermaid 渲染器是否启用
+     * @returns {Promise<boolean>}
+     */
+    async function isMermaidRendererEnabled() {
+        try {
+            const key = window.MermaidRenderer?.STORAGE_KEY || 'mermaidRendererEnabled';
+            const result = await chrome.storage.local.get(key);
+            return result[key] !== false;
+        } catch {
+            return false;
+        }
+    }
+
+    /**
      * 检查指定语言是否启用
      * @param {string} language - 语言类型
      * @returns {Promise<boolean>}
@@ -691,6 +734,7 @@
         if (language === 'markdown') return isMarkdownRunnerEnabled();
         if (language === 'lua') return isLuaRunnerEnabled();
         if (language === 'ruby') return isRubyRunnerEnabled();
+        if (language === 'mermaid') return isMermaidRendererEnabled();
         return false;
     }
 
@@ -699,7 +743,7 @@
      */
     async function scanCodeBlocks() {
         // 检查各语言是否启用
-        const [jsEnabled, pyEnabled, tsEnabled, sqlEnabled, htmlEnabled, jsonEnabled, mdEnabled, luaEnabled, rubyEnabled] = await Promise.all([
+        const [jsEnabled, pyEnabled, tsEnabled, sqlEnabled, htmlEnabled, jsonEnabled, mdEnabled, luaEnabled, rubyEnabled, mermaidEnabled] = await Promise.all([
             isJavaScriptRunnerEnabled(),
             isPythonRunnerEnabled(),
             isTypeScriptRunnerEnabled(),
@@ -708,11 +752,12 @@
             isJsonRunnerEnabled(),
             isMarkdownRunnerEnabled(),
             isLuaRunnerEnabled(),
-            isRubyRunnerEnabled()
+            isRubyRunnerEnabled(),
+            isMermaidRendererEnabled()
         ]);
         
-        // 如果所有语言都禁用，不扫描
-        if (!jsEnabled && !pyEnabled && !tsEnabled && !sqlEnabled && !htmlEnabled && !jsonEnabled && !mdEnabled && !luaEnabled && !rubyEnabled) {
+        // 如果所有功能都禁用，不扫描
+        if (!jsEnabled && !pyEnabled && !tsEnabled && !sqlEnabled && !htmlEnabled && !jsonEnabled && !mdEnabled && !luaEnabled && !rubyEnabled && !mermaidEnabled) {
             return;
         }
         
@@ -725,7 +770,8 @@
             json: jsonEnabled,
             markdown: mdEnabled,
             lua: luaEnabled,
-            ruby: rubyEnabled
+            ruby: rubyEnabled,
+            mermaid: mermaidEnabled
         };
         
         // 遍历配置，按优先级匹配代码块
@@ -744,56 +790,33 @@
         }
     }
 
-    // 排除的网站列表（不在这些网站上显示 Run 按钮）
-    const EXCLUDED_SITES = [
-        // GitHub
-        'github.com',
-        'gist.github.com',
-        'github.io',
-        'githubusercontent.com',
-        'github.dev',
-        'githubassets.com',
-        // GitLab
-        'gitlab.com',
-        'gitlab.io',
-        // Bitbucket
-        'bitbucket.org',
-        'bitbucket.io',
-        // 码云 Gitee
-        'gitee.com',
-        'gitee.io',
-        // Coding
-        'coding.net',
-        // Gitea
-        'gitea.com',
-        'gitea.io',
-        // SourceForge
-        'sourceforge.net',
-        // Codeberg
-        'codeberg.org'
-    ];
-
     /**
-     * 检查当前网站是否在排除列表中
+     * 检查当前网站是否为已知 AI 平台（SITE_INFO 白名单）
+     * 只在 AI 平台上启用代码检测，其他网站直接跳过
      * @returns {boolean}
      */
-    function isExcludedSite() {
-        const hostname = location.hostname;
-        return EXCLUDED_SITES.some(site => hostname.includes(site));
+    function isAiPlatform() {
+        try {
+            const hostname = location.hostname;
+            return SITE_INFO.some(platform =>
+                platform.sites.some(site => hostname.includes(site))
+            );
+        } catch {
+            return false;
+        }
     }
 
     /**
      * 初始化 Runner 模块
      */
     async function initialize() {
-        // 检查是否在排除的网站上
-        if (isExcludedSite()) {
-            console.log('[Runner] Current site is excluded, skipping initialization');
+        // 只在已知 AI 平台上运行
+        if (!isAiPlatform()) {
             return;
         }
 
         // 检查是否有任何语言启用
-        const [jsEnabled, pyEnabled, tsEnabled, sqlEnabled, htmlEnabled, jsonEnabled, mdEnabled, luaEnabled, rubyEnabled] = await Promise.all([
+        const [jsEnabled, pyEnabled, tsEnabled, sqlEnabled, htmlEnabled, jsonEnabled, mdEnabled, luaEnabled, rubyEnabled, mermaidEnabled] = await Promise.all([
             isJavaScriptRunnerEnabled(),
             isPythonRunnerEnabled(),
             isTypeScriptRunnerEnabled(),
@@ -802,14 +825,26 @@
             isJsonRunnerEnabled(),
             isMarkdownRunnerEnabled(),
             isLuaRunnerEnabled(),
-            isRubyRunnerEnabled()
+            isRubyRunnerEnabled(),
+            isMermaidRendererEnabled()
         ]);
         
-        if (!jsEnabled && !pyEnabled && !tsEnabled && !sqlEnabled && !htmlEnabled && !jsonEnabled && !mdEnabled && !luaEnabled && !rubyEnabled) {
+        if (!jsEnabled && !pyEnabled && !tsEnabled && !sqlEnabled && !htmlEnabled && !jsonEnabled && !mdEnabled && !luaEnabled && !rubyEnabled && !mermaidEnabled) {
             console.log('[Runner] All runners are disabled, skipping initialization');
             return;
         }
         
+        // Mermaid 图表点击全屏（事件委托，只注册一次）
+        if (window.MermaidRenderer) {
+            document.addEventListener('click', (e) => {
+                const preview = e.target.closest('.runner-mermaid-preview');
+                if (preview) {
+                    const svg = preview.innerHTML;
+                    if (svg) window.MermaidRenderer.openFullscreen(svg);
+                }
+            });
+        }
+
         // 初始扫描
         await scanCodeBlocks();
         

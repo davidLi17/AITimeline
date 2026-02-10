@@ -334,5 +334,26 @@
   },
   "gdriveHint": {
     "message": "Cadangkan data ke Google Drive Anda untuk sinkronisasi multi-perangkat."
+  },
+  "mermaidTabName": {
+    "message": "Mermaid"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Rendering Diagram Mermaid"
+  },
+  "mermaidSettingsHint": {
+    "message": "Secara otomatis merender blok kode Mermaid sebagai diagram interaktif"
+  },
+  "mermaidDiagramBtn": {
+    "message": "Diagram"
+  },
+  "mermaidCodeBtn": {
+    "message": "Kode"
+  },
+  "mermaidFullscreen": {
+    "message": "Layar penuh"
+  },
+  "mermaidViewerHint": {
+    "message": "Gulir untuk zoom · Seret untuk menggeser · ESC untuk menutup"
   }
 }

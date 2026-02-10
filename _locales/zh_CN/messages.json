@@ -403,5 +403,26 @@
   },
   "gdriveHint": {
     "message": "将数据备份到你的 Google Drive 中，实现多设备同步。"
+  },
+  "mermaidTabName": {
+    "message": "Mermaid 图表"
+  },
+  "mermaidSettingsTitle": {
+    "message": "Mermaid 图表渲染"
+  },
+  "mermaidSettingsHint": {
+    "message": "自动将 Mermaid 代码块渲染为可视化图表"
+  },
+  "mermaidDiagramBtn": {
+    "message": "图表"
+  },
+  "mermaidCodeBtn": {
+    "message": "源码"
+  },
+  "mermaidFullscreen": {
+    "message": "全屏查看"
+  },
+  "mermaidViewerHint": {
+    "message": "滚轮缩放 · 拖拽平移 · ESC 退出"
   }
 }
